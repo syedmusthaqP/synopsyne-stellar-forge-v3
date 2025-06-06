@@ -69,6 +69,51 @@ const TechGalaxy = () => {
       keyFeatures: ['TypeScript', 'Dependency Injection', 'RxJS', 'Angular CLI'],
       experienceYears: 5
     },
+    { 
+      id: 'nextjs', 
+      name: 'Next.js', 
+      category: 'Frontend', 
+      color: '#000000', 
+      size: 52, 
+      orbitRadius: 240, 
+      orbitSpeed: 0.9, 
+      angle: 180, 
+      description: 'Full-stack React framework with server-side rendering and static generation', 
+      expertise: 90,
+      projects: ['E-commerce Site', 'Blog Platform', 'Corporate Website'],
+      keyFeatures: ['SSR/SSG', 'API Routes', 'Image Optimization', 'File-based Routing'],
+      experienceYears: 4
+    },
+    { 
+      id: 'svelte', 
+      name: 'Svelte', 
+      category: 'Frontend', 
+      color: '#FF3E00', 
+      size: 48, 
+      orbitRadius: 200, 
+      orbitSpeed: 1.1, 
+      angle: 240, 
+      description: 'Compile-time optimized framework with no virtual DOM overhead', 
+      expertise: 75,
+      projects: ['Interactive Dashboard', 'Animation-heavy App'],
+      keyFeatures: ['Compile-time Optimization', 'No Virtual DOM', 'Small Bundle Size', 'Reactive Stores'],
+      experienceYears: 2
+    },
+    { 
+      id: 'typescript', 
+      name: 'TypeScript', 
+      category: 'Frontend', 
+      color: '#3178C6', 
+      size: 58, 
+      orbitRadius: 160, 
+      orbitSpeed: 1.3, 
+      angle: 300, 
+      description: 'Strongly typed JavaScript superset for scalable application development', 
+      expertise: 92,
+      projects: ['Large Scale Apps', 'Enterprise Solutions', 'Type-safe APIs'],
+      keyFeatures: ['Static Typing', 'IntelliSense', 'Compile-time Checking', 'Modern ES Features'],
+      experienceYears: 5
+    },
     
     // Backend
     { 
@@ -79,7 +124,7 @@ const TechGalaxy = () => {
       size: 65, 
       orbitRadius: 160, 
       orbitSpeed: 1.5, 
-      angle: 180, 
+      angle: 30, 
       description: 'Server-side JavaScript runtime for building scalable network applications', 
       expertise: 92,
       projects: ['API Gateway', 'Microservices Architecture', 'Real-time Gaming Platform'],
@@ -94,7 +139,7 @@ const TechGalaxy = () => {
       size: 58, 
       orbitRadius: 240, 
       orbitSpeed: 0.7, 
-      angle: 240, 
+      angle: 90, 
       description: 'Versatile programming language for AI, web development, and data science', 
       expertise: 90,
       projects: ['Machine Learning Pipeline', 'Data Analytics Platform', 'Web Scraping Service'],
@@ -109,15 +154,75 @@ const TechGalaxy = () => {
       size: 52, 
       orbitRadius: 200, 
       orbitSpeed: 1.1, 
-      angle: 300, 
+      angle: 150, 
       description: 'Enterprise application development with robust performance and security', 
       expertise: 85,
       projects: ['Enterprise Banking System', 'Supply Chain Management'],
       keyFeatures: ['Spring Framework', 'JVM Ecosystem', 'Enterprise Security', 'Microservices'],
       experienceYears: 6
     },
+    { 
+      id: 'csharp', 
+      name: 'C#', 
+      category: 'Backend', 
+      color: '#239120', 
+      size: 54, 
+      orbitRadius: 220, 
+      orbitSpeed: 0.8, 
+      angle: 210, 
+      description: '.NET ecosystem for building scalable Windows and cross-platform applications', 
+      expertise: 80,
+      projects: ['Enterprise Software', 'Windows Applications', 'Web APIs'],
+      keyFeatures: ['.NET Core', 'Entity Framework', 'ASP.NET', 'LINQ'],
+      experienceYears: 5
+    },
+    { 
+      id: 'go', 
+      name: 'Go', 
+      category: 'Backend', 
+      color: '#00ADD8', 
+      size: 50, 
+      orbitRadius: 180, 
+      orbitSpeed: 1.2, 
+      angle: 270, 
+      description: 'Concurrent programming language for high-performance backend services', 
+      expertise: 78,
+      projects: ['Microservices', 'CLI Tools', 'Network Services'],
+      keyFeatures: ['Concurrency', 'Fast Compilation', 'Static Typing', 'Garbage Collection'],
+      experienceYears: 3
+    },
+    { 
+      id: 'rust', 
+      name: 'Rust', 
+      category: 'Backend', 
+      color: '#000000', 
+      size: 48, 
+      orbitRadius: 260, 
+      orbitSpeed: 0.6, 
+      angle: 330, 
+      description: 'Systems programming language with memory safety and zero-cost abstractions', 
+      expertise: 70,
+      projects: ['System Tools', 'Performance-critical Services'],
+      keyFeatures: ['Memory Safety', 'Zero-cost Abstractions', 'Concurrency', 'Performance'],
+      experienceYears: 2
+    },
+    { 
+      id: 'php', 
+      name: 'PHP', 
+      category: 'Backend', 
+      color: '#777BB4', 
+      size: 46, 
+      orbitRadius: 190, 
+      orbitSpeed: 1.0, 
+      angle: 45, 
+      description: 'Server-side scripting language for web development and APIs', 
+      expertise: 75,
+      projects: ['WordPress Sites', 'Laravel Applications', 'Legacy Systems'],
+      keyFeatures: ['Laravel/Symfony', 'WordPress', 'Server-side Rendering', 'Database Integration'],
+      experienceYears: 4
+    },
     
-    // Cloud
+    // Cloud & DevOps
     { 
       id: 'aws', 
       name: 'AWS', 
@@ -126,7 +231,7 @@ const TechGalaxy = () => {
       size: 70, 
       orbitRadius: 280, 
       orbitSpeed: 0.6, 
-      angle: 30, 
+      angle: 60, 
       description: 'Comprehensive cloud computing platform with 200+ services', 
       expertise: 88,
       projects: ['Serverless Architecture', 'Auto-scaling Infrastructure', 'Multi-region Deployment'],
@@ -141,7 +246,7 @@ const TechGalaxy = () => {
       size: 62, 
       orbitRadius: 260, 
       orbitSpeed: 0.9, 
-      angle: 90, 
+      angle: 120, 
       description: 'Microsoft cloud services and solutions for enterprise integration', 
       expertise: 80,
       projects: ['Hybrid Cloud Setup', 'DevOps Pipeline', 'AI/ML Services'],
@@ -156,11 +261,41 @@ const TechGalaxy = () => {
       size: 58, 
       orbitRadius: 300, 
       orbitSpeed: 0.5, 
-      angle: 150, 
+      angle: 180, 
       description: 'Google Cloud Platform services with advanced AI and analytics', 
       expertise: 75,
       projects: ['BigQuery Analytics', 'Kubernetes Deployment', 'Vision API Integration'],
       keyFeatures: ['BigQuery', 'Kubernetes Engine', 'AI/ML APIs', 'Global Network'],
+      experienceYears: 3
+    },
+    { 
+      id: 'docker', 
+      name: 'Docker', 
+      category: 'Cloud', 
+      color: '#2496ED', 
+      size: 55, 
+      orbitRadius: 200, 
+      orbitSpeed: 1.1, 
+      angle: 240, 
+      description: 'Containerization platform for consistent deployment across environments', 
+      expertise: 85,
+      projects: ['Microservices Deployment', 'CI/CD Pipelines', 'Development Environments'],
+      keyFeatures: ['Containerization', 'Docker Compose', 'Multi-stage Builds', 'Container Orchestration'],
+      experienceYears: 4
+    },
+    { 
+      id: 'kubernetes', 
+      name: 'Kubernetes', 
+      category: 'Cloud', 
+      color: '#326CE5', 
+      size: 60, 
+      orbitRadius: 320, 
+      orbitSpeed: 0.4, 
+      angle: 300, 
+      description: 'Container orchestration platform for automating deployment and scaling', 
+      expertise: 82,
+      projects: ['Container Orchestration', 'Auto-scaling Services', 'Multi-cloud Deployment'],
+      keyFeatures: ['Pod Management', 'Service Discovery', 'Auto-scaling', 'Rolling Updates'],
       experienceYears: 3
     },
     
@@ -173,7 +308,7 @@ const TechGalaxy = () => {
       size: 55, 
       orbitRadius: 320, 
       orbitSpeed: 0.4, 
-      angle: 210, 
+      angle: 0, 
       description: 'Machine learning and neural networks for production-ready AI solutions', 
       expertise: 85,
       projects: ['Computer Vision System', 'Predictive Analytics', 'Recommendation Engine'],
@@ -188,13 +323,120 @@ const TechGalaxy = () => {
       size: 52, 
       orbitRadius: 290, 
       orbitSpeed: 0.8, 
-      angle: 270, 
+      angle: 72, 
       description: 'Deep learning research and production with dynamic computational graphs', 
       expertise: 78,
       projects: ['Research Prototypes', 'Custom Neural Networks', 'Transfer Learning'],
       keyFeatures: ['Dynamic Graphs', 'Research Friendly', 'GPU Acceleration', 'Model Deployment'],
       experienceYears: 3
     },
+    { 
+      id: 'pandas', 
+      name: 'Pandas', 
+      category: 'AI/ML', 
+      color: '#150458', 
+      size: 48, 
+      orbitRadius: 250, 
+      orbitSpeed: 0.9, 
+      angle: 144, 
+      description: 'Data manipulation and analysis library for Python data science workflows', 
+      expertise: 90,
+      projects: ['Data Analysis Pipeline', 'ETL Processes', 'Business Intelligence'],
+      keyFeatures: ['Data Manipulation', 'Time Series', 'Data Cleaning', 'Statistical Analysis'],
+      experienceYears: 5
+    },
+    { 
+      id: 'scikit-learn', 
+      name: 'Scikit-learn', 
+      category: 'AI/ML', 
+      color: '#F7931E', 
+      size: 50, 
+      orbitRadius: 270, 
+      orbitSpeed: 0.7, 
+      angle: 216, 
+      description: 'Machine learning library for classification, regression, and clustering', 
+      expertise: 88,
+      projects: ['Predictive Models', 'Classification Systems', 'Data Mining'],
+      keyFeatures: ['Classification', 'Regression', 'Clustering', 'Dimensionality Reduction'],
+      experienceYears: 4
+    },
+    { 
+      id: 'opencv', 
+      name: 'OpenCV', 
+      category: 'AI/ML', 
+      color: '#5C3EE8', 
+      size: 46, 
+      orbitRadius: 310, 
+      orbitSpeed: 0.5, 
+      angle: 288, 
+      description: 'Computer vision library for image and video processing applications', 
+      expertise: 80,
+      projects: ['Image Recognition', 'Video Analysis', 'Object Detection'],
+      keyFeatures: ['Image Processing', 'Object Detection', 'Feature Extraction', 'Video Analysis'],
+      experienceYears: 3
+    },
+
+    // Databases
+    { 
+      id: 'postgresql', 
+      name: 'PostgreSQL', 
+      category: 'Database', 
+      color: '#336791', 
+      size: 58, 
+      orbitRadius: 340, 
+      orbitSpeed: 0.3, 
+      angle: 45, 
+      description: 'Advanced open-source relational database with powerful features', 
+      expertise: 85,
+      projects: ['Enterprise Applications', 'Data Warehousing', 'Financial Systems'],
+      keyFeatures: ['ACID Compliance', 'JSON Support', 'Full-text Search', 'Extensibility'],
+      experienceYears: 5
+    },
+    { 
+      id: 'mongodb', 
+      name: 'MongoDB', 
+      category: 'Database', 
+      color: '#47A248', 
+      size: 54, 
+      orbitRadius: 190, 
+      orbitSpeed: 1.0, 
+      angle: 135, 
+      description: 'NoSQL document database for flexible and scalable data storage', 
+      expertise: 82,
+      projects: ['Content Management', 'Real-time Analytics', 'Mobile Backend'],
+      keyFeatures: ['Document Storage', 'Horizontal Scaling', 'Flexible Schema', 'Aggregation Pipeline'],
+      experienceYears: 4
+    },
+    { 
+      id: 'redis', 
+      name: 'Redis', 
+      category: 'Database', 
+      color: '#DC382D', 
+      size: 50, 
+      orbitRadius: 230, 
+      orbitSpeed: 0.8, 
+      angle: 225, 
+      description: 'In-memory data structure store for caching and real-time applications', 
+      expertise: 80,
+      projects: ['Caching Layer', 'Session Management', 'Real-time Features'],
+      keyFeatures: ['In-memory Storage', 'Data Structures', 'Pub/Sub', 'Clustering'],
+      experienceYears: 4
+    },
+    { 
+      id: 'mysql', 
+      name: 'MySQL', 
+      category: 'Database', 
+      color: '#4479A1', 
+      size: 52, 
+      orbitRadius: 210, 
+      orbitSpeed: 0.9, 
+      angle: 315, 
+      description: 'Popular open-source relational database management system', 
+      expertise: 78,
+      projects: ['Web Applications', 'E-commerce Sites', 'Content Management'],
+      keyFeatures: ['SQL Compliance', 'Replication', 'Partitioning', 'Full-text Search'],
+      experienceYears: 6
+    }
   ];
 
   useEffect(() => {
@@ -209,7 +451,8 @@ const TechGalaxy = () => {
       Frontend: '#61DAFB',
       Backend: '#339933',
       Cloud: '#FF9900',
-      'AI/ML': '#FF6F00'
+      'AI/ML': '#FF6F00',
+      Database: '#336791'
     };
     return colors[category as keyof typeof colors] || '#00D4FF';
   };
@@ -243,7 +486,7 @@ const TechGalaxy = () => {
           >
             All Technologies
           </button>
-          {['Frontend', 'Backend', 'Cloud', 'AI/ML'].map((category) => (
+          {['Frontend', 'Backend', 'Cloud', 'AI/ML', 'Database'].map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
@@ -336,7 +579,7 @@ const TechGalaxy = () => {
 
           {/* Category Legend */}
           <div className="flex flex-wrap justify-center gap-4 mt-12">
-            {['Frontend', 'Backend', 'Cloud', 'AI/ML'].map((category) => (
+            {['Frontend', 'Backend', 'Cloud', 'AI/ML', 'Database'].map((category) => (
               <div key={category} className="flex items-center glassmorphism px-4 py-2 rounded-lg">
                 <div 
                   className="w-4 h-4 rounded-full mr-2"

@@ -45,11 +45,16 @@ const HeroSection = () => {
           </span>
         </h1>
 
-        {/* Subheadline */}
-        <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
-          Custom solutions, cutting-edge technology, measurable results.
-          We build the future, one line of code at a time.
-        </p>
+        {/* Subheadline with gradient box */}
+        <div className="relative mb-12 max-w-3xl mx-auto">
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 rounded-lg blur-xl"></div>
+          <div className="relative glassmorphism p-6 rounded-lg">
+            <p className="text-lg md:text-xl text-gray-300">
+              Custom solutions, cutting-edge technology, measurable results.
+              We build the future, one line of code at a time.
+            </p>
+          </div>
+        </div>
 
         {/* CTA Buttons */}
         <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
