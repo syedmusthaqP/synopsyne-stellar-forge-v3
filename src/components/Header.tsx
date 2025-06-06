@@ -1,0 +1,68 @@
+
+import React, { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
+
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      scrolled ? 'glassmorphism backdrop-blur-lg' : 'bg-transparent'
+    }`}>
+      <nav className="container mx-auto px-6 py-4">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <div className="text-2xl font-bold text-white">
+            <span className="text-neon">Synopsyne</span>
+            <span className="ml-1">Dynamics</span>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            <a href="#services" className="text-white hover:text-neon transition-colors">Services</a>
+            <a href="#technology" className="text-white hover:text-neon transition-colors">Technology</a>
+            <a href="#portfolio" className="text-white hover:text-neon transition-colors">Portfolio</a>
+            <a href="#about" className="text-white hover:text-neon transition-colors">About</a>
+            <a href="#contact" className="neon-border px-6 py-2 rounded-lg text-neon hover:bg-cyan-500/10 transition-all">
+              Contact Us
+            </a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden text-white"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden mt-4 glassmorphism rounded-lg p-4">
+            <div className="flex flex-col space-y-4">
+              <a href="#services" className="text-white hover:text-neon transition-colors">Services</a>
+              <a href="#technology" className="text-white hover:text-neon transition-colors">Technology</a>
+              <a href="#portfolio" className="text-white hover:text-neon transition-colors">Portfolio</a>
+              <a href="#about" className="text-white hover:text-neon transition-colors">About</a>
+              <a href="#contact" className="neon-border px-6 py-2 rounded-lg text-neon hover:bg-cyan-500/10 transition-all text-center">
+                Contact Us
+              </a>
+            </div>
+          </div>
+        )}
+      </nav>
+    </header>
+  );
+};
+
+export default Header;
