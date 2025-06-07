@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Brain, Zap, Link, TrendingUp, Gem, Handshake, Target, Rocket, Lightbulb, Globe } from 'lucide-react';
 
@@ -61,7 +62,7 @@ const AboutSection = () => {
       title: "Cognitive Architecture",
       subtitle: "Thinking Together",
       description: "We think differently because we think together. Our team operates like a neural network—each connection strengthening the whole.",
-      position: { x: 25, y: 35 },
+      position: { x: 25, y: 25 },
       connections: [1, 2]
     },
     {
@@ -77,7 +78,7 @@ const AboutSection = () => {
       title: "Synthesis Philosophy",
       subtitle: "Exponential Fusion",
       description: "We don't just combine technologies; we synthesize them into something entirely new. The whole becomes exponentially greater than its parts.",
-      position: { x: 50, y: 70 },
+      position: { x: 50, y: 80 },
       connections: [0, 1]
     }
   ];
@@ -108,7 +109,7 @@ const AboutSection = () => {
         "Living Interfaces: Technology that adapts to human behavior rather than forcing behavior to adapt to technology",
         "Cross-Platform Fluency: We speak every digital language and make them all work together"
       ],
-      position: { x: 85, y: 35 },
+      position: { x: 85, y: 40 },
       connections: [0, 2, 4]
     },
     {
@@ -122,7 +123,7 @@ const AboutSection = () => {
         "Elastic Architecture: Solutions that breathe with your business rhythms",
         "Wisdom Accumulation: Every interaction makes the entire system more intelligent"
       ],
-      position: { x: 70, y: 80 },
+      position: { x: 70, y: 85 },
       connections: [1, 3, 4]
     },
     {
@@ -136,7 +137,7 @@ const AboutSection = () => {
         "Intuitive Interfaces: If it needs a manual, we haven't finished building it",
         "Graceful Performance: Our solutions work so smoothly, they feel like magic"
       ],
-      position: { x: 30, y: 80 },
+      position: { x: 30, y: 85 },
       connections: [0, 2, 4]
     },
     {
@@ -150,7 +151,7 @@ const AboutSection = () => {
         "Continuous Calibration: We don't deliver and disappear; we grow alongside you",
         "Innovation Partnership: You bring the vision, we bring the impossible-made-possible"
       ],
-      position: { x: 15, y: 35 },
+      position: { x: 15, y: 40 },
       connections: [1, 2, 3]
     }
   ];
@@ -209,7 +210,7 @@ const AboutSection = () => {
             <span>Where Synapses Meet Systems</span>
           </div>
 
-          <h2 className="text-6xl md:text-8xl font-bold text-white mb-16 leading-none">
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-16 leading-none">
             The <span className="text-neon animate-text-glow relative">
               Neural
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 opacity-20 blur-2xl"></div>
@@ -217,7 +218,7 @@ const AboutSection = () => {
           </h2>
 
           <div className="max-w-4xl mx-auto relative">
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light tracking-wide" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '0.025em' }}>
+            <p className="text-base md:text-lg text-gray-300 leading-relaxed font-light tracking-wide" style={{ fontFamily: 'Courier New, monospace', letterSpacing: '0.05em' }}>
               At Synopsyne Dynamics, we exist at the intersection of human intuition and digital precision. 
               Our name isn't just clever wordplay—it's our philosophy. Like synapses firing in perfect harmony 
               to create thought, we connect disparate elements to spark innovation.
@@ -298,12 +299,12 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* Our DNA - Fixed alignment Neural Network */}
+        {/* Our DNA - Neural Network */}
         <div className="mb-40">
           <h3 className="text-4xl font-bold text-white text-center mb-8">Our <span className="text-neon">DNA</span></h3>
           <p className="text-lg text-gray-300 text-center mb-20">Interactive Neural Network Visualization</p>
 
-          <div className="relative max-w-6xl mx-auto h-[500px]">
+          <div className="relative max-w-6xl mx-auto h-[600px]">
             {/* Neural connections */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none">
               {dnaNodes.map((node, index) => 
@@ -324,7 +325,7 @@ const AboutSection = () => {
               )}
             </svg>
 
-            {/* DNA nodes with proper alignment */}
+            {/* DNA nodes */}
             {dnaNodes.map((node, index) => (
               <div
                 key={index}
@@ -360,7 +361,7 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* Founder Profile - Organic Layout */}
+        {/* Founder Profile - Unique Design */}
         <div className="mb-40">
           <div className="relative max-w-6xl mx-auto">
             {/* Flowing background shape */}
@@ -389,19 +390,69 @@ const AboutSection = () => {
                 </p>
 
                 <div>
-                  <h5 className="text-2xl font-bold text-neon mb-6">The Musthaq Method:</h5>
-                  <div className="space-y-4">
-                    {[
-                      "Pattern Recognition: Identifying opportunities where others see obstacles",
-                      "Synthesis Thinking: Combining disparate elements to create breakthrough solutions",
-                      "Anticipatory Leadership: Building for tomorrow's challenges with today's foundations",
-                      "Human-Centric Innovation: Technology that amplifies rather than replaces human potential"
-                    ].map((method, index) => (
-                      <div key={index} className="flex items-start group">
-                        <div className="w-3 h-3 rounded-full bg-neon mt-2 mr-4 animate-pulse"></div>
-                        <p className="text-gray-300 group-hover:text-white transition-colors text-lg">{method}</p>
-                      </div>
-                    ))}
+                  <h5 className="text-2xl font-bold text-neon mb-8">The Musthaq Method:</h5>
+                  
+                  {/* Unique organic design for methods */}
+                  <div className="relative">
+                    {/* Background neural web */}
+                    <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 400 300">
+                      <path d="M0,150 Q100,50 200,150 Q300,250 400,150" stroke="url(#methodGradient)" strokeWidth="2" fill="none" className="animate-pulse"/>
+                      <defs>
+                        <linearGradient id="methodGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="#00D4FF" />
+                          <stop offset="100%" stopColor="#9333EA" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                    
+                    <div className="relative space-y-6">
+                      {[
+                        {
+                          title: "Pattern Recognition",
+                          description: "Identifying opportunities where others see obstacles",
+                          color: "from-cyan-400 to-blue-500",
+                          position: "ml-0"
+                        },
+                        {
+                          title: "Synthesis Thinking", 
+                          description: "Combining disparate elements to create breakthrough solutions",
+                          color: "from-blue-500 to-purple-500",
+                          position: "ml-12"
+                        },
+                        {
+                          title: "Anticipatory Leadership",
+                          description: "Building for tomorrow's challenges with today's foundations", 
+                          color: "from-purple-500 to-pink-500",
+                          position: "ml-6"
+                        },
+                        {
+                          title: "Human-Centric Innovation",
+                          description: "Technology that amplifies rather than replaces human potential",
+                          color: "from-pink-500 to-cyan-400", 
+                          position: "ml-3"
+                        }
+                      ].map((method, index) => (
+                        <div key={index} className={`group relative ${method.position} max-w-md`}>
+                          {/* Organic flowing shape */}
+                          <div className={`absolute -inset-4 bg-gradient-to-r ${method.color} opacity-20 rounded-full blur-xl group-hover:opacity-40 transition-all duration-500`}></div>
+                          
+                          <div className="relative bg-black/20 backdrop-blur-sm p-6 rounded-3xl border border-white/10 group-hover:border-neon/50 transition-all duration-500">
+                            {/* Neural pulse indicator */}
+                            <div className={`w-4 h-4 rounded-full bg-gradient-to-r ${method.color} animate-pulse mb-3`}></div>
+                            
+                            <h6 className="text-lg font-bold text-white group-hover:text-neon transition-colors mb-2">
+                              {method.title}
+                            </h6>
+                            <p className="text-gray-300 text-sm leading-relaxed">
+                              {method.description}
+                            </p>
+                            
+                            {/* Connecting line */}
+                            <div className={`absolute -right-2 top-1/2 w-8 h-0.5 bg-gradient-to-r ${method.color} opacity-50 transform -translate-y-1/2`}></div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -433,7 +484,7 @@ const AboutSection = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 opacity-20 blur-2xl"></div>
             </span> Advantage
           </h2>
-          <p className="text-xl text-gray-300 font-light">We don't compete—we create new categories.</p>
+          <p className="text-lg text-gray-300 font-light">We don't compete—we create new categories.</p>
         </div>
 
         {/* The Five Synaptic Advantages - Fixed alignment constellation */}
@@ -441,7 +492,7 @@ const AboutSection = () => {
           <h3 className="text-4xl font-bold text-white text-center mb-8">The Five Synaptic Advantages</h3>
           <p className="text-lg text-gray-300 text-center mb-20">Interactive Synaptic Constellation</p>
 
-          <div className="relative max-w-7xl mx-auto h-[800px]">
+          <div className="relative max-w-7xl mx-auto h-[900px]">
             {/* Dynamic constellation background */}
             <div className="absolute inset-0 overflow-hidden">
               {[...Array(20)].map((_, i) => (
@@ -473,11 +524,13 @@ const AboutSection = () => {
               ))}
             </svg>
 
-            {/* Advantage nodes with proper alignment */}
+            {/* Advantage nodes with proper spacing and z-index management */}
             {advantages.map((advantage, index) => (
               <div
                 key={index}
-                className="absolute cursor-pointer transition-all duration-500 group"
+                className={`absolute cursor-pointer transition-all duration-500 group ${
+                  activeAdvantage === index ? 'z-50' : 'z-10'
+                }`}
                 style={{ 
                   left: `${advantage.position.x}%`, 
                   top: `${advantage.position.y}%`,
@@ -490,7 +543,9 @@ const AboutSection = () => {
                 {/* Organic pulsing aura */}
                 <div className="absolute inset-0 w-96 h-96 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-2xl animate-neural-pulse -translate-x-1/2 -translate-y-1/2"></div>
                 
-                <div className="relative bg-black/40 backdrop-blur-sm p-8 rounded-3xl border border-white/20 max-w-md group-hover:border-neon transition-all">
+                <div className={`relative bg-black/40 backdrop-blur-sm p-8 rounded-3xl border border-white/20 group-hover:border-neon transition-all ${
+                  activeAdvantage === index ? 'max-w-lg scale-105 shadow-2xl' : 'max-w-md'
+                }`}>
                   <div className="flex items-center mb-6">
                     <div className="w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500/30 to-purple-500/30 flex items-center justify-center mr-4 animate-pulse-glow">
                       <advantage.icon className="w-8 h-8 text-neon" />
@@ -511,7 +566,7 @@ const AboutSection = () => {
                   </p>
 
                   {activeAdvantage === index && (
-                    <div className="space-y-3 animate-fade-in">
+                    <div className="space-y-3 animate-fade-in border-t border-cyan-500/30 pt-4">
                       {advantage.features.map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-start">
                           <div className="w-2 h-2 rounded-full bg-neon mt-2 mr-3 animate-pulse"></div>
