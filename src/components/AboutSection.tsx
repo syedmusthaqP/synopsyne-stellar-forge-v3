@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Brain, Zap, Link, TrendingUp, Gem, Handshake, Target, Rocket, Lightbulb, Globe } from 'lucide-react';
 
@@ -95,7 +94,7 @@ const AboutSection = () => {
         "Future-Backward Design: We start with tomorrow's needs and engineer backward to today's solutions",
         "Anticipatory Architecture: Our systems evolve with your growth, not against it"
       ],
-      position: { x: 50, y: 20 },
+      position: { x: 50, y: 15 },
       connections: [1, 3]
     },
     {
@@ -109,7 +108,7 @@ const AboutSection = () => {
         "Living Interfaces: Technology that adapts to human behavior rather than forcing behavior to adapt to technology",
         "Cross-Platform Fluency: We speak every digital language and make them all work together"
       ],
-      position: { x: 80, y: 40 },
+      position: { x: 85, y: 35 },
       connections: [0, 2, 4]
     },
     {
@@ -123,7 +122,7 @@ const AboutSection = () => {
         "Elastic Architecture: Solutions that breathe with your business rhythms",
         "Wisdom Accumulation: Every interaction makes the entire system more intelligent"
       ],
-      position: { x: 65, y: 75 },
+      position: { x: 70, y: 80 },
       connections: [1, 3, 4]
     },
     {
@@ -137,7 +136,7 @@ const AboutSection = () => {
         "Intuitive Interfaces: If it needs a manual, we haven't finished building it",
         "Graceful Performance: Our solutions work so smoothly, they feel like magic"
       ],
-      position: { x: 35, y: 75 },
+      position: { x: 30, y: 80 },
       connections: [0, 2, 4]
     },
     {
@@ -151,7 +150,7 @@ const AboutSection = () => {
         "Continuous Calibration: We don't deliver and disappear; we grow alongside you",
         "Innovation Partnership: You bring the vision, we bring the impossible-made-possible"
       ],
-      position: { x: 20, y: 40 },
+      position: { x: 15, y: 35 },
       connections: [1, 2, 3]
     }
   ];
@@ -218,7 +217,7 @@ const AboutSection = () => {
           </h2>
 
           <div className="max-w-4xl mx-auto relative">
-            <p className="text-2xl text-gray-300 leading-relaxed font-light">
+            <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light tracking-wide" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '0.025em' }}>
               At Synopsyne Dynamics, we exist at the intersection of human intuition and digital precision. 
               Our name isn't just clever wordplay—it's our philosophy. Like synapses firing in perfect harmony 
               to create thought, we connect disparate elements to spark innovation.
@@ -299,12 +298,12 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* Our DNA - Organic Neural Network */}
+        {/* Our DNA - Fixed alignment Neural Network */}
         <div className="mb-40">
           <h3 className="text-4xl font-bold text-white text-center mb-8">Our <span className="text-neon">DNA</span></h3>
           <p className="text-lg text-gray-300 text-center mb-20">Interactive Neural Network Visualization</p>
 
-          <div className="relative max-w-6xl mx-auto h-96">
+          <div className="relative max-w-6xl mx-auto h-[500px]">
             {/* Neural connections */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none">
               {dnaNodes.map((node, index) => 
@@ -325,17 +324,21 @@ const AboutSection = () => {
               )}
             </svg>
 
-            {/* DNA nodes with organic shapes */}
+            {/* DNA nodes with proper alignment */}
             {dnaNodes.map((node, index) => (
               <div
                 key={index}
-                className="absolute cursor-pointer transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 group"
-                style={{ left: `${node.position.x}%`, top: `${node.position.y}%` }}
+                className="absolute cursor-pointer transition-all duration-500 group"
+                style={{ 
+                  left: `${node.position.x}%`, 
+                  top: `${node.position.y}%`,
+                  transform: 'translate(-50%, -50%)'
+                }}
                 onMouseEnter={() => setActiveDNA(index)}
                 onMouseLeave={() => setActiveDNA(-1)}
               >
                 {/* Organic pulsing background */}
-                <div className="absolute inset-0 w-48 h-48 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-xl animate-neural-pulse"></div>
+                <div className="absolute inset-0 w-80 h-80 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-xl animate-neural-pulse -translate-x-1/2 -translate-y-1/2"></div>
                 
                 <div className="relative bg-black/40 backdrop-blur-sm p-6 rounded-3xl border border-white/20 max-w-sm group-hover:border-neon transition-all">
                   <div className="flex items-center mb-4">
@@ -424,21 +427,21 @@ const AboutSection = () => {
 
         {/* WHY CHOOSE US SECTION */}
         <div className="text-center mb-32">
-          <h2 className="text-6xl md:text-8xl font-bold text-white mb-8 leading-none">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-none">
             The <span className="text-neon animate-text-glow relative">
               Synopsyne
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 opacity-20 blur-2xl"></div>
             </span> Advantage
           </h2>
-          <p className="text-3xl text-gray-300 font-light">We don't compete—we create new categories.</p>
+          <p className="text-xl text-gray-300 font-light">We don't compete—we create new categories.</p>
         </div>
 
-        {/* The Five Synaptic Advantages - Organic Constellation */}
+        {/* The Five Synaptic Advantages - Fixed alignment constellation */}
         <div className="mb-40">
           <h3 className="text-4xl font-bold text-white text-center mb-8">The Five Synaptic Advantages</h3>
           <p className="text-lg text-gray-300 text-center mb-20">Interactive Synaptic Constellation</p>
 
-          <div className="relative max-w-7xl mx-auto h-[700px]">
+          <div className="relative max-w-7xl mx-auto h-[800px]">
             {/* Dynamic constellation background */}
             <div className="absolute inset-0 overflow-hidden">
               {[...Array(20)].map((_, i) => (
@@ -470,18 +473,22 @@ const AboutSection = () => {
               ))}
             </svg>
 
-            {/* Advantage nodes with organic shapes */}
+            {/* Advantage nodes with proper alignment */}
             {advantages.map((advantage, index) => (
               <div
                 key={index}
-                className="absolute cursor-pointer transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 group"
-                style={{ left: `${advantage.position.x}%`, top: `${advantage.position.y}%` }}
+                className="absolute cursor-pointer transition-all duration-500 group"
+                style={{ 
+                  left: `${advantage.position.x}%`, 
+                  top: `${advantage.position.y}%`,
+                  transform: 'translate(-50%, -50%)'
+                }}
                 onClick={() => setActiveAdvantage(activeAdvantage === index ? -1 : index)}
                 onMouseEnter={() => setActiveAdvantage(index)}
                 onMouseLeave={() => setActiveAdvantage(-1)}
               >
                 {/* Organic pulsing aura */}
-                <div className="absolute inset-0 w-64 h-64 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-2xl animate-neural-pulse"></div>
+                <div className="absolute inset-0 w-96 h-96 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-2xl animate-neural-pulse -translate-x-1/2 -translate-y-1/2"></div>
                 
                 <div className="relative bg-black/40 backdrop-blur-sm p-8 rounded-3xl border border-white/20 max-w-md group-hover:border-neon transition-all">
                   <div className="flex items-center mb-6">
