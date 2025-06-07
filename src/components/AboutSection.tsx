@@ -8,7 +8,7 @@ const AboutSection = () => {
   const [activeAdvantage, setActiveAdvantage] = useState(-1);
   const [activeProofPoint, setActiveProofPoint] = useState(-1);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [constellationRotation, setConstellationRotation] = useState(0);
+  const [neuralPulse, setNeuralPulse] = useState(0);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -18,14 +18,14 @@ const AboutSection = () => {
       });
     };
 
-    const rotationInterval = setInterval(() => {
-      setConstellationRotation(prev => (prev + 0.5) % 360);
-    }, 100);
+    const pulseInterval = setInterval(() => {
+      setNeuralPulse(prev => (prev + 1) % 5);
+    }, 2000);
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      clearInterval(rotationInterval);
+      clearInterval(pulseInterval);
     };
   }, []);
 
@@ -35,21 +35,24 @@ const AboutSection = () => {
       title: "The Spark",
       subtitle: "Genesis",
       description: "Born from late-night conversations between minds that refused to accept 'that's just how it's done.' We saw gaps where others saw walls.",
-      color: "from-cyan-500 to-blue-500"
+      color: "from-cyan-400 to-blue-500",
+      position: { x: 20, y: 30 }
     },
     {
       year: "Today",
       title: "The Synapse",
       subtitle: "Evolution",
       description: "We've evolved from idea to impact, creating solutions that don't just solve problems—they redefine possibilities.",
-      color: "from-blue-500 to-purple-500"
+      color: "from-blue-500 to-purple-500",
+      position: { x: 50, y: 50 }
     },
     {
       year: "Tomorrow",
       title: "The Symphony",
       subtitle: "Revolution",
       description: "Building toward a future where technology amplifies human potential rather than replacing it.",
-      color: "from-purple-500 to-pink-500"
+      color: "from-purple-500 to-pink-500",
+      position: { x: 80, y: 30 }
     }
   ];
 
@@ -57,23 +60,26 @@ const AboutSection = () => {
     {
       icon: Brain,
       title: "Cognitive Architecture",
-      subtitle: "Connection Node: Thinking Together",
+      subtitle: "Thinking Together",
       description: "We think differently because we think together. Our team operates like a neural network—each connection strengthening the whole.",
-      position: { x: 25, y: 30 }
+      position: { x: 25, y: 35 },
+      connections: [1, 2]
     },
     {
       icon: Zap,
       title: "Dynamic Adaptation",
-      subtitle: "Connection Node: Evolutionary Response",
+      subtitle: "Evolutionary Response",
       description: "Static solutions die quickly. We build systems that learn, evolve, and anticipate change before it happens.",
-      position: { x: 75, y: 25 }
+      position: { x: 75, y: 25 },
+      connections: [0, 2]
     },
     {
-      icon: Brain,
+      icon: Link,
       title: "Synthesis Philosophy",
-      subtitle: "Connection Node: Exponential Fusion",
+      subtitle: "Exponential Fusion",
       description: "We don't just combine technologies; we synthesize them into something entirely new. The whole becomes exponentially greater than its parts.",
-      position: { x: 50, y: 75 }
+      position: { x: 50, y: 70 },
+      connections: [0, 1]
     }
   ];
 
@@ -155,233 +161,244 @@ const AboutSection = () => {
       icon: Target,
       title: "Precision Without Rigidity",
       description: "Our solutions hit targets that haven't been set yet while remaining flexible enough to pivot with purpose.",
-      connections: [0, 3] // Connects to Predictive Innovation + Transparent Complexity
+      position: { x: 30, y: 20 },
+      connections: [0, 3]
     },
     {
       icon: Rocket,
       title: "Speed Without Sacrifice",
       description: "We move at startup velocity while maintaining enterprise reliability. Fast doesn't mean fragile in our world.",
-      connections: [1, 2] // Connects to Symbiotic Integration + Cognitive Scaling
+      position: { x: 70, y: 20 },
+      connections: [1, 2]
     },
     {
       icon: Lightbulb,
       title: "Research-Rooted Reality",
       description: "Every solution is grounded in cognitive science principles and proven through real-world application.",
-      connections: [0, 1, 2, 3, 4] // Connects to all advantages
+      position: { x: 50, y: 40 },
+      connections: [0, 1, 2, 3, 4]
     },
     {
       icon: Globe,
       title: "Global Thinking, Local Feeling",
       description: "We build for scale but optimize for the individual experience within that scale.",
-      connections: [3, 4] // Connects to Partnership Paradigm + Transparent Complexity
+      position: { x: 50, y: 70 },
+      connections: [3, 4]
     }
   ];
 
-  const musthaqMethods = [
-    "Pattern Recognition: Identifying opportunities where others see obstacles",
-    "Synthesis Thinking: Combining disparate elements to create breakthrough solutions",
-    "Anticipatory Leadership: Building for tomorrow's challenges with today's foundations",
-    "Human-Centric Innovation: Technology that amplifies rather than replaces human potential"
-  ];
-
-  const renderConnectionLines = (fromNodes: any[], toNodes: any[], activeIndex: number, connections: number[]) => {
-    if (activeIndex === -1) return null;
-    
-    const fromNode = fromNodes[activeIndex];
-    if (!fromNode) return null;
-
-    return connections.map((connectionIndex) => {
-      const toNode = toNodes[connectionIndex];
-      if (!toNode) return null;
-
-      return (
-        <line
-          key={`${activeIndex}-${connectionIndex}`}
-          x1={`${fromNode.position.x}%`}
-          y1={`${fromNode.position.y}%`}
-          x2={`${toNode.position.x}%`}
-          y2={`${toNode.position.y}%`}
-          stroke="rgba(0, 212, 255, 0.8)"
-          strokeWidth="3"
-          className="animate-synaptic-fire"
-        />
-      );
-    });
-  };
-
   return (
-    <section id="about" className="py-32 relative overflow-hidden">
-      {/* Dynamic gradient overlay */}
+    <section id="about" className="py-32 relative overflow-hidden min-h-screen">
+      {/* Dynamic Neural Background */}
       <div 
-        className="absolute inset-0 opacity-20 transition-all duration-1000"
+        className="absolute inset-0 opacity-30 transition-all duration-1000"
         style={{
-          background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(0, 212, 255, 0.3) 0%, transparent 50%)`
+          background: `
+            radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(0, 212, 255, 0.2) 0%, transparent 40%),
+            radial-gradient(circle at ${100-mousePosition.x}% ${100-mousePosition.y}%, rgba(147, 51, 234, 0.2) 0%, transparent 40%),
+            conic-gradient(from ${neuralPulse * 72}deg at 50% 50%, rgba(0, 212, 255, 0.1), rgba(147, 51, 234, 0.1), rgba(236, 72, 153, 0.1), rgba(0, 212, 255, 0.1))
+          `
         }}
       ></div>
 
       <div className="container mx-auto px-6 relative z-10">
-        {/* ABOUT US SECTION: The Neural Bridge */}
         
-        {/* Opening Hook */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center glassmorphism px-6 py-2 rounded-full mb-8 animate-float">
-            <Brain className="w-4 h-4 text-neon mr-2" />
-            <span className="text-white text-sm">Where Synapses Meet Systems</span>
+        {/* ABOUT US SECTION */}
+        <div className="text-center mb-32">
+          <div className="inline-flex items-center text-neon text-sm mb-8 animate-float">
+            <Brain className="w-4 h-4 mr-2" />
+            <span>Where Synapses Meet Systems</span>
           </div>
 
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-8 leading-tight">
-            The <span className="text-neon animate-text-glow">Neural</span> Bridge
+          <h2 className="text-6xl md:text-8xl font-bold text-white mb-16 leading-none">
+            The <span className="text-neon animate-text-glow relative">
+              Neural
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 opacity-20 blur-2xl"></div>
+            </span> Bridge
           </h2>
 
-          <div className="relative max-w-4xl mx-auto">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 rounded-lg blur-xl"></div>
-            <div className="relative glassmorphism p-8 rounded-lg">
-              <p className="text-xl text-gray-300 leading-relaxed">
-                At Synopsyne Dynamics, we exist at the intersection of human intuition and digital precision. 
-                Our name isn't just clever wordplay—it's our philosophy. Like synapses firing in perfect harmony 
-                to create thought, we connect disparate elements to spark innovation.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Interactive Timeline - The Origin Story */}
-        <div className="mb-32">
-          <h3 className="text-3xl font-bold text-white text-center mb-4">The Origin Story</h3>
-          <p className="text-lg text-neon text-center mb-16 font-medium">Genesis → Evolution → Revolution</p>
-
-          <div className="relative max-w-6xl mx-auto">
-            <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-full transform -translate-y-1/2"></div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {timelineItems.map((item, index) => (
-                <div
-                  key={index}
-                  className={`relative cursor-pointer transition-all duration-500 ${
-                    activeTimeline === index ? 'scale-105' : 'scale-95 opacity-70'
-                  }`}
-                  onClick={() => setActiveTimeline(index)}
-                  onMouseEnter={() => setActiveTimeline(index)}
-                >
-                  <div className={`absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-gradient-to-r ${item.color} shadow-lg z-10 animate-pulse`}></div>
-                  
-                  <div className="glassmorphism p-8 rounded-xl mt-12 hover:neon-border transition-all">
-                    <div className="text-center">
-                      <div className={`text-2xl font-bold bg-gradient-to-r ${item.color} bg-clip-text text-transparent mb-2`}>
-                        {item.year}
-                      </div>
-                      <div className="text-xl font-semibold text-white mb-2">{item.title}</div>
-                      <div className="text-neon text-sm mb-4">{item.subtitle}</div>
-                      <p className="text-gray-300 text-sm leading-relaxed">{item.description}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Our DNA - Interactive Neural Network Visualization */}
-        <div className="mb-32">
-          <h3 className="text-3xl font-bold text-white text-center mb-8">Our <span className="text-neon">DNA</span></h3>
-          <p className="text-lg text-gray-300 text-center mb-16">Interactive Neural Network Visualization</p>
-
-          <div className="relative max-w-6xl mx-auto h-96">
-            <div className="absolute inset-0 neural-bg"></div>
+          <div className="max-w-4xl mx-auto relative">
+            <p className="text-2xl text-gray-300 leading-relaxed font-light">
+              At Synopsyne Dynamics, we exist at the intersection of human intuition and digital precision. 
+              Our name isn't just clever wordplay—it's our philosophy. Like synapses firing in perfect harmony 
+              to create thought, we connect disparate elements to spark innovation.
+            </p>
             
-            {/* Connection Lines */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none">
-              {dnaNodes.map((node, index) => (
-                dnaNodes.slice(index + 1).map((targetNode, targetIndex) => (
-                  <line
-                    key={`${index}-${targetIndex}`}
-                    x1={`${node.position.x}%`}
-                    y1={`${node.position.y}%`}
-                    x2={`${targetNode.position.x}%`}
-                    y2={`${targetNode.position.y}%`}
-                    stroke="rgba(0, 212, 255, 0.3)"
-                    strokeWidth="2"
-                    className={`transition-all duration-500 ${activeDNA === index || activeDNA === (index + targetIndex + 1) ? 'opacity-100 animate-synaptic-fire' : 'opacity-30'}`}
-                  />
-                ))
-              )).flat()}
+            {/* Flowing decoration lines */}
+            <svg className="absolute -top-10 -left-10 w-32 h-32 opacity-30" viewBox="0 0 100 100">
+              <path d="M10,50 Q50,10 90,50 Q50,90 10,50" stroke="url(#gradient1)" strokeWidth="2" fill="none" className="animate-neural-pulse"/>
+              <defs>
+                <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#00D4FF" />
+                  <stop offset="100%" stopColor="#9333EA" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+
+        {/* Origin Story - Flowing Timeline */}
+        <div className="mb-40">
+          <h3 className="text-4xl font-bold text-white text-center mb-8">The Origin Story</h3>
+          <p className="text-xl text-neon text-center mb-20 font-medium">Genesis → Evolution → Revolution</p>
+
+          <div className="relative max-w-7xl mx-auto h-96">
+            {/* Flowing connection path */}
+            <svg className="absolute inset-0 w-full h-full">
+              <path 
+                d={`M ${timelineItems[0].position.x}% ${timelineItems[0].position.y}% Q 50% 20% ${timelineItems[1].position.x}% ${timelineItems[1].position.y}% Q 70% 60% ${timelineItems[2].position.x}% ${timelineItems[2].position.y}%`}
+                stroke="url(#timelineGradient)" 
+                strokeWidth="3" 
+                fill="none"
+                className="animate-synaptic-fire"
+              />
+              <defs>
+                <linearGradient id="timelineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#06B6D4" />
+                  <stop offset="50%" stopColor="#8B5CF6" />
+                  <stop offset="100%" stopColor="#EC4899" />
+                </linearGradient>
+              </defs>
             </svg>
 
-            {/* DNA Nodes */}
-            {dnaNodes.map((node, index) => (
+            {/* Timeline nodes */}
+            {timelineItems.map((item, index) => (
               <div
                 key={index}
-                className={`absolute cursor-pointer transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${
-                  activeDNA === index ? 'scale-110 z-20' : 'scale-100 z-10'
+                className={`absolute cursor-pointer transform -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ${
+                  activeTimeline === index ? 'scale-110 z-20' : 'scale-100 z-10'
                 }`}
-                style={{ left: `${node.position.x}%`, top: `${node.position.y}%` }}
-                onMouseEnter={() => setActiveDNA(index)}
-                onMouseLeave={() => setActiveDNA(-1)}
+                style={{ left: `${item.position.x}%`, top: `${item.position.y}%` }}
+                onMouseEnter={() => setActiveTimeline(index)}
+                onMouseLeave={() => setActiveTimeline(-1)}
               >
-                <div className={`glassmorphism p-6 rounded-xl hover:neon-border transition-all group max-w-sm ${
-                  activeDNA === index ? 'neon-border' : ''
+                {/* Organic shape container */}
+                <div className={`relative p-8 text-center transition-all duration-500 ${
+                  activeTimeline === index ? 'transform scale-105' : ''
                 }`}>
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500/20 to-purple-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform animate-neural-pulse">
-                    <node.icon className="w-8 h-8 text-neon" />
+                  {/* Organic background shape */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-20 blur-xl rounded-full transform rotate-12`}></div>
+                  <div className="absolute inset-2 bg-black/30 backdrop-blur-sm rounded-full border border-white/20"></div>
+                  
+                  <div className="relative z-10">
+                    <div className={`text-3xl font-bold bg-gradient-to-r ${item.color} bg-clip-text text-transparent mb-2`}>
+                      {item.year}
+                    </div>
+                    <div className="text-xl font-semibold text-white mb-2">{item.title}</div>
+                    <div className="text-neon text-sm mb-4">{item.subtitle}</div>
+                    
+                    {activeTimeline === index && (
+                      <div className="animate-fade-in">
+                        <p className="text-gray-300 text-sm leading-relaxed max-w-xs">{item.description}</p>
+                      </div>
+                    )}
                   </div>
-                  
-                  <h4 className="text-lg font-bold text-white mb-2 group-hover:text-neon transition-colors">
-                    {node.title}
-                  </h4>
-                  
-                  <p className="text-sm text-neon mb-3 font-medium">
-                    {node.subtitle}
-                  </p>
-                  
-                  <p className="text-gray-300 leading-relaxed text-sm">
-                    {node.description}
-                  </p>
                 </div>
               </div>
             ))}
           </div>
-
-          <p className="text-center text-gray-300 text-sm mt-8 italic">
-            Interactive web of connecting nodes with pulsing synapses. Hover on any node to see how it connects to others, creating a living visualization of interconnected thinking.
-          </p>
         </div>
 
-        {/* Founder Profile - Syed Musthaq */}
-        <div className="mb-32">
-          <div className="relative max-w-5xl mx-auto">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 rounded-lg blur-2xl"></div>
-            <div className="relative glassmorphism p-12 rounded-xl">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-                <div className="lg:col-span-1">
-                  <div className="w-48 h-48 mx-auto rounded-full glassmorphism flex items-center justify-center animate-pulse-glow">
-                    <div className="w-32 h-32 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 flex items-center justify-center">
-                      <Brain className="w-16 h-16 text-white" />
+        {/* Our DNA - Organic Neural Network */}
+        <div className="mb-40">
+          <h3 className="text-4xl font-bold text-white text-center mb-8">Our <span className="text-neon">DNA</span></h3>
+          <p className="text-lg text-gray-300 text-center mb-20">Interactive Neural Network Visualization</p>
+
+          <div className="relative max-w-6xl mx-auto h-96">
+            {/* Neural connections */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none">
+              {dnaNodes.map((node, index) => 
+                node.connections.map(connIndex => (
+                  <line
+                    key={`${index}-${connIndex}`}
+                    x1={`${node.position.x}%`}
+                    y1={`${node.position.y}%`}
+                    x2={`${dnaNodes[connIndex].position.x}%`}
+                    y2={`${dnaNodes[connIndex].position.y}%`}
+                    stroke="rgba(0, 212, 255, 0.6)"
+                    strokeWidth="2"
+                    className={`transition-all duration-500 ${
+                      activeDNA === index || activeDNA === connIndex ? 'animate-synaptic-fire opacity-100' : 'opacity-30'
+                    }`}
+                  />
+                ))
+              )}
+            </svg>
+
+            {/* DNA nodes with organic shapes */}
+            {dnaNodes.map((node, index) => (
+              <div
+                key={index}
+                className="absolute cursor-pointer transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 group"
+                style={{ left: `${node.position.x}%`, top: `${node.position.y}%` }}
+                onMouseEnter={() => setActiveDNA(index)}
+                onMouseLeave={() => setActiveDNA(-1)}
+              >
+                {/* Organic pulsing background */}
+                <div className="absolute inset-0 w-48 h-48 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-xl animate-neural-pulse"></div>
+                
+                <div className="relative bg-black/40 backdrop-blur-sm p-6 rounded-3xl border border-white/20 max-w-sm group-hover:border-neon transition-all">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500/30 to-purple-500/30 flex items-center justify-center mr-4 animate-pulse-glow">
+                      <node.icon className="w-6 h-6 text-neon" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-bold text-white group-hover:text-neon transition-colors">
+                        {node.title}
+                      </h4>
+                      <p className="text-sm text-neon font-medium">{node.subtitle}</p>
                     </div>
                   </div>
-                  <h4 className="text-2xl font-bold text-white text-center mt-6 mb-2">Syed Musthaq</h4>
-                  <p className="text-neon text-center font-medium">Founder & Neural Architect</p>
-                </div>
-
-                <div className="lg:col-span-2">
-                  <p className="text-lg text-gray-300 leading-relaxed mb-6">
-                    Syed didn't just found Synopsyne Dynamics; he architected it from first principles. With a mind that naturally bridges the gap between human intuition and digital precision, Syed recognized that the future belongs to those who can synthesize complexity into elegant solutions.
-                  </p>
                   
-                  <p className="text-lg text-gray-300 leading-relaxed mb-8">
-                    His approach to innovation mirrors the very neural networks that inspire our company—making connections across disciplines, industries, and paradigms that others see as separate. Under his leadership, Synopsyne Dynamics has evolved from concept to catalyst, transforming how organizations think about technology integration.
-                  </p>
+                  <p className="text-gray-300 leading-relaxed text-sm">{node.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
-                  <div>
-                    <h5 className="text-xl font-bold text-neon mb-4">The Musthaq Method:</h5>
-                    <div className="space-y-3">
-                      {musthaqMethods.map((method, index) => (
-                        <div key={index} className="glassmorphism p-4 rounded-lg hover:neon-border transition-all group">
-                          <div className="text-gray-300 group-hover:text-white transition-colors">
-                            {method}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+        {/* Founder Profile - Organic Layout */}
+        <div className="mb-40">
+          <div className="relative max-w-6xl mx-auto">
+            {/* Flowing background shape */}
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-purple-500/10 to-pink-500/5 rounded-full blur-3xl transform rotate-12"></div>
+            
+            <div className="relative grid grid-cols-1 lg:grid-cols-3 gap-12 items-center p-12">
+              <div className="lg:col-span-1 text-center">
+                {/* Organic profile container */}
+                <div className="relative w-64 h-64 mx-auto mb-8">
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-full animate-pulse-glow"></div>
+                  <div className="absolute inset-4 bg-black rounded-full flex items-center justify-center">
+                    <Brain className="w-24 h-24 text-neon" />
+                  </div>
+                </div>
+                <h4 className="text-3xl font-bold text-white mb-2">Syed Musthaq</h4>
+                <p className="text-neon font-medium">Founder & Neural Architect</p>
+              </div>
+
+              <div className="lg:col-span-2 space-y-8">
+                <p className="text-xl text-gray-300 leading-relaxed">
+                  Syed didn't just found Synopsyne Dynamics; he architected it from first principles. With a mind that naturally bridges the gap between human intuition and digital precision, Syed recognized that the future belongs to those who can synthesize complexity into elegant solutions.
+                </p>
+                
+                <p className="text-xl text-gray-300 leading-relaxed">
+                  His approach to innovation mirrors the very neural networks that inspire our company—making connections across disciplines, industries, and paradigms that others see as separate. Under his leadership, Synopsyne Dynamics has evolved from concept to catalyst, transforming how organizations think about technology integration.
+                </p>
+
+                <div>
+                  <h5 className="text-2xl font-bold text-neon mb-6">The Musthaq Method:</h5>
+                  <div className="space-y-4">
+                    {[
+                      "Pattern Recognition: Identifying opportunities where others see obstacles",
+                      "Synthesis Thinking: Combining disparate elements to create breakthrough solutions",
+                      "Anticipatory Leadership: Building for tomorrow's challenges with today's foundations",
+                      "Human-Centric Innovation: Technology that amplifies rather than replaces human potential"
+                    ].map((method, index) => (
+                      <div key={index} className="flex items-start group">
+                        <div className="w-3 h-3 rounded-full bg-neon mt-2 mr-4 animate-pulse"></div>
+                        <p className="text-gray-300 group-hover:text-white transition-colors text-lg">{method}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -390,68 +407,88 @@ const AboutSection = () => {
         </div>
 
         {/* Team Ethos */}
-        <div className="mb-32 text-center">
+        <div className="mb-40 text-center">
           <div className="relative max-w-5xl mx-auto">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 rounded-lg blur-2xl"></div>
-            <div className="relative glassmorphism p-12 rounded-xl">
-              <blockquote className="text-2xl md:text-3xl font-bold text-white mb-8 leading-relaxed">
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 rounded-full blur-3xl"></div>
+            <div className="relative p-16">
+              <blockquote className="text-3xl md:text-4xl font-bold text-white mb-8 leading-relaxed">
                 "We're not just building a company—we're <span className="text-neon">architecting</span> the future's nervous system."
               </blockquote>
               
-              <p className="text-lg text-gray-300 leading-relaxed">
+              <p className="text-xl text-gray-300 leading-relaxed">
                 Led by Syed's vision, our team operates like a neural network—each connection strengthening the whole. Our developers aren't just coders; they're digital neuroscientists. Our designers aren't just creative minds; they're experience architects. Together, we form a cognitive ecosystem that thinks, adapts, and innovates as one.
               </p>
             </div>
           </div>
         </div>
 
-        {/* WHY CHOOSE US SECTION: The Synopsyne Advantage */}
-        
-        {/* Lead Statement */}
-        <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-8 leading-tight">
-            The <span className="text-neon animate-text-glow">Synopsyne</span> Advantage
+        {/* WHY CHOOSE US SECTION */}
+        <div className="text-center mb-32">
+          <h2 className="text-6xl md:text-8xl font-bold text-white mb-8 leading-none">
+            The <span className="text-neon animate-text-glow relative">
+              Synopsyne
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 opacity-20 blur-2xl"></div>
+            </span> Advantage
           </h2>
-          <p className="text-2xl text-gray-300 font-medium">We don't compete—we create new categories.</p>
+          <p className="text-3xl text-gray-300 font-light">We don't compete—we create new categories.</p>
         </div>
 
-        {/* The Five Synaptic Advantages - Interactive Synaptic Constellation */}
-        <div className="mb-32">
-          <h3 className="text-3xl font-bold text-white text-center mb-8">The Five Synaptic Advantages</h3>
-          <p className="text-lg text-gray-300 text-center mb-16">Interactive Synaptic Constellation</p>
+        {/* The Five Synaptic Advantages - Organic Constellation */}
+        <div className="mb-40">
+          <h3 className="text-4xl font-bold text-white text-center mb-8">The Five Synaptic Advantages</h3>
+          <p className="text-lg text-gray-300 text-center mb-20">Interactive Synaptic Constellation</p>
 
-          <div 
-            className="relative max-w-6xl mx-auto h-[600px]"
-            style={{ transform: `rotate(${constellationRotation * 0.1}deg)` }}
-          >
-            {/* Constellation Background */}
-            <div className="absolute inset-0 neural-bg"></div>
-            
-            {/* Connection Lines */}
+          <div className="relative max-w-7xl mx-auto h-[700px]">
+            {/* Dynamic constellation background */}
+            <div className="absolute inset-0 overflow-hidden">
+              {[...Array(20)].map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute w-1 h-1 bg-cyan-400 rounded-full animate-pulse opacity-60"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    animationDelay: `${Math.random() * 2}s`
+                  }}
+                ></div>
+              ))}
+            </div>
+
+            {/* Neural connections */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none">
-              {renderConnectionLines(advantages, advantages, activeAdvantage, activeAdvantage >= 0 ? advantages[activeAdvantage].connections : [])}
+              {activeAdvantage >= 0 && advantages[activeAdvantage].connections.map((connIndex) => (
+                <line
+                  key={`${activeAdvantage}-${connIndex}`}
+                  x1={`${advantages[activeAdvantage].position.x}%`}
+                  y1={`${advantages[activeAdvantage].position.y}%`}
+                  x2={`${advantages[connIndex].position.x}%`}
+                  y2={`${advantages[connIndex].position.y}%`}
+                  stroke="rgba(0, 212, 255, 0.8)"
+                  strokeWidth="3"
+                  className="animate-synaptic-fire"
+                />
+              ))}
             </svg>
 
-            {/* Advantage Nodes */}
+            {/* Advantage nodes with organic shapes */}
             {advantages.map((advantage, index) => (
               <div
                 key={index}
-                className={`absolute cursor-pointer transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${
-                  activeAdvantage === index ? 'scale-110 z-20' : 'scale-100 z-10'
-                }`}
+                className="absolute cursor-pointer transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 group"
                 style={{ left: `${advantage.position.x}%`, top: `${advantage.position.y}%` }}
                 onClick={() => setActiveAdvantage(activeAdvantage === index ? -1 : index)}
                 onMouseEnter={() => setActiveAdvantage(index)}
                 onMouseLeave={() => setActiveAdvantage(-1)}
               >
-                <div className={`glassmorphism p-6 rounded-xl hover:neon-border transition-all group max-w-md ${
-                  activeAdvantage === index ? 'neon-border' : ''
-                }`}>
-                  <div className="flex items-center mb-4">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500/20 to-purple-500/20 flex items-center justify-center mr-4 group-hover:scale-110 transition-transform animate-neural-pulse">
+                {/* Organic pulsing aura */}
+                <div className="absolute inset-0 w-64 h-64 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-2xl animate-neural-pulse"></div>
+                
+                <div className="relative bg-black/40 backdrop-blur-sm p-8 rounded-3xl border border-white/20 max-w-md group-hover:border-neon transition-all">
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500/30 to-purple-500/30 flex items-center justify-center mr-4 animate-pulse-glow">
                       <advantage.icon className="w-8 h-8 text-neon" />
                     </div>
-                    <div className="text-3xl">{advantage.emoji}</div>
+                    <div className="text-4xl">{advantage.emoji}</div>
                   </div>
                   
                   <h4 className="text-xl font-bold text-white mb-2 group-hover:text-neon transition-colors">
@@ -467,11 +504,12 @@ const AboutSection = () => {
                   </p>
 
                   {activeAdvantage === index && (
-                    <div className="space-y-2 animate-fade-in">
+                    <div className="space-y-3 animate-fade-in">
                       {advantage.features.map((feature, featureIndex) => (
-                        <p key={featureIndex} className="text-sm text-gray-300 leading-relaxed">
-                          • {feature}
-                        </p>
+                        <div key={featureIndex} className="flex items-start">
+                          <div className="w-2 h-2 rounded-full bg-neon mt-2 mr-3 animate-pulse"></div>
+                          <p className="text-sm text-gray-300 leading-relaxed">{feature}</p>
+                        </div>
                       ))}
                     </div>
                   )}
@@ -481,45 +519,45 @@ const AboutSection = () => {
           </div>
 
           <p className="text-center text-gray-300 text-sm mt-8 italic">
-            Hover over any advantage to see glowing pathways connecting to related advantages. Click to expand detailed connections. The constellation rotates slowly, showing the dynamic relationship between all five elements.
+            Hover over any advantage to see glowing pathways connecting to related advantages. Click to expand detailed connections.
           </p>
         </div>
 
-        {/* The Proof Points - Interactive Evidence Web */}
-        <div className="mb-32">
-          <h3 className="text-3xl font-bold text-white text-center mb-8">The Proof Points</h3>
-          <p className="text-lg text-gray-300 text-center mb-16">Interactive Evidence Web</p>
+        {/* The Proof Points - Flowing Evidence Web */}
+        <div className="mb-40">
+          <h3 className="text-4xl font-bold text-white text-center mb-8">The Proof Points</h3>
+          <p className="text-lg text-gray-300 text-center mb-20">Interactive Evidence Web</p>
 
           <div className="relative max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Flowing grid layout */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               {proofPoints.map((point, index) => (
                 <div
                   key={index}
-                  className={`relative cursor-pointer transition-all duration-500 ${
-                    activeProofPoint === index ? 'scale-105' : 'scale-100'
-                  }`}
+                  className="relative cursor-pointer transition-all duration-500 group"
                   onClick={() => setActiveProofPoint(activeProofPoint === index ? -1 : index)}
                   onMouseEnter={() => setActiveProofPoint(index)}
                   onMouseLeave={() => setActiveProofPoint(-1)}
                 >
-                  <div className={`glassmorphism p-8 rounded-xl hover:neon-border transition-all group ${
-                    activeProofPoint === index ? 'neon-border' : ''
-                  }`}>
-                    <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500/20 to-purple-500/20 flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
-                        <point.icon className="w-6 h-6 text-neon" />
+                  {/* Organic background shape */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/10 to-pink-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all"></div>
+                  
+                  <div className="relative bg-black/30 backdrop-blur-sm p-8 rounded-3xl border border-white/20 group-hover:border-neon transition-all">
+                    <div className="flex items-center mb-6">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500/30 to-purple-500/30 flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                        <point.icon className="w-8 h-8 text-neon" />
                       </div>
                       <h4 className="text-xl font-bold text-white group-hover:text-neon transition-colors">
                         {point.title}
                       </h4>
                     </div>
                     
-                    <p className="text-gray-300 leading-relaxed">
+                    <p className="text-gray-300 leading-relaxed text-lg">
                       {point.description}
                     </p>
 
                     {activeProofPoint === index && (
-                      <div className="mt-4 pt-4 border-t border-cyan-500/30 animate-fade-in">
+                      <div className="mt-6 pt-6 border-t border-cyan-500/30 animate-fade-in">
                         <p className="text-sm text-neon font-medium">
                           Connects to: {point.connections.map(conn => advantages[conn]?.title).join(' + ')}
                         </p>
@@ -532,20 +570,20 @@ const AboutSection = () => {
           </div>
 
           <p className="text-center text-gray-300 text-sm mt-8 italic">
-            Click any proof point to see animated connections to related advantages above, creating a living demonstration of interconnected value.
+            Click any proof point to see connections to related advantages above, creating a living demonstration of interconnected value.
           </p>
         </div>
 
         {/* Closing Statement */}
         <div className="text-center">
           <div className="relative max-w-5xl mx-auto">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 rounded-lg blur-2xl"></div>
-            <div className="relative glassmorphism p-12 rounded-xl">
-              <blockquote className="text-2xl md:text-3xl font-bold text-white mb-8 leading-relaxed">
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 rounded-full blur-3xl"></div>
+            <div className="relative p-16">
+              <blockquote className="text-3xl md:text-4xl font-bold text-white mb-8 leading-relaxed">
                 "Choose Synopsyne Dynamics not for what we've built, but for what we'll <span className="text-neon">discover</span> together."
               </blockquote>
               
-              <p className="text-lg text-gray-300 leading-relaxed">
+              <p className="text-xl text-gray-300 leading-relaxed">
                 The future isn't something that happens to you—it's something you actively create. We're not just service providers; we're co-architects of tomorrow's digital nervous system. When you choose us, you're not buying a solution—you're investing in evolution.
               </p>
             </div>
@@ -553,11 +591,21 @@ const AboutSection = () => {
         </div>
       </div>
 
-      {/* Enhanced Neural Network Elements */}
-      <div className="absolute top-1/4 left-10 w-2 h-2 rounded-full bg-cyan-400 animate-pulse opacity-60"></div>
-      <div className="absolute top-1/3 right-20 w-3 h-3 rounded-full bg-blue-400 animate-pulse opacity-40" style={{animationDelay: '1s'}}></div>
-      <div className="absolute bottom-1/4 left-1/4 w-2 h-2 rounded-full bg-purple-400 animate-pulse opacity-50" style={{animationDelay: '2s'}}></div>
-      <div className="absolute bottom-1/3 right-1/3 w-3 h-3 rounded-full bg-pink-400 animate-pulse opacity-30" style={{animationDelay: '3s'}}></div>
+      {/* Floating organic elements */}
+      {[...Array(8)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute rounded-full bg-gradient-to-r from-cyan-400/20 to-purple-500/20 animate-float"
+          style={{
+            width: `${Math.random() * 100 + 50}px`,
+            height: `${Math.random() * 100 + 50}px`,
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 3}s`,
+            animationDuration: `${Math.random() * 4 + 3}s`
+          }}
+        ></div>
+      ))}
     </section>
   );
 };
