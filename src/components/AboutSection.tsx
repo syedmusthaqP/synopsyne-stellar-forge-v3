@@ -1,12 +1,12 @@
-
 import React, { useState, useEffect } from 'react';
-import { Brain, Zap, Link, TrendingUp, Gem, Handshake, Target, Rocket, Lightbulb, Globe } from 'lucide-react';
+import { Brain, Zap, Link, TrendingUp, Gem, Handshake, Target, Rocket, Lightbulb, Globe, Eye, Layers, Users, Compass } from 'lucide-react';
 
 const AboutSection = () => {
   const [activeTimeline, setActiveTimeline] = useState(0);
   const [activeDNA, setActiveDNA] = useState(-1);
   const [activeAdvantage, setActiveAdvantage] = useState(-1);
   const [activeProofPoint, setActiveProofPoint] = useState(-1);
+  const [activeMethod, setActiveMethod] = useState(-1);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [neuralPulse, setNeuralPulse] = useState(0);
 
@@ -78,8 +78,39 @@ const AboutSection = () => {
       title: "Synthesis Philosophy",
       subtitle: "Exponential Fusion",
       description: "We don't just combine technologies; we synthesize them into something entirely new. The whole becomes exponentially greater than its parts.",
-      position: { x: 50, y: 80 },
+      position: { x: 50, y: 75 },
       connections: [0, 1]
+    }
+  ];
+
+  const methodNodes = [
+    {
+      icon: Eye,
+      title: "Pattern Recognition",
+      description: "Identifying opportunities where others see obstacles",
+      position: { x: 20, y: 30 },
+      connections: [1, 3]
+    },
+    {
+      icon: Layers,
+      title: "Synthesis Thinking", 
+      description: "Combining disparate elements to create breakthrough solutions",
+      position: { x: 80, y: 30 },
+      connections: [0, 2]
+    },
+    {
+      icon: Compass,
+      title: "Anticipatory Leadership",
+      description: "Building for tomorrow's challenges with today's foundations", 
+      position: { x: 80, y: 70 },
+      connections: [1, 3]
+    },
+    {
+      icon: Users,
+      title: "Human-Centric Innovation",
+      description: "Technology that amplifies rather than replaces human potential",
+      position: { x: 20, y: 70 },
+      connections: [0, 2]
     }
   ];
 
@@ -109,7 +140,7 @@ const AboutSection = () => {
         "Living Interfaces: Technology that adapts to human behavior rather than forcing behavior to adapt to technology",
         "Cross-Platform Fluency: We speak every digital language and make them all work together"
       ],
-      position: { x: 85, y: 40 },
+      position: { x: 85, y: 35 },
       connections: [0, 2, 4]
     },
     {
@@ -123,7 +154,7 @@ const AboutSection = () => {
         "Elastic Architecture: Solutions that breathe with your business rhythms",
         "Wisdom Accumulation: Every interaction makes the entire system more intelligent"
       ],
-      position: { x: 70, y: 85 },
+      position: { x: 70, y: 75 },
       connections: [1, 3, 4]
     },
     {
@@ -137,7 +168,7 @@ const AboutSection = () => {
         "Intuitive Interfaces: If it needs a manual, we haven't finished building it",
         "Graceful Performance: Our solutions work so smoothly, they feel like magic"
       ],
-      position: { x: 30, y: 85 },
+      position: { x: 30, y: 75 },
       connections: [0, 2, 4]
     },
     {
@@ -151,7 +182,7 @@ const AboutSection = () => {
         "Continuous Calibration: We don't deliver and disappear; we grow alongside you",
         "Innovation Partnership: You bring the vision, we bring the impossible-made-possible"
       ],
-      position: { x: 15, y: 40 },
+      position: { x: 15, y: 35 },
       connections: [1, 2, 3]
     }
   ];
@@ -210,7 +241,7 @@ const AboutSection = () => {
             <span>Where Synapses Meet Systems</span>
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-16 leading-none">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-16 leading-none">
             The <span className="text-neon animate-text-glow relative">
               Neural
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 opacity-20 blur-2xl"></div>
@@ -218,7 +249,7 @@ const AboutSection = () => {
           </h2>
 
           <div className="max-w-4xl mx-auto relative">
-            <p className="text-base md:text-lg text-gray-300 leading-relaxed font-light tracking-wide" style={{ fontFamily: 'Courier New, monospace', letterSpacing: '0.05em' }}>
+            <p className="text-sm md:text-base text-gray-300 leading-relaxed font-light tracking-wide" style={{ fontFamily: 'Orbitron, monospace', letterSpacing: '0.05em' }}>
               At Synopsyne Dynamics, we exist at the intersection of human intuition and digital precision. 
               Our name isn't just clever wordplay—it's our philosophy. Like synapses firing in perfect harmony 
               to create thought, we connect disparate elements to spark innovation.
@@ -325,7 +356,7 @@ const AboutSection = () => {
               )}
             </svg>
 
-            {/* DNA nodes */}
+            {/* DNA nodes with improved spacing */}
             {dnaNodes.map((node, index) => (
               <div
                 key={index}
@@ -333,7 +364,8 @@ const AboutSection = () => {
                 style={{ 
                   left: `${node.position.x}%`, 
                   top: `${node.position.y}%`,
-                  transform: 'translate(-50%, -50%)'
+                  transform: 'translate(-50%, -50%)',
+                  zIndex: activeDNA === index ? 50 : 10
                 }}
                 onMouseEnter={() => setActiveDNA(index)}
                 onMouseLeave={() => setActiveDNA(-1)}
@@ -341,7 +373,9 @@ const AboutSection = () => {
                 {/* Organic pulsing background */}
                 <div className="absolute inset-0 w-80 h-80 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-xl animate-neural-pulse -translate-x-1/2 -translate-y-1/2"></div>
                 
-                <div className="relative bg-black/40 backdrop-blur-sm p-6 rounded-3xl border border-white/20 max-w-sm group-hover:border-neon transition-all">
+                <div className={`relative bg-black/40 backdrop-blur-sm p-6 rounded-3xl border border-white/20 max-w-sm group-hover:border-neon transition-all ${
+                  activeDNA === index ? 'scale-105' : ''
+                }`}>
                   <div className="flex items-center mb-4">
                     <div className="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500/30 to-purple-500/30 flex items-center justify-center mr-4 animate-pulse-glow">
                       <node.icon className="w-6 h-6 text-neon" />
@@ -361,144 +395,172 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* Founder Profile - Unique Design */}
+        {/* Founder Profile - New Clean Design */}
         <div className="mb-40">
-          <div className="relative max-w-6xl mx-auto">
-            {/* Flowing background shape */}
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-purple-500/10 to-pink-500/5 rounded-full blur-3xl transform rotate-12"></div>
-            
-            <div className="relative grid grid-cols-1 lg:grid-cols-3 gap-12 items-center p-12">
-              <div className="lg:col-span-1 text-center">
-                {/* Organic profile container */}
-                <div className="relative w-64 h-64 mx-auto mb-8">
-                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-full animate-pulse-glow"></div>
-                  <div className="absolute inset-4 bg-black rounded-full flex items-center justify-center">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              The Visionary Behind the Vision
+            </h2>
+          </div>
+
+          {/* Main Profile Block */}
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start mb-20">
+              {/* Left Column - Photo */}
+              <div className="lg:col-span-1 flex justify-center">
+                <div className="relative">
+                  {/* Neural network animation around photo */}
+                  <div className="absolute inset-0 w-64 h-64 rounded-full">
+                    <div className="absolute inset-0 border-2 border-cyan-400/30 rounded-full animate-pulse"></div>
+                    <div className="absolute inset-4 border border-purple-500/40 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                    <div className="absolute inset-8 border border-pink-500/20 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+                  </div>
+                  
+                  {/* Photo placeholder */}
+                  <div className="relative w-64 h-64 bg-gradient-to-br from-cyan-400/20 to-purple-500/20 rounded-full flex items-center justify-center animate-pulse-glow">
                     <Brain className="w-24 h-24 text-neon" />
                   </div>
                 </div>
-                <h4 className="text-3xl font-bold text-white mb-2">Syed Musthaq</h4>
-                <p className="text-neon font-medium">Founder & Neural Architect</p>
               </div>
 
-              <div className="lg:col-span-2 space-y-8">
-                <p className="text-xl text-gray-300 leading-relaxed">
-                  Syed didn't just found Synopsyne Dynamics; he architected it from first principles. With a mind that naturally bridges the gap between human intuition and digital precision, Syed recognized that the future belongs to those who can synthesize complexity into elegant solutions.
-                </p>
-                
-                <p className="text-xl text-gray-300 leading-relaxed">
-                  His approach to innovation mirrors the very neural networks that inspire our company—making connections across disciplines, industries, and paradigms that others see as separate. Under his leadership, Synopsyne Dynamics has evolved from concept to catalyst, transforming how organizations think about technology integration.
+              {/* Right Column - Content */}
+              <div className="lg:col-span-2 space-y-6">
+                <div>
+                  <h3 className="text-3xl font-bold text-white mb-2">Syed Musthaq</h3>
+                  <p className="text-xl text-neon font-medium mb-6">Founder & Chief Synapse Officer</p>
+                </div>
+
+                <blockquote className="text-lg text-neon italic border-l-2 border-cyan-400 pl-6 mb-8">
+                  "Every great leap forward starts with seeing patterns others miss. At Synopsyne Dynamics, we don't just connect dots—we discover new constellations."
+                </blockquote>
+
+                <p className="text-gray-300 leading-relaxed text-base">
+                  Syed Musthaq didn't just found Synopsyne Dynamics; he architected it from first principles. With a mind that naturally bridges the gap between human intuition and digital precision, Syed recognized that the future belongs to those who can synthesize complexity into elegant solutions.
                 </p>
 
-                <div>
-                  <h5 className="text-2xl font-bold text-neon mb-8">The Musthaq Method:</h5>
-                  
-                  {/* Unique organic design for methods */}
-                  <div className="relative">
-                    {/* Background neural web */}
-                    <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 400 300">
-                      <path d="M0,150 Q100,50 200,150 Q300,250 400,150" stroke="url(#methodGradient)" strokeWidth="2" fill="none" className="animate-pulse"/>
-                      <defs>
-                        <linearGradient id="methodGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" stopColor="#00D4FF" />
-                          <stop offset="100%" stopColor="#9333EA" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    
-                    <div className="relative space-y-6">
-                      {[
-                        {
-                          title: "Pattern Recognition",
-                          description: "Identifying opportunities where others see obstacles",
-                          color: "from-cyan-400 to-blue-500",
-                          position: "ml-0"
-                        },
-                        {
-                          title: "Synthesis Thinking", 
-                          description: "Combining disparate elements to create breakthrough solutions",
-                          color: "from-blue-500 to-purple-500",
-                          position: "ml-12"
-                        },
-                        {
-                          title: "Anticipatory Leadership",
-                          description: "Building for tomorrow's challenges with today's foundations", 
-                          color: "from-purple-500 to-pink-500",
-                          position: "ml-6"
-                        },
-                        {
-                          title: "Human-Centric Innovation",
-                          description: "Technology that amplifies rather than replaces human potential",
-                          color: "from-pink-500 to-cyan-400", 
-                          position: "ml-3"
-                        }
-                      ].map((method, index) => (
-                        <div key={index} className={`group relative ${method.position} max-w-md`}>
-                          {/* Organic flowing shape */}
-                          <div className={`absolute -inset-4 bg-gradient-to-r ${method.color} opacity-20 rounded-full blur-xl group-hover:opacity-40 transition-all duration-500`}></div>
-                          
-                          <div className="relative bg-black/20 backdrop-blur-sm p-6 rounded-3xl border border-white/10 group-hover:border-neon/50 transition-all duration-500">
-                            {/* Neural pulse indicator */}
-                            <div className={`w-4 h-4 rounded-full bg-gradient-to-r ${method.color} animate-pulse mb-3`}></div>
-                            
-                            <h6 className="text-lg font-bold text-white group-hover:text-neon transition-colors mb-2">
-                              {method.title}
-                            </h6>
-                            <p className="text-gray-300 text-sm leading-relaxed">
-                              {method.description}
-                            </p>
-                            
-                            {/* Connecting line */}
-                            <div className={`absolute -right-2 top-1/2 w-8 h-0.5 bg-gradient-to-r ${method.color} opacity-50 transform -translate-y-1/2`}></div>
-                          </div>
-                        </div>
-                      ))}
+                <p className="text-gray-300 leading-relaxed text-base">
+                  His approach to innovation mirrors the very neural networks that inspire our company—making connections across disciplines, industries, and paradigms that others see as separate. Under his leadership, Synopsyne Dynamics has evolved from concept to catalyst, transforming how organizations think about technology integration.
+                </p>
+              </div>
+            </div>
+
+            {/* The Musthaq Method - Neural Web */}
+            <div className="relative">
+              <h4 className="text-3xl font-bold text-center text-white mb-4">The Musthaq Method</h4>
+              <p className="text-center text-neon mb-12">Neural Web of Core Principles</p>
+
+              <div className="relative max-w-4xl mx-auto h-[500px]">
+                {/* Center Hub */}
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
+                  <div className="w-32 h-32 rounded-full bg-gradient-to-br from-cyan-500/30 to-purple-500/30 flex items-center justify-center border border-neon animate-pulse-glow">
+                    <div className="text-center">
+                      <Brain className="w-8 h-8 text-neon mx-auto mb-2" />
+                      <span className="text-sm font-bold text-white">Method</span>
                     </div>
                   </div>
                 </div>
+
+                {/* Neural connections */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                  {activeMethod >= 0 && methodNodes[activeMethod].connections.map((connIndex) => (
+                    <line
+                      key={`${activeMethod}-${connIndex}`}
+                      x1="50%"
+                      y1="50%"
+                      x2={`${methodNodes[connIndex].position.x}%`}
+                      y2={`${methodNodes[connIndex].position.y}%`}
+                      stroke="rgba(0, 212, 255, 0.8)"
+                      strokeWidth="3"
+                      className="animate-synaptic-fire"
+                    />
+                  ))}
+                  
+                  {/* Always show connections to center */}
+                  {methodNodes.map((node, index) => (
+                    <line
+                      key={`center-${index}`}
+                      x1="50%"
+                      y1="50%"
+                      x2={`${node.position.x}%`}
+                      y2={`${node.position.y}%`}
+                      stroke="rgba(0, 212, 255, 0.3)"
+                      strokeWidth="2"
+                      className={activeMethod === index ? 'animate-synaptic-fire opacity-100' : 'opacity-50'}
+                    />
+                  ))}
+                </svg>
+
+                {/* Method nodes */}
+                {methodNodes.map((node, index) => (
+                  <div
+                    key={index}
+                    className="absolute cursor-pointer transition-all duration-500 group"
+                    style={{ 
+                      left: `${node.position.x}%`, 
+                      top: `${node.position.y}%`,
+                      transform: 'translate(-50%, -50%)'
+                    }}
+                    onMouseEnter={() => setActiveMethod(index)}
+                    onMouseLeave={() => setActiveMethod(-1)}
+                  >
+                    <div className={`relative bg-black/40 backdrop-blur-sm p-6 rounded-2xl border border-white/20 max-w-xs group-hover:border-neon transition-all ${
+                      activeMethod === index ? 'scale-105 shadow-2xl' : ''
+                    }`}>
+                      <div className="flex items-center mb-3">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500/30 to-purple-500/30 flex items-center justify-center mr-3">
+                          <node.icon className="w-5 h-5 text-neon" />
+                        </div>
+                        <h5 className="text-lg font-bold text-white group-hover:text-neon transition-colors">
+                          {node.title}
+                        </h5>
+                      </div>
+                      <p className="text-gray-300 text-sm leading-relaxed">{node.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Team Ethos */}
+            <div className="text-center mt-20 relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 rounded-full blur-3xl"></div>
+              <div className="relative p-12">
+                <blockquote className="text-2xl md:text-3xl font-bold text-white mb-6 leading-relaxed">
+                  "We're not just building a company—we're <span className="text-neon">architecting</span> the future's nervous system."
+                </blockquote>
+                
+                <p className="text-lg text-gray-300 leading-relaxed max-w-4xl mx-auto">
+                  Led by Syed's vision, our team operates like a neural network—each connection strengthening the whole. Our developers aren't just coders; they're digital neuroscientists. Our designers aren't just creative minds; they're experience architects. Together, we form a cognitive ecosystem that thinks, adapts, and innovates as one.
+                </p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Team Ethos */}
-        <div className="mb-40 text-center">
-          <div className="relative max-w-5xl mx-auto">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 rounded-full blur-3xl"></div>
-            <div className="relative p-16">
-              <blockquote className="text-3xl md:text-4xl font-bold text-white mb-8 leading-relaxed">
-                "We're not just building a company—we're <span className="text-neon">architecting</span> the future's nervous system."
-              </blockquote>
-              
-              <p className="text-xl text-gray-300 leading-relaxed">
-                Led by Syed's vision, our team operates like a neural network—each connection strengthening the whole. Our developers aren't just coders; they're digital neuroscientists. Our designers aren't just creative minds; they're experience architects. Together, we form a cognitive ecosystem that thinks, adapts, and innovates as one.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* WHY CHOOSE US SECTION */}
+        {/* WHY CHOOSE US SECTION - Enhanced Color Contrast */}
         <div className="text-center mb-32">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-none">
-            The <span className="text-neon animate-text-glow relative">
+          <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-none">
+            The <span className="bg-gradient-to-r from-orange-400 via-red-500 to-pink-500 bg-clip-text text-transparent animate-text-glow relative">
               Synopsyne
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 opacity-20 blur-2xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-pink-500 opacity-20 blur-2xl"></div>
             </span> Advantage
           </h2>
-          <p className="text-lg text-gray-300 font-light">We don't compete—we create new categories.</p>
+          <p className="text-base text-gray-400 font-light">We don't compete—we create new categories.</p>
         </div>
 
-        {/* The Five Synaptic Advantages - Fixed alignment constellation */}
+        {/* The Five Synaptic Advantages - Enhanced with better colors */}
         <div className="mb-40">
           <h3 className="text-4xl font-bold text-white text-center mb-8">The Five Synaptic Advantages</h3>
           <p className="text-lg text-gray-300 text-center mb-20">Interactive Synaptic Constellation</p>
 
           <div className="relative max-w-7xl mx-auto h-[900px]">
-            {/* Dynamic constellation background */}
+            {/* Dynamic constellation background with different colors */}
             <div className="absolute inset-0 overflow-hidden">
               {[...Array(20)].map((_, i) => (
                 <div
                   key={i}
-                  className="absolute w-1 h-1 bg-cyan-400 rounded-full animate-pulse opacity-60"
+                  className="absolute w-1 h-1 bg-orange-400 rounded-full animate-pulse opacity-60"
                   style={{
                     left: `${Math.random() * 100}%`,
                     top: `${Math.random() * 100}%`,
@@ -508,7 +570,7 @@ const AboutSection = () => {
               ))}
             </div>
 
-            {/* Neural connections */}
+            {/* Neural connections with different color */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none">
               {activeAdvantage >= 0 && advantages[activeAdvantage].connections.map((connIndex) => (
                 <line
@@ -517,14 +579,14 @@ const AboutSection = () => {
                   y1={`${advantages[activeAdvantage].position.y}%`}
                   x2={`${advantages[connIndex].position.x}%`}
                   y2={`${advantages[connIndex].position.y}%`}
-                  stroke="rgba(0, 212, 255, 0.8)"
+                  stroke="rgba(251, 146, 60, 0.8)"
                   strokeWidth="3"
                   className="animate-synaptic-fire"
                 />
               ))}
             </svg>
 
-            {/* Advantage nodes with proper spacing and z-index management */}
+            {/* Advantage nodes with improved spacing and orange theme */}
             {advantages.map((advantage, index) => (
               <div
                 key={index}
@@ -540,24 +602,24 @@ const AboutSection = () => {
                 onMouseEnter={() => setActiveAdvantage(index)}
                 onMouseLeave={() => setActiveAdvantage(-1)}
               >
-                {/* Organic pulsing aura */}
-                <div className="absolute inset-0 w-96 h-96 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-2xl animate-neural-pulse -translate-x-1/2 -translate-y-1/2"></div>
+                {/* Enhanced pulsing aura with orange theme */}
+                <div className="absolute inset-0 w-96 h-96 bg-gradient-to-br from-orange-500/20 via-red-500/20 to-pink-500/20 rounded-full blur-2xl animate-neural-pulse -translate-x-1/2 -translate-y-1/2"></div>
                 
-                <div className={`relative bg-black/40 backdrop-blur-sm p-8 rounded-3xl border border-white/20 group-hover:border-neon transition-all ${
-                  activeAdvantage === index ? 'max-w-lg scale-105 shadow-2xl' : 'max-w-md'
+                <div className={`relative bg-black/40 backdrop-blur-sm p-8 rounded-3xl border border-orange-500/20 group-hover:border-orange-400 transition-all ${
+                  activeAdvantage === index ? 'max-w-lg scale-105 shadow-2xl border-orange-400' : 'max-w-md'
                 }`}>
                   <div className="flex items-center mb-6">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500/30 to-purple-500/30 flex items-center justify-center mr-4 animate-pulse-glow">
-                      <advantage.icon className="w-8 h-8 text-neon" />
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-r from-orange-500/30 to-red-500/30 flex items-center justify-center mr-4 animate-pulse-glow">
+                      <advantage.icon className="w-8 h-8 text-orange-400" />
                     </div>
                     <div className="text-4xl">{advantage.emoji}</div>
                   </div>
                   
-                  <h4 className="text-xl font-bold text-white mb-2 group-hover:text-neon transition-colors">
+                  <h4 className="text-xl font-bold text-white mb-2 group-hover:text-orange-400 transition-colors">
                     {advantage.title}
                   </h4>
                   
-                  <p className="text-sm text-neon mb-3 font-medium">
+                  <p className="text-sm text-orange-400 mb-3 font-medium">
                     Neural Pattern: {advantage.pattern}
                   </p>
                   
@@ -566,10 +628,10 @@ const AboutSection = () => {
                   </p>
 
                   {activeAdvantage === index && (
-                    <div className="space-y-3 animate-fade-in border-t border-cyan-500/30 pt-4">
+                    <div className="space-y-3 animate-fade-in border-t border-orange-500/30 pt-4">
                       {advantage.features.map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-start">
-                          <div className="w-2 h-2 rounded-full bg-neon mt-2 mr-3 animate-pulse"></div>
+                          <div className="w-2 h-2 rounded-full bg-orange-400 mt-2 mr-3 animate-pulse"></div>
                           <p className="text-sm text-gray-300 leading-relaxed">{feature}</p>
                         </div>
                       ))}
