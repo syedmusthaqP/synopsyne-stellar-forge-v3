@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Brain, Zap, Link, TrendingUp, Gem, Handshake, Target, Rocket, Lightbulb, Globe, Eye, Layers, Users, Compass, Sparkles, Network, Shield, Crown, Atom } from 'lucide-react';
 
@@ -78,7 +79,7 @@ const AboutSection = () => {
       title: "Synthesis Philosophy",
       subtitle: "Exponential Fusion",
       description: "We don't just combine technologies; we synthesize them into something entirely new. The whole becomes exponentially greater than its parts.",
-      position: { x: 50, y: 75 },
+      position: { x: 50, y: 85 },
       connections: [0, 1]
     }
   ];
@@ -454,18 +455,69 @@ const AboutSection = () => {
               </div>
             </div>
 
-            {/* The Musthaq Method - Rectangular Cards */}
+            {/* The Musthaq Method - Neural Network */}
             <div className="relative">
               <h4 className="text-3xl font-bold text-center text-white mb-4">The Musthaq Method</h4>
-              <p className="text-center text-neon mb-12">Core Principles Framework</p>
+              <p className="text-center text-neon mb-12">Interactive Neural Network Framework</p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+              <div className="relative max-w-6xl mx-auto h-[600px]">
+                {/* Neural connections */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                  {methodNodes.map((node, index) => 
+                    node.connections.map(connIndex => (
+                      <line
+                        key={`${index}-${connIndex}`}
+                        x1={`${node.position.x}%`}
+                        y1={`${node.position.y}%`}
+                        x2={`${methodNodes[connIndex].position.x}%`}
+                        y2={`${methodNodes[connIndex].position.y}%`}
+                        stroke="rgba(0, 212, 255, 0.6)"
+                        strokeWidth="3"
+                        className={`transition-all duration-500 ${
+                          activeMethod === index || activeMethod === connIndex ? 'animate-synaptic-fire opacity-100 stroke-cyan-400' : 'opacity-40'
+                        }`}
+                      />
+                    ))
+                  )}
+                  
+                  {/* Central hub */}
+                  <circle
+                    cx="50%"
+                    cy="50%"
+                    r="40"
+                    fill="rgba(0, 212, 255, 0.1)"
+                    stroke="rgba(0, 212, 255, 0.6)"
+                    strokeWidth="2"
+                    className="animate-pulse"
+                  />
+                  
+                  {/* Connection points */}
+                  {methodNodes.map((node, index) => (
+                    <circle
+                      key={`point-${index}`}
+                      cx={`${node.position.x}%`}
+                      cy={`${node.position.y}%`}
+                      r="6"
+                      fill="rgb(0, 212, 255)"
+                      className={`transition-all duration-300 ${
+                        activeMethod === index ? 'animate-pulse scale-150' : 'opacity-60'
+                      }`}
+                    />
+                  ))}
+                </svg>
+
+                {/* Method nodes */}
                 {methodNodes.map((node, index) => (
                   <div
                     key={index}
-                    className={`relative cursor-pointer transition-all duration-500 group ${
+                    className={`absolute cursor-pointer transition-all duration-500 group ${
                       activeMethod === index ? 'scale-105' : ''
                     }`}
+                    style={{ 
+                      left: `${node.position.x}%`, 
+                      top: `${node.position.y}%`,
+                      transform: 'translate(-50%, -50%)'
+                    }}
                     onMouseEnter={() => setActiveMethod(index)}
                     onMouseLeave={() => setActiveMethod(-1)}
                   >
@@ -474,8 +526,8 @@ const AboutSection = () => {
                       activeMethod === index ? 'opacity-100' : 'opacity-0'
                     }`}></div>
                     
-                    <div className="relative bg-black/40 backdrop-blur-sm p-6 rounded-2xl border border-white/20 h-full group-hover:border-neon transition-all">
-                      <div className="flex flex-col items-center text-center h-full">
+                    <div className="relative bg-black/40 backdrop-blur-sm p-6 rounded-2xl border border-white/20 w-64 group-hover:border-neon transition-all">
+                      <div className="flex flex-col items-center text-center">
                         <div className="w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500/30 to-purple-500/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                           <node.icon className="w-8 h-8 text-neon" />
                         </div>
@@ -484,13 +536,19 @@ const AboutSection = () => {
                           {node.title}
                         </h5>
                         
-                        <p className="text-gray-300 text-sm leading-relaxed flex-grow">
+                        <p className="text-gray-300 text-sm leading-relaxed">
                           {node.description}
                         </p>
                       </div>
                     </div>
                   </div>
                 ))}
+
+                {/* Central method label */}
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none">
+                  <div className="text-lg font-bold text-neon">Neural Core</div>
+                  <div className="text-sm text-gray-400">Method Hub</div>
+                </div>
               </div>
             </div>
 
