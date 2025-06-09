@@ -103,8 +103,31 @@ const AboutSection = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-cyan-900/20"></div>
       
       <div className="container mx-auto px-6 relative z-10">
-        {/* Move DNA Section Up */}
-        <div className="mb-16">
+        {/* About Us Section: The Neural Bridge */}
+        <div className="text-center mb-20">
+          <h2 className="text-5xl md:text-7xl font-bold text-white mb-8">
+            About <span className="text-neon animate-text-glow">Us</span>
+          </h2>
+          
+          <div className="max-w-4xl mx-auto">
+            <h3 className="text-3xl font-bold text-white mb-6">
+              The Neural <span className="text-neon">Bridge</span>
+            </h3>
+            <p className="text-xl text-gray-300 leading-relaxed mb-8">
+              At Synopsyne Dynamics, we exist at the intersection of human intuition and digital precision. 
+              Our name isn't just clever wordplay—it's our philosophy. Like synapses firing in perfect 
+              harmony to create thought, we connect disparate elements to spark innovation.
+            </p>
+            <p className="text-lg text-gray-400 leading-relaxed">
+              Founded on the principle that the most powerful solutions emerge from the synthesis of 
+              seemingly unrelated concepts, we approach every project with a neural mindset—seeing 
+              connections, patterns, and possibilities that others miss.
+            </p>
+          </div>
+        </div>
+
+        {/* DNA Section - Moved Up Slightly */}
+        <div className="mb-12">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Our <span className="text-neon animate-text-glow">DNA</span>
@@ -323,12 +346,15 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* The Five Synaptic Advantages - Enhanced Design */}
+        {/* Why Choose Us Section: "The Synopsyne Advantage" */}
         <div className="mb-20">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              The Five <span className="text-neon animate-text-glow">Synaptic</span> Advantages
+              Why Choose <span className="text-neon animate-text-glow">Us</span>
             </h2>
+            <h3 className="text-3xl font-bold text-white mb-8">
+              The <span className="text-neon">Synopsyne</span> Advantage
+            </h3>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               What makes us different isn't just what we do—it's how our neural approach 
               creates exponential value through interconnected thinking.
@@ -402,13 +428,6 @@ const AboutSection = () => {
                 </div>
               </div>
             ))}
-
-            {/* Make Dynamic Adaptation rectangular like others */}
-            {advantages.length === 5 && (
-              <div className="md:col-span-2 lg:col-span-1 lg:col-start-2">
-                {/* This will center the last item in a 3-column grid */}
-              </div>
-            )}
           </div>
 
           {/* Proof Points Section */}
