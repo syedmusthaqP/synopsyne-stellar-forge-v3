@@ -103,22 +103,22 @@ const AboutSection = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-cyan-900/20"></div>
       
       <div className="container mx-auto px-6 relative z-10">
-        {/* About Us Section: The Neural Bridge */}
+        {/* About Us Section: The Neural Bridge - Original Design */}
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-7xl font-bold text-white mb-8">
             About <span className="text-neon animate-text-glow">Us</span>
           </h2>
           
           <div className="max-w-4xl mx-auto">
-            <h3 className="text-3xl font-bold text-white mb-6">
+            <h3 className="text-4xl md:text-5xl font-bold text-white mb-8">
               The Neural <span className="text-neon">Bridge</span>
             </h3>
-            <p className="text-xl text-gray-300 leading-relaxed mb-8">
+            <p className="text-2xl md:text-3xl text-gray-300 leading-relaxed mb-10">
               At Synopsyne Dynamics, we exist at the intersection of human intuition and digital precision. 
               Our name isn't just clever wordplay—it's our philosophy. Like synapses firing in perfect 
               harmony to create thought, we connect disparate elements to spark innovation.
             </p>
-            <p className="text-lg text-gray-400 leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-400 leading-relaxed">
               Founded on the principle that the most powerful solutions emerge from the synthesis of 
               seemingly unrelated concepts, we approach every project with a neural mindset—seeing 
               connections, patterns, and possibilities that others miss.
@@ -144,7 +144,7 @@ const AboutSection = () => {
               { icon: Brain, title: 'Cognitive Architecture', desc: 'Thinking in interconnected systems' },
               { icon: Zap, title: 'Adaptive Intelligence', desc: 'Learning and evolving continuously' },
               { icon: Network, title: 'Synaptic Integration', desc: 'Seamless technology harmony' },
-              { icon: TrendingUp, title: 'Predictive Synthesis', desc: 'Anticipating future needs' }
+              { icon: Layers, title: 'Dynamic Adaptation', desc: 'Flexible frameworks that grow' }
             ].map((item, index) => (
               <div key={index} className="group">
                 <div className="glassmorphism p-6 rounded-xl text-center hover:border-cyan-400/50 transition-all duration-300 h-full">
