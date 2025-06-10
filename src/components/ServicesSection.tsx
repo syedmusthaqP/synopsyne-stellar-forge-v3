@@ -158,8 +158,10 @@ const ServicesSection = () => {
           
           {/* The Neural Bridge - Increased Size */}
           <div className="max-w-6xl mx-auto mb-12">
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-8">
+            <h3 className="text-5xl md:text-7xl font-bold text-white mb-8">
               The Neural <span className="text-neon">Bridge</span>
+              <br />
+              <span className="text-3xl md:text-4xl text-gray-300">(Where Synapses Meet Systems)</span>
             </h3>
             <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
               At Synopsyne Dynamics, we exist at the intersection of human intuition and digital precision. 
@@ -167,11 +169,6 @@ const ServicesSection = () => {
               harmony to create thought, we connect disparate elements to spark innovation.
             </p>
           </div>
-
-          <p className="text-lg text-gray-300 max-w-4xl mx-auto">
-            Interconnected solutions that form a comprehensive neural ecosystem, 
-            each service amplifying the others to create exponential value.
-          </p>
         </div>
 
         {/* Neural Services Network - Better Alignment */}
@@ -294,19 +291,19 @@ const ServicesSection = () => {
               </div>
             ))}
           </div>
-
-          <p className="text-center text-gray-300 text-sm mt-12 italic">
-            Hover over any service to see neural connections and synaptic relationships.
-          </p>
         </div>
 
         {/* Neural Development Process - Radial Orbital Timeline */}
         <div className="mt-20">
-          <h3 className="text-3xl font-bold text-white text-center mb-12">
+          <h3 className="text-5xl md:text-7xl font-bold text-white text-center mb-12">
             Neural Development <span className="text-neon">Process</span>
           </h3>
           
-          <div className="relative h-[600px] bg-gradient-to-br from-black via-gray-900 to-black rounded-3xl overflow-hidden">
+          <div className="relative h-[600px] bg-gradient-to-br from-cyan-500/10 via-purple-500/10 to-pink-500/10 rounded-3xl overflow-hidden">
+            {/* Additional gradient overlays for more attractive lighting */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/5 to-transparent animate-pulse"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 via-transparent to-blue-500/5"></div>
+            
             <RadialOrbitalTimeline timelineData={timelineData} />
           </div>
         </div>
