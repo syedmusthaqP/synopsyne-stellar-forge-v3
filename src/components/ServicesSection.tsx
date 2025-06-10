@@ -152,29 +152,21 @@ const ServicesSection = () => {
             <span>Neural Service Architecture</span>
           </div>
 
-          <h2 className="text-5xl md:text-7xl font-bold text-white mb-8">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
             Our <span className="text-neon animate-text-glow">Services</span> Network
           </h2>
           
-          {/* The Neural Bridge - Increased Size */}
+          {/* Philosophy text with reduced font size */}
           <div className="max-w-6xl mx-auto mb-12">
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-8">
-              The Neural <span className="text-neon">Bridge</span>
-            </h3>
-            <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
+            <p className="text-base md:text-lg text-gray-300 leading-relaxed">
               At Synopsyne Dynamics, we exist at the intersection of human intuition and digital precision. 
               Our name isn't just clever wordplay—it's our philosophy. Like synapses firing in perfect 
               harmony to create thought, we connect disparate elements to spark innovation.
             </p>
           </div>
-
-          <p className="text-lg text-gray-300 max-w-4xl mx-auto">
-            Interconnected solutions that form a comprehensive neural ecosystem, 
-            each service amplifying the others to create exponential value.
-          </p>
         </div>
 
-        {/* Neural Services Network - Better Alignment */}
+        {/* Neural Services Network */}
         <div className="relative max-w-7xl mx-auto mb-20">
           <div className="relative h-[700px] w-full">
             {/* Neural connections */}
@@ -211,7 +203,7 @@ const ServicesSection = () => {
               ))}
             </svg>
 
-            {/* Service nodes - Better positioning */}
+            {/* Service nodes */}
             {services.map((service, index) => (
               <div
                 key={index}
@@ -294,19 +286,15 @@ const ServicesSection = () => {
               </div>
             ))}
           </div>
-
-          <p className="text-center text-gray-300 text-sm mt-12 italic">
-            Hover over any service to see neural connections and synaptic relationships.
-          </p>
         </div>
 
         {/* Neural Development Process - Radial Orbital Timeline */}
         <div className="mt-20">
-          <h3 className="text-3xl font-bold text-white text-center mb-12">
+          <h3 className="text-4xl md:text-5xl font-bold text-white text-center mb-12">
             Neural Development <span className="text-neon">Process</span>
           </h3>
           
-          <div className="relative h-[600px] bg-gradient-to-br from-black via-gray-900 to-black rounded-3xl overflow-hidden">
+          <div className="relative h-[600px] rounded-3xl overflow-hidden">
             <RadialOrbitalTimeline timelineData={timelineData} />
           </div>
         </div>
