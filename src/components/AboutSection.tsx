@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Brain, Zap, Link, TrendingUp, Gem, Handshake, Target, Rocket, Lightbulb, Globe, Eye, Layers, Users, Compass, Sparkles, Network, Shield, Crown, Atom } from 'lucide-react';
 
@@ -129,7 +128,8 @@ const AboutSection = () => {
         "Anticipatory Architecture: Our systems evolve with your growth, not against it"
       ],
       position: { x: 50, y: 20 },
-      color: "from-blue-400 to-cyan-500"
+      color: "from-blue-400 to-cyan-500",
+      connections: [1, 4]
     },
     {
       icon: Network,
@@ -144,7 +144,8 @@ const AboutSection = () => {
         "Cross-Platform Fluency: We speak every digital language and make them all work together"
       ],
       position: { x: 85, y: 40 },
-      color: "from-purple-400 to-pink-500"
+      color: "from-purple-400 to-pink-500",
+      connections: [0, 2]
     },
     {
       icon: TrendingUp,
@@ -159,7 +160,8 @@ const AboutSection = () => {
         "Wisdom Accumulation: Every interaction makes the entire system more intelligent"
       ],
       position: { x: 70, y: 75 },
-      color: "from-green-400 to-emerald-500"
+      color: "from-green-400 to-emerald-500",
+      connections: [1, 3]
     },
     {
       icon: Crown,
@@ -174,7 +176,8 @@ const AboutSection = () => {
         "Graceful Performance: Our solutions work so smoothly, they feel like magic"
       ],
       position: { x: 30, y: 75 },
-      color: "from-amber-400 to-orange-500"
+      color: "from-amber-400 to-orange-500",
+      connections: [2, 4]
     },
     {
       icon: Handshake,
@@ -189,7 +192,8 @@ const AboutSection = () => {
         "Innovation Partnership: You bring the vision, we bring the impossible-made-possible"
       ],
       position: { x: 15, y: 40 },
-      color: "from-violet-400 to-purple-500"
+      color: "from-violet-400 to-purple-500",
+      connections: [0, 3]
     }
   ];
 
@@ -366,7 +370,7 @@ const AboutSection = () => {
               )}
             </svg>
 
-            {/* DNA nodes with improved spacing */}
+            {/* DNA nodes with equal sizing */}
             {dnaNodes.map((node, index) => (
               <div
                 key={index}
@@ -375,7 +379,9 @@ const AboutSection = () => {
                   left: `${node.position.x}%`, 
                   top: `${node.position.y}%`,
                   transform: 'translate(-50%, -50%)',
-                  zIndex: activeDNA === index ? 50 : 10
+                  zIndex: activeDNA === index ? 50 : 10,
+                  width: '350px',
+                  height: '280px'
                 }}
                 onMouseEnter={() => setActiveDNA(index)}
                 onMouseLeave={() => setActiveDNA(-1)}
@@ -383,7 +389,7 @@ const AboutSection = () => {
                 {/* Organic pulsing background */}
                 <div className="absolute inset-0 w-96 h-96 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-xl animate-neural-pulse -translate-x-1/2 -translate-y-1/2"></div>
                 
-                <div className={`relative bg-black/40 backdrop-blur-sm p-6 rounded-3xl border border-white/20 max-w-sm group-hover:border-neon transition-all ${
+                <div className={`relative bg-black/40 backdrop-blur-sm p-6 rounded-3xl border border-white/20 w-full h-full flex flex-col justify-between group-hover:border-neon transition-all ${
                   activeDNA === index ? 'scale-105' : ''
                 }`}>
                   <div className="flex items-center mb-4">
@@ -398,7 +404,7 @@ const AboutSection = () => {
                     </div>
                   </div>
                   
-                  <p className="text-gray-300 leading-relaxed text-sm">{node.description}</p>
+                  <p className="text-gray-300 leading-relaxed text-sm flex-grow">{node.description}</p>
                 </div>
               </div>
             ))}
@@ -455,41 +461,78 @@ const AboutSection = () => {
               </div>
             </div>
 
-            {/* The Musthaq Method - Neural Network */}
+            {/* The Musthaq Method - Enhanced Neural Network */}
             <div className="relative">
               <h4 className="text-3xl font-bold text-center text-white mb-4">The Musthaq Method</h4>
               <p className="text-center text-neon mb-12">Interactive Neural Network Framework</p>
 
               <div className="relative max-w-6xl mx-auto h-[600px]">
-                {/* Neural connections */}
+                {/* Enhanced neural connections with rectangular paths */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none">
                   {methodNodes.map((node, index) => 
                     node.connections.map(connIndex => (
-                      <line
-                        key={`${index}-${connIndex}`}
-                        x1={`${node.position.x}%`}
-                        y1={`${node.position.y}%`}
-                        x2={`${methodNodes[connIndex].position.x}%`}
-                        y2={`${methodNodes[connIndex].position.y}%`}
-                        stroke="rgba(0, 212, 255, 0.6)"
-                        strokeWidth="3"
-                        className={`transition-all duration-500 ${
-                          activeMethod === index || activeMethod === connIndex ? 'animate-synaptic-fire opacity-100 stroke-cyan-400' : 'opacity-40'
-                        }`}
-                      />
+                      <g key={`${index}-${connIndex}`}>
+                        {/* Rectangular neural path */}
+                        <rect
+                          x={Math.min(node.position.x, methodNodes[connIndex].position.x) + '%'}
+                          y={Math.min(node.position.y, methodNodes[connIndex].position.y) + '%'}
+                          width={Math.abs(node.position.x - methodNodes[connIndex].position.x) + '%'}
+                          height={Math.abs(node.position.y - methodNodes[connIndex].position.y) + '%'}
+                          fill="rgba(0, 212, 255, 0.05)"
+                          stroke="rgba(0, 212, 255, 0.2)"
+                          strokeWidth="1"
+                          rx="8"
+                          className={`transition-all duration-500 ${
+                            activeMethod === index || activeMethod === connIndex ? 'opacity-100' : 'opacity-30'
+                          }`}
+                        />
+                        {/* Connection line */}
+                        <line
+                          x1={`${node.position.x}%`}
+                          y1={`${node.position.y}%`}
+                          x2={`${methodNodes[connIndex].position.x}%`}
+                          y2={`${methodNodes[connIndex].position.y}%`}
+                          stroke="rgba(0, 212, 255, 0.6)"
+                          strokeWidth="3"
+                          className={`transition-all duration-500 ${
+                            activeMethod === index || activeMethod === connIndex ? 'animate-synaptic-fire opacity-100 stroke-cyan-400' : 'opacity-40'
+                          }`}
+                        />
+                      </g>
                     ))
                   )}
                   
-                  {/* Central hub */}
+                  {/* Enhanced central hub with gradient flash */}
                   <circle
                     cx="50%"
                     cy="50%"
-                    r="40"
-                    fill="rgba(0, 212, 255, 0.1)"
-                    stroke="rgba(0, 212, 255, 0.6)"
-                    strokeWidth="2"
+                    r="60"
+                    fill="url(#centralGradient)"
+                    stroke="rgba(0, 212, 255, 0.8)"
+                    strokeWidth="3"
                     className="animate-pulse"
                   />
+                  
+                  {/* Gradient flash effect */}
+                  <circle
+                    cx="50%"
+                    cy="50%"
+                    r="45"
+                    fill="url(#flashGradient)"
+                    className="animate-ping opacity-60"
+                  />
+                  
+                  <defs>
+                    <radialGradient id="centralGradient" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stopColor="rgba(0, 212, 255, 0.3)" />
+                      <stop offset="50%" stopColor="rgba(147, 51, 234, 0.2)" />
+                      <stop offset="100%" stopColor="rgba(0, 212, 255, 0.1)" />
+                    </radialGradient>
+                    <radialGradient id="flashGradient" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stopColor="rgba(255, 255, 255, 0.4)" />
+                      <stop offset="100%" stopColor="rgba(0, 212, 255, 0.2)" />
+                    </radialGradient>
+                  </defs>
                   
                   {/* Connection points */}
                   {methodNodes.map((node, index) => (
@@ -497,7 +540,7 @@ const AboutSection = () => {
                       key={`point-${index}`}
                       cx={`${node.position.x}%`}
                       cy={`${node.position.y}%`}
-                      r="6"
+                      r="8"
                       fill="rgb(0, 212, 255)"
                       className={`transition-all duration-300 ${
                         activeMethod === index ? 'animate-pulse scale-150' : 'opacity-60'
@@ -544,10 +587,10 @@ const AboutSection = () => {
                   </div>
                 ))}
 
-                {/* Central method label */}
+                {/* Enhanced central method label */}
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none">
-                  <div className="text-lg font-bold text-neon">Neural Core</div>
-                  <div className="text-sm text-gray-400">Method Hub</div>
+                  <div className="text-xl font-bold text-neon animate-pulse">Neural Core</div>
+                  <div className="text-base text-gray-400">Method Hub</div>
                 </div>
               </div>
             </div>
@@ -579,7 +622,7 @@ const AboutSection = () => {
           <p className="text-sm text-gray-400 font-light">We don't compete—we create new categories.</p>
         </div>
 
-        {/* The Five Synaptic Advantages - Redesigned Neural Theme */}
+        {/* The Five Synaptic Advantages - Enhanced with Neural Paths */}
         <div className="mb-40">
           <h3 className="text-4xl font-bold text-white text-center mb-8">The Five Synaptic Advantages</h3>
           <p className="text-lg text-gray-300 text-center mb-20">Neural Innovation Constellation</p>
@@ -600,6 +643,42 @@ const AboutSection = () => {
                 <rect width="100%" height="100%" fill="url(#neuralGrid)" />
               </svg>
             </div>
+
+            {/* Neural Path Connections */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none">
+              {advantages.map((advantage, index) => 
+                advantage.connections.map(connIndex => (
+                  <g key={`${index}-${connIndex}`}>
+                    {/* Rectangular neural path background */}
+                    <rect
+                      x={Math.min(advantage.position.x, advantages[connIndex].position.x) - 5 + '%'}
+                      y={Math.min(advantage.position.y, advantages[connIndex].position.y) - 5 + '%'}
+                      width={Math.abs(advantage.position.x - advantages[connIndex].position.x) + 10 + '%'}
+                      height={Math.abs(advantage.position.y - advantages[connIndex].position.y) + 10 + '%'}
+                      fill="rgba(0, 212, 255, 0.03)"
+                      stroke="rgba(0, 212, 255, 0.15)"
+                      strokeWidth="1"
+                      rx="12"
+                      className={`transition-all duration-500 ${
+                        activeAdvantage === index || activeAdvantage === connIndex ? 'opacity-100' : 'opacity-40'
+                      }`}
+                    />
+                    {/* Connection line */}
+                    <line
+                      x1={`${advantage.position.x}%`}
+                      y1={`${advantage.position.y}%`}
+                      x2={`${advantages[connIndex].position.x}%`}
+                      y2={`${advantages[connIndex].position.y}%`}
+                      stroke="rgba(0, 212, 255, 0.6)"
+                      strokeWidth="2"
+                      className={`transition-all duration-500 ${
+                        activeAdvantage === index || activeAdvantage === connIndex ? 'animate-synaptic-fire opacity-100' : 'opacity-30'
+                      }`}
+                    />
+                  </g>
+                ))
+              )}
+            </svg>
 
             {/* Advantage Cards in Neural Formation */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
