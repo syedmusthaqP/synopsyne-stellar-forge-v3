@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
-import { Code, Cloud, Smartphone, Brain, Database, Shield } from 'lucide-react';
+import { Code, Cloud, Smartphone, Brain, Database, Shield, Calendar, FileText, User, Clock } from 'lucide-react';
+import RadialOrbitalTimeline from '@/components/ui/radial-orbital-timeline';
 
 const ServicesSection = () => {
   const [activeService, setActiveService] = useState(-1);
@@ -63,6 +64,65 @@ const ServicesSection = () => {
       position: { x: 15, y: 80 },
       connections: [4, 0]
     }
+  ];
+
+  // Timeline data for neural development process
+  const timelineData = [
+    {
+      id: 1,
+      title: "Discovery",
+      date: "Phase 01",
+      content: "Understanding your vision and requirements through comprehensive analysis and stakeholder collaboration.",
+      category: "Planning",
+      icon: Brain,
+      relatedIds: [2],
+      status: "completed" as const,
+      energy: 100,
+    },
+    {
+      id: 2,
+      title: "Design",
+      date: "Phase 02",
+      content: "Creating intuitive user experiences with cutting-edge design principles and neural interface concepts.",
+      category: "Design",
+      icon: FileText,
+      relatedIds: [1, 3],
+      status: "completed" as const,
+      energy: 90,
+    },
+    {
+      id: 3,
+      title: "Development",
+      date: "Phase 03",
+      content: "Building with cutting-edge technologies using neural development methodologies and cognitive architecture.",
+      category: "Development",
+      icon: Code,
+      relatedIds: [2, 4],
+      status: "in-progress" as const,
+      energy: 75,
+    },
+    {
+      id: 4,
+      title: "Testing",
+      date: "Phase 04",
+      content: "Ensuring quality and performance through comprehensive testing protocols and neural validation systems.",
+      category: "Testing",
+      icon: User,
+      relatedIds: [3, 5],
+      status: "pending" as const,
+      energy: 60,
+    },
+    {
+      id: 5,
+      title: "Deployment",
+      date: "Phase 05",
+      content: "Launching your solution to the world with seamless deployment and continuous neural monitoring.",
+      category: "Release",
+      icon: Clock,
+      relatedIds: [4],
+      status: "pending" as const,
+      energy: 40,
+    },
   ];
 
   return (
@@ -240,43 +300,14 @@ const ServicesSection = () => {
           </p>
         </div>
 
-        {/* Process Timeline - Neural Enhanced */}
+        {/* Neural Development Process - Radial Orbital Timeline */}
         <div className="mt-20">
           <h3 className="text-3xl font-bold text-white text-center mb-12">
             Neural Development <span className="text-neon">Process</span>
           </h3>
           
-          <div className="relative">
-            {/* Neural pathway line */}
-            <div className="absolute top-8 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-purple-500 to-cyan-400 opacity-60"></div>
-            
-            <div className="flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0 md:space-x-4">
-              {[
-                { step: '01', title: 'Discovery', description: 'Understanding your vision and requirements', icon: '🧠' },
-                { step: '02', title: 'Design', description: 'Creating intuitive user experiences', icon: '⚡' },
-                { step: '03', title: 'Development', description: 'Building with cutting-edge technologies', icon: '🔗' },
-                { step: '04', title: 'Testing', description: 'Ensuring quality and performance', icon: '🎯' },
-                { step: '05', title: 'Deployment', description: 'Launching your solution to the world', icon: '🚀' }
-              ].map((phase, index) => (
-                <div key={index} className="text-center group relative">
-                  {/* Neural node */}
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-full border-2 border-cyan-400 bg-black/40 backdrop-blur-sm flex items-center justify-center text-cyan-400 font-bold text-lg group-hover:bg-cyan-400/20 transition-all relative z-10">
-                    {phase.step}
-                    
-                    {/* Pulsing ring */}
-                    <div className="absolute inset-0 rounded-full border-2 border-cyan-400 animate-ping opacity-30"></div>
-                  </div>
-                  
-                  <div className="text-2xl mb-2">{phase.icon}</div>
-                  <h4 className="text-white font-semibold mb-2 group-hover:text-neon transition-colors">
-                    {phase.title}
-                  </h4>
-                  <p className="text-gray-400 text-sm max-w-32">
-                    {phase.description}
-                  </p>
-                </div>
-              ))}
-            </div>
+          <div className="relative h-[600px] bg-gradient-to-br from-black via-gray-900 to-black rounded-3xl overflow-hidden">
+            <RadialOrbitalTimeline timelineData={timelineData} />
           </div>
         </div>
       </div>
