@@ -146,29 +146,15 @@ const ServicesSection = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Header Section */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-16">
           <div className="inline-flex items-center text-neon text-sm mb-8 animate-float">
             <Brain className="w-4 h-4 mr-2" />
             <span>Neural Service Architecture</span>
           </div>
 
-          <h2 className="text-5xl md:text-7xl font-bold text-white mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
             Our <span className="text-neon animate-text-glow">Services</span> Network
           </h2>
-          
-          {/* The Neural Bridge - Increased Size */}
-          <div className="max-w-6xl mx-auto mb-12">
-            <h3 className="text-5xl md:text-7xl font-bold text-white mb-8">
-              The Neural <span className="text-neon">Bridge</span>
-              <br />
-              <span className="text-3xl md:text-4xl text-gray-300">(Where Synapses Meet Systems)</span>
-            </h3>
-            <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
-              At Synopsyne Dynamics, we exist at the intersection of human intuition and digital precision. 
-              Our name isn't just clever wordplay—it's our philosophy. Like synapses firing in perfect 
-              harmony to create thought, we connect disparate elements to spark innovation.
-            </p>
-          </div>
         </div>
 
         {/* Neural Services Network - Better Alignment */}
@@ -295,7 +281,7 @@ const ServicesSection = () => {
 
         {/* Neural Development Process - Radial Orbital Timeline */}
         <div className="mt-20">
-          <h3 className="text-5xl md:text-7xl font-bold text-white text-center mb-12">
+          <h3 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
             Neural Development <span className="text-neon">Process</span>
           </h3>
           
