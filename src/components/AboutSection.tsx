@@ -248,14 +248,14 @@ const AboutSection = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         
-        {/* ABOUT US SECTION */}
+        {/* THE NEURAL BRIDGE SECTION with increased font size */}
         <div className="text-center mb-32">
           <div className="inline-flex items-center text-neon text-sm mb-8 animate-float">
             <Brain className="w-4 h-4 mr-2" />
             <span>Where Synapses Meet Systems</span>
           </div>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-16 leading-none">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-16 leading-none">
             The <span className="text-neon animate-text-glow relative">
               Neural
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 opacity-20 blur-2xl"></div>
@@ -263,7 +263,7 @@ const AboutSection = () => {
           </h2>
 
           <div className="max-w-4xl mx-auto relative">
-            <p className="text-xs md:text-sm text-gray-300 leading-relaxed font-light tracking-wide" style={{ fontFamily: 'Orbitron, monospace', letterSpacing: '0.05em' }}>
+            <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light tracking-wide" style={{ fontFamily: 'Orbitron, monospace', letterSpacing: '0.05em' }}>
               At Synopsyne Dynamics, we exist at the intersection of human intuition and digital precision. 
               Our name isn't just clever wordplay—it's our philosophy. Like synapses firing in perfect harmony 
               to create thought, we connect disparate elements to spark innovation.
@@ -282,8 +282,8 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* Origin Story - Flowing Timeline */}
-        <div className="mb-40">
+        {/* Origin Story - Flowing Timeline with reduced spacing */}
+        <div className="mb-24">
           <h3 className="text-4xl font-bold text-white text-center mb-8">The Origin Story</h3>
           <p className="text-xl text-neon text-center mb-20 font-medium">Genesis → Evolution → Revolution</p>
 
@@ -306,7 +306,7 @@ const AboutSection = () => {
               </defs>
             </svg>
 
-            {/* Timeline nodes */}
+            {/* Timeline nodes with consistent design */}
             {timelineItems.map((item, index) => (
               <div
                 key={index}
@@ -317,11 +317,11 @@ const AboutSection = () => {
                 onMouseEnter={() => setActiveTimeline(index)}
                 onMouseLeave={() => setActiveTimeline(-1)}
               >
-                {/* Organic shape container */}
+                {/* Consistent organic shape container for all items */}
                 <div className={`relative p-8 text-center transition-all duration-500 ${
                   activeTimeline === index ? 'transform scale-105' : ''
                 }`}>
-                  {/* Organic background shape */}
+                  {/* Consistent organic background shape */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-20 blur-xl rounded-full transform rotate-12`}></div>
                   <div className="absolute inset-2 bg-black/30 backdrop-blur-sm rounded-full border border-white/20"></div>
                   
@@ -344,8 +344,8 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* Our DNA - Neural Network */}
-        <div className="mb-40">
+        {/* Our DNA - Neural Network - moved up with reduced spacing */}
+        <div className="mb-32">
           <h3 className="text-4xl font-bold text-white text-center mb-8">Our <span className="text-neon">DNA</span></h3>
           <p className="text-lg text-gray-300 text-center mb-20">Interactive Neural Network Visualization</p>
 
@@ -447,9 +447,15 @@ const AboutSection = () => {
                   <p className="text-xl text-neon font-medium mb-6">Founder & Chief Synapse Officer</p>
                 </div>
 
-                <blockquote className="text-lg text-neon italic border-l-2 border-cyan-400 pl-6 mb-8">
-                  "Every great leap forward starts with seeing patterns others miss. At Synopsyne Dynamics, we don't just connect dots—we discover new constellations."
-                </blockquote>
+                {/* Enhanced quote with attractive box */}
+                <div className="relative mb-8">
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 rounded-lg blur-xl"></div>
+                  <div className="relative glassmorphism p-6 rounded-lg border border-cyan-400/30">
+                    <blockquote className="text-lg text-neon italic border-l-2 border-cyan-400 pl-6">
+                      "Every great leap forward starts with seeing patterns others miss. At Synopsyne Dynamics, we don't just connect dots—we discover new constellations."
+                    </blockquote>
+                  </div>
+                </div>
 
                 <p className="text-gray-300 leading-relaxed text-base">
                   Syed Musthaq didn't just found Synopsyne Dynamics; he architected it from first principles. With a mind that naturally bridges the gap between human intuition and digital precision, Syed recognized that the future belongs to those who can synthesize complexity into elegant solutions.
@@ -595,7 +601,7 @@ const AboutSection = () => {
               </div>
             </div>
 
-            {/* Team Ethos */}
+            {/* Team Ethos with reduced font size */}
             <div className="text-center mt-20 relative">
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 rounded-full blur-3xl"></div>
               <div className="relative p-12">
@@ -603,7 +609,7 @@ const AboutSection = () => {
                   "We're not just building a company—we're <span className="text-neon">architecting</span> the future's nervous system."
                 </blockquote>
                 
-                <p className="text-lg text-gray-300 leading-relaxed max-w-4xl mx-auto">
+                <p className="text-base text-gray-300 leading-relaxed max-w-4xl mx-auto">
                   Led by Syed's vision, our team operates like a neural network—each connection strengthening the whole. Our developers aren't just coders; they're digital neuroscientists. Our designers aren't just creative minds; they're experience architects. Together, we form a cognitive ecosystem that thinks, adapts, and innovates as one.
                 </p>
               </div>
@@ -867,7 +873,7 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* Closing Statement */}
+        {/* Closing Statement with reduced font size */}
         <div className="text-center">
           <div className="relative max-w-5xl mx-auto">
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 rounded-full blur-3xl"></div>
@@ -876,7 +882,7 @@ const AboutSection = () => {
                 "Choose Synopsyne Dynamics not for what we've built, but for what we'll <span className="text-neon">discover</span> together."
               </blockquote>
               
-              <p className="text-xl text-gray-300 leading-relaxed">
+              <p className="text-lg text-gray-300 leading-relaxed">
                 The future isn't something that happens to you—it's something you actively create. We're not just service providers; we're co-architects of tomorrow's digital nervous system. When you choose us, you're not buying a solution—you're investing in evolution.
               </p>
             </div>
