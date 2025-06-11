@@ -1,10 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Brain, LogOut, Plus, Edit2, Trash2, Upload, Image as ImageIcon } from 'lucide-react';
+import { Brain, LogOut, Plus, Edit2, Trash2, Upload, Image as ImageIcon, Home, Users, Settings, FileText } from 'lucide-react';
 
 const CMS = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [activeSection, setActiveSection] = useState('testimonials');
   const [testimonials, setTestimonials] = useState([
     {
       id: 1,
@@ -19,9 +20,79 @@ const CMS = () => {
       name: "Marcus Rodriguez",
       designation: "Founder & CEO at InnovateLab",
       src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&h=500&fit=crop&crop=face"
+    },
+    {
+      id: 3,
+      quote: "The neural networks they implemented for our patient management system have revolutionized how we deliver healthcare. Their approach to connecting disparate systems mirrors how synapses create complex thoughts.",
+      name: "Dr. Amanda Foster",
+      designation: "Head of Digital Innovation at MedTech Global",
+      src: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500&h=500&fit=crop&crop=face"
+    },
+    {
+      id: 4,
+      quote: "Synopsyne Dynamics doesn't just build software—they architect digital ecosystems. Their cloud solutions are so intuitive, it's like they read our minds. The scalability is phenomenal.",
+      name: "James Thompson",
+      designation: "VP Engineering at CloudVision",
+      src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&h=500&fit=crop&crop=face"
+    },
+    {
+      id: 5,
+      quote: "The mobile applications they developed for us have a neural-like intelligence. They adapt to user behavior in real-time. Our customer engagement has increased by 250% since launch.",
+      name: "Lisa Park",
+      designation: "Chief Digital Officer at RetailNext",
+      src: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=500&h=500&fit=crop&crop=face"
+    },
+    {
+      id: 6,
+      quote: "Their cybersecurity solutions are like having a digital immune system. The way they anticipate and prevent threats feels almost precognitive. We haven't had a single security incident since implementation.",
+      name: "David Kumar",
+      designation: "Director of Technology at FinanceForward",
+      src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop&crop=face"
     }
   ]);
+
+  const [heroContent, setHeroContent] = useState({
+    title: "Neural Software Development",
+    subtitle: "Building Tomorrow's Digital Synapses",
+    description: "We architect neural pathways in code, creating interconnected systems that think, adapt, and evolve like the human brain."
+  });
+
+  const [aboutContent, setAboutContent] = useState({
+    title: "About Synopsyne Dynamics",
+    description: "We are digital neuroscientists, crafting software that mirrors the complexity and beauty of neural networks."
+  });
+
+  const [services, setServices] = useState([
+    {
+      id: 1,
+      title: "Web Applications",
+      description: "Neural-inspired web solutions that adapt and learn from user interactions.",
+      icon: "Globe"
+    },
+    {
+      id: 2,
+      title: "Mobile Development",
+      description: "Synaptic mobile experiences that create lasting connections with users.",
+      icon: "Smartphone"
+    },
+    {
+      id: 3,
+      title: "Cloud Solutions",
+      description: "Distributed neural networks in the cloud for maximum scalability.",
+      icon: "Cloud"
+    },
+    {
+      id: 4,
+      title: "AI Integration",
+      description: "Artificial neural pathways that enhance human decision-making.",
+      icon: "Brain"
+    }
+  ]);
+
   const [editingTestimonial, setEditingTestimonial] = useState<any>(null);
+  const [editingHero, setEditingHero] = useState(false);
+  const [editingAbout, setEditingAbout] = useState(false);
+  const [editingService, setEditingService] = useState<any>(null);
   const [isAddingNew, setIsAddingNew] = useState(false);
   const [uploadedImages, setUploadedImages] = useState<any[]>([]);
   const navigate = useNavigate();
@@ -64,6 +135,7 @@ const CMS = () => {
     setUploadedImages(prev => prev.filter(img => img.id !== imageId));
   };
 
+  // Testimonial functions
   const addTestimonial = (testimonialData: any) => {
     const newTestimonial = {
       ...testimonialData,
@@ -80,6 +152,25 @@ const CMS = () => {
 
   const deleteTestimonial = (id: number) => {
     setTestimonials(prev => prev.filter(t => t.id !== id));
+  };
+
+  // Service functions
+  const addService = (serviceData: any) => {
+    const newService = {
+      ...serviceData,
+      id: Date.now()
+    };
+    setServices(prev => [...prev, newService]);
+    setIsAddingNew(false);
+  };
+
+  const updateService = (id: number, serviceData: any) => {
+    setServices(prev => prev.map(s => s.id === id ? { ...serviceData, id } : s));
+    setEditingService(null);
+  };
+
+  const deleteService = (id: number) => {
+    setServices(prev => prev.filter(s => s.id !== id));
   };
 
   const TestimonialForm = ({ testimonial, onSave, onCancel }: { testimonial?: any, onSave: (data: any) => void, onCancel: () => void }) => {
@@ -153,7 +244,6 @@ const CMS = () => {
               required
             />
             
-            {/* Uploaded Images Selection */}
             {uploadedImages.length > 0 && (
               <div className="mt-3">
                 <p className="text-sm text-gray-300 mb-2">Or select from uploaded images:</p>
@@ -203,41 +293,153 @@ const CMS = () => {
     return null;
   }
 
-  return (
-    <div className="min-h-screen gradient-bg relative overflow-hidden">
-      {/* Particle background effect */}
-      <div className="particle-bg"></div>
-      
-      {/* Floating elements */}
-      <div className="fixed top-20 left-10 w-32 h-32 rounded-full glassmorphism animate-float opacity-30"></div>
-      <div className="fixed top-40 right-20 w-20 h-20 rounded-full glassmorphism animate-float opacity-20" style={{animationDelay: '1s'}}></div>
-
-      <div className="relative z-10 min-h-screen">
-        {/* Header */}
-        <header className="glassmorphism backdrop-blur-lg border-b border-white/20">
-          <div className="container mx-auto px-6 py-4">
+  const renderSectionContent = () => {
+    switch (activeSection) {
+      case 'hero':
+        return (
+          <div className="space-y-6">
             <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <Brain className="w-8 h-8 text-neon mr-3" />
-                <h1 className="text-2xl font-bold text-white">
-                  <span className="text-neon">Synopsyne</span> CMS
-                </h1>
-              </div>
-              
+              <h2 className="text-2xl font-bold text-white">Hero Section</h2>
               <button
-                onClick={handleLogout}
-                className="flex items-center px-4 py-2 rounded-lg glassmorphism neon-border text-white hover:bg-red-500/10 transition-all"
+                onClick={() => setEditingHero(true)}
+                className="flex items-center px-4 py-2 neon-border rounded-lg text-cyan-400 hover:bg-cyan-500/10 transition-all"
               >
-                <LogOut className="w-4 h-4 mr-2" />
-                Logout
+                <Edit2 className="w-4 h-4 mr-2" />
+                Edit Hero
               </button>
             </div>
-          </div>
-        </header>
 
-        <div className="container mx-auto px-6 py-8">
-          {/* Image Upload Section */}
-          <div className="mb-8">
+            {editingHero ? (
+              <div className="glassmorphism p-6 rounded-xl neon-border">
+                <h3 className="text-xl font-bold text-white mb-6">Edit Hero Content</h3>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-white text-sm font-medium mb-2">Title</label>
+                    <input
+                      type="text"
+                      value={heroContent.title}
+                      onChange={(e) => setHeroContent(prev => ({ ...prev, title: e.target.value }))}
+                      className="w-full px-4 py-3 glassmorphism rounded-lg text-white placeholder-gray-400 focus:neon-border focus:outline-none transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-white text-sm font-medium mb-2">Subtitle</label>
+                    <input
+                      type="text"
+                      value={heroContent.subtitle}
+                      onChange={(e) => setHeroContent(prev => ({ ...prev, subtitle: e.target.value }))}
+                      className="w-full px-4 py-3 glassmorphism rounded-lg text-white placeholder-gray-400 focus:neon-border focus:outline-none transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-white text-sm font-medium mb-2">Description</label>
+                    <textarea
+                      value={heroContent.description}
+                      onChange={(e) => setHeroContent(prev => ({ ...prev, description: e.target.value }))}
+                      className="w-full px-4 py-3 glassmorphism rounded-lg text-white placeholder-gray-400 focus:neon-border focus:outline-none transition-all resize-none"
+                      rows={3}
+                    />
+                  </div>
+                  <div className="flex space-x-4">
+                    <button
+                      onClick={() => setEditingHero(false)}
+                      className="flex-1 neon-border px-6 py-3 rounded-lg text-white font-semibold hover:bg-cyan-500/10 transition-all"
+                    >
+                      Save Changes
+                    </button>
+                    <button
+                      onClick={() => setEditingHero(false)}
+                      className="flex-1 border border-gray-500 px-6 py-3 rounded-lg text-gray-300 font-semibold hover:bg-gray-500/10 transition-all"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="glassmorphism p-6 rounded-xl border border-white/20">
+                <h3 className="text-xl font-bold text-white mb-4">{heroContent.title}</h3>
+                <p className="text-lg text-neon mb-2">{heroContent.subtitle}</p>
+                <p className="text-gray-300">{heroContent.description}</p>
+              </div>
+            )}
+          </div>
+        );
+
+      case 'testimonials':
+        return (
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-white">Testimonials Management</h2>
+              <button
+                onClick={() => setIsAddingNew(true)}
+                className="flex items-center px-4 py-2 neon-border rounded-lg text-cyan-400 hover:bg-cyan-500/10 transition-all"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Add New
+              </button>
+            </div>
+
+            {(isAddingNew || editingTestimonial) && (
+              <div className="mb-6">
+                <TestimonialForm
+                  testimonial={editingTestimonial}
+                  onSave={(data) => {
+                    if (editingTestimonial) {
+                      updateTestimonial(editingTestimonial.id, data);
+                    } else {
+                      addTestimonial(data);
+                    }
+                  }}
+                  onCancel={() => {
+                    setIsAddingNew(false);
+                    setEditingTestimonial(null);
+                  }}
+                />
+              </div>
+            )}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {testimonials.map(testimonial => (
+                <div key={testimonial.id} className="glassmorphism p-6 rounded-xl border border-white/20">
+                  <div className="flex items-start space-x-4">
+                    <img
+                      src={testimonial.src}
+                      alt={testimonial.name}
+                      className="w-16 h-16 rounded-full object-cover neon-border"
+                    />
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-white">{testimonial.name}</h3>
+                      <p className="text-sm text-neon mb-2">{testimonial.designation}</p>
+                      <p className="text-gray-300 text-sm line-clamp-3">{testimonial.quote}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex space-x-2 mt-4">
+                    <button
+                      onClick={() => setEditingTestimonial(testimonial)}
+                      className="flex items-center px-3 py-2 rounded-lg glassmorphism neon-border text-cyan-400 hover:bg-cyan-500/10 transition-all"
+                    >
+                      <Edit2 className="w-4 h-4 mr-1" />
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => deleteTestimonial(testimonial.id)}
+                      className="flex items-center px-3 py-2 rounded-lg glassmorphism border border-red-500 text-red-400 hover:bg-red-500/10 transition-all"
+                    >
+                      <Trash2 className="w-4 h-4 mr-1" />
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case 'photos':
+        return (
+          <div>
             <h2 className="text-2xl font-bold text-white mb-6">Photo Management</h2>
             
             <div className="glassmorphism p-6 rounded-xl neon-border mb-6">
@@ -287,77 +489,69 @@ const CMS = () => {
               )}
             </div>
           </div>
+        );
 
-          {/* Testimonials Management */}
-          <div className="mb-8">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-white">Testimonials Management</h2>
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="min-h-screen gradient-bg relative overflow-hidden">
+      <div className="particle-bg"></div>
+      
+      <div className="fixed top-20 left-10 w-32 h-32 rounded-full glassmorphism animate-float opacity-30"></div>
+      <div className="fixed top-40 right-20 w-20 h-20 rounded-full glassmorphism animate-float opacity-20" style={{animationDelay: '1s'}}></div>
+
+      <div className="relative z-10 min-h-screen">
+        <header className="glassmorphism backdrop-blur-lg border-b border-white/20">
+          <div className="container mx-auto px-6 py-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <Brain className="w-8 h-8 text-neon mr-3" />
+                <h1 className="text-2xl font-bold text-white">
+                  <span className="text-neon">Synopsyne</span> CMS
+                </h1>
+              </div>
+              
               <button
-                onClick={() => setIsAddingNew(true)}
-                className="flex items-center px-4 py-2 neon-border rounded-lg text-cyan-400 hover:bg-cyan-500/10 transition-all"
+                onClick={handleLogout}
+                className="flex items-center px-4 py-2 rounded-lg glassmorphism neon-border text-white hover:bg-red-500/10 transition-all"
               >
-                <Plus className="w-4 h-4 mr-2" />
-                Add New
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
               </button>
             </div>
+          </div>
+        </header>
 
-            {/* Add/Edit Form */}
-            {(isAddingNew || editingTestimonial) && (
-              <div className="mb-6">
-                <TestimonialForm
-                  testimonial={editingTestimonial}
-                  onSave={(data) => {
-                    if (editingTestimonial) {
-                      updateTestimonial(editingTestimonial.id, data);
-                    } else {
-                      addTestimonial(data);
-                    }
-                  }}
-                  onCancel={() => {
-                    setIsAddingNew(false);
-                    setEditingTestimonial(null);
-                  }}
-                />
-              </div>
-            )}
-
-            {/* Testimonials List */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {testimonials.map(testimonial => (
-                <div key={testimonial.id} className="glassmorphism p-6 rounded-xl border border-white/20">
-                  <div className="flex items-start space-x-4">
-                    <img
-                      src={testimonial.src}
-                      alt={testimonial.name}
-                      className="w-16 h-16 rounded-full object-cover neon-border"
-                    />
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-white">{testimonial.name}</h3>
-                      <p className="text-sm text-neon mb-2">{testimonial.designation}</p>
-                      <p className="text-gray-300 text-sm">{testimonial.quote}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex space-x-2 mt-4">
-                    <button
-                      onClick={() => setEditingTestimonial(testimonial)}
-                      className="flex items-center px-3 py-2 rounded-lg glassmorphism neon-border text-cyan-400 hover:bg-cyan-500/10 transition-all"
-                    >
-                      <Edit2 className="w-4 h-4 mr-1" />
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => deleteTestimonial(testimonial.id)}
-                      className="flex items-center px-3 py-2 rounded-lg glassmorphism border border-red-500 text-red-400 hover:bg-red-500/10 transition-all"
-                    >
-                      <Trash2 className="w-4 h-4 mr-1" />
-                      Delete
-                    </button>
-                  </div>
-                </div>
+        <div className="flex">
+          <nav className="w-64 glassmorphism border-r border-white/20 min-h-screen p-6">
+            <div className="space-y-2">
+              {[
+                { id: 'hero', label: 'Hero Section', icon: Home },
+                { id: 'testimonials', label: 'Testimonials', icon: Users },
+                { id: 'photos', label: 'Photos', icon: ImageIcon },
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveSection(item.id)}
+                  className={`w-full flex items-center px-4 py-3 rounded-lg transition-all ${
+                    activeSection === item.id
+                      ? 'neon-border text-cyan-400 bg-cyan-500/10'
+                      : 'text-gray-300 hover:bg-white/5'
+                  }`}
+                >
+                  <item.icon className="w-4 h-4 mr-3" />
+                  {item.label}
+                </button>
               ))}
             </div>
-          </div>
+          </nav>
+
+          <main className="flex-1 p-6">
+            {renderSectionContent()}
+          </main>
         </div>
       </div>
     </div>

@@ -104,7 +104,15 @@ const NeuralDevelopmentProcess = () => {
     }
   };
 
-  const getStatusColor = (status: ProcessNode["status"]) => {
+  const getStatusColor = (status: ProcessNode["status"], nodeId: number) => {
+    // Special colors for phases 4 and 5
+    if (nodeId === 4) {
+      return "from-purple-400 to-violet-500";
+    }
+    if (nodeId === 5) {
+      return "from-orange-400 to-red-500";
+    }
+    
     switch (status) {
       case "completed":
         return "from-green-400 to-emerald-500";
@@ -115,6 +123,24 @@ const NeuralDevelopmentProcess = () => {
       default:
         return "from-gray-400 to-gray-500";
     }
+  };
+
+  const getInfoPanelPosition = (nodeId: number, position: { x: number; y: number }) => {
+    // Adjust positioning for deployment phase (node 5) to ensure visibility
+    if (nodeId === 5) {
+      return {
+        top: '-280px', // Move panel above the node instead of below
+        left: '50%',
+        transform: 'translateX(-50%)'
+      };
+    }
+    
+    // For other nodes, position below
+    return {
+      top: '28px',
+      left: '50%',
+      transform: 'translateX(-50%)'
+    };
   };
 
   return (
@@ -200,7 +226,7 @@ const NeuralDevelopmentProcess = () => {
           onClick={() => handleNodeClick(node.id)}
         >
           {/* Node aura */}
-          <div className={`absolute inset-0 w-32 h-32 bg-gradient-to-br ${getStatusColor(node.status)} rounded-full blur-xl transition-all duration-500 -translate-x-1/2 -translate-y-1/2 ${
+          <div className={`absolute inset-0 w-32 h-32 bg-gradient-to-br ${getStatusColor(node.status, node.id)} rounded-full blur-xl transition-all duration-500 -translate-x-1/2 -translate-y-1/2 ${
             activeNode === node.id ? 'scale-150 opacity-60' : 'scale-100 opacity-20'
           }`}></div>
 
@@ -222,7 +248,7 @@ const NeuralDevelopmentProcess = () => {
           )}
 
           {/* Main node */}
-          <div className={`relative w-16 h-16 rounded-full bg-gradient-to-br ${getStatusColor(node.status)} flex items-center justify-center transition-all duration-500 ${
+          <div className={`relative w-16 h-16 rounded-full bg-gradient-to-br ${getStatusColor(node.status, node.id)} flex items-center justify-center transition-all duration-500 ${
             activeNode === node.id ? 'scale-125 shadow-2xl' : 'group-hover:scale-110'
           }`}>
             <node.icon className="w-8 h-8 text-white" />
@@ -241,9 +267,12 @@ const NeuralDevelopmentProcess = () => {
             <div className="text-sm font-bold text-white mt-1">{node.title}</div>
           </div>
 
-          {/* Expanded info panel */}
+          {/* Expanded info panel with improved positioning */}
           {activeNode === node.id && (
-            <div className="absolute top-28 left-1/2 transform -translate-x-1/2 w-64 glassmorphism p-4 rounded-xl neon-border animate-fade-in">
+            <div 
+              className="absolute w-64 glassmorphism p-4 rounded-xl neon-border animate-fade-in z-50"
+              style={getInfoPanelPosition(node.id, node.position)}
+            >
               <p className="text-xs text-gray-300 mb-3">{node.description}</p>
               
               <div className="flex items-center justify-between text-xs mb-2">
@@ -256,7 +285,7 @@ const NeuralDevelopmentProcess = () => {
               
               <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
                 <div
-                  className={`h-full bg-gradient-to-r ${getStatusColor(node.status)} transition-all duration-1000`}
+                  className={`h-full bg-gradient-to-r ${getStatusColor(node.status, node.id)} transition-all duration-1000`}
                   style={{ width: `${node.energy}%` }}
                 ></div>
               </div>
