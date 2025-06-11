@@ -33,6 +33,7 @@ const Header = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <Link to="/services" className="text-white hover:text-neon transition-colors">Services</Link>
+            <Link to="/testimonials" className="text-white hover:text-neon transition-colors">Testimonials</Link>
             {isHomePage ? (
               <a href="#technology" className="text-white hover:text-neon transition-colors">Technology</a>
             ) : (
@@ -65,6 +66,7 @@ const Header = () => {
           <div className="md:hidden mt-4 glassmorphism rounded-lg p-4">
             <div className="flex flex-col space-y-4">
               <Link to="/services" className="text-white hover:text-neon transition-colors">Services</Link>
+              <Link to="/testimonials" className="text-white hover:text-neon transition-colors">Testimonials</Link>
               {isHomePage ? (
                 <a href="#technology" className="text-white hover:text-neon transition-colors">Technology</a>
               ) : (
