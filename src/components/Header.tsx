@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LogIn } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
@@ -41,6 +41,13 @@ const Header = () => {
             )}
             <a href="#portfolio" className="text-white hover:text-neon transition-colors">Portfolio</a>
             <a href="#about" className="text-white hover:text-neon transition-colors">About</a>
+            
+            {/* Login Button */}
+            <Link to="/login" className="flex items-center px-4 py-2 rounded-lg glassmorphism neon-border text-neon hover:bg-cyan-500/10 transition-all">
+              <LogIn className="w-4 h-4 mr-2" />
+              Login
+            </Link>
+            
             {isHomePage ? (
               <a href="#contact" className="neon-border px-6 py-2 rounded-lg text-neon hover:bg-cyan-500/10 transition-all">
                 Contact Us
@@ -74,6 +81,13 @@ const Header = () => {
               )}
               <a href="#portfolio" className="text-white hover:text-neon transition-colors">Portfolio</a>
               <a href="#about" className="text-white hover:text-neon transition-colors">About</a>
+              
+              {/* Mobile Login Button */}
+              <Link to="/login" className="flex items-center px-4 py-2 rounded-lg glassmorphism neon-border text-neon hover:bg-cyan-500/10 transition-all">
+                <LogIn className="w-4 h-4 mr-2" />
+                Login
+              </Link>
+              
               {isHomePage ? (
                 <a href="#contact" className="neon-border px-6 py-2 rounded-lg text-neon hover:bg-cyan-500/10 transition-all text-center">
                   Contact Us

@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import { Code, Cloud, Smartphone, Brain, Database, Shield, Calendar, FileText, User, Clock } from 'lucide-react';
-import RadialOrbitalTimeline from '@/components/ui/radial-orbital-timeline';
+import { Code, Cloud, Smartphone, Brain, Database, Shield } from 'lucide-react';
+import NeuralDevelopmentProcess from '@/components/ui/neural-development-process';
 
 const ServicesSection = () => {
   const [activeService, setActiveService] = useState(-1);
@@ -64,65 +64,6 @@ const ServicesSection = () => {
       position: { x: 15, y: 80 },
       connections: [4, 0]
     }
-  ];
-
-  // Timeline data for neural development process
-  const timelineData = [
-    {
-      id: 1,
-      title: "Discovery",
-      date: "Phase 01",
-      content: "Understanding your vision and requirements through comprehensive analysis and stakeholder collaboration.",
-      category: "Planning",
-      icon: Brain,
-      relatedIds: [2],
-      status: "completed" as const,
-      energy: 100,
-    },
-    {
-      id: 2,
-      title: "Design",
-      date: "Phase 02",
-      content: "Creating intuitive user experiences with cutting-edge design principles and neural interface concepts.",
-      category: "Design",
-      icon: FileText,
-      relatedIds: [1, 3],
-      status: "completed" as const,
-      energy: 90,
-    },
-    {
-      id: 3,
-      title: "Development",
-      date: "Phase 03",
-      content: "Building with cutting-edge technologies using neural development methodologies and cognitive architecture.",
-      category: "Development",
-      icon: Code,
-      relatedIds: [2, 4],
-      status: "in-progress" as const,
-      energy: 75,
-    },
-    {
-      id: 4,
-      title: "Testing",
-      date: "Phase 04",
-      content: "Ensuring quality and performance through comprehensive testing protocols and neural validation systems.",
-      category: "Testing",
-      icon: User,
-      relatedIds: [3, 5],
-      status: "pending" as const,
-      energy: 60,
-    },
-    {
-      id: 5,
-      title: "Deployment",
-      date: "Phase 05",
-      content: "Launching your solution to the world with seamless deployment and continuous neural monitoring.",
-      category: "Release",
-      icon: Clock,
-      relatedIds: [4],
-      status: "pending" as const,
-      energy: 40,
-    },
   ];
 
   return (
@@ -288,15 +229,9 @@ const ServicesSection = () => {
           </div>
         </div>
 
-        {/* Neural Development Process - Radial Orbital Timeline with reduced font size */}
+        {/* Neural Development Process - New Enhanced Version */}
         <div className="mt-20">
-          <h3 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
-            Neural Development <span className="text-neon">Process</span>
-          </h3>
-          
-          <div className="relative h-[600px] rounded-3xl overflow-hidden">
-            <RadialOrbitalTimeline timelineData={timelineData} />
-          </div>
+          <NeuralDevelopmentProcess />
         </div>
       </div>
     </section>
