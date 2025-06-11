@@ -21,9 +21,9 @@ const CMS = () => {
       src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&h=500&fit=crop&crop=face"
     }
   ]);
-  const [editingTestimonial, setEditingTestimonial] = useState(null);
+  const [editingTestimonial, setEditingTestimonial] = useState<any>(null);
   const [isAddingNew, setIsAddingNew] = useState(false);
-  const [uploadedImages, setUploadedImages] = useState([]);
+  const [uploadedImages, setUploadedImages] = useState<any[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,16 +40,17 @@ const CMS = () => {
     navigate('/login');
   };
 
-  const handleImageUpload = (event) => {
-    const files = Array.from(event.target.files);
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (!files) return;
     
-    files.forEach(file => {
+    Array.from(files).forEach((file: File) => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const newImage = {
           id: Date.now() + Math.random(),
           name: file.name,
-          url: e.target.result,
+          url: e.target?.result as string,
           size: file.size,
           type: file.type
         };
@@ -59,11 +60,11 @@ const CMS = () => {
     });
   };
 
-  const deleteImage = (imageId) => {
+  const deleteImage = (imageId: number) => {
     setUploadedImages(prev => prev.filter(img => img.id !== imageId));
   };
 
-  const addTestimonial = (testimonialData) => {
+  const addTestimonial = (testimonialData: any) => {
     const newTestimonial = {
       ...testimonialData,
       id: Date.now()
@@ -72,16 +73,16 @@ const CMS = () => {
     setIsAddingNew(false);
   };
 
-  const updateTestimonial = (id, testimonialData) => {
+  const updateTestimonial = (id: number, testimonialData: any) => {
     setTestimonials(prev => prev.map(t => t.id === id ? { ...testimonialData, id } : t));
     setEditingTestimonial(null);
   };
 
-  const deleteTestimonial = (id) => {
+  const deleteTestimonial = (id: number) => {
     setTestimonials(prev => prev.filter(t => t.id !== id));
   };
 
-  const TestimonialForm = ({ testimonial, onSave, onCancel }) => {
+  const TestimonialForm = ({ testimonial, onSave, onCancel }: { testimonial?: any, onSave: (data: any) => void, onCancel: () => void }) => {
     const [formData, setFormData] = useState({
       quote: testimonial?.quote || '',
       name: testimonial?.name || '',
@@ -89,12 +90,12 @@ const CMS = () => {
       src: testimonial?.src || ''
     });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       onSave(formData);
     };
 
-    const useUploadedImage = (imageUrl) => {
+    const useUploadedImage = (imageUrl: string) => {
       setFormData(prev => ({ ...prev, src: imageUrl }));
     };
 
@@ -111,7 +112,7 @@ const CMS = () => {
               value={formData.quote}
               onChange={(e) => setFormData(prev => ({ ...prev, quote: e.target.value }))}
               className="w-full px-4 py-3 glassmorphism rounded-lg text-white placeholder-gray-400 focus:neon-border focus:outline-none transition-all resize-none"
-              rows="4"
+              rows={4}
               placeholder="Enter testimonial quote"
               required
             />
