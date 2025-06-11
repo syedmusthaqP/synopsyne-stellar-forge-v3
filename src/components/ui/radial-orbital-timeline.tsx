@@ -1,4 +1,3 @@
-
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { ArrowRight, Link, Zap } from "lucide-react";
@@ -227,11 +226,23 @@ export default function RadialOrbitalTimeline({
                 <div
                   className={`
                   w-10 h-10 rounded-full flex items-center justify-center
-                  bg-black text-white
-                  border-2 border-white/40
+                  ${
+                    isExpanded
+                      ? "bg-white text-black"
+                      : isRelated
+                      ? "bg-white/50 text-black"
+                      : "bg-black text-white"
+                  }
+                  border-2 
+                  ${
+                    isExpanded
+                      ? "border-white shadow-lg shadow-white/30"
+                      : isRelated
+                      ? "border-white animate-pulse"
+                      : "border-white/40"
+                  }
                   transition-all duration-300 transform
-                  ${isExpanded ? "bg-white text-black border-white shadow-lg shadow-white/30 scale-150" : ""}
-                  ${isRelated ? "border-white animate-pulse" : ""}
+                  ${isExpanded ? "scale-150" : ""}
                 `}
                 >
                   <Icon size={16} />

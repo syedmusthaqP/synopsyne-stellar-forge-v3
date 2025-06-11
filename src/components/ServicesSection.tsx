@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Code, Cloud, Smartphone, Brain, Database, Shield, Calendar, FileText, User, Clock } from 'lucide-react';
 import RadialOrbitalTimeline from '@/components/ui/radial-orbital-timeline';
@@ -145,7 +146,7 @@ const ServicesSection = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Header Section */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-16">
           <div className="inline-flex items-center text-neon text-sm mb-8 animate-float">
             <Brain className="w-4 h-4 mr-2" />
             <span>Neural Service Architecture</span>
@@ -155,18 +156,13 @@ const ServicesSection = () => {
             Our <span className="text-neon animate-text-glow">Services</span> Network
           </h2>
           
-          {/* Philosophy text with smaller font size and Services styling */}
+          {/* Philosophy text with smaller font size */}
           <div className="max-w-6xl mx-auto mb-16">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 rounded-lg blur-xl"></div>
-              <div className="relative glassmorphism p-6 rounded-lg">
-                <p className="text-sm md:text-base text-gray-300 leading-relaxed">
-                  At Synopsyne Dynamics, we exist at the intersection of human intuition and digital precision. 
-                  Our name isn't just clever wordplay—it's our philosophy. Like synapses firing in perfect 
-                  harmony to create thought, we connect disparate elements to spark innovation.
-                </p>
-              </div>
-            </div>
+            <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+              At Synopsyne Dynamics, we exist at the intersection of human intuition and digital precision. 
+              Our name isn't just clever wordplay—it's our philosophy. Like synapses firing in perfect 
+              harmony to create thought, we connect disparate elements to spark innovation.
+            </p>
           </div>
         </div>
 
@@ -294,7 +290,7 @@ const ServicesSection = () => {
 
         {/* Neural Development Process - Radial Orbital Timeline with reduced font size */}
         <div className="mt-20">
-          <h3 className="text-2xl md:text-3xl font-bold text-white text-center mb-12">
+          <h3 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
             Neural Development <span className="text-neon">Process</span>
           </h3>
           
