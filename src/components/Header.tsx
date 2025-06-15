@@ -74,13 +74,19 @@ const Header = () => {
                   <ChevronDown className="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" />
                 </button>
                 
-                {/* Dropdown Menu */}
+                {/* Dropdown Menu with Black Transparent Background */}
                 <div 
-                  className={`absolute top-full left-0 mt-2 w-64 glassmorphism rounded-lg p-4 transition-all duration-200 ${
+                  className={`absolute top-full left-0 mt-2 w-64 bg-black/80 backdrop-blur-md border border-cyan-500/20 rounded-lg p-4 transition-all duration-200 shadow-xl ${
                     activeDropdown === key ? 'opacity-100 visible' : 'opacity-0 invisible'
                   }`}
                   onMouseEnter={() => setActiveDropdown(key)}
                   onMouseLeave={() => setActiveDropdown(null)}
+                  style={{
+                    background: 'rgba(0, 0, 0, 0.85)',
+                    backdropFilter: 'blur(12px)',
+                    border: '1px solid rgba(0, 212, 255, 0.2)',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)'
+                  }}
                 >
                   <div className="space-y-2">
                     {section.items.map((item, index) => (

@@ -63,14 +63,12 @@ const Carousel = ({items, initialScroll = 0}: iCarouselProps) => {
 	const handleScrollLeft = () => {
 		if (carouselRef.current) {
 			carouselRef.current.scrollBy({left: -300, behavior: "smooth"});
-			setTimeout(checkScrollability, 100);
 		}
 	};
 
 	const handleScrollRight = () => {
 		if (carouselRef.current) {
 			carouselRef.current.scrollBy({left: 300, behavior: "smooth"});
-			setTimeout(checkScrollability, 100);
 		}
 	};
 
@@ -97,12 +95,20 @@ const Carousel = ({items, initialScroll = 0}: iCarouselProps) => {
 		}
 	}, [initialScroll]);
 
+	// Add scroll event listener to update button states
+	useEffect(() => {
+		const carousel = carouselRef.current;
+		if (carousel) {
+			carousel.addEventListener('scroll', checkScrollability);
+			return () => carousel.removeEventListener('scroll', checkScrollability);
+		}
+	}, []);
+
 	return (
 		<div className="relative w-full mt-10">
 			<div
 				className="flex w-full overflow-x-scroll overscroll-x-auto scroll-smooth [scrollbar-width:none] py-5"
 				ref={carouselRef}
-				onScroll={checkScrollability}
 			>
 				<div
 					className={cn(

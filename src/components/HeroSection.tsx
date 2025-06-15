@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [neuralPulse, setNeuralPulse] = useState(0);
-  const [logoLoaded, setLogoLoaded] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,13 +25,6 @@ const HeroSection = () => {
     }, 800);
 
     return () => clearInterval(pulseInterval);
-  }, []);
-
-  // Preload the logo image
-  useEffect(() => {
-    const img = new Image();
-    img.onload = () => setLogoLoaded(true);
-    img.src = "/lovable-uploads/4b99589a-d4bb-4fbd-98d6-1b0fb06de699.png";
   }, []);
 
   const handleNeuralTransformation = () => {
@@ -139,7 +131,7 @@ const HeroSection = () => {
         ))}
       </div>
 
-      {/* Company Logo with glowing effect - right side, absolutely positioned */}
+      {/* Company Logo with instant loading - right side, absolutely positioned */}
       <div className="hidden md:block absolute right-8 top-1/2 z-20 -translate-y-1/2">
         <div className="relative flex items-center justify-center">
           {/* Glowing gradient light behind logo */}
@@ -150,31 +142,19 @@ const HeroSection = () => {
               zIndex: 0,
             }}>
           </div>
-          {/* Logo image with optimized loading */}
+          {/* Logo image with instant loading */}
           <img
             src="/lovable-uploads/4b99589a-d4bb-4fbd-98d6-1b0fb06de699.png"
             alt="Synopsyne Dynamics Logo"
-            className={`relative z-10 max-w-[220px] rounded-xl shadow-lg transition-opacity duration-300 ${
-              logoLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
+            className="relative z-10 max-w-[220px] rounded-xl shadow-lg"
             style={{
               border: '2px solid rgba(0, 212, 255, .44)',
               background: 'rgba(20,25,35,0.55)',
             }}
             loading="eager"
             fetchPriority="high"
-            onLoad={() => setLogoLoaded(true)}
+            decoding="sync"
           />
-          {/* Loading placeholder */}
-          {!logoLoaded && (
-            <div 
-              className="absolute z-10 max-w-[220px] w-full h-[140px] rounded-xl animate-pulse"
-              style={{
-                border: '2px solid rgba(0, 212, 255, .44)',
-                background: 'rgba(20,25,35,0.55)',
-              }}
-            />
-          )}
         </div>
       </div>
 
