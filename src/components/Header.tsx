@@ -17,27 +17,25 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const isHomePage = location.pathname === '/';
-
   const navigationItems = {
     technology: {
       label: 'Technology',
       items: [
-        { label: 'Technology Galaxy', href: isHomePage ? '#technology' : '/#technology' },
-        { label: 'Where Synapses Meet Systems', href: isHomePage ? '#technology' : '/#technology' }
+        { label: 'Technology Galaxy', href: '/technology' },
+        { label: 'Where Synapses Meet Systems', href: '/technology' }
       ]
     },
     architecture: {
       label: 'Architecture',
       items: [
-        { label: 'Neural Service Architecture', href: '/services' },
-        { label: 'Solution Architecture', href: '/services' }
+        { label: 'Neural Service Architecture', href: '/architecture' },
+        { label: 'Solution Architecture', href: '/architecture' }
       ]
     },
     advantage: {
       label: 'Advantage',
       items: [
-        { label: 'The Synopsyne Advantage', href: isHomePage ? '#about' : '/#about' }
+        { label: 'The Synopsyne Advantage', href: '/advantage' }
       ]
     }
   };
@@ -87,23 +85,13 @@ const Header = () => {
                   <div className="space-y-2">
                     {section.items.map((item, index) => (
                       <div key={index}>
-                        {item.href.startsWith('#') || item.href.startsWith('/#') ? (
-                          <a
-                            href={item.href}
-                            className="block text-white hover:text-neon transition-colors py-2 px-3 rounded hover:bg-cyan-500/10"
-                            onClick={handleLinkClick}
-                          >
-                            {item.label}
-                          </a>
-                        ) : (
-                          <Link
-                            to={item.href}
-                            className="block text-white hover:text-neon transition-colors py-2 px-3 rounded hover:bg-cyan-500/10"
-                            onClick={handleLinkClick}
-                          >
-                            {item.label}
-                          </Link>
-                        )}
+                        <Link
+                          to={item.href}
+                          className="block text-white hover:text-neon transition-colors py-2 px-3 rounded hover:bg-cyan-500/10"
+                          onClick={handleLinkClick}
+                        >
+                          {item.label}
+                        </Link>
                       </div>
                     ))}
                   </div>
@@ -112,23 +100,13 @@ const Header = () => {
             ))}
             
             {/* Get In Touch Button */}
-            {isHomePage ? (
-              <a 
-                href="#contact" 
-                className="neon-border px-6 py-2 rounded-lg text-neon hover:bg-cyan-500/10 transition-all"
-                onClick={handleLinkClick}
-              >
-                Get In Touch
-              </a>
-            ) : (
-              <Link 
-                to="/#contact" 
-                className="neon-border px-6 py-2 rounded-lg text-neon hover:bg-cyan-500/10 transition-all"
-                onClick={handleLinkClick}
-              >
-                Get In Touch
-              </Link>
-            )}
+            <Link 
+              to="/contact" 
+              className="neon-border px-6 py-2 rounded-lg text-neon hover:bg-cyan-500/10 transition-all"
+              onClick={handleLinkClick}
+            >
+              Get In Touch
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -160,23 +138,13 @@ const Header = () => {
                     <div className="mt-3 ml-4 space-y-2">
                       {section.items.map((item, index) => (
                         <div key={index}>
-                          {item.href.startsWith('#') || item.href.startsWith('/#') ? (
-                            <a
-                              href={item.href}
-                              className="block text-gray-300 hover:text-neon transition-colors py-1"
-                              onClick={handleLinkClick}
-                            >
-                              • {item.label}
-                            </a>
-                          ) : (
-                            <Link
-                              to={item.href}
-                              className="block text-gray-300 hover:text-neon transition-colors py-1"
-                              onClick={handleLinkClick}
-                            >
-                              • {item.label}
-                            </Link>
-                          )}
+                          <Link
+                            to={item.href}
+                            className="block text-gray-300 hover:text-neon transition-colors py-1"
+                            onClick={handleLinkClick}
+                          >
+                            • {item.label}
+                          </Link>
                         </div>
                       ))}
                     </div>
@@ -186,23 +154,13 @@ const Header = () => {
               
               {/* Mobile Get In Touch Button */}
               <div className="pt-4 border-t border-gray-600">
-                {isHomePage ? (
-                  <a 
-                    href="#contact" 
-                    className="block neon-border px-6 py-3 rounded-lg text-neon hover:bg-cyan-500/10 transition-all text-center"
-                    onClick={handleLinkClick}
-                  >
-                    Get In Touch
-                  </a>
-                ) : (
-                  <Link 
-                    to="/#contact" 
-                    className="block neon-border px-6 py-3 rounded-lg text-neon hover:bg-cyan-500/10 transition-all text-center"
-                    onClick={handleLinkClick}
-                  >
-                    Get In Touch
-                  </Link>
-                )}
+                <Link 
+                  to="/contact" 
+                  className="block neon-border px-6 py-3 rounded-lg text-neon hover:bg-cyan-500/10 transition-all text-center"
+                  onClick={handleLinkClick}
+                >
+                  Get In Touch
+                </Link>
               </div>
             </div>
           </div>

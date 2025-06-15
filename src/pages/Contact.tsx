@@ -1,10 +1,10 @@
 
 import React from 'react';
 import Header from '../components/Header';
-import HeroSection from '../components/HeroSection';
 import Footer from '../components/Footer';
+import ContactSection from '../components/ContactSection';
 
-const Index = () => {
+const Contact = () => {
   return (
     <div className="min-h-screen gradient-bg relative overflow-hidden">
       {/* Particle background effect */}
@@ -16,10 +16,10 @@ const Index = () => {
       <div className="fixed bottom-40 left-20 w-24 h-24 rounded-full glassmorphism animate-float opacity-25" style={{animationDelay: '2s'}}></div>
       
       <Header />
-      <HeroSection />
+      <ContactSection />
       <Footer />
     </div>
   );
 };
 
-export default Index;
+export default Contact;
