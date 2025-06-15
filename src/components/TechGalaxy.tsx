@@ -47,7 +47,7 @@ const TechGalaxy = () => {
       size: 50, 
       orbitRadius: 180, 
       orbitSpeed: 1.2, 
-      angle: 60, 
+      angle: 80, 
       description: 'Progressive framework for building user interfaces with gentle learning curve', 
       expertise: 88,
       projects: ['Content Management System', 'Real-time Chat App'],
@@ -62,7 +62,7 @@ const TechGalaxy = () => {
       size: 55, 
       orbitRadius: 220, 
       orbitSpeed: 0.8, 
-      angle: 120, 
+      angle: 160, 
       description: 'Enterprise-grade application framework with TypeScript integration', 
       expertise: 82,
       projects: ['Enterprise Resource Planning', 'Banking Portal'],
@@ -77,7 +77,7 @@ const TechGalaxy = () => {
       size: 52, 
       orbitRadius: 240, 
       orbitSpeed: 0.9, 
-      angle: 180, 
+      angle: 240, 
       description: 'Full-stack React framework with server-side rendering and static generation', 
       expertise: 90,
       projects: ['E-commerce Site', 'Blog Platform', 'Corporate Website'],
@@ -92,7 +92,7 @@ const TechGalaxy = () => {
       size: 48, 
       orbitRadius: 200, 
       orbitSpeed: 1.1, 
-      angle: 240, 
+      angle: 300, 
       description: 'Compile-time optimized framework with no virtual DOM overhead', 
       expertise: 75,
       projects: ['Interactive Dashboard', 'Animation-heavy App'],
@@ -107,7 +107,7 @@ const TechGalaxy = () => {
       size: 58, 
       orbitRadius: 160, 
       orbitSpeed: 1.3, 
-      angle: 300, 
+      angle: 40, 
       description: 'Strongly typed JavaScript superset for scalable application development', 
       expertise: 92,
       projects: ['Large Scale Apps', 'Enterprise Solutions', 'Type-safe APIs'],
@@ -124,7 +124,7 @@ const TechGalaxy = () => {
       size: 65, 
       orbitRadius: 160, 
       orbitSpeed: 1.5, 
-      angle: 30, 
+      angle: 120, 
       description: 'Server-side JavaScript runtime for building scalable network applications', 
       expertise: 92,
       projects: ['API Gateway', 'Microservices Architecture', 'Real-time Gaming Platform'],
@@ -139,7 +139,7 @@ const TechGalaxy = () => {
       size: 58, 
       orbitRadius: 240, 
       orbitSpeed: 0.7, 
-      angle: 90, 
+      angle: 200, 
       description: 'Versatile programming language for AI, web development, and data science', 
       expertise: 90,
       projects: ['Machine Learning Pipeline', 'Data Analytics Platform', 'Web Scraping Service'],
@@ -154,7 +154,7 @@ const TechGalaxy = () => {
       size: 52, 
       orbitRadius: 200, 
       orbitSpeed: 1.1, 
-      angle: 150, 
+      angle: 280, 
       description: 'Enterprise application development with robust performance and security', 
       expertise: 85,
       projects: ['Enterprise Banking System', 'Supply Chain Management'],
@@ -169,7 +169,7 @@ const TechGalaxy = () => {
       size: 54, 
       orbitRadius: 220, 
       orbitSpeed: 0.8, 
-      angle: 210, 
+      angle: 20, 
       description: '.NET ecosystem for building scalable Windows and cross-platform applications', 
       expertise: 80,
       projects: ['Enterprise Software', 'Windows Applications', 'Web APIs'],
@@ -184,7 +184,7 @@ const TechGalaxy = () => {
       size: 50, 
       orbitRadius: 180, 
       orbitSpeed: 1.2, 
-      angle: 270, 
+      angle: 100, 
       description: 'Concurrent programming language for high-performance backend services', 
       expertise: 78,
       projects: ['Microservices', 'CLI Tools', 'Network Services'],
@@ -199,7 +199,7 @@ const TechGalaxy = () => {
       size: 48, 
       orbitRadius: 260, 
       orbitSpeed: 0.6, 
-      angle: 330, 
+      angle: 60, 
       description: 'Systems programming language with memory safety and zero-cost abstractions', 
       expertise: 70,
       projects: ['System Tools', 'Performance-critical Services'],
@@ -214,7 +214,7 @@ const TechGalaxy = () => {
       size: 46, 
       orbitRadius: 190, 
       orbitSpeed: 1.0, 
-      angle: 45, 
+      angle: 180, 
       description: 'Server-side scripting language for web development and APIs', 
       expertise: 75,
       projects: ['WordPress Sites', 'Laravel Applications', 'Legacy Systems'],
@@ -231,7 +231,7 @@ const TechGalaxy = () => {
       size: 70, 
       orbitRadius: 280, 
       orbitSpeed: 0.6, 
-      angle: 60, 
+      angle: 140, 
       description: 'Comprehensive cloud computing platform with 200+ services', 
       expertise: 88,
       projects: ['Serverless Architecture', 'Auto-scaling Infrastructure', 'Multi-region Deployment'],
@@ -246,7 +246,7 @@ const TechGalaxy = () => {
       size: 62, 
       orbitRadius: 260, 
       orbitSpeed: 0.9, 
-      angle: 120, 
+      angle: 220, 
       description: 'Microsoft cloud services and solutions for enterprise integration', 
       expertise: 80,
       projects: ['Hybrid Cloud Setup', 'DevOps Pipeline', 'AI/ML Services'],
@@ -261,7 +261,7 @@ const TechGalaxy = () => {
       size: 58, 
       orbitRadius: 300, 
       orbitSpeed: 0.5, 
-      angle: 180, 
+      angle: 300, 
       description: 'Google Cloud Platform services with advanced AI and analytics', 
       expertise: 75,
       projects: ['BigQuery Analytics', 'Kubernetes Deployment', 'Vision API Integration'],
@@ -276,7 +276,7 @@ const TechGalaxy = () => {
       size: 55, 
       orbitRadius: 200, 
       orbitSpeed: 1.1, 
-      angle: 240, 
+      angle: 320, 
       description: 'Containerization platform for consistent deployment across environments', 
       expertise: 85,
       projects: ['Microservices Deployment', 'CI/CD Pipelines', 'Development Environments'],
@@ -291,7 +291,7 @@ const TechGalaxy = () => {
       size: 60, 
       orbitRadius: 320, 
       orbitSpeed: 0.4, 
-      angle: 300, 
+      angle: 40, 
       description: 'Container orchestration platform for automating deployment and scaling', 
       expertise: 82,
       projects: ['Container Orchestration', 'Auto-scaling Services', 'Multi-cloud Deployment'],
@@ -308,7 +308,7 @@ const TechGalaxy = () => {
       size: 55, 
       orbitRadius: 320, 
       orbitSpeed: 0.4, 
-      angle: 0, 
+      angle: 80, 
       description: 'Machine learning and neural networks for production-ready AI solutions', 
       expertise: 85,
       projects: ['Computer Vision System', 'Predictive Analytics', 'Recommendation Engine'],
@@ -323,7 +323,7 @@ const TechGalaxy = () => {
       size: 52, 
       orbitRadius: 290, 
       orbitSpeed: 0.8, 
-      angle: 72, 
+      angle: 160, 
       description: 'Deep learning research and production with dynamic computational graphs', 
       expertise: 78,
       projects: ['Research Prototypes', 'Custom Neural Networks', 'Transfer Learning'],
@@ -338,7 +338,7 @@ const TechGalaxy = () => {
       size: 48, 
       orbitRadius: 250, 
       orbitSpeed: 0.9, 
-      angle: 144, 
+      angle: 240, 
       description: 'Data manipulation and analysis library for Python data science workflows', 
       expertise: 90,
       projects: ['Data Analysis Pipeline', 'ETL Processes', 'Business Intelligence'],
@@ -353,7 +353,7 @@ const TechGalaxy = () => {
       size: 50, 
       orbitRadius: 270, 
       orbitSpeed: 0.7, 
-      angle: 216, 
+      angle: 320, 
       description: 'Machine learning library for classification, regression, and clustering', 
       expertise: 88,
       projects: ['Predictive Models', 'Classification Systems', 'Data Mining'],
@@ -368,7 +368,7 @@ const TechGalaxy = () => {
       size: 46, 
       orbitRadius: 310, 
       orbitSpeed: 0.5, 
-      angle: 288, 
+      angle: 0, 
       description: 'Computer vision library for image and video processing applications', 
       expertise: 80,
       projects: ['Image Recognition', 'Video Analysis', 'Object Detection'],
@@ -385,7 +385,7 @@ const TechGalaxy = () => {
       size: 58, 
       orbitRadius: 340, 
       orbitSpeed: 0.3, 
-      angle: 45, 
+      angle: 120, 
       description: 'Advanced open-source relational database with powerful features', 
       expertise: 85,
       projects: ['Enterprise Applications', 'Data Warehousing', 'Financial Systems'],
@@ -400,7 +400,7 @@ const TechGalaxy = () => {
       size: 54, 
       orbitRadius: 190, 
       orbitSpeed: 1.0, 
-      angle: 135, 
+      angle: 260, 
       description: 'NoSQL document database for flexible and scalable data storage', 
       expertise: 82,
       projects: ['Content Management', 'Real-time Analytics', 'Mobile Backend'],
@@ -415,7 +415,7 @@ const TechGalaxy = () => {
       size: 50, 
       orbitRadius: 230, 
       orbitSpeed: 0.8, 
-      angle: 225, 
+      angle: 340, 
       description: 'In-memory data structure store for caching and real-time applications', 
       expertise: 80,
       projects: ['Caching Layer', 'Session Management', 'Real-time Features'],
@@ -430,7 +430,7 @@ const TechGalaxy = () => {
       size: 52, 
       orbitRadius: 210, 
       orbitSpeed: 0.9, 
-      angle: 315, 
+      angle: 20, 
       description: 'Popular open-source relational database management system', 
       expertise: 78,
       projects: ['Web Applications', 'E-commerce Sites', 'Content Management'],
@@ -438,6 +438,41 @@ const TechGalaxy = () => {
       experienceYears: 6
     }
   ];
+
+  // Function to calculate distance between two points
+  const calculateDistance = (x1: number, y1: number, x2: number, y2: number) => {
+    return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+  };
+
+  // Function to check for collisions and adjust positions
+  const getAdjustedPosition = (tech: TechNode, allTechs: TechNode[], currentRotation: number) => {
+    const angle = (tech.angle + currentRotation * tech.orbitSpeed) * (Math.PI / 180);
+    let x = Math.cos(angle) * tech.orbitRadius;
+    let y = Math.sin(angle) * tech.orbitRadius;
+
+    // Check for collisions with other nodes
+    const minDistance = tech.size / 2 + 40; // Minimum distance to prevent overlap
+    
+    for (const otherTech of allTechs) {
+      if (otherTech.id === tech.id) continue;
+      
+      const otherAngle = (otherTech.angle + currentRotation * otherTech.orbitSpeed) * (Math.PI / 180);
+      const otherX = Math.cos(otherAngle) * otherTech.orbitRadius;
+      const otherY = Math.sin(otherAngle) * otherTech.orbitRadius;
+      
+      const distance = calculateDistance(x, y, otherX, otherY);
+      const requiredDistance = (tech.size + otherTech.size) / 2 + 20;
+      
+      if (distance < requiredDistance) {
+        // Adjust position to avoid collision
+        const adjustmentAngle = Math.atan2(y - otherY, x - otherX);
+        x = otherX + Math.cos(adjustmentAngle) * requiredDistance;
+        y = otherY + Math.sin(adjustmentAngle) * requiredDistance;
+      }
+    }
+
+    return { x, y };
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -516,16 +551,14 @@ const TechGalaxy = () => {
 
             {/* Technology Nodes */}
             {filteredTechnologies.map((tech) => {
-              const angle = (tech.angle + rotation * tech.orbitSpeed) * (Math.PI / 180);
-              const x = Math.cos(angle) * tech.orbitRadius;
-              const y = Math.sin(angle) * tech.orbitRadius;
+              const position = getAdjustedPosition(tech, filteredTechnologies, rotation);
 
               return (
                 <div
                   key={tech.id}
                   className="absolute tech-node"
                   style={{
-                    transform: `translate(${x}px, ${y}px)`,
+                    transform: `translate(${position.x}px, ${position.y}px)`,
                     transition: 'all 0.3s ease'
                   }}
                 >
