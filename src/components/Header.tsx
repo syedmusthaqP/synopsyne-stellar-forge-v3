@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
@@ -98,6 +99,15 @@ const Header = () => {
               </div>
             ))}
             
+            {/* Direct Links */}
+            <Link 
+              to="/testimonials" 
+              className="text-white hover:text-neon transition-colors"
+              onClick={handleLinkClick}
+            >
+              Testimonials
+            </Link>
+            
             {/* Get In Touch Button */}
             <Link 
               to="/contact" 
@@ -150,6 +160,17 @@ const Header = () => {
                   )}
                 </div>
               ))}
+              
+              {/* Mobile Direct Links */}
+              <div>
+                <Link
+                  to="/testimonials"
+                  className="block text-white hover:text-neon transition-colors text-lg font-medium py-2"
+                  onClick={handleLinkClick}
+                >
+                  Testimonials
+                </Link>
+              </div>
               
               {/* Mobile Get In Touch Button */}
               <div className="pt-4 border-t border-gray-600">
