@@ -50,9 +50,9 @@ const ContactSection = () => {
             
             <div className="space-y-6">
               {[
-                { icon: Mail, title: 'Email Us', content: 'hello@synopsyne.com', subtitle: 'We respond within 24 hours' },
-                { icon: Phone, title: 'Call Us', content: '+1 (555) 123-4567', subtitle: 'Mon-Fri 9AM-6PM EST' },
-                { icon: MapPin, title: 'Visit Us', content: '123 Innovation Drive', subtitle: 'San Francisco, CA 94105' }
+                { icon: Mail, title: 'Email Us', content: 'syedmusthaqk786@gmail.com', subtitle: 'We respond within 24 hours' },
+                { icon: Phone, title: 'Call Us', content: '+91 7013425496', subtitle: 'Mon-Fri 9AM-6PM IST' },
+                { icon: MapPin, title: 'Visit Us', content: 'Andhra Pradesh, India', subtitle: '' }
               ].map((contact, index) => (
                 <div key={index} className="flex items-start space-x-4 group">
                   <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-cyan-500/20 to-blue-500/20 flex items-center justify-center group-hover:animate-pulse-glow">
@@ -63,7 +63,9 @@ const ContactSection = () => {
                       {contact.title}
                     </h4>
                     <p className="text-neon text-lg">{contact.content}</p>
-                    <p className="text-gray-400 text-sm">{contact.subtitle}</p>
+                    {contact.subtitle && (
+                      <p className="text-gray-400 text-sm">{contact.subtitle}</p>
+                    )}
                   </div>
                 </div>
               ))}
@@ -188,3 +190,4 @@ const ContactSection = () => {
 };
 
 export default ContactSection;
+
