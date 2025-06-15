@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 
 interface TechNode {
@@ -23,7 +22,7 @@ const TechGalaxy = () => {
   const [rotation, setRotation] = useState(0);
 
   const technologies: TechNode[] = [
-    // Frontend
+    // Frontend - Frameworks
     { 
       id: 'react', 
       name: 'React', 
@@ -99,6 +98,8 @@ const TechGalaxy = () => {
       keyFeatures: ['Compile-time Optimization', 'No Virtual DOM', 'Small Bundle Size', 'Reactive Stores'],
       experienceYears: 2
     },
+    
+    // Frontend - Languages & Core
     { 
       id: 'typescript', 
       name: 'TypeScript', 
@@ -113,6 +114,175 @@ const TechGalaxy = () => {
       projects: ['Large Scale Apps', 'Enterprise Solutions', 'Type-safe APIs'],
       keyFeatures: ['Static Typing', 'IntelliSense', 'Compile-time Checking', 'Modern ES Features'],
       experienceYears: 5
+    },
+    { 
+      id: 'javascript', 
+      name: 'JavaScript', 
+      category: 'Frontend', 
+      color: '#F7DF1E', 
+      size: 62, 
+      orbitRadius: 150, 
+      orbitSpeed: 1.4, 
+      angle: 120, 
+      description: 'Dynamic programming language for interactive web experiences', 
+      expertise: 95,
+      projects: ['Web Applications', 'Interactive UIs', 'Dynamic Content'],
+      keyFeatures: ['ES6+', 'Async/Await', 'DOM Manipulation', 'Event Handling'],
+      experienceYears: 8
+    },
+    { 
+      id: 'html5', 
+      name: 'HTML5', 
+      category: 'Frontend', 
+      color: '#E34F26', 
+      size: 54, 
+      orbitRadius: 140, 
+      orbitSpeed: 1.5, 
+      angle: 200, 
+      description: 'Modern markup language for structuring web content and applications', 
+      expertise: 98,
+      projects: ['Semantic Web', 'Accessibility-focused Sites', 'PWAs'],
+      keyFeatures: ['Semantic Elements', 'Accessibility', 'Media Support', 'Canvas API'],
+      experienceYears: 10
+    },
+    
+    // Frontend - Styling
+    { 
+      id: 'css3', 
+      name: 'CSS3', 
+      category: 'Frontend', 
+      color: '#1572B6', 
+      size: 56, 
+      orbitRadius: 170, 
+      orbitSpeed: 1.2, 
+      angle: 280, 
+      description: 'Advanced styling language for modern responsive web design', 
+      expertise: 90,
+      projects: ['Responsive Designs', 'Animation Libraries', 'Modern Layouts'],
+      keyFeatures: ['Flexbox', 'Grid', 'Animations', 'Custom Properties'],
+      experienceYears: 8
+    },
+    { 
+      id: 'tailwind', 
+      name: 'Tailwind CSS', 
+      category: 'Frontend', 
+      color: '#06B6D4', 
+      size: 50, 
+      orbitRadius: 190, 
+      orbitSpeed: 1.0, 
+      angle: 60, 
+      description: 'Utility-first CSS framework for rapid UI development', 
+      expertise: 88,
+      projects: ['Modern Dashboards', 'Landing Pages', 'Component Libraries'],
+      keyFeatures: ['Utility Classes', 'Responsive Design', 'Custom Themes', 'JIT Compilation'],
+      experienceYears: 3
+    },
+    { 
+      id: 'sass', 
+      name: 'Sass/SCSS', 
+      category: 'Frontend', 
+      color: '#CC6699', 
+      size: 48, 
+      orbitRadius: 210, 
+      orbitSpeed: 0.9, 
+      angle: 140, 
+      description: 'CSS preprocessor with variables, nesting, and advanced features', 
+      expertise: 85,
+      projects: ['Large Stylesheets', 'Design Systems', 'Theme Management'],
+      keyFeatures: ['Variables', 'Mixins', 'Nesting', 'Functions'],
+      experienceYears: 5
+    },
+    { 
+      id: 'bootstrap', 
+      name: 'Bootstrap', 
+      category: 'Frontend', 
+      color: '#7952B3', 
+      size: 46, 
+      orbitRadius: 230, 
+      orbitSpeed: 0.8, 
+      angle: 220, 
+      description: 'Popular CSS framework for responsive and mobile-first development', 
+      expertise: 80,
+      projects: ['Rapid Prototypes', 'Admin Dashboards', 'Business Websites'],
+      keyFeatures: ['Grid System', 'Components', 'Responsive Utilities', 'JavaScript Plugins'],
+      experienceYears: 6
+    },
+    
+    // Frontend - Build Tools & Libraries
+    { 
+      id: 'webpack', 
+      name: 'Webpack', 
+      category: 'Frontend', 
+      color: '#8DD6F9', 
+      size: 44, 
+      orbitRadius: 250, 
+      orbitSpeed: 0.7, 
+      angle: 320, 
+      description: 'Module bundler for modern JavaScript applications', 
+      expertise: 78,
+      projects: ['Build Optimization', 'Code Splitting', 'Asset Management'],
+      keyFeatures: ['Module Bundling', 'Code Splitting', 'Loaders', 'Plugins'],
+      experienceYears: 4
+    },
+    { 
+      id: 'vite', 
+      name: 'Vite', 
+      category: 'Frontend', 
+      color: '#646CFF', 
+      size: 46, 
+      orbitRadius: 270, 
+      orbitSpeed: 0.6, 
+      angle: 20, 
+      description: 'Fast build tool with instant HMR for modern web development', 
+      expertise: 85,
+      projects: ['React Apps', 'Vue Applications', 'Fast Development'],
+      keyFeatures: ['Fast HMR', 'ES Modules', 'Optimized Builds', 'Plugin System'],
+      experienceYears: 2
+    },
+    { 
+      id: 'jquery', 
+      name: 'jQuery', 
+      category: 'Frontend', 
+      color: '#0769AD', 
+      size: 42, 
+      orbitRadius: 160, 
+      orbitSpeed: 1.1, 
+      angle: 100, 
+      description: 'Fast and lightweight JavaScript library for DOM manipulation', 
+      expertise: 75,
+      projects: ['Legacy Systems', 'Quick Prototypes', 'DOM Manipulation'],
+      keyFeatures: ['DOM Manipulation', 'AJAX', 'Animations', 'Cross-browser'],
+      experienceYears: 7
+    },
+    { 
+      id: 'redux', 
+      name: 'Redux', 
+      category: 'Frontend', 
+      color: '#764ABC', 
+      size: 48, 
+      orbitRadius: 220, 
+      orbitSpeed: 0.9, 
+      angle: 180, 
+      description: 'Predictable state container for JavaScript applications', 
+      expertise: 82,
+      projects: ['Complex State Management', 'Large Applications', 'Predictable Updates'],
+      keyFeatures: ['Predictable State', 'DevTools', 'Middleware', 'Time Travel'],
+      experienceYears: 4
+    },
+    { 
+      id: 'graphql', 
+      name: 'GraphQL', 
+      category: 'Frontend', 
+      color: '#E10098', 
+      size: 44, 
+      orbitRadius: 240, 
+      orbitSpeed: 0.8, 
+      angle: 260, 
+      description: 'Query language and runtime for APIs with precise data fetching', 
+      expertise: 75,
+      projects: ['API Integration', 'Data Fetching', 'Type-safe Queries'],
+      keyFeatures: ['Single Endpoint', 'Type System', 'Real-time', 'Introspection'],
+      experienceYears: 3
     },
     
     // Backend
@@ -444,31 +614,43 @@ const TechGalaxy = () => {
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
   };
 
-  // Function to check for collisions and adjust positions
+  // Enhanced collision avoidance function
   const getAdjustedPosition = (tech: TechNode, allTechs: TechNode[], currentRotation: number) => {
     const angle = (tech.angle + currentRotation * tech.orbitSpeed) * (Math.PI / 180);
     let x = Math.cos(angle) * tech.orbitRadius;
     let y = Math.sin(angle) * tech.orbitRadius;
 
-    // Check for collisions with other nodes
-    const minDistance = tech.size / 2 + 40; // Minimum distance to prevent overlap
-    
-    for (const otherTech of allTechs) {
-      if (otherTech.id === tech.id) continue;
+    // Minimum distance based on node sizes plus buffer
+    const basePadding = 30;
+    let adjustmentAttempts = 0;
+    const maxAttempts = 5;
+
+    while (adjustmentAttempts < maxAttempts) {
+      let hasCollision = false;
       
-      const otherAngle = (otherTech.angle + currentRotation * otherTech.orbitSpeed) * (Math.PI / 180);
-      const otherX = Math.cos(otherAngle) * otherTech.orbitRadius;
-      const otherY = Math.sin(otherAngle) * otherTech.orbitRadius;
-      
-      const distance = calculateDistance(x, y, otherX, otherY);
-      const requiredDistance = (tech.size + otherTech.size) / 2 + 20;
-      
-      if (distance < requiredDistance) {
-        // Adjust position to avoid collision
-        const adjustmentAngle = Math.atan2(y - otherY, x - otherX);
-        x = otherX + Math.cos(adjustmentAngle) * requiredDistance;
-        y = otherY + Math.sin(adjustmentAngle) * requiredDistance;
+      for (const otherTech of allTechs) {
+        if (otherTech.id === tech.id) continue;
+        
+        const otherAngle = (otherTech.angle + currentRotation * otherTech.orbitSpeed) * (Math.PI / 180);
+        const otherX = Math.cos(otherAngle) * otherTech.orbitRadius;
+        const otherY = Math.sin(otherAngle) * otherTech.orbitRadius;
+        
+        const distance = calculateDistance(x, y, otherX, otherY);
+        const requiredDistance = (tech.size + otherTech.size) / 2 + basePadding;
+        
+        if (distance < requiredDistance) {
+          hasCollision = true;
+          // Push away from collision with more force
+          const pushAngle = Math.atan2(y - otherY, x - otherX);
+          const pushForce = requiredDistance - distance + 10;
+          x += Math.cos(pushAngle) * pushForce * 0.5;
+          y += Math.sin(pushAngle) * pushForce * 0.5;
+          break;
+        }
       }
+      
+      if (!hasCollision) break;
+      adjustmentAttempts++;
     }
 
     return { x, y };
