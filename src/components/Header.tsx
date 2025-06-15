@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
@@ -98,6 +97,15 @@ const Header = () => {
                 </div>
               </div>
             ))}
+            
+            {/* Get In Touch Button */}
+            <Link 
+              to="/contact" 
+              className="neon-border px-6 py-2 rounded-lg text-neon hover:bg-cyan-500/10 transition-all"
+              onClick={handleLinkClick}
+            >
+              Get In Touch
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -142,6 +150,17 @@ const Header = () => {
                   )}
                 </div>
               ))}
+              
+              {/* Mobile Get In Touch Button */}
+              <div className="pt-4 border-t border-gray-600">
+                <Link 
+                  to="/contact" 
+                  className="block neon-border px-6 py-3 rounded-lg text-neon hover:bg-cyan-500/10 transition-all text-center"
+                  onClick={handleLinkClick}
+                >
+                  Get In Touch
+                </Link>
+              </div>
             </div>
           </div>
         )}
