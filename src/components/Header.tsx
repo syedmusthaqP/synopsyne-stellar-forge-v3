@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
@@ -21,8 +20,7 @@ const Header = () => {
     technology: {
       label: 'Technology',
       items: [
-        { label: 'Technology Galaxy', href: '/technology' },
-        { label: 'Where Synapses Meet Systems', href: '/where-synapses-meet-systems' }
+        { label: 'Technology Galaxy', href: '/technology' }
       ]
     },
     architecture: {
