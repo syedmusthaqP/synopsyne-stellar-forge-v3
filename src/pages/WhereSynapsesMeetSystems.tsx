@@ -1,8 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { Brain, Zap, Link, TrendingUp, Gem, Handshake, Target, Rocket, Lightbulb, Globe, Eye, Layers, Users, Compass, Sparkles, Network, Shield, Crown, Atom } from 'lucide-react';
+import ContactSection from '../components/ContactSection';
+import { Brain, Zap, Link, TrendingUp, Gem, Handshake, Target, Rocket, Lightbulb, Globe, Eye, Layers, Users, Compass, Sparkles, Network, Shield, Crown, Atom, MessageCircle } from 'lucide-react';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
 const WhereSynapsesMeetSystems = () => {
   const [activeTimeline, setActiveTimeline] = useState(0);
@@ -11,6 +12,7 @@ const WhereSynapsesMeetSystems = () => {
   const [activeMethod, setActiveMethod] = useState(-1);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [neuralPulse, setNeuralPulse] = useState(0);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -160,6 +162,65 @@ const WhereSynapsesMeetSystems = () => {
       <div className="fixed top-20 left-10 w-32 h-32 rounded-full glassmorphism animate-float opacity-30"></div>
       <div className="fixed top-40 right-20 w-20 h-20 rounded-full glassmorphism animate-float opacity-20" style={{animationDelay: '1s'}}></div>
       <div className="fixed bottom-40 left-20 w-24 h-24 rounded-full glassmorphism animate-float opacity-25" style={{animationDelay: '2s'}}></div>
+      
+      {/* Unique Floating Contact Button */}
+      <Dialog open={isContactOpen} onOpenChange={setIsContactOpen}>
+        <DialogTrigger asChild>
+          <button className="fixed bottom-8 right-8 w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 group z-50 animate-pulse-glow">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/30 to-purple-500/30 blur-xl animate-ping"></div>
+            <div className="relative">
+              <MessageCircle className="w-7 h-7 text-white group-hover:scale-110 transition-transform" />
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-neon rounded-full animate-pulse"></div>
+            </div>
+            
+            {/* Tooltip */}
+            <div className="absolute bottom-full right-0 mb-4 px-4 py-2 bg-black/80 backdrop-blur-sm text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap border border-cyan-400/30">
+              Start Your Digital Journey
+              <div className="absolute top-full right-6 border-4 border-transparent border-t-black/80"></div>
+            </div>
+          </button>
+        </DialogTrigger>
+        
+        <DialogContent className="max-w-7xl w-[95vw] h-[90vh] p-0 bg-transparent border-none overflow-hidden">
+          <div className="relative w-full h-full">
+            {/* Neural connection background for popup */}
+            <div className="absolute inset-0 opacity-20">
+              <svg className="w-full h-full">
+                {[...Array(12)].map((_, i) => (
+                  <g key={i}>
+                    <circle
+                      cx={`${(i * 23 + 15) % 100}%`}
+                      cy={`${(i * 37 + 20) % 100}%`}
+                      r="2"
+                      fill="rgb(0, 212, 255)"
+                      className="animate-pulse"
+                      style={{ animationDelay: `${i * 0.2}s` }}
+                    />
+                    <line
+                      x1={`${(i * 23 + 15) % 100}%`}
+                      y1={`${(i * 37 + 20) % 100}%`}
+                      x2={`${((i + 1) * 23 + 15) % 100}%`}
+                      y2={`${((i + 1) * 37 + 20) % 100}%`}
+                      stroke="rgba(0, 212, 255, 0.3)"
+                      strokeWidth="1"
+                      className="animate-synaptic-fire"
+                      style={{ animationDelay: `${i * 0.3}s` }}
+                    />
+                  </g>
+                ))}
+              </svg>
+            </div>
+            
+            {/* Contact Section with custom styling for popup */}
+            <div className="relative bg-gradient-to-br from-black/95 via-gray-900/95 to-black/95 backdrop-blur-xl rounded-2xl border border-cyan-400/30 h-full overflow-y-auto">
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-purple-500/5 to-pink-500/5 rounded-2xl"></div>
+              <div className="relative">
+                <ContactSection />
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
       
       <Header />
       
