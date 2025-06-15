@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 
 interface TechNode {
@@ -657,17 +656,6 @@ const TechGalaxy = () => {
     return { x, y };
   };
 
-  // Detect if mobile (simple check)
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const handleResize = () =>
-      setIsMobile(window.innerWidth < 768);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () =>
-      window.removeEventListener('resize', handleResize);
-  }, []);
-
   useEffect(() => {
     const interval = setInterval(() => {
       setRotation(prev => prev + 0.5);
@@ -690,27 +678,24 @@ const TechGalaxy = () => {
     ? technologies 
     : technologies.filter(tech => tech.category === selectedCategory);
 
-  // Update node size and orbit sizing for mobile
-  const nodeSizeFactor = isMobile ? 0.62 : 1; // A little smaller for better fit
-  const orbitHeight = isMobile ? 380 : 800; // Smaller height for mobile
-
   return (
-    <section id="technology" className="py-7 md:py-20 relative">
-      <div className="container mx-auto px-0 md:px-6">
-        <div className="text-center mb-7 md:mb-16 px-2">
-          <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold text-white mb-2 md:mb-6 leading-tight">
+    <section id="technology" className="py-20 relative">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Our Technology <span className="text-neon">Galaxy</span>
           </h2>
-          <p className="text-sm md:text-base text-gray-300 max-w-lg md:max-w-3xl mx-auto">
-            Explore our constellation of cutting-edge technologies. Each planet represents our expertise and experience.
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Explore our constellation of cutting-edge technologies. Each planet represents 
+            our expertise in transforming complex challenges into elegant solutions.
           </p>
         </div>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 md:mb-12 px-2">
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
           <button
             onClick={() => setSelectedCategory('all')}
-            className={`px-3 py-1.5 md:px-6 md:py-3 rounded-lg transition-all text-xs md:text-base ${
+            className={`px-6 py-3 rounded-lg transition-all ${
               selectedCategory === 'all'
                 ? 'neon-border text-neon bg-cyan-500/10'
                 : 'glassmorphism text-gray-300 hover:text-white'
@@ -722,14 +707,14 @@ const TechGalaxy = () => {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`flex items-center gap-2 px-3 py-1.5 md:px-6 md:py-3 rounded-lg transition-all text-xs md:text-base ${
+              className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all ${
                 selectedCategory === category
                   ? 'neon-border text-neon bg-cyan-500/10'
                   : 'glassmorphism text-gray-300 hover:text-white'
               }`}
             >
               <div 
-                className="w-2 h-2 md:w-3 md:h-3 rounded-full"
+                className="w-3 h-3 rounded-full"
                 style={{ backgroundColor: getCategoryColor(category) }}
               ></div>
               {category}
@@ -737,58 +722,34 @@ const TechGalaxy = () => {
           ))}
         </div>
 
-        <div className="relative w-full">
-          {/* Galaxy background glass effect on mobile */}
-          <div className={`absolute inset-0 ${isMobile ? "mobile-galaxy-bg-card" : ""}`} aria-hidden="true"></div>
-
-          {/* Central Hub with horizontally scrollable container for mobile */}
-          <div
-            className={`tech-orbit-container relative mx-auto flex items-center justify-center ${isMobile ? "mobile-galaxy-container" : ""}`}
-            style={{
-              width: isMobile ? '100vw' : '100%',
-              minWidth: isMobile ? '340px' : undefined,
-              maxWidth: isMobile ? '100vw' : undefined,
-              height: `${orbitHeight}px`,
-              overflowX: isMobile ? 'auto' : 'visible',
-              overflowY: 'visible',
-              position: 'relative',
-              touchAction: isMobile ? 'pan-x' : undefined,
-            }}
-          >
-            {/* Core planet */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-              <div
-                className="w-14 h-14 md:w-32 md:h-32 rounded-full glassmorphism neon-border animate-pulse-glow flex items-center justify-center pointer-events-auto"
-                style={{
-                  boxShadow: isMobile ? "0 2px 16px #00D4FF33" : undefined,
-                  fontSize: isMobile ? "1.1rem" : undefined,
-                }}
-              >
-                <span className="text-neon font-bold text-xs md:text-lg">CORE</span>
+        <div className="relative">
+          {/* Central Hub */}
+          <div className="tech-orbit-container relative w-full h-[800px] mx-auto flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-32 h-32 rounded-full glassmorphism neon-border animate-pulse-glow flex items-center justify-center">
+                <span className="text-neon font-bold text-lg">CORE</span>
               </div>
             </div>
+
             {/* Technology Nodes */}
             {filteredTechnologies.map((tech) => {
               const position = getAdjustedPosition(tech, filteredTechnologies, rotation);
+
               return (
                 <div
                   key={tech.id}
-                  className={`absolute tech-node ${isMobile ? "mobile-tech-node" : ""}`}
+                  className="absolute tech-node"
                   style={{
-                    transform: `translate(${position.x * (isMobile ? 0.6 : 1)}px, ${position.y * (isMobile ? 0.6 : 1)}px)`,
-                    transition: 'all 0.3s cubic-bezier(0.4,0,0.2,1)',
-                    zIndex: 3,
-                    fontSize: isMobile ? '0.8rem' : 'inherit',
+                    transform: `translate(${position.x}px, ${position.y}px)`,
+                    transition: 'all 0.3s ease'
                   }}
                 >
                   {/* Technology Node */}
-                  <div
+                  <div 
                     className="relative group cursor-pointer"
                     style={{
-                      width: tech.size * nodeSizeFactor,
-                      height: tech.size * nodeSizeFactor,
-                      minWidth: isMobile ? 32 : 0,
-                      minHeight: isMobile ? 32 : 0,
+                      width: tech.size,
+                      height: tech.size
                     }}
                     onClick={() => setSelectedTech(tech)}
                   >
@@ -796,48 +757,35 @@ const TechGalaxy = () => {
                       className="w-full h-full rounded-full glassmorphism border-2 flex items-center justify-center group-hover:animate-pulse-glow transition-all"
                       style={{ 
                         borderColor: tech.color,
-                        boxShadow: `0 0 12px ${tech.color}50`,
-                        fontSize: isMobile ? '11px' : '10px',
-                        padding: isMobile ? 2 : 0,
+                        boxShadow: `0 0 20px ${tech.color}40`
                       }}
                     >
-                      <span className="text-white text-[10px] md:text-xs font-bold text-center px-1 md:px-2">
+                      <span className="text-white text-xs font-bold text-center px-2">
                         {tech.name}
                       </span>
                     </div>
+
                     {/* Expertise level indicator */}
-                    <div className={`absolute -bottom-1 left-1/2 transform -translate-x-1/2 ${isMobile ? "w-5" : "w-6"}`}>
-                      <div className={`h-1 bg-gray-700/60 rounded ${isMobile ? "w-5" : "w-6 md:w-8"}`}>
+                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+                      <div className="w-8 h-1 bg-gray-600 rounded">
                         <div 
                           className="h-full rounded transition-all"
                           style={{ 
                             width: `${tech.expertise}%`,
-                            backgroundColor: tech.color,
-                            minWidth: isMobile ? '1px' : undefined,
+                            backgroundColor: tech.color
                           }}
                         ></div>
                       </div>
                     </div>
-                    {/* Hover tooltip (fixes showing on click for mobile) */}
-                    {isMobile ? (
-                      selectedTech?.id === tech.id && (
-                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 z-30 pointer-events-none">
-                          <div className="glassmorphism mobile-tooltip p-2 rounded text-white text-xs whitespace-nowrap w-max max-w-[160px]">
-                            <div className="font-bold">{tech.name}</div>
-                            <div className="text-gray-300">{tech.expertise}% Expertise</div>
-                            <div className="text-gray-400">{tech.experienceYears}y exp</div>
-                          </div>
-                        </div>
-                      )
-                    ) : (
-                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
-                        <div className="glassmorphism p-3 rounded text-white text-xs whitespace-nowrap">
-                          <div className="font-bold">{tech.name}</div>
-                          <div className="text-gray-300">{tech.expertise}% Expertise</div>
-                          <div className="text-gray-400">{tech.experienceYears} years experience</div>
-                        </div>
+
+                    {/* Hover tooltip */}
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                      <div className="glassmorphism p-3 rounded text-white text-xs whitespace-nowrap">
+                        <div className="font-bold">{tech.name}</div>
+                        <div className="text-gray-300">{tech.expertise}% Expertise</div>
+                        <div className="text-gray-400">{tech.experienceYears} years experience</div>
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               );
@@ -845,67 +793,67 @@ const TechGalaxy = () => {
           </div>
 
           {/* Category Legend */}
-          <div className="flex flex-wrap justify-center gap-2 md:gap-4 mt-6 md:mt-12 z-10 relative">
+          <div className="flex flex-wrap justify-center gap-4 mt-12">
             {['Frontend', 'Backend', 'Cloud', 'AI/ML', 'Database'].map((category) => (
-              <div key={category} className="flex items-center glassmorphism px-2 md:px-4 py-1 md:py-2 rounded-lg">
+              <div key={category} className="flex items-center glassmorphism px-4 py-2 rounded-lg">
                 <div 
-                  className="w-3 h-3 md:w-4 md:h-4 rounded-full mr-2"
+                  className="w-4 h-4 rounded-full mr-2"
                   style={{ backgroundColor: getCategoryColor(category) }}
                 ></div>
-                <span className="text-white text-xs md:text-sm">{category}</span>
+                <span className="text-white text-sm">{category}</span>
               </div>
             ))}
           </div>
         </div>
-        
-        {/* Selected Technology Details - mobile friendly full screen modal */}
+
+        {/* Selected Technology Details */}
         {selectedTech && (
-          <div className={`fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-1 ${isMobile ? "mobile-modal-wrap" : ""}`}>
-            <div className={`glassmorphism max-w-2xl w-full ${isMobile ? "p-2 rounded-3xl min-h-[80dvh] relative" : "p-6 md:p-8 rounded-xl"} neon-border max-h-[95vh] overflow-y-auto`}>
-              <div className="flex justify-between items-start mb-1">
-                <h3 className={`font-bold ${isMobile ? "text-lg" : "text-xl md:text-3xl"} text-white`}>{selectedTech.name}</h3>
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className="glassmorphism max-w-2xl w-full p-8 rounded-xl neon-border max-h-[90vh] overflow-y-auto">
+              <div className="flex justify-between items-start mb-4">
+                <h3 className="text-3xl font-bold text-white">{selectedTech.name}</h3>
                 <button 
                   onClick={() => setSelectedTech(null)}
-                  className={`text-gray-400 hover:text-white ${isMobile ? "text-3xl px-3" : "text-xl"}`}
-                  aria-label="Close"
+                  className="text-gray-400 hover:text-white text-xl"
                 >
                   ×
                 </button>
               </div>
               
-              <div className={`mb-3 ${isMobile && "flex flex-col gap-1"}`}>
+              <div className="mb-6">
                 <span 
-                  className={`inline-block px-2 py-1 rounded-full text-xs font-medium mb-1`}
+                  className="inline-block px-3 py-1 rounded-full text-sm font-medium"
                   style={{ 
-                    backgroundColor: `${selectedTech.color}26`,
+                    backgroundColor: `${selectedTech.color}20`,
                     color: selectedTech.color,
-                    border: `1px solid ${selectedTech.color}33`,
+                    border: `1px solid ${selectedTech.color}40`
                   }}
                 >
                   {selectedTech.category}
                 </span>
-                <span className={`ml-2 text-gray-400 ${isMobile ? "text-xs" : ""}`}>{selectedTech.experienceYears}y exp</span>
+                <span className="ml-3 text-gray-400">{selectedTech.experienceYears} years experience</span>
               </div>
 
-              <p className={`text-gray-300 mb-4 ${isMobile ? "text-base" : "text-lg"}`}>{selectedTech.description}</p>
+              <p className="text-gray-300 mb-6 text-lg">{selectedTech.description}</p>
 
-              <div className={`grid grid-cols-1 ${isMobile ? "gap-3" : "md:grid-cols-2 gap-6"} mb-3`}>
+              <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <div>
-                  <h4 className="text-md font-semibold text-white mb-2">Key Features</h4>
-                  <div className="space-y-1">
-                    {selectedTech.keyFeatures.map((feature, idx) => (
-                      <div key={idx} className="flex items-center gap-2">
+                  <h4 className="text-lg font-semibold text-white mb-3">Key Features</h4>
+                  <div className="space-y-2">
+                    {selectedTech.keyFeatures.map((feature, index) => (
+                      <div key={index} className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full" style={{ backgroundColor: selectedTech.color }}></div>
-                        <span className="text-gray-300 text-xs">{feature}</span>
+                        <span className="text-gray-300 text-sm">{feature}</span>
                       </div>
                     ))}
                   </div>
                 </div>
+
                 <div>
-                  <h4 className="text-md font-semibold text-white mb-2">Recent Projects</h4>
-                  <div className="space-y-1">
-                    {selectedTech.projects.map((project, idx) => (
-                      <div key={idx} className="glassmorphism/50 p-2 rounded text-xs text-gray-300">
+                  <h4 className="text-lg font-semibold text-white mb-3">Recent Projects</h4>
+                  <div className="space-y-2">
+                    {selectedTech.projects.map((project, index) => (
+                      <div key={index} className="glassmorphism/50 p-2 rounded text-sm text-gray-300">
                         {project}
                       </div>
                     ))}
@@ -913,14 +861,14 @@ const TechGalaxy = () => {
                 </div>
               </div>
 
-              <div className="mb-4">
-                <div className="flex justify-between text-xs mb-1">
+              <div className="mb-6">
+                <div className="flex justify-between text-sm mb-2">
                   <span className="text-gray-400">Expertise Level</span>
                   <span className="text-white">{selectedTech.expertise}%</span>
                 </div>
-                <div className="w-full bg-gray-700 rounded-full h-2">
+                <div className="w-full bg-gray-600 rounded-full h-3">
                   <div 
-                    className="h-2 rounded-full transition-all"
+                    className="h-3 rounded-full transition-all"
                     style={{ 
                       width: `${selectedTech.expertise}%`,
                       backgroundColor: selectedTech.color
@@ -929,15 +877,15 @@ const TechGalaxy = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col md:flex-row gap-2">
+              <div className="flex gap-4">
                 <button 
-                  className="flex-1 neon-border px-4 py-2 rounded-lg text-neon hover:bg-cyan-500/10 transition-all"
+                  className="flex-1 neon-border px-6 py-3 rounded-lg text-neon hover:bg-cyan-500/10 transition-all"
                   onClick={() => setSelectedTech(null)}
                 >
-                  Close
+                  Close Details
                 </button>
                 <button 
-                  className="flex-1 glassmorphism px-4 py-2 rounded-lg text-white hover:bg-gray-500/20 transition-all"
+                  className="flex-1 glassmorphism px-6 py-3 rounded-lg text-white hover:bg-gray-500/20 transition-all"
                 >
                   View Projects
                 </button>
