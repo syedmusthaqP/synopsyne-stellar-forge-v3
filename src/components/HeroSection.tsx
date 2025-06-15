@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, Zap, Rocket, Brain } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [neuralPulse, setNeuralPulse] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -24,6 +26,14 @@ const HeroSection = () => {
 
     return () => clearInterval(pulseInterval);
   }, []);
+
+  const handleNeuralTransformation = () => {
+    navigate('/contact');
+  };
+
+  const handleExploreSolutions = () => {
+    navigate('/services');
+  };
 
   const neuralNodes = [
     { x: 15, y: 20, size: 12, delay: 0 },
@@ -179,7 +189,10 @@ const HeroSection = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
             {/* Primary CTA */}
-            <button className="group relative overflow-hidden neon-border px-8 py-4 rounded-lg text-white hover:bg-cyan-500/10 transition-all transform hover:scale-105">
+            <button 
+              onClick={handleNeuralTransformation}
+              className="group relative overflow-hidden neon-border px-8 py-4 rounded-lg text-white hover:bg-cyan-500/10 transition-all transform hover:scale-105"
+            >
               <span className="relative z-10 flex items-center text-lg font-semibold">
                 Start Your Neural Transformation
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -188,7 +201,10 @@ const HeroSection = () => {
             </button>
 
             {/* Secondary CTA */}
-            <button className="group glassmorphism px-8 py-4 rounded-lg text-white hover:bg-white/10 transition-all transform hover:scale-105">
+            <button 
+              onClick={handleExploreSolutions}
+              className="group glassmorphism px-8 py-4 rounded-lg text-white hover:bg-white/10 transition-all transform hover:scale-105"
+            >
               <span className="flex items-center text-lg font-semibold">
                 <Rocket className="mr-2 w-5 h-5 group-hover:rotate-12 transition-transform" />
                 Explore Neural Solutions
@@ -199,9 +215,9 @@ const HeroSection = () => {
           {/* Floating cards with stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 max-w-4xl mx-auto">
             {[
-              { label: 'Neural Projects', value: '500+', delay: '0s' },
-              { label: 'Synaptic Satisfaction', value: '99%', delay: '0.2s' },
-              { label: 'Years of Innovation', value: '4+', delay: '0.4s' }
+              { label: 'Neural Projects', value: 'Delivered', delay: '0s' },
+              { label: 'Synaptic Satisfaction', value: 'Achieved', delay: '0.2s' },
+              { label: 'Years of Innovation', value: 'Experience', delay: '0.4s' }
             ].map((stat, index) => (
               <div 
                 key={index}

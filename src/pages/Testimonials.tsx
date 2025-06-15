@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -144,9 +143,9 @@ const Testimonials = () => {
           {/* Stats Section */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 max-w-4xl mx-auto">
             {[
-              { label: 'Happy Clients', value: '150+', delay: '0s' },
-              { label: 'Success Rate', value: '99.2%', delay: '0.2s' },
-              { label: 'Project Completion', value: '100%', delay: '0.4s' }
+              { label: 'Happy Clients', value: 'Achieved', delay: '0s' },
+              { label: 'Success Rate', value: 'Delivered', delay: '0.2s' },
+              { label: 'Project Completion', value: 'Guaranteed', delay: '0.4s' }
             ].map((stat, index) => (
               <div 
                 key={index}
