@@ -14,7 +14,6 @@ const ContactSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
     setTimeout(() => {
       setIsSubmitted(true);
       setTimeout(() => {
@@ -109,8 +108,11 @@ const ContactSection = () => {
                       required
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 bg-black/20 border border-gray-600 rounded-lg text-white focus:border-cyan-400 focus:outline-none transition-colors"
+                      // Ensure background always set, remove browser autofill override
+                      className="w-full px-4 py-3 bg-black/20 border border-gray-600 rounded-lg text-white focus:border-cyan-400 focus:outline-none transition-colors autofill:bg-black/20 autofill:shadow-[inset_0_0_0px_1000px_rgba(10,22,40,0.2)]"
                       placeholder=""
+                      autoComplete="off"
+                      style={{ backgroundColor: 'rgba(0,0,0,0.2)' }}
                     />
                   </div>
                   
@@ -125,8 +127,10 @@ const ContactSection = () => {
                       required
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 bg-black/20 border border-gray-600 rounded-lg text-white focus:border-cyan-400 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 bg-black/20 border border-gray-600 rounded-lg text-white focus:border-cyan-400 focus:outline-none transition-colors autofill:bg-black/20 autofill:shadow-[inset_0_0_0px_1000px_rgba(10,22,40,0.2)]"
                       placeholder=""
+                      autoComplete="off"
+                      style={{ backgroundColor: 'rgba(0,0,0,0.2)' }}
                     />
                   </div>
                 </div>
@@ -141,8 +145,10 @@ const ContactSection = () => {
                     name="company"
                     value={formData.company}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-black/20 border border-gray-600 rounded-lg text-white focus:border-cyan-400 focus:outline-none transition-colors"
+                    className="w-full px-4 py-3 bg-black/20 border border-gray-600 rounded-lg text-white focus:border-cyan-400 focus:outline-none transition-colors autofill:bg-black/20 autofill:shadow-[inset_0_0_0px_1000px_rgba(10,22,40,0.2)]"
                     placeholder="Your Company"
+                    autoComplete="off"
+                    style={{ backgroundColor: 'rgba(0,0,0,0.2)' }}
                   />
                 </div>
 
@@ -159,6 +165,7 @@ const ContactSection = () => {
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 bg-black/20 border border-gray-600 rounded-lg text-white focus:border-cyan-400 focus:outline-none transition-colors resize-none"
                     placeholder="Tell us about your project, goals, and timeline..."
+                    style={{ backgroundColor: 'rgba(0,0,0,0.2)' }}
                   ></textarea>
                 </div>
 
@@ -175,6 +182,7 @@ const ContactSection = () => {
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 bg-black/20 border border-gray-600 rounded-lg text-white focus:border-cyan-400 focus:outline-none transition-colors resize-none"
                     placeholder="Any other information you'd like to share?"
+                    style={{ backgroundColor: 'rgba(0,0,0,0.2)' }}
                   ></textarea>
                 </div>
 
