@@ -4,7 +4,6 @@ import { Brain, Zap, Link, TrendingUp, Gem, Handshake, Target, Rocket, Lightbulb
 const AboutSection = () => {
   const [activeTimeline, setActiveTimeline] = useState(0);
   const [activeDNA, setActiveDNA] = useState(-1);
-  const [activeAdvantage, setActiveAdvantage] = useState(-1);
   const [activeProofPoint, setActiveProofPoint] = useState(-1);
   const [activeMethod, setActiveMethod] = useState(-1);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });

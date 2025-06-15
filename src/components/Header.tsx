@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
@@ -35,7 +34,8 @@ const Header = () => {
     advantage: {
       label: 'Advantage',
       items: [
-        { label: 'The Synopsyne Advantage', href: '/advantage' }
+        { label: 'The Synopsyne Advantage', href: '/advantage' },
+        { label: 'Why Choose Us', href: '/why-choose-us' }
       ]
     }
   };

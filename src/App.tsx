@@ -10,6 +10,7 @@ import WhereSynapsesMeetSystems from "./pages/WhereSynapsesMeetSystems";
 import NeuralServiceArchitecture from "./pages/NeuralServiceArchitecture";
 import SolutionArchitecture from "./pages/SolutionArchitecture";
 import Advantage from "./pages/Advantage";
+import WhyChooseUs from "./pages/WhyChooseUs";
 import Contact from "./pages/Contact";
 import Services from "./pages/Services";
 import Testimonials from "./pages/Testimonials";
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/neural-service-architecture" element={<NeuralServiceArchitecture />} />
           <Route path="/solution-architecture" element={<SolutionArchitecture />} />
           <Route path="/advantage" element={<Advantage />} />
+          <Route path="/why-choose-us" element={<WhyChooseUs />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/services" element={<Services />} />
           <Route path="/testimonials" element={<Testimonials />} />
