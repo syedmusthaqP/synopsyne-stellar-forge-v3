@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, Zap, Rocket, Brain } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -218,9 +219,9 @@ const HeroSection = () => {
           {/* Floating cards with stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 max-w-4xl mx-auto">
             {[
-              { label: 'Neural Projects', value: 'Delivered', delay: '0s' },
-              { label: 'Synaptic Satisfaction', value: 'Achieved', delay: '0.2s' },
-              { label: 'Years of Innovation', value: 'Experience', delay: '0.4s' }
+              { label: 'Successful Projects', value: '200+', delay: '0s' },
+              { label: 'Client Satisfaction', value: '98%', delay: '0.2s' },
+              { label: 'Years of Excellence', value: '5+', delay: '0.4s' }
             ].map((stat, index) => (
               <div 
                 key={index}
