@@ -375,3 +375,52 @@
     padding: 1rem !important;
   }
 }
+
+/* Responsive fix for tech-orbit-container galaxy on mobile */
+.tech-orbit-container {
+  /* default: for desktop/large */
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  width: 100%;
+  height: 800px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  overflow: visible;
+}
+
+/* Hide horizontal scroll on desktop, enable on mobile */
+@media (max-width: 767px) {
+  .tech-orbit-container {
+    max-width: 100vw !important;
+    min-width: 370px !important;
+    width: 100vw !important;
+    height: 370px !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+  }
+  /* Center horizontally if content is smaller than screen */
+  .tech-orbit-container > div {
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* Reduce modal/detail max width on mobile */
+@media (max-width: 540px) {
+  .glassmorphism.max-w-2xl {
+    max-width: 95vw !important;
+    padding: 1.25rem !important;
+  }
+}
+
+/* Reduce font size for .text-neon on mobile */
+@media (max-width: 767px) {
+  .text-neon {
+    font-size: 1rem !important;
+    text-shadow: 0 0 6px rgba(0,212,255,.7);
+  }
+}

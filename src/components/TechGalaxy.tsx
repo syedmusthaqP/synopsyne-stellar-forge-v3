@@ -656,6 +656,17 @@ const TechGalaxy = () => {
     return { x, y };
   };
 
+  // Detect if mobile (simple check)
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () =>
+      setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () =>
+      window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setRotation(prev => prev + 0.5);
@@ -678,24 +689,28 @@ const TechGalaxy = () => {
     ? technologies 
     : technologies.filter(tech => tech.category === selectedCategory);
 
+  // Update node size and orbit sizing for mobile
+  const nodeSizeFactor = isMobile ? 0.7 : 1;
+  const orbitHeight = isMobile ? 370 : 800;
+
   return (
-    <section id="technology" className="py-20 relative">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+    <section id="technology" className="py-10 md:py-20 relative">
+      <div className="container mx-auto px-2 md:px-6">
+        <div className="text-center mb-8 md:mb-16">
+          <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold text-white mb-4 md:mb-6">
             Our Technology <span className="text-neon">Galaxy</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-base md:text-xl text-gray-300 max-w-xl md:max-w-3xl mx-auto">
             Explore our constellation of cutting-edge technologies. Each planet represents 
             our expertise in transforming complex challenges into elegant solutions.
           </p>
         </div>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-12">
           <button
             onClick={() => setSelectedCategory('all')}
-            className={`px-6 py-3 rounded-lg transition-all ${
+            className={`px-3 py-2 md:px-6 md:py-3 rounded-lg transition-all text-sm md:text-base ${
               selectedCategory === 'all'
                 ? 'neon-border text-neon bg-cyan-500/10'
                 : 'glassmorphism text-gray-300 hover:text-white'
@@ -707,14 +722,14 @@ const TechGalaxy = () => {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all ${
+              className={`flex items-center gap-2 px-3 py-2 md:px-6 md:py-3 rounded-lg transition-all text-sm md:text-base ${
                 selectedCategory === category
                   ? 'neon-border text-neon bg-cyan-500/10'
                   : 'glassmorphism text-gray-300 hover:text-white'
               }`}
             >
               <div 
-                className="w-3 h-3 rounded-full"
+                className="w-2 h-2 md:w-3 md:h-3 rounded-full"
                 style={{ backgroundColor: getCategoryColor(category) }}
               ></div>
               {category}
@@ -723,33 +738,47 @@ const TechGalaxy = () => {
         </div>
 
         <div className="relative">
-          {/* Central Hub */}
-          <div className="tech-orbit-container relative w-full h-[800px] mx-auto flex items-center justify-center">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-32 h-32 rounded-full glassmorphism neon-border animate-pulse-glow flex items-center justify-center">
-                <span className="text-neon font-bold text-lg">CORE</span>
+          {/* Central Hub with horizontally scrollable container for mobile */}
+          <div
+            className={`tech-orbit-container relative mx-auto flex items-center justify-center`}
+            style={{
+              width: isMobile ? '100vw' : '100%',
+              minWidth: isMobile ? '370px' : undefined,
+              maxWidth: isMobile ? '100vw' : undefined,
+              height: `${orbitHeight}px`,
+              overflowX: isMobile ? 'auto' : 'visible',
+              overflowY: 'visible',
+              position: 'relative',
+              touchAction: isMobile ? 'pan-x' : undefined,
+            }}
+          >
+            {/* Scrollable wrapper for mobile: absolute positioned tech nodes/fixed size container */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div
+                className="w-20 h-20 md:w-32 md:h-32 rounded-full glassmorphism neon-border animate-pulse-glow flex items-center justify-center pointer-events-auto"
+              >
+                <span className="text-neon font-bold text-[1rem] md:text-lg">CORE</span>
               </div>
             </div>
-
             {/* Technology Nodes */}
             {filteredTechnologies.map((tech) => {
               const position = getAdjustedPosition(tech, filteredTechnologies, rotation);
-
               return (
                 <div
                   key={tech.id}
                   className="absolute tech-node"
                   style={{
-                    transform: `translate(${position.x}px, ${position.y}px)`,
-                    transition: 'all 0.3s ease'
+                    transform: `translate(${position.x * (isMobile ? 0.6 : 1)}px, ${position.y * (isMobile ? 0.6 : 1)}px)`,
+                    transition: 'all 0.3s ease',
+                    zIndex: 3,
                   }}
                 >
                   {/* Technology Node */}
-                  <div 
+                  <div
                     className="relative group cursor-pointer"
                     style={{
-                      width: tech.size,
-                      height: tech.size
+                      width: tech.size * nodeSizeFactor,
+                      height: tech.size * nodeSizeFactor,
                     }}
                     onClick={() => setSelectedTech(tech)}
                   >
@@ -760,14 +789,13 @@ const TechGalaxy = () => {
                         boxShadow: `0 0 20px ${tech.color}40`
                       }}
                     >
-                      <span className="text-white text-xs font-bold text-center px-2">
+                      <span className="text-white text-[10px] md:text-xs font-bold text-center px-1 md:px-2">
                         {tech.name}
                       </span>
                     </div>
-
                     {/* Expertise level indicator */}
                     <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
-                      <div className="w-8 h-1 bg-gray-600 rounded">
+                      <div className="w-6 md:w-8 h-1 bg-gray-600 rounded">
                         <div 
                           className="h-full rounded transition-all"
                           style={{ 
@@ -777,30 +805,40 @@ const TechGalaxy = () => {
                         ></div>
                       </div>
                     </div>
-
-                    {/* Hover tooltip */}
-                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
-                      <div className="glassmorphism p-3 rounded text-white text-xs whitespace-nowrap">
-                        <div className="font-bold">{tech.name}</div>
-                        <div className="text-gray-300">{tech.expertise}% Expertise</div>
-                        <div className="text-gray-400">{tech.experienceYears} years experience</div>
+                    {/* Hover tooltip (fixes showing on click for mobile) */}
+                    {isMobile ? (
+                      selectedTech?.id === tech.id && (
+                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 transition-opacity pointer-events-none z-10">
+                          <div className="glassmorphism p-3 rounded text-white text-xs whitespace-nowrap">
+                            <div className="font-bold">{tech.name}</div>
+                            <div className="text-gray-300">{tech.expertise}% Expertise</div>
+                            <div className="text-gray-400">{tech.experienceYears} years experience</div>
+                          </div>
+                        </div>
+                      )
+                    ) : (
+                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                        <div className="glassmorphism p-3 rounded text-white text-xs whitespace-nowrap">
+                          <div className="font-bold">{tech.name}</div>
+                          <div className="text-gray-300">{tech.expertise}% Expertise</div>
+                          <div className="text-gray-400">{tech.experienceYears} years experience</div>
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                 </div>
               );
             })}
           </div>
-
           {/* Category Legend */}
-          <div className="flex flex-wrap justify-center gap-4 mt-12">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-4 mt-8 md:mt-12">
             {['Frontend', 'Backend', 'Cloud', 'AI/ML', 'Database'].map((category) => (
-              <div key={category} className="flex items-center glassmorphism px-4 py-2 rounded-lg">
+              <div key={category} className="flex items-center glassmorphism px-2 md:px-4 py-1 md:py-2 rounded-lg">
                 <div 
-                  className="w-4 h-4 rounded-full mr-2"
+                  className="w-3 h-3 md:w-4 md:h-4 rounded-full mr-2"
                   style={{ backgroundColor: getCategoryColor(category) }}
                 ></div>
-                <span className="text-white text-sm">{category}</span>
+                <span className="text-white text-xs md:text-sm">{category}</span>
               </div>
             ))}
           </div>
@@ -809,9 +847,9 @@ const TechGalaxy = () => {
         {/* Selected Technology Details */}
         {selectedTech && (
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-            <div className="glassmorphism max-w-2xl w-full p-8 rounded-xl neon-border max-h-[90vh] overflow-y-auto">
+            <div className="glassmorphism max-w-2xl w-full p-6 md:p-8 rounded-xl neon-border max-h-[90vh] overflow-y-auto">
               <div className="flex justify-between items-start mb-4">
-                <h3 className="text-3xl font-bold text-white">{selectedTech.name}</h3>
+                <h3 className="text-xl md:text-3xl font-bold text-white">{selectedTech.name}</h3>
                 <button 
                   onClick={() => setSelectedTech(null)}
                   className="text-gray-400 hover:text-white text-xl"
