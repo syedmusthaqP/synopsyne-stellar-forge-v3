@@ -2,7 +2,6 @@
 import React from 'react';
 import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
-import FirstSynapsesSection from '../components/FirstSynapsesSection';
 import Footer from '../components/Footer';
 
 const Index = () => {
@@ -18,7 +17,6 @@ const Index = () => {
       
       <Header />
       <HeroSection />
-      <FirstSynapsesSection />
       <Footer />
     </div>
   );
