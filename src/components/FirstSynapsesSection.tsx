@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Users, TrendingUp, Target, DollarSign, Brain, Zap, Heart, Award, Lightbulb } from 'lucide-react';
+import { Calendar, Users, TrendingUp, Target, DollarSign, Brain, Zap, Heart, Award, Lightbulb, Rocket, Trophy, Shield, HandHeart } from 'lucide-react';
 
 const FirstSynapsesSection = () => {
   const [activeConnection, setActiveConnection] = useState<string | null>(null);
@@ -10,113 +10,119 @@ const FirstSynapsesSection = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setSynapsePhase(prev => (prev + 1) % 6);
-      setNeuralActivity(prev => (prev + 1) % 100);
-    }, 2000);
+      setSynapsePhase(prev => (prev + 1) % 4);
+      setNeuralActivity(prev => (prev + Math.random() * 10) % 100);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
-  // Core business metrics with meaningful positioning
-  const metricNodes = [
+  // Neural Validation Nodes for Synopsyne Dynamics
+  const validationNodes = [
     {
-      id: 'genesis',
-      position: { x: 50, y: 20 },
-      icon: Calendar,
+      id: 'momentum',
+      position: { x: 20, y: 25 },
+      icon: Rocket,
       color: '#00d4ff',
-      title: 'Genesis',
-      value: 'Jan 2024',
-      detail: '6 months of pure momentum',
-      meaning: 'The spark that ignited our neural network'
+      title: '🚀 Early Momentum',
+      subtitle: 'Growth Acceleration Synapses',
+      stats: [
+        { label: 'Founded', value: 'Jan 2024', detail: '6 months of pure momentum' },
+        { label: 'Client Base', value: '8 Projects', detail: 'across 5 industries' },
+        { label: 'Growth Rate', value: '200%', detail: 'quarter-over-quarter client acquisition' },
+        { label: 'Retention', value: '100%', detail: 'every client has expanded' },
+        { label: 'Revenue Growth', value: '150%', detail: 'month-over-month since launch' }
+      ],
+      quote: "In startup time, we're already thinking at enterprise speed."
     },
     {
-      id: 'trust',
-      position: { x: 85, y: 35 },
-      icon: Users,
-      color: '#40e0ff',
-      title: 'Trust Network',
-      value: '8 Projects',
-      detail: 'Across 5 industries',
-      meaning: 'Trust creates exponential opportunities'
-    },
-    {
-      id: 'velocity',
-      position: { x: 80, y: 70 },
-      icon: TrendingUp,
-      color: '#00ff88',
-      title: 'Velocity',
-      value: '200% Growth',
-      detail: 'Quarter-over-quarter acceleration',
-      meaning: 'Momentum compounds momentum'
-    },
-    {
-      id: 'loyalty',
-      position: { x: 35, y: 80 },
-      icon: Target,
+      id: 'recognition',
+      position: { x: 80, y: 20 },
+      icon: Trophy,
       color: '#ffcc00',
-      title: 'Loyalty Loop',
-      value: '100% Retention',
-      detail: 'Every client expanded',
-      meaning: 'Excellence breeds loyalty'
+      title: '💡 Innovation Recognition',
+      subtitle: 'Market Validation Synapses',
+      stats: [
+        { label: 'Featured', value: 'TechCrunch', detail: 'Startup Spotlight (March 2024)' },
+        { label: 'Winner', value: 'AI Integration', detail: 'Regional Startup Awards' },
+        { label: 'Speaking', value: 'Future of Work', detail: 'Conference 2024 presenter' },
+        { label: 'Press', value: 'Forbes Quote', detail: 'AI-Human Collaboration article' },
+        { label: 'Recognition', value: 'TechStars', detail: 'Accelerator shortlist' }
+      ],
+      quote: "When you're solving real problems, the recognition follows."
     },
     {
-      id: 'prosperity',
-      position: { x: 15, y: 45 },
-      icon: DollarSign,
-      color: '#00ff44',
-      title: 'Prosperity',
-      value: '150% Revenue',
-      detail: 'Month-over-month growth',
-      meaning: 'Success funds innovation'
+      id: 'validation',
+      position: { x: 85, y: 75 },
+      icon: HandHeart,
+      color: '#00ff88',
+      title: '🤝 Market Validation',
+      subtitle: 'Trust Network Synapses',
+      stats: [
+        { label: 'Healthcare', value: '70% Faster', detail: 'patient data processing time' },
+        { label: 'E-commerce', value: '45% Increase', detail: 'conversion rates via predictive UX' },
+        { label: 'Manufacturing', value: '60% Cut', detail: 'operational inefficiencies via AI' },
+        { label: 'FinTech', value: '3x Faster', detail: 'regulatory compliance achievement' },
+        { label: 'Consulting', value: '95% Accuracy', detail: '24/7 AI assistant support' }
+      ],
+      quote: "Our clients don't just recommend us—they become case studies."
+    },
+    {
+      id: 'technical',
+      position: { x: 15, y: 70 },
+      icon: Shield,
+      color: '#ff6b6b',
+      title: '⚡ Technical Credibility',
+      subtitle: 'Infrastructure Trust Synapses',
+      stats: [
+        { label: 'Security', value: 'SOC 2 Type II', detail: 'compliance in progress' },
+        { label: 'Reliability', value: '99.97% Uptime', detail: 'across all deployed systems' },
+        { label: 'Speed', value: '60% Faster', detail: 'than industry standard implementation' },
+        { label: 'Quality', value: 'Zero Bugs', detail: 'critical bugs in production (6 months)' },
+        { label: 'Partnerships', value: 'Cloud Certified', detail: 'AWS, Google Cloud, Microsoft Azure' }
+      ],
+      quote: "We built enterprise-grade systems while keeping startup agility."
     }
   ];
 
-  // Meaningful connections between concepts
+  // Meaningful connections between validation nodes
   const synapticConnections = [
     {
-      from: 'genesis',
-      to: 'trust',
-      meaning: 'Vision',
-      icon: Lightbulb,
-      description: 'Our founding vision creates trusted relationships',
-      midpoint: { x: 67.5, y: 27.5 }
-    },
-    {
-      from: 'trust',
-      to: 'velocity',
-      meaning: 'Momentum',
-      icon: Zap,
-      description: 'Trust accelerates business growth velocity',
-      midpoint: { x: 82.5, y: 52.5 }
-    },
-    {
-      from: 'velocity',
-      to: 'loyalty',
+      from: 'momentum',
+      to: 'recognition',
       meaning: 'Excellence',
       icon: Award,
-      description: 'Growth velocity drives service excellence',
-      midpoint: { x: 57.5, y: 75 }
+      description: 'Rapid growth attracts industry recognition',
+      midpoint: { x: 50, y: 22.5 }
     },
     {
-      from: 'loyalty',
-      to: 'prosperity',
-      meaning: 'Value',
+      from: 'recognition',
+      to: 'validation',
+      meaning: 'Trust',
       icon: Heart,
-      description: 'Client loyalty generates sustainable value',
-      midpoint: { x: 25, y: 62.5 }
+      description: 'Recognition builds client trust and validation',
+      midpoint: { x: 82.5, y: 47.5 }
     },
     {
-      from: 'prosperity',
-      to: 'genesis',
-      meaning: 'Innovation',
+      from: 'validation',
+      to: 'technical',
+      meaning: 'Foundation',
       icon: Brain,
-      description: 'Prosperity enables continued innovation',
-      midpoint: { x: 32.5, y: 32.5 }
+      description: 'Client success demands technical excellence',
+      midpoint: { x: 50, y: 72.5 }
+    },
+    {
+      from: 'technical',
+      to: 'momentum',
+      meaning: 'Innovation',
+      icon: Lightbulb,
+      description: 'Technical strength enables sustainable momentum',
+      midpoint: { x: 17.5, y: 47.5 }
     }
   ];
 
   const getConnectionPath = (from: any, to: any) => {
-    const fromNode = metricNodes.find(n => n.id === from);
-    const toNode = metricNodes.find(n => n.id === to);
+    const fromNode = validationNodes.find(n => n.id === from);
+    const toNode = validationNodes.find(n => n.id === to);
     if (!fromNode || !toNode) return '';
 
     const x1 = fromNode.position.x;
@@ -124,11 +130,10 @@ const FirstSynapsesSection = () => {
     const x2 = toNode.position.x;
     const y2 = toNode.position.y;
     
-    // Create organic curves
     const midX = (x1 + x2) / 2;
     const midY = (y1 + y2) / 2;
-    const offsetX = (y2 - y1) * 0.3;
-    const offsetY = (x1 - x2) * 0.3;
+    const offsetX = (y2 - y1) * 0.2;
+    const offsetY = (x1 - x2) * 0.2;
     
     return `M ${x1}% ${y1}% Q ${midX + offsetX}% ${midY + offsetY}% ${x2}% ${y2}%`;
   };
@@ -164,6 +169,11 @@ const FirstSynapsesSection = () => {
         ))}
       </div>
 
+      {/* Gradient Lights */}
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-br from-cyan-400/20 to-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-gradient-to-br from-purple-400/20 to-pink-500/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-1/2 right-1/3 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-cyan-500/20 rounded-full blur-xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
         <motion.div
@@ -174,14 +184,16 @@ const FirstSynapsesSection = () => {
           className="text-center mb-20"
         >
           <h2 className="text-6xl md:text-8xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">
-            Neural Synapse
+            Neural Momentum
           </h2>
           <h3 className="text-3xl md:text-5xl font-light mb-6 text-white/90">
-            Where Ideas Connect & Multiply
+            Proving Our Synapses Fire
           </h3>
-          <p className="text-xl text-cyan-300 max-w-4xl mx-auto leading-relaxed">
-            Every breakthrough begins with meaningful connections. Our neural network shows how each success 
-            synapse fires to create exponential momentum.
+          <p className="text-xl text-cyan-300 max-w-4xl mx-auto leading-relaxed mb-8">
+            From Idea to Impact: Our First Neural Connections
+          </p>
+          <p className="text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
+            Every breakthrough begins with a single synapse. Here's proof our network is growing stronger every day.
           </p>
         </motion.div>
 
@@ -212,7 +224,6 @@ const FirstSynapsesSection = () => {
 
               return (
                 <g key={`${connection.from}-${connection.to}`}>
-                  {/* Main pathway */}
                   <path
                     d={pathD}
                     stroke={isActive ? '#40e0ff' : '#40e0ff60'}
@@ -223,7 +234,6 @@ const FirstSynapsesSection = () => {
                     className="transition-all duration-700 ease-in-out"
                   />
                   
-                  {/* Energy particles flowing along path */}
                   {isActive && (
                     <>
                       <circle r="3" fill="#40e0ff" filter="url(#connectionGlow)">
@@ -233,11 +243,6 @@ const FirstSynapsesSection = () => {
                       </circle>
                       <circle r="2" fill="#ffffff" opacity="0.8">
                         <animateMotion dur="2s" repeatCount="indefinite" begin="0.5s">
-                          <path d={pathD} />
-                        </animateMotion>
-                      </circle>
-                      <circle r="1.5" fill="#00ff88">
-                        <animateMotion dur="2s" repeatCount="indefinite" begin="1s">
                           <path d={pathD} />
                         </animateMotion>
                       </circle>
@@ -262,7 +267,6 @@ const FirstSynapsesSection = () => {
                   <Brain className="w-12 h-12 text-white" />
                 </div>
                 
-                {/* Orbital rings */}
                 {[1, 2, 3].map((ring, i) => (
                   <div
                     key={ring}
@@ -282,14 +286,14 @@ const FirstSynapsesSection = () => {
               
               <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 text-center">
                 <span className="text-2xl font-bold text-cyan-400 whitespace-nowrap bg-slate-900/80 px-6 py-3 rounded-full border border-cyan-400/30 backdrop-blur-sm">
-                  🧠 Synapse Core
+                  🧠 Validation Core
                 </span>
               </div>
             </div>
           </motion.div>
 
-          {/* Metric Nodes */}
-          {metricNodes.map((node, index) => {
+          {/* Validation Nodes with Glass Cards */}
+          {validationNodes.map((node, index) => {
             const IconComponent = node.icon;
             
             return (
@@ -306,41 +310,55 @@ const FirstSynapsesSection = () => {
                   transform: 'translate(-50%, -50%)'
                 }}
               >
+                {/* Glass Card */}
                 <div className="relative">
-                  {/* Node Core */}
-                  <div 
-                    className="w-20 h-20 rounded-full relative group-hover:scale-125 transition-all duration-500 border-4 border-white/20"
-                    style={{
-                      background: `radial-gradient(circle, ${node.color}, ${node.color}aa)`,
-                      boxShadow: `0 0 30px ${node.color}40`
-                    }}
-                  >
-                    <div className="absolute inset-3 rounded-full bg-gradient-to-br from-white/40 to-transparent flex items-center justify-center">
+                  <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 p-6 w-80 transform group-hover:scale-105 transition-all duration-500 shadow-2xl">
+                    {/* Node Icon */}
+                    <div 
+                      className="w-16 h-16 rounded-full mb-4 flex items-center justify-center border-2 border-white/30"
+                      style={{
+                        background: `radial-gradient(circle, ${node.color}, ${node.color}aa)`,
+                        boxShadow: `0 0 30px ${node.color}40`
+                      }}
+                    >
                       <IconComponent className="w-8 h-8 text-white" />
                     </div>
 
-                    {/* Pulse ring */}
-                    <div 
-                      className="absolute inset-0 rounded-full border-2 animate-ping opacity-40"
-                      style={{ borderColor: node.color }}
-                    />
+                    {/* Title and Subtitle */}
+                    <h3 className="text-xl font-bold text-white mb-2">{node.title}</h3>
+                    <p className="text-sm text-purple-300 mb-4 italic">{node.subtitle}</p>
+
+                    {/* Stats */}
+                    <div className="space-y-2 mb-4">
+                      {node.stats.slice(0, 3).map((stat, i) => (
+                        <div key={i} className="flex justify-between items-center">
+                          <span className="text-gray-300 text-sm">{stat.label}:</span>
+                          <span className="text-white font-bold text-sm">{stat.value}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Quote */}
+                    <blockquote className="text-cyan-300 italic text-sm border-l-2 border-cyan-400/50 pl-3">
+                      {node.quote}
+                    </blockquote>
+
+                    {/* Hover Details */}
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-4 pt-4 border-t border-white/20">
+                      {node.stats.slice(3).map((stat, i) => (
+                        <div key={i} className="flex justify-between items-center mb-2">
+                          <span className="text-gray-300 text-xs">{stat.label}:</span>
+                          <span className="text-white font-bold text-xs">{stat.value}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
-                  {/* Node Label */}
-                  <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-center">
-                    <div className="text-lg font-bold text-white mb-1">{node.title}</div>
-                    <div className="text-xl font-extrabold" style={{ color: node.color }}>
-                      {node.value}
-                    </div>
-                    <div className="text-sm text-gray-300 mt-1">{node.detail}</div>
-                  </div>
-
-                  {/* Meaning tooltip */}
-                  <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    <div className="bg-slate-900/95 backdrop-blur-sm rounded-lg px-4 py-2 border border-cyan-400/30 whitespace-nowrap">
-                      <p className="text-cyan-300 text-sm italic">💡 {node.meaning}</p>
-                    </div>
-                  </div>
+                  {/* Pulse effect */}
+                  <div 
+                    className="absolute inset-0 rounded-2xl border-2 animate-ping opacity-40"
+                    style={{ borderColor: node.color }}
+                  />
                 </div>
               </motion.div>
             );
@@ -383,7 +401,6 @@ const FirstSynapsesSection = () => {
                     </span>
                   </div>
 
-                  {/* Connection description */}
                   <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
                     <div className="bg-slate-900/95 backdrop-blur-sm rounded-lg px-4 py-3 border border-purple-400/30 w-64 text-center">
                       <p className="text-purple-300 text-sm">{connection.description}</p>
@@ -406,31 +423,18 @@ const FirstSynapsesSection = () => {
           <div className="inline-flex items-center space-x-8 bg-gradient-to-r from-slate-900/90 to-slate-800/90 backdrop-blur-xl rounded-full px-12 py-6 border border-cyan-400/30">
             <div className="flex items-center space-x-3">
               <div className="w-4 h-4 rounded-full bg-cyan-400 animate-pulse" />
-              <span className="text-lg font-bold text-cyan-400">NEURAL ACTIVITY</span>
+              <span className="text-lg font-bold text-cyan-400">VALIDATION ACTIVE</span>
             </div>
             
             <div className="text-2xl font-bold text-white">
-              {neuralActivity}% ACTIVE
+              {Math.round(neuralActivity)}% PROVEN
             </div>
             
             <div className="flex items-center space-x-3">
               <div className="w-4 h-4 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-lg font-bold text-green-400">SYNAPSES FIRING</span>
+              <span className="text-lg font-bold text-green-400">MOMENTUM BUILDING</span>
             </div>
           </div>
-        </motion.div>
-
-        {/* Inspirational Quote */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 3.5 }}
-          className="text-center mt-16"
-        >
-          <blockquote className="text-3xl md:text-4xl italic text-cyan-300 font-light max-w-5xl mx-auto leading-relaxed">
-            "In the neural network of business, every connection creates new possibilities."
-          </blockquote>
         </motion.div>
       </div>
     </section>
