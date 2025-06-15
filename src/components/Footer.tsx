@@ -37,9 +37,9 @@ const Footer = () => {
                 <a
                   key={index}
                   href={social.href}
-                  className="w-10 h-10 rounded-lg glassmorphism flex items-center justify-center text-gray-400 hover:text-neon hover:bg-cyan-500/10 transition-all"
+                  className="w-12 h-12 rounded-lg glassmorphism flex items-center justify-center text-gray-400 hover:text-neon hover:bg-cyan-500/10 transition-all"
                 >
-                  <social.icon className="w-5 h-5" />
+                  <social.icon className="w-7 h-7" />
                 </a>
               ))}
             </div>
@@ -106,3 +106,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
