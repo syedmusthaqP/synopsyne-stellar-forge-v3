@@ -220,42 +220,47 @@ const TestimonialCard = ({
 		<>
 			<AnimatePresence>
 				{isExpanded && (
-					<div className="fixed inset-0 h-screen overflow-hidden z-50">
+					<div className="fixed inset-0 z-50 flex items-center justify-center p-4">
 						<motion.div
 							initial={{opacity: 0}}
 							animate={{opacity: 1}}
 							exit={{opacity: 0}}
-							className="bg-black/50 backdrop-blur-lg h-full w-full fixed inset-0"
+							className="bg-black/50 backdrop-blur-lg absolute inset-0"
 						/>
 						<motion.div
-							initial={{opacity: 0}}
-							animate={{opacity: 1}}
-							exit={{opacity: 0}}
+							initial={{opacity: 0, scale: 0.95}}
+							animate={{opacity: 1, scale: 1}}
+							exit={{opacity: 0, scale: 0.95}}
 							ref={containerRef}
 							layoutId={layout ? `card-${testimonial.name}` : undefined}
-							className="max-w-5xl mx-auto bg-gradient-to-b from-gray-900/95 to-black/95 glassmorphism h-full z-[60] p-4 md:p-10 rounded-3xl relative md:mt-10 neon-border"
+							className="relative max-w-2xl w-full max-h-[80vh] bg-gradient-to-b from-gray-900/95 to-black/95 glassmorphism rounded-3xl overflow-y-auto neon-border z-60"
 						>
-							<button
-								className="sticky top-4 h-8 w-8 right-0 ml-auto rounded-full flex items-center justify-center bg-cyan-500/20 neon-border"
-								onClick={handleCollapse}
-							>
-								<X className="h-6 w-6 text-cyan-400 absolute" />
-							</button>
-							<motion.p
-								layoutId={layout ? `category-${testimonial.name}` : undefined}
-								className="px-0 md:px-20 text-cyan-400 text-lg font-thin underline underline-offset-8"
-							>
-								{testimonial.designation}
-							</motion.p>
-							<motion.p
-								layoutId={layout ? `title-${testimonial.name}` : undefined}
-								className="px-0 md:px-20 text-2xl md:text-4xl font-normal italic text-white mt-4 lowercase"
-							>
-								{testimonial.name}
-							</motion.p>
-							<div className="py-8 text-gray-300 px-0 md:px-20 text-3xl lowercase font-thin leading-snug tracking-wide">
-								<Quote className="h-6 w-6 text-cyan-400 mb-4" />
-								{testimonial.description}
+							<div className="p-6 md:p-8">
+								<button
+									className="absolute top-4 right-4 h-8 w-8 rounded-full flex items-center justify-center bg-cyan-500/20 neon-border hover:bg-cyan-500/30 transition-colors"
+									onClick={handleCollapse}
+								>
+									<X className="h-5 w-5 text-cyan-400" />
+								</button>
+								
+								<motion.p
+									layoutId={layout ? `category-${testimonial.name}` : undefined}
+									className="text-cyan-400 text-sm md:text-base font-thin underline underline-offset-4 mb-4"
+								>
+									{testimonial.designation}
+								</motion.p>
+								
+								<motion.p
+									layoutId={layout ? `title-${testimonial.name}` : undefined}
+									className="text-xl md:text-2xl font-normal italic text-white mb-6 lowercase"
+								>
+									{testimonial.name}
+								</motion.p>
+								
+								<div className="text-gray-300 text-base md:text-lg font-thin leading-relaxed">
+									<Quote className="h-5 w-5 text-cyan-400 mb-3" />
+									{testimonial.description}
+								</div>
 							</div>
 						</motion.div>
 					</div>
