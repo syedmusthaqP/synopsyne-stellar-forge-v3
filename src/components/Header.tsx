@@ -16,6 +16,8 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const isHomePage = location.pathname === '/';
+
   return (
     <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
       scrolled ? 'glassmorphism backdrop-blur-lg' : 'bg-transparent'
@@ -32,9 +34,13 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-8">
             <Link to="/services" className="text-white hover:text-neon transition-colors">Services</Link>
             <Link to="/testimonials" className="text-white hover:text-neon transition-colors">Testimonials</Link>
-            <Link to="/technology" className="text-white hover:text-neon transition-colors">Technology</Link>
-            <Link to="/portfolio" className="text-white hover:text-neon transition-colors">Portfolio</Link>
-            <Link to="/about" className="text-white hover:text-neon transition-colors">About</Link>
+            {isHomePage ? (
+              <a href="#technology" className="text-white hover:text-neon transition-colors">Technology</a>
+            ) : (
+              <Link to="/#technology" className="text-white hover:text-neon transition-colors">Technology</Link>
+            )}
+            <a href="#portfolio" className="text-white hover:text-neon transition-colors">Portfolio</a>
+            <a href="#about" className="text-white hover:text-neon transition-colors">About</a>
             
             {/* Login Button */}
             <Link to="/login" className="flex items-center px-4 py-2 rounded-lg glassmorphism neon-border text-neon hover:bg-cyan-500/10 transition-all">
@@ -42,9 +48,15 @@ const Header = () => {
               Login
             </Link>
             
-            <Link to="/contact" className="neon-border px-6 py-2 rounded-lg text-neon hover:bg-cyan-500/10 transition-all">
-              Contact Us
-            </Link>
+            {isHomePage ? (
+              <a href="#contact" className="neon-border px-6 py-2 rounded-lg text-neon hover:bg-cyan-500/10 transition-all">
+                Contact Us
+              </a>
+            ) : (
+              <Link to="/#contact" className="neon-border px-6 py-2 rounded-lg text-neon hover:bg-cyan-500/10 transition-all">
+                Contact Us
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -62,9 +74,13 @@ const Header = () => {
             <div className="flex flex-col space-y-4">
               <Link to="/services" className="text-white hover:text-neon transition-colors">Services</Link>
               <Link to="/testimonials" className="text-white hover:text-neon transition-colors">Testimonials</Link>
-              <Link to="/technology" className="text-white hover:text-neon transition-colors">Technology</Link>
-              <Link to="/portfolio" className="text-white hover:text-neon transition-colors">Portfolio</Link>
-              <Link to="/about" className="text-white hover:text-neon transition-colors">About</Link>
+              {isHomePage ? (
+                <a href="#technology" className="text-white hover:text-neon transition-colors">Technology</a>
+              ) : (
+                <Link to="/#technology" className="text-white hover:text-neon transition-colors">Technology</Link>
+              )}
+              <a href="#portfolio" className="text-white hover:text-neon transition-colors">Portfolio</a>
+              <a href="#about" className="text-white hover:text-neon transition-colors">About</a>
               
               {/* Mobile Login Button */}
               <Link to="/login" className="flex items-center px-4 py-2 rounded-lg glassmorphism neon-border text-neon hover:bg-cyan-500/10 transition-all">
@@ -72,9 +88,15 @@ const Header = () => {
                 Login
               </Link>
               
-              <Link to="/contact" className="neon-border px-6 py-2 rounded-lg text-neon hover:bg-cyan-500/10 transition-all text-center">
-                Contact Us
-              </Link>
+              {isHomePage ? (
+                <a href="#contact" className="neon-border px-6 py-2 rounded-lg text-neon hover:bg-cyan-500/10 transition-all text-center">
+                  Contact Us
+                </a>
+              ) : (
+                <Link to="/#contact" className="neon-border px-6 py-2 rounded-lg text-neon hover:bg-cyan-500/10 transition-all text-center">
+                  Contact Us
+                </Link>
+              )}
             </div>
           </div>
         )}
