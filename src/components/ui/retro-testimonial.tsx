@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, {useEffect, useRef, useState} from "react";
@@ -64,12 +63,14 @@ const Carousel = ({items, initialScroll = 0}: iCarouselProps) => {
 	const handleScrollLeft = () => {
 		if (carouselRef.current) {
 			carouselRef.current.scrollBy({left: -300, behavior: "smooth"});
+			setTimeout(checkScrollability, 100);
 		}
 	};
 
 	const handleScrollRight = () => {
 		if (carouselRef.current) {
 			carouselRef.current.scrollBy({left: 300, behavior: "smooth"});
+			setTimeout(checkScrollability, 100);
 		}
 	};
 

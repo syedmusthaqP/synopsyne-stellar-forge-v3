@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [neuralPulse, setNeuralPulse] = useState(0);
+  const [logoLoaded, setLogoLoaded] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,6 +26,13 @@ const HeroSection = () => {
     }, 800);
 
     return () => clearInterval(pulseInterval);
+  }, []);
+
+  // Preload the logo image
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => setLogoLoaded(true);
+    img.src = "/lovable-uploads/4b99589a-d4bb-4fbd-98d6-1b0fb06de699.png";
   }, []);
 
   const handleNeuralTransformation = () => {
@@ -142,16 +150,31 @@ const HeroSection = () => {
               zIndex: 0,
             }}>
           </div>
-          {/* Logo image */}
+          {/* Logo image with optimized loading */}
           <img
             src="/lovable-uploads/4b99589a-d4bb-4fbd-98d6-1b0fb06de699.png"
             alt="Synopsyne Dynamics Logo"
-            className="relative z-10 max-w-[220px] rounded-xl shadow-lg"
+            className={`relative z-10 max-w-[220px] rounded-xl shadow-lg transition-opacity duration-300 ${
+              logoLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
             style={{
               border: '2px solid rgba(0, 212, 255, .44)',
               background: 'rgba(20,25,35,0.55)',
             }}
+            loading="eager"
+            fetchPriority="high"
+            onLoad={() => setLogoLoaded(true)}
           />
+          {/* Loading placeholder */}
+          {!logoLoaded && (
+            <div 
+              className="absolute z-10 max-w-[220px] w-full h-[140px] rounded-xl animate-pulse"
+              style={{
+                border: '2px solid rgba(0, 212, 255, .44)',
+                background: 'rgba(20,25,35,0.55)',
+              }}
+            />
+          )}
         </div>
       </div>
 
