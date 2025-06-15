@@ -1,6 +1,18 @@
 
 import React from 'react';
 import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+// All nav bar tabs and their sublinks
+const navLinks = [
+  { label: 'Technology Galaxy', href: '/technology' },
+  { label: 'Where Synapses Meet Systems', href: '/where-synapses-meet-systems' },
+  { label: 'Neural Service Architecture', href: '/neural-service-architecture' },
+  { label: 'Solution Architecture', href: '/solution-architecture' },
+  { label: 'The Synopsyne Advantage', href: '/why-choose-us' },
+  { label: 'Testimonials', href: '/testimonials' },
+  { label: 'Contact', href: '/contact' }
+];
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -11,10 +23,6 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
-            <div className="text-2xl font-bold text-white mb-4">
-              <span className="text-neon">Synopsyne</span>
-              <span className="ml-1">Dynamics</span>
-            </div>
             <p className="text-gray-400 mb-6 max-w-md">
               Engineering the future through innovative software solutions. 
               We transform complex challenges into elegant, scalable technology.
@@ -58,22 +66,15 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Company */}
+          {/* Company (now: All nav tabs) */}
           <div>
             <h4 className="text-white font-semibold mb-4">Company</h4>
             <ul className="space-y-2">
-              {[
-                'About Us',
-                'Our Team',
-                'Careers',
-                'Case Studies',
-                'Blog',
-                'Contact'
-              ].map((link, index) => (
+              {navLinks.map((link, index) => (
                 <li key={index}>
-                  <a href="#" className="text-gray-400 hover:text-neon transition-colors text-sm">
-                    {link}
-                  </a>
+                  <Link to={link.href} className="text-gray-400 hover:text-neon transition-colors text-sm block">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -85,7 +86,7 @@ const Footer = () => {
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
             © {currentYear} Synopsyne Dynamics. All rights reserved.
           </p>
-          <div className="flex space-x-6 text-sm">
+          <div className="flex flex-col md:flex-row md:space-x-6 space-y-2 md:space-y-0 text-sm">
             <a href="#" className="text-gray-400 hover:text-neon transition-colors">Privacy Policy</a>
             <a href="#" className="text-gray-400 hover:text-neon transition-colors">Terms of Service</a>
             <a href="#" className="text-gray-400 hover:text-neon transition-colors">Cookie Policy</a>

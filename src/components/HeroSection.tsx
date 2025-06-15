@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, Zap, Rocket, Brain } from 'lucide-react';
+import { ArrowRight, Rocket, Brain } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
@@ -138,7 +138,7 @@ const HeroSection = () => {
           <span className="text-white text-sm">Neural Innovation Since 2020</span>
         </div>
 
-        {/* Main headline with animated text */}
+        {/* Main headline */}
         <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
           We Engineer{' '}
           <span className="text-neon animate-text-glow">Software</span>
@@ -149,7 +149,7 @@ const HeroSection = () => {
           </span>
         </h1>
 
-        {/* Subheadline with gradient box */}
+        {/* Subheadline */}
         <div className="relative mb-12 max-w-3xl mx-auto">
           <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 rounded-lg blur-xl"></div>
           <div className="relative glassmorphism p-6 rounded-lg">
@@ -189,17 +189,18 @@ const HeroSection = () => {
         {/* Floating cards with stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 max-w-4xl mx-auto">
           {[
-            { label: 'Successful Projects', value: '200+', delay: '0s' },
-            { label: 'Client Satisfaction', value: '98%', delay: '0.2s' },
-            { label: 'Years of Excellence', value: '5+', delay: '0.4s' }
+            { label: 'Successful Projects', value: '' },
+            { label: 'Client Satisfaction', value: '' },
+            { label: 'Years of Excellence', value: '' }
           ].map((stat, index) => (
             <div 
               key={index}
-              className="glassmorphism p-6 rounded-xl text-center animate-float hover:neon-border transition-all group cursor-pointer"
-              style={{ animationDelay: stat.delay }}
+              className="glassmorphism p-6 rounded-xl text-center animate-float hover:neon-border transition-all group cursor-pointer min-h-[90px] flex flex-col items-center justify-center"
+              style={{ animationDelay: `${index * 0.2}s` }}
             >
+              {/* Value is intentionally left empty for user to add later */}
               <div className="text-3xl font-bold text-neon mb-2 group-hover:animate-pulse">{stat.value}</div>
-              <div className="text-gray-300 text-sm">{stat.label}</div>
+              <div className="text-gray-300 text-base">{stat.label}</div>
             </div>
           ))}
         </div>
