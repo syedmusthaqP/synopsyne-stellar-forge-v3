@@ -2,12 +2,8 @@
 "use client";
 
 import React, {useEffect, useRef, useState} from "react";
-
-import Image from "next/image";
 import {AnimatePresence, motion} from "framer-motion";
-import {ImageProps} from "next/image";
 import {ArrowLeft, ArrowRight, Quote, X} from "lucide-react";
-
 import {cn} from "@/lib/utils";
 
 // ===== Types and Interfaces =====
@@ -282,11 +278,10 @@ const TestimonialCard = ({
 				>
 					<div className="absolute opacity-20" style={{inset: "-1px 0 0"}}>
 						<div className="absolute inset-0">
-							<Image
+							<img
 								className="block w-full h-full object-center object-cover"
 								src={backgroundImage}
 								alt="Background layer"
-								fill
 								style={{objectFit: 'cover'}}
 							/>
 						</div>
@@ -320,12 +315,12 @@ const TestimonialCard = ({
 	);
 };
 
-const ProfileImage = ({src, alt, ...rest}: ImageProps) => {
+const ProfileImage = ({src, alt, ...rest}: {src: string; alt: string; className?: string}) => {
 	const [isLoading, setLoading] = useState(true);
 
 	return (
 		<div className="w-[90px] h-[90px] md:w-[150px] md:h-[150px] opacity-80 overflow-hidden rounded-[1000px] border-[3px] border-solid border-cyan-400/60 aspect-[1/1] flex-none saturate-[0.2] sepia-[0.46] relative">
-			<Image
+			<img
 				className={cn(
 					"transition duration-300 absolute top-0 inset-0 rounded-inherit object-cover z-50",
 					isLoading ? "blur-sm" : "blur-0",
@@ -338,7 +333,6 @@ const ProfileImage = ({src, alt, ...rest}: ImageProps) => {
 				height={150}
 				loading="lazy"
 				decoding="async"
-				blurDataURL={typeof src === "string" ? src : undefined}
 				alt={alt || "Profile image"}
 				{...rest}
 			/>
