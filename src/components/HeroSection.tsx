@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, Zap, Rocket, Brain } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -132,109 +131,78 @@ const HeroSection = () => {
         ))}
       </div>
 
-      {/* Company Logo with instant loading - right side, absolutely positioned */}
-      <div className="hidden md:block absolute right-8 top-1/2 z-20 -translate-y-1/2">
-        <div className="relative flex items-center justify-center">
-          {/* Glowing gradient light behind logo */}
-          <div className="absolute -inset-8 rounded-3xl blur-2xl opacity-50 pointer-events-none"
-            style={{
-              background: 'radial-gradient(circle at 60% 50%, #00D4FF 0%, #8B5CF6 50%, transparent 85%)',
-              filter: 'blur(30px)',
-              zIndex: 0,
-            }}>
-          </div>
-          {/* Logo image with instant loading */}
-          <img
-            src="/lovable-uploads/4b99589a-d4bb-4fbd-98d6-1b0fb06de699.png"
-            alt="Synopsyne Dynamics Logo"
-            className="relative z-10 max-w-[220px] rounded-xl shadow-lg"
-            style={{
-              border: '2px solid rgba(0, 212, 255, .44)',
-              background: 'rgba(20,25,35,0.55)',
-            }}
-            loading="eager"
-            fetchPriority="high"
-            decoding="sync"
-          />
+      <div className="container mx-auto px-6 text-center relative z-10">
+        {/* Animated badge */}
+        <div className="inline-flex items-center glassmorphism px-6 py-2 rounded-full mb-8 animate-float">
+          <Brain className="w-4 h-4 text-neon mr-2" />
+          <span className="text-white text-sm">Neural Innovation Since 2020</span>
         </div>
-      </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10 flex flex-col md:flex-row items-center justify-center">
-        {/* Left Side: Hero Content */}
-        <div className="w-full md:w-2/3">
-          {/* Animated badge */}
-          <div className="inline-flex items-center glassmorphism px-6 py-2 rounded-full mb-8 animate-float">
-            <Brain className="w-4 h-4 text-neon mr-2" />
-            <span className="text-white text-sm">Neural Innovation Since 2020</span>
+        {/* Main headline with animated text */}
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+          We Engineer{' '}
+          <span className="text-neon animate-text-glow">Software</span>
+          <br />
+          That Transforms{' '}
+          <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+            Industries
+          </span>
+        </h1>
+
+        {/* Subheadline with gradient box */}
+        <div className="relative mb-12 max-w-3xl mx-auto">
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 rounded-lg blur-xl"></div>
+          <div className="relative glassmorphism p-6 rounded-lg">
+            <p className="text-lg md:text-xl text-gray-300">
+              Custom solutions, cutting-edge technology, measurable results.
+              We build the future, one neural connection at a time.
+            </p>
           </div>
+        </div>
 
-          {/* Main headline with animated text */}
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            We Engineer{' '}
-            <span className="text-neon animate-text-glow">Software</span>
-            <br />
-            That Transforms{' '}
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              Industries
+        {/* CTA Buttons */}
+        <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
+          {/* Primary CTA */}
+          <button 
+            onClick={handleNeuralTransformation}
+            className="group relative overflow-hidden neon-border px-8 py-4 rounded-lg text-white hover:bg-cyan-500/10 transition-all transform hover:scale-105"
+          >
+            <span className="relative z-10 flex items-center text-lg font-semibold">
+              Start Your Neural Transformation
+              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </span>
-          </h1>
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </button>
 
-          {/* Subheadline with gradient box */}
-          <div className="relative mb-12 max-w-3xl mx-auto">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 rounded-lg blur-xl"></div>
-            <div className="relative glassmorphism p-6 rounded-lg">
-              <p className="text-lg md:text-xl text-gray-300">
-                Custom solutions, cutting-edge technology, measurable results.
-                We build the future, one neural connection at a time.
-              </p>
-            </div>
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
-            {/* Primary CTA */}
-            <button 
-              onClick={handleNeuralTransformation}
-              className="group relative overflow-hidden neon-border px-8 py-4 rounded-lg text-white hover:bg-cyan-500/10 transition-all transform hover:scale-105"
-            >
-              <span className="relative z-10 flex items-center text-lg font-semibold">
-                Start Your Neural Transformation
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </button>
-
-            {/* Secondary CTA */}
-            <button 
-              onClick={handleExploreSolutions}
-              className="group glassmorphism px-8 py-4 rounded-lg text-white hover:bg-white/10 transition-all transform hover:scale-105"
-            >
-              <span className="flex items-center text-lg font-semibold">
-                <Rocket className="mr-2 w-5 h-5 group-hover:rotate-12 transition-transform" />
-                Explore Neural Solutions
-              </span>
-            </button>
-          </div>
-
-          {/* Floating cards with stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 max-w-4xl mx-auto">
-            {[
-              { label: 'Successful Projects', value: '200+', delay: '0s' },
-              { label: 'Client Satisfaction', value: '98%', delay: '0.2s' },
-              { label: 'Years of Excellence', value: '5+', delay: '0.4s' }
-            ].map((stat, index) => (
-              <div 
-                key={index}
-                className="glassmorphism p-6 rounded-xl text-center animate-float hover:neon-border transition-all group cursor-pointer"
-                style={{ animationDelay: stat.delay }}
-              >
-                <div className="text-3xl font-bold text-neon mb-2 group-hover:animate-pulse">{stat.value}</div>
-                <div className="text-gray-300 text-sm">{stat.label}</div>
-              </div>
-            ))}
-          </div>
+          {/* Secondary CTA */}
+          <button 
+            onClick={handleExploreSolutions}
+            className="group glassmorphism px-8 py-4 rounded-lg text-white hover:bg-white/10 transition-all transform hover:scale-105"
+          >
+            <span className="flex items-center text-lg font-semibold">
+              <Rocket className="mr-2 w-5 h-5 group-hover:rotate-12 transition-transform" />
+              Explore Neural Solutions
+            </span>
+          </button>
         </div>
-        {/* The right side logo is handled by the absolutely positioned block above */}
+
+        {/* Floating cards with stats */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 max-w-4xl mx-auto">
+          {[
+            { label: 'Successful Projects', value: '200+', delay: '0s' },
+            { label: 'Client Satisfaction', value: '98%', delay: '0.2s' },
+            { label: 'Years of Excellence', value: '5+', delay: '0.4s' }
+          ].map((stat, index) => (
+            <div 
+              key={index}
+              className="glassmorphism p-6 rounded-xl text-center animate-float hover:neon-border transition-all group cursor-pointer"
+              style={{ animationDelay: stat.delay }}
+            >
+              <div className="text-3xl font-bold text-neon mb-2 group-hover:animate-pulse">{stat.value}</div>
+              <div className="text-gray-300 text-sm">{stat.label}</div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Scroll indicator */}

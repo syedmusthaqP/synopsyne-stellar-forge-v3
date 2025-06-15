@@ -52,23 +52,25 @@ const Carousel = ({items, initialScroll = 0}: iCarouselProps) => {
 	const [canScrollLeft, setCanScrollLeft] = React.useState(false);
 	const [canScrollRight, setCanScrollRight] = React.useState(true);
 
-	const checkScrollability = () => {
+	const checkScrollability = React.useCallback(() => {
 		if (carouselRef.current) {
 			const {scrollLeft, scrollWidth, clientWidth} = carouselRef.current;
 			setCanScrollLeft(scrollLeft > 0);
 			setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
 		}
-	};
+	}, []);
 
 	const handleScrollLeft = () => {
 		if (carouselRef.current) {
-			carouselRef.current.scrollBy({left: -300, behavior: "smooth"});
+			const scrollAmount = isMobile() ? 250 : 400;
+			carouselRef.current.scrollBy({left: -scrollAmount, behavior: "smooth"});
 		}
 	};
 
 	const handleScrollRight = () => {
 		if (carouselRef.current) {
-			carouselRef.current.scrollBy({left: 300, behavior: "smooth"});
+			const scrollAmount = isMobile() ? 250 : 400;
+			carouselRef.current.scrollBy({left: scrollAmount, behavior: "smooth"});
 		}
 	};
 
@@ -93,22 +95,34 @@ const Carousel = ({items, initialScroll = 0}: iCarouselProps) => {
 			carouselRef.current.scrollLeft = initialScroll;
 			checkScrollability();
 		}
-	}, [initialScroll]);
+	}, [initialScroll, checkScrollability]);
 
 	// Add scroll event listener to update button states
 	useEffect(() => {
 		const carousel = carouselRef.current;
 		if (carousel) {
 			carousel.addEventListener('scroll', checkScrollability);
-			return () => carousel.removeEventListener('scroll', checkScrollability);
+			// Also check after a short delay to ensure proper state
+			const timeout = setTimeout(checkScrollability, 100);
+			return () => {
+				carousel.removeEventListener('scroll', checkScrollability);
+				clearTimeout(timeout);
+			};
 		}
-	}, []);
+	}, [checkScrollability]);
+
+	// Force check on mount and when items change
+	useEffect(() => {
+		const timeout = setTimeout(checkScrollability, 200);
+		return () => clearTimeout(timeout);
+	}, [items, checkScrollability]);
 
 	return (
 		<div className="relative w-full mt-10">
 			<div
 				className="flex w-full overflow-x-scroll overscroll-x-auto scroll-smooth [scrollbar-width:none] py-5"
 				ref={carouselRef}
+				style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
 			>
 				<div
 					className={cn(
@@ -150,14 +164,14 @@ const Carousel = ({items, initialScroll = 0}: iCarouselProps) => {
 			</div>
 			<div className="flex justify-end gap-2 mt-4">
 				<button
-					className="relative z-40 h-10 w-10 rounded-full bg-cyan-500/20 glassmorphism neon-border flex items-center justify-center disabled:opacity-50 hover:bg-cyan-500/30 transition-colors duration-200"
+					className="relative z-40 h-10 w-10 rounded-full bg-cyan-500/20 glassmorphism neon-border flex items-center justify-center disabled:opacity-50 hover:bg-cyan-500/30 transition-colors duration-200 disabled:cursor-not-allowed"
 					onClick={handleScrollLeft}
 					disabled={!canScrollLeft}
 				>
 					<ArrowLeft className="h-6 w-6 text-cyan-400" />
 				</button>
 				<button
-					className="relative z-40 h-10 w-10 rounded-full bg-cyan-500/20 glassmorphism neon-border flex items-center justify-center disabled:opacity-50 hover:bg-cyan-500/30 transition-colors duration-200"
+					className="relative z-40 h-10 w-10 rounded-full bg-cyan-500/20 glassmorphism neon-border flex items-center justify-center disabled:opacity-50 hover:bg-cyan-500/30 transition-colors duration-200 disabled:cursor-not-allowed"
 					onClick={handleScrollRight}
 					disabled={!canScrollRight}
 				>
