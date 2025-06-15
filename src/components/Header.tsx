@@ -22,14 +22,14 @@ const Header = () => {
       label: 'Technology',
       items: [
         { label: 'Technology Galaxy', href: '/technology' },
-        { label: 'Where Synapses Meet Systems', href: '/technology' }
+        { label: 'Where Synapses Meet Systems', href: '/where-synapses-meet-systems' }
       ]
     },
     architecture: {
       label: 'Architecture',
       items: [
-        { label: 'Neural Service Architecture', href: '/architecture' },
-        { label: 'Solution Architecture', href: '/architecture' }
+        { label: 'Neural Service Architecture', href: '/neural-service-architecture' },
+        { label: 'Solution Architecture', href: '/solution-architecture' }
       ]
     },
     advantage: {

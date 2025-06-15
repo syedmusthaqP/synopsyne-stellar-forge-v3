@@ -2,9 +2,9 @@
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import AboutSection from '../components/AboutSection';
+import ServicesSection from '../components/ServicesSection';
 
-const Advantage = () => {
+const NeuralServiceArchitecture = () => {
   return (
     <div className="min-h-screen gradient-bg relative overflow-hidden">
       {/* Particle background effect */}
@@ -17,22 +17,22 @@ const Advantage = () => {
       
       <Header />
       
-      {/* Hero Section for Synopsyne Advantage */}
+      {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative pt-20">
         <div className="container mx-auto px-6 text-center relative z-10">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            The Synopsyne <span className="text-neon animate-text-glow">Advantage</span>
+            Neural <span className="text-neon animate-text-glow">Service</span> Architecture
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
-            Discover what sets us apart in the digital transformation landscape
+            Advanced neural network architectures for modern service delivery
           </p>
         </div>
       </section>
       
-      <AboutSection />
+      <ServicesSection />
       <Footer />
     </div>
   );
 };
 
-export default Advantage;
+export default NeuralServiceArchitecture;

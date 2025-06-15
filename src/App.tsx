@@ -6,7 +6,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Technology from "./pages/Technology";
-import Architecture from "./pages/Architecture";
+import WhereSynapsesMeetSystems from "./pages/WhereSynapsesMeetSystems";
+import NeuralServiceArchitecture from "./pages/NeuralServiceArchitecture";
+import SolutionArchitecture from "./pages/SolutionArchitecture";
 import Advantage from "./pages/Advantage";
 import Contact from "./pages/Contact";
 import Services from "./pages/Services";
@@ -26,7 +28,9 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/technology" element={<Technology />} />
-          <Route path="/architecture" element={<Architecture />} />
+          <Route path="/where-synapses-meet-systems" element={<WhereSynapsesMeetSystems />} />
+          <Route path="/neural-service-architecture" element={<NeuralServiceArchitecture />} />
+          <Route path="/solution-architecture" element={<SolutionArchitecture />} />
           <Route path="/advantage" element={<Advantage />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/services" element={<Services />} />
