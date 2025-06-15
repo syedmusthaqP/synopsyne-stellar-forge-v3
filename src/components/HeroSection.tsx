@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, Zap, Rocket, Brain } from 'lucide-react';
 
@@ -43,12 +42,8 @@ const HeroSection = () => {
     { from: 0, to: 3 }, { from: 1, to: 4 }
   ];
 
-  const handleStartTransformation = () => {
-    window.location.href = '/contact';
-  };
-
   return (
-    <section className="min-h-screen flex items-center justify-start relative pt-20">
+    <section className="min-h-screen flex items-center justify-center relative pt-20">
       {/* Neural Network Background */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Subtle gradient overlay */}
@@ -126,8 +121,8 @@ const HeroSection = () => {
         ))}
       </div>
 
-      {/* Company Logo with glowing effect - right side, slightly moved left */}
-      <div className="hidden md:block absolute right-16 top-1/2 z-20 -translate-y-1/2">
+      {/* Company Logo with glowing effect - right side, absolutely positioned */}
+      <div className="hidden md:block absolute right-8 top-1/2 z-20 -translate-y-1/2">
         <div className="relative flex items-center justify-center">
           {/* Glowing gradient light behind logo */}
           <div className="absolute -inset-8 rounded-3xl blur-2xl opacity-50 pointer-events-none"
@@ -141,7 +136,7 @@ const HeroSection = () => {
           <img
             src="/lovable-uploads/4b99589a-d4bb-4fbd-98d6-1b0fb06de699.png"
             alt="Synopsyne Dynamics Logo"
-            className="relative z-10 max-w-[200px] rounded-xl shadow-lg"
+            className="relative z-10 max-w-[220px] rounded-xl shadow-lg"
             style={{
               border: '2px solid rgba(0, 212, 255, .44)',
               background: 'rgba(20,25,35,0.55)',
@@ -150,70 +145,76 @@ const HeroSection = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10 flex justify-start">
-        {/* Left Side: Hero Content - pushed to left */}
-        <div className="w-full md:w-3/5 lg:w-1/2 text-left">
+      <div className="container mx-auto px-6 text-center relative z-10 flex flex-col md:flex-row items-center justify-center">
+        {/* Left Side: Hero Content */}
+        <div className="w-full md:w-2/3">
           {/* Animated badge */}
-          <div className="inline-flex items-center glassmorphism px-6 py-3 rounded-full mb-10 animate-float">
-            <Brain className="w-5 h-5 text-neon mr-3" />
-            <span className="text-white text-sm font-medium">Neural Innovation Since 2020</span>
+          <div className="inline-flex items-center glassmorphism px-6 py-2 rounded-full mb-8 animate-float">
+            <Brain className="w-4 h-4 text-neon mr-2" />
+            <span className="text-white text-sm">Neural Innovation Since 2020</span>
           </div>
 
           {/* Main headline with animated text */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight">
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
             We Engineer{' '}
-            <span className="text-neon animate-text-glow block md:inline">Software</span>
+            <span className="text-neon animate-text-glow">Software</span>
             <br />
             That Transforms{' '}
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent block md:inline">
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
               Industries
             </span>
           </h1>
 
-          {/* Enhanced subheadline */}
-          <div className="relative mb-12 max-w-2xl">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 rounded-2xl blur-xl"></div>
-            <div className="relative glassmorphism p-8 rounded-2xl border border-cyan-500/20">
-              <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+          {/* Subheadline with gradient box */}
+          <div className="relative mb-12 max-w-3xl mx-auto">
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 rounded-lg blur-xl"></div>
+            <div className="relative glassmorphism p-6 rounded-lg">
+              <p className="text-lg md:text-xl text-gray-300">
                 Custom solutions, cutting-edge technology, measurable results.
-                <br />
-                <span className="text-cyan-400 font-semibold">We build the future, one neural connection at a time.</span>
+                We build the future, one neural connection at a time.
               </p>
             </div>
           </div>
 
-          {/* Enhanced CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 mb-16">
-            {/* Primary CTA - Now functional */}
-            <button 
-              onClick={handleStartTransformation}
-              className="group relative overflow-hidden neon-border px-10 py-5 rounded-xl text-white hover:bg-cyan-500/10 transition-all transform hover:scale-105 hover:shadow-2xl"
-            >
-              <span className="relative z-10 flex items-center text-lg font-bold">
+          {/* CTA Buttons */}
+          <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
+            {/* Primary CTA */}
+            <button className="group relative overflow-hidden neon-border px-8 py-4 rounded-lg text-white hover:bg-cyan-500/10 transition-all transform hover:scale-105">
+              <span className="relative z-10 flex items-center text-lg font-semibold">
                 Start Your Neural Transformation
-                <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </button>
 
             {/* Secondary CTA */}
-            <button className="group glassmorphism px-10 py-5 rounded-xl text-white hover:bg-white/10 transition-all transform hover:scale-105">
-              <span className="flex items-center text-lg font-bold">
-                <Rocket className="mr-3 w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
+            <button className="group glassmorphism px-8 py-4 rounded-lg text-white hover:bg-white/10 transition-all transform hover:scale-105">
+              <span className="flex items-center text-lg font-semibold">
+                <Rocket className="mr-2 w-5 h-5 group-hover:rotate-12 transition-transform" />
                 Explore Neural Solutions
               </span>
             </button>
           </div>
 
-          {/* Redesigned floating card with only one stat */}
-          <div className="max-w-sm">
-            <div className="glassmorphism p-8 rounded-2xl text-center animate-float hover:neon-border transition-all group cursor-pointer border border-cyan-500/20">
-              <div className="text-4xl font-bold text-neon mb-3 group-hover:animate-pulse">99%</div>
-              <div className="text-gray-300 text-lg font-medium">Synaptic Satisfaction</div>
-              <div className="text-gray-400 text-sm mt-2">Client satisfaction rate</div>
-            </div>
+          {/* Floating cards with stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 max-w-4xl mx-auto">
+            {[
+              { label: 'Neural Projects', value: '500+', delay: '0s' },
+              { label: 'Synaptic Satisfaction', value: '99%', delay: '0.2s' },
+              { label: 'Years of Innovation', value: '4+', delay: '0.4s' }
+            ].map((stat, index) => (
+              <div 
+                key={index}
+                className="glassmorphism p-6 rounded-xl text-center animate-float hover:neon-border transition-all group cursor-pointer"
+                style={{ animationDelay: stat.delay }}
+              >
+                <div className="text-3xl font-bold text-neon mb-2 group-hover:animate-pulse">{stat.value}</div>
+                <div className="text-gray-300 text-sm">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
+        {/* The right side logo is handled by the absolutely positioned block above */}
       </div>
 
       {/* Scroll indicator */}
