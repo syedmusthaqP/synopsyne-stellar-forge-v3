@@ -1,48 +1,82 @@
+
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Brain } from 'lucide-react';
-import { AnimatedTestimonials } from '../components/ui/animated-testimonials';
+import { Carousel, TestimonialCard, iTestimonial } from '../components/ui/retro-testimonial';
+
+type TestimonialDetails = {
+  [key: string]: iTestimonial & {id: string};
+};
 
 const Testimonials = () => {
-  const testimonials = [
-    {
-      quote: "Synopsyne Dynamics transformed our entire infrastructure. Their neural approach to software development isn't just innovative—it's revolutionary. Our system performance improved by 300%.",
-      name: "Sarah Chen",
-      designation: "CTO at TechFlow Solutions",
-      src: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=500&h=500&fit=crop&crop=face"
+  const testimonialData = {
+    ids: [
+      "e60aa346-f6da-11ed-b67e-0242ac120002",
+      "e60aa346-f6da-11ed-b67e-0242ac120003",
+      "e60aa346-f6da-11ed-b67e-0242ac120004",
+      "e60aa346-f6da-11ed-b67e-0242ac120005",
+      "e60aa346-f6da-11ed-b67e-0242ac120006",
+      "e60aa346-f6da-11ed-b67e-0242ac120007",
+    ],
+    details: {
+      "e60aa346-f6da-11ed-b67e-0242ac120002": {
+        id: "e60aa346-f6da-11ed-b67e-0242ac120002",
+        description: "Synopsyne Dynamics transformed our entire infrastructure. Their neural approach to software development isn't just innovative—it's revolutionary. Our system performance improved by 300%.",
+        profileImage: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=500&h=500&fit=crop&crop=face",
+        name: "Sarah Chen",
+        designation: "CTO at TechFlow Solutions",
+      },
+      "e60aa346-f6da-11ed-b67e-0242ac120003": {
+        id: "e60aa346-f6da-11ed-b67e-0242ac120003",
+        description: "Working with Synopsyne was like having a team of digital neuroscientists. They understood our vision before we even fully articulated it. The AI solutions they built have become the backbone of our operations.",
+        profileImage: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&h=500&fit=crop&crop=face",
+        name: "Marcus Rodriguez",
+        designation: "Founder & CEO at InnovateLab",
+      },
+      "e60aa346-f6da-11ed-b67e-0242ac120004": {
+        id: "e60aa346-f6da-11ed-b67e-0242ac120004",
+        description: "The neural networks they implemented for our patient management system have revolutionized how we deliver healthcare. Their approach to connecting disparate systems mirrors how synapses create complex thoughts.",
+        profileImage: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500&h=500&fit=crop&crop=face",
+        name: "Dr. Amanda Foster",
+        designation: "Head of Digital Innovation at MedTech Global",
+      },
+      "e60aa346-f6da-11ed-b67e-0242ac120005": {
+        id: "e60aa346-f6da-11ed-b67e-0242ac120005",
+        description: "Synopsyne Dynamics doesn't just build software—they architect digital ecosystems. Their cloud solutions are so intuitive, it's like they read our minds. The scalability is phenomenal.",
+        profileImage: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&h=500&fit=crop&crop=face",
+        name: "James Thompson",
+        designation: "VP Engineering at CloudVision",
+      },
+      "e60aa346-f6da-11ed-b67e-0242ac120006": {
+        id: "e60aa346-f6da-11ed-b67e-0242ac120006",
+        description: "The mobile applications they developed for us have a neural-like intelligence. They adapt to user behavior in real-time. Our customer engagement has increased by 250% since launch.",
+        profileImage: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=500&h=500&fit=crop&crop=face",
+        name: "Lisa Park",
+        designation: "Chief Digital Officer at RetailNext",
+      },
+      "e60aa346-f6da-11ed-b67e-0242ac120007": {
+        id: "e60aa346-f6da-11ed-b67e-0242ac120007",
+        description: "Their cybersecurity solutions are like having a digital immune system. The way they anticipate and prevent threats feels almost precognitive. We haven't had a single security incident since implementation.",
+        profileImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop&crop=face",
+        name: "David Kumar",
+        designation: "Director of Technology at FinanceForward",
+      }
     },
-    {
-      quote: "Working with Synopsyne was like having a team of digital neuroscientists. They understood our vision before we even fully articulated it. The AI solutions they built have become the backbone of our operations.",
-      name: "Marcus Rodriguez",
-      designation: "Founder & CEO at InnovateLab",
-      src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&h=500&fit=crop&crop=face"
-    },
-    {
-      quote: "The neural networks they implemented for our patient management system have revolutionized how we deliver healthcare. Their approach to connecting disparate systems mirrors how synapses create complex thoughts.",
-      name: "Dr. Amanda Foster",
-      designation: "Head of Digital Innovation at MedTech Global",
-      src: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500&h=500&fit=crop&crop=face"
-    },
-    {
-      quote: "Synopsyne Dynamics doesn't just build software—they architect digital ecosystems. Their cloud solutions are so intuitive, it's like they read our minds. The scalability is phenomenal.",
-      name: "James Thompson",
-      designation: "VP Engineering at CloudVision",
-      src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&h=500&fit=crop&crop=face"
-    },
-    {
-      quote: "The mobile applications they developed for us have a neural-like intelligence. They adapt to user behavior in real-time. Our customer engagement has increased by 250% since launch.",
-      name: "Lisa Park",
-      designation: "Chief Digital Officer at RetailNext",
-      src: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=500&h=500&fit=crop&crop=face"
-    },
-    {
-      quote: "Their cybersecurity solutions are like having a digital immune system. The way they anticipate and prevent threats feels almost precognitive. We haven't had a single security incident since implementation.",
-      name: "David Kumar",
-      designation: "Director of Technology at FinanceForward",
-      src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop&crop=face"
-    }
-  ];
+  };
+
+  // Create testimonial cards for the retro carousel
+  const cards = testimonialData.ids.map((cardId: string, index: number) => {
+    const details = testimonialData.details as TestimonialDetails;
+    return (
+      <TestimonialCard
+        key={cardId}
+        testimonial={details[cardId]}
+        index={index}
+        backgroundImage="https://images.unsplash.com/photo-1528458965990-428de4b1cb0d?q=80&w=3129&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      />
+    );
+  });
 
   return (
     <div className="min-h-screen gradient-bg relative overflow-hidden">
@@ -89,7 +123,7 @@ const Testimonials = () => {
         </div>
       </section>
 
-      {/* Animated Testimonials Section */}
+      {/* Retro Testimonials Section */}
       <section className="py-20 relative">
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
@@ -102,7 +136,10 @@ const Testimonials = () => {
             </p>
           </div>
 
-          <AnimatedTestimonials testimonials={testimonials} autoplay={true} />
+          {/* Retro Testimonial Carousel */}
+          <div className="max-w-7xl mx-auto">
+            <Carousel items={cards} />
+          </div>
 
           {/* Stats Section */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 max-w-4xl mx-auto">
