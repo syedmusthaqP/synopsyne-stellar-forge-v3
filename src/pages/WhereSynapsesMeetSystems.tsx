@@ -16,14 +16,14 @@ const WhereSynapsesMeetSystems = () => {
       
       <Header />
       
-      {/* Minimal content section */}
+      {/* Hero section with updated title */}
       <section className="min-h-screen flex items-center justify-center relative pt-20">
         <div className="container mx-auto px-6 text-center relative z-10">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
             Where <span className="text-neon animate-text-glow">Synapses</span> Meet <span className="text-neon animate-text-glow">Systems</span>
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
-            Content coming soon...
+            Discover what sets us apart in the digital transformation landscape
           </p>
         </div>
       </section>
