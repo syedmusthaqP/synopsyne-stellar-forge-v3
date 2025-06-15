@@ -7,7 +7,8 @@ const ContactSection = () => {
     name: '',
     email: '',
     company: '',
-    message: ''
+    message: '',
+    details: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -18,7 +19,7 @@ const ContactSection = () => {
       setIsSubmitted(true);
       setTimeout(() => {
         setIsSubmitted(false);
-        setFormData({ name: '', email: '', company: '', message: '' });
+        setFormData({ name: '', email: '', company: '', message: '', details: '' });
       }, 3000);
     }, 1000);
   };
@@ -76,7 +77,7 @@ const ContactSection = () => {
               <h4 className="text-white font-semibold mb-4">Why Choose Synopsyne?</h4>
               <div className="space-y-3">
                 {[
-                  '500+ successful projects delivered',
+                  // '500+ successful projects delivered', // Removed as per instruction
                   '99% client satisfaction rate',
                   '24/7 support and maintenance',
                   'Cutting-edge technology stack'
@@ -109,7 +110,7 @@ const ContactSection = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 bg-black/20 border border-gray-600 rounded-lg text-white focus:border-cyan-400 focus:outline-none transition-colors"
-                      placeholder="John Doe"
+                      placeholder=""
                     />
                   </div>
                   
@@ -125,7 +126,7 @@ const ContactSection = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 bg-black/20 border border-gray-600 rounded-lg text-white focus:border-cyan-400 focus:outline-none transition-colors"
-                      placeholder="john@company.com"
+                      placeholder=""
                     />
                   </div>
                 </div>
@@ -161,6 +162,22 @@ const ContactSection = () => {
                   ></textarea>
                 </div>
 
+                {/* Additional Details textarea */}
+                <div>
+                  <label htmlFor="details" className="block text-sm font-medium text-gray-300 mb-2">
+                    Additional Details
+                  </label>
+                  <textarea
+                    id="details"
+                    name="details"
+                    rows={4}
+                    value={formData.details}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 bg-black/20 border border-gray-600 rounded-lg text-white focus:border-cyan-400 focus:outline-none transition-colors resize-none"
+                    placeholder="Any other information you'd like to share?"
+                  ></textarea>
+                </div>
+
                 <button
                   type="submit"
                   className="w-full neon-border px-6 py-4 rounded-lg text-neon hover:bg-cyan-500/10 transition-all group font-semibold"
@@ -190,4 +207,3 @@ const ContactSection = () => {
 };
 
 export default ContactSection;
-
