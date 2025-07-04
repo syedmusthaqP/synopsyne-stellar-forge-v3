@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [neuralPulse, setNeuralPulse] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,14 +18,6 @@ const HeroSection = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  useEffect(() => {
-    const pulseInterval = setInterval(() => {
-      setNeuralPulse(prev => (prev + 1) % 8);
-    }, 800);
-
-    return () => clearInterval(pulseInterval);
-  }, []);
-
   const handleNeuralTransformation = () => {
     navigate('/contact');
   };
@@ -35,100 +26,41 @@ const HeroSection = () => {
     navigate('/services');
   };
 
-  const neuralNodes = [
-    { x: 15, y: 20, size: 12, delay: 0 },
-    { x: 85, y: 15, size: 8, delay: 0.2 },
-    { x: 70, y: 70, size: 10, delay: 0.4 },
-    { x: 20, y: 80, size: 6, delay: 0.6 },
-    { x: 50, y: 25, size: 14, delay: 0.8 },
-    { x: 30, y: 50, size: 9, delay: 1 },
-    { x: 80, y: 45, size: 7, delay: 1.2 },
-    { x: 60, y: 85, size: 11, delay: 1.4 }
-  ];
-
-  const neuralConnections = [
-    { from: 0, to: 4 }, { from: 1, to: 2 }, { from: 2, to: 6 },
-    { from: 3, to: 5 }, { from: 4, to: 5 }, { from: 5, to: 6 },
-    { from: 0, to: 3 }, { from: 1, to: 4 }
-  ];
-
   return (
     <section className="min-h-screen flex items-center justify-center relative pt-20">
-      {/* Neural Network Background */}
+      {/* New Geometric Pattern Background */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Subtle gradient overlay */}
+        {/* Dynamic gradient overlay based on mouse position */}
         <div 
-          className="absolute inset-0 opacity-20 transition-all duration-1000"
+          className="absolute inset-0 opacity-30 transition-all duration-1000"
           style={{
-            background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(0, 212, 255, 0.15) 0%, transparent 50%)`
+            background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(0, 212, 255, 0.2) 0%, rgba(147, 51, 234, 0.1) 50%, transparent 70%)`
           }}
         ></div>
 
-        {/* Neural connections */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none">
-          {neuralConnections.map((connection, index) => {
-            const fromNode = neuralNodes[connection.from];
-            const toNode = neuralNodes[connection.to];
-            return (
-              <line
-                key={index}
-                x1={`${fromNode.x}%`}
-                y1={`${fromNode.y}%`}
-                x2={`${toNode.x}%`}
-                y2={`${toNode.y}%`}
-                stroke="rgba(0, 212, 255, 0.2)"
-                strokeWidth="1"
-                className="transition-all duration-500"
-                style={{
-                  opacity: neuralPulse === index % 4 ? 0.6 : 0.2,
-                  strokeWidth: neuralPulse === index % 4 ? '2' : '1'
-                }}
-              />
-            );
-          })}
-        </svg>
+        {/* Animated geometric shapes */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-32 h-32 border border-cyan-400/20 rotate-45 animate-pulse"></div>
+          <div className="absolute top-40 right-20 w-20 h-20 border border-purple-500/20 rotate-12 animate-float"></div>
+          <div className="absolute bottom-40 left-20 w-24 h-24 border border-blue-400/20 rotate-45 animate-float" style={{animationDelay: '1s'}}></div>
+          <div className="absolute bottom-20 right-40 w-16 h-16 border border-pink-400/20 rotate-12 animate-pulse"></div>
+          
+          {/* Floating orbs */}
+          <div className="absolute top-1/3 left-1/4 w-4 h-4 bg-gradient-to-br from-cyan-400/40 to-blue-500/40 rounded-full blur-sm animate-float"></div>
+          <div className="absolute top-2/3 right-1/3 w-6 h-6 bg-gradient-to-br from-purple-400/40 to-pink-500/40 rounded-full blur-sm animate-float" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-1/2 left-1/2 w-3 h-3 bg-gradient-to-br from-blue-400/40 to-cyan-500/40 rounded-full blur-sm animate-float" style={{animationDelay: '1.5s'}}></div>
+        </div>
 
-        {/* Neural nodes */}
-        {neuralNodes.map((node, index) => (
-          <div
-            key={index}
-            className="absolute transition-all duration-700"
-            style={{
-              left: `${node.x}%`,
-              top: `${node.y}%`,
-              width: `${node.size}px`,
-              height: `${node.size}px`,
-              transform: 'translate(-50%, -50%)',
-              animationDelay: `${node.delay}s`
-            }}
-          >
-            {/* Node glow */}
-            <div 
-              className={`absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400/30 to-blue-500/30 transition-all duration-500 ${
-                neuralPulse === index ? 'scale-150 opacity-80' : 'scale-100 opacity-40'
-              }`}
-              style={{
-                width: `${node.size * 2}px`,
-                height: `${node.size * 2}px`,
-                left: `-${node.size / 2}px`,
-                top: `-${node.size / 2}px`,
-                filter: 'blur(4px)'
-              }}
-            ></div>
-            
-            {/* Node core */}
-            <div 
-              className={`relative rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 transition-all duration-300 ${
-                neuralPulse === index ? 'animate-pulse' : ''
-              }`}
-              style={{
-                width: `${node.size}px`,
-                height: `${node.size}px`,
-                boxShadow: '0 0 15px rgba(0, 212, 255, 0.5)'
-              }}
-            ></div>
-          </div>
-        ))}
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="w-full h-full" style={{
+            backgroundImage: `
+              linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }}></div>
+        </div>
       </div>
 
       <div className="container mx-auto px-6 text-center relative z-10">

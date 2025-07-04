@@ -21,9 +21,17 @@ const Footer = () => {
     <footer className="py-12 border-t border-gray-800 bg-slate-900/80">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Company Info */}
+          {/* Company Info with updated Synopsyne Dynamics design */}
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-white text-xl font-bold mb-2">Synopsyne Dynamics</h3>
+            <div className="mb-4">
+              <h3 className="text-2xl font-bold mb-2">
+                <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent animate-text-glow">
+                  Synopsyne
+                </span>{' '}
+                <span className="text-white">Dynamics</span>
+              </h3>
+              <div className="w-16 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 mb-4"></div>
+            </div>
             <p className="text-gray-400 mb-6 max-w-md">
               Engineering the future through innovative software solutions. 
               We transform complex challenges into elegant, scalable technology.
@@ -94,7 +102,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Innovation Badge */}
         <div className="mt-8 text-center">
           <div className="inline-flex items-center glassmorphism px-4 py-2 rounded-full">
             <div className="w-2 h-2 rounded-full bg-green-400 mr-2 animate-pulse"></div>

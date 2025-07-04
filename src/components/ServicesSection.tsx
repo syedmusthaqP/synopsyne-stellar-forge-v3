@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Code, Cloud, Smartphone, Brain, Database, Shield } from 'lucide-react';
 import NeuralDevelopmentProcess from '@/components/ui/neural-development-process';
@@ -21,7 +20,7 @@ const ServicesSection = () => {
       title: 'Custom Software Development',
       description: 'Bespoke applications tailored to your unique business requirements and workflows.',
       features: ['Full-stack development', 'Legacy system modernization', 'API integration', 'Code auditing'],
-      position: { x: 15, y: 30 },
+      position: { x: 15, y: 20 },
       connections: [1, 5]
     },
     {
@@ -37,7 +36,7 @@ const ServicesSection = () => {
       title: 'AI & Machine Learning',
       description: 'Intelligent solutions that learn and adapt to drive business insights and automation.',
       features: ['Predictive analytics', 'Natural language processing', 'Computer vision', 'Recommendation systems'],
-      position: { x: 85, y: 30 },
+      position: { x: 85, y: 20 },
       connections: [1, 3]
     },
     {
@@ -45,7 +44,7 @@ const ServicesSection = () => {
       title: 'Mobile App Development',
       description: 'Native and cross-platform mobile applications for iOS and Android.',
       features: ['React Native', 'Flutter development', 'Progressive Web Apps', 'App store optimization'],
-      position: { x: 85, y: 70 },
+      position: { x: 85, y: 80 },
       connections: [2, 4]
     },
     {
@@ -61,14 +60,13 @@ const ServicesSection = () => {
       title: 'Cybersecurity Solutions',
       description: 'Comprehensive security measures to protect your digital assets and infrastructure.',
       features: ['Security audits', 'Penetration testing', 'Compliance consulting', 'Incident response'],
-      position: { x: 15, y: 70 },
+      position: { x: 15, y: 80 },
       connections: [4, 0]
     }
   ];
 
   return (
     <section id="services" className="py-20 relative overflow-hidden">
-      {/* Neural Network Background */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/10 to-pink-500/10 animate-neural-pulse"></div>
         <svg className="absolute inset-0 w-full h-full">
@@ -86,7 +84,6 @@ const ServicesSection = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        {/* Header Section */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center text-neon text-sm mb-8 animate-float">
             <Brain className="w-4 h-4 mr-2" />
@@ -97,7 +94,6 @@ const ServicesSection = () => {
             Our <span className="text-neon animate-text-glow">Services</span> Network
           </h2>
           
-          {/* Philosophy text with smaller font size */}
           <div className="max-w-6xl mx-auto mb-16">
             <p className="text-sm md:text-base text-gray-300 leading-relaxed">
               At Synopsyne Dynamics, we exist at the intersection of human intuition and digital precision. 
@@ -107,10 +103,8 @@ const ServicesSection = () => {
           </div>
         </div>
 
-        {/* Neural Services Network with reduced card size */}
         <div className="relative max-w-8xl mx-auto mb-32 mt-32">
-          <div className="relative h-[1000px] w-full flex items-center justify-center">
-            {/* Enhanced Neural connections with thicker vertical lines */}
+          <div className="relative h-[1200px] w-full flex items-center justify-center">
             <svg className="absolute inset-0 w-full h-full pointer-events-none">
               {services.map((service, index) => 
                 service.connections.map(connIndex => (
@@ -130,7 +124,6 @@ const ServicesSection = () => {
                 ))
               )}
 
-              {/* Enhanced pulsing connection points */}
               {services.map((service, index) => (
                 <circle
                   key={`pulse-${index}`}
@@ -144,7 +137,6 @@ const ServicesSection = () => {
                 />
               ))}
 
-              {/* Additional vertical emphasis lines */}
               <defs>
                 <linearGradient id="verticalLineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stopColor="rgba(0, 212, 255, 0.8)" />
@@ -153,16 +145,15 @@ const ServicesSection = () => {
                 </linearGradient>
               </defs>
               
-              {/* Vertical connection enhancement between specific services */}
               <line
-                x1="15%" y1="30%" x2="15%" y2="70%"
+                x1="15%" y1="20%" x2="15%" y2="80%"
                 stroke="url(#verticalLineGradient)"
                 strokeWidth="6"
                 className="animate-pulse"
                 opacity="0.8"
               />
               <line
-                x1="85%" y1="30%" x2="85%" y2="70%"
+                x1="85%" y1="20%" x2="85%" y2="80%"
                 stroke="url(#verticalLineGradient)"
                 strokeWidth="6"
                 className="animate-pulse"
@@ -170,7 +161,6 @@ const ServicesSection = () => {
               />
             </svg>
 
-            {/* Service nodes with reduced sizing */}
             {services.map((service, index) => (
               <div
                 key={index}
@@ -185,12 +175,10 @@ const ServicesSection = () => {
                 onMouseEnter={() => setActiveService(index)}
                 onMouseLeave={() => setActiveService(-1)}
               >
-                {/* Neural aura with smaller sizing */}
                 <div className={`absolute inset-0 w-[350px] h-[350px] bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-3xl transition-all duration-500 -translate-x-1/2 -translate-y-1/2 ${
                   activeService === index ? 'scale-110 opacity-100' : 'scale-100 opacity-30'
                 }`}></div>
 
-                {/* Synaptic sparks */}
                 {activeService === index && (
                   <div className="absolute inset-0 pointer-events-none">
                     {[...Array(8)].map((_, i) => (
@@ -207,7 +195,6 @@ const ServicesSection = () => {
                   </div>
                 )}
 
-                {/* Reduced hexagon-shaped card */}
                 <div className={`relative bg-black/40 backdrop-blur-sm p-6 rounded-3xl border transition-all duration-500 w-full min-h-[260px] flex flex-col justify-between ${
                   activeService === index ? 'border-cyan-400 shadow-2xl scale-105' : 'border-white/20 group-hover:border-cyan-400/50'
                 }`}>
@@ -260,7 +247,6 @@ const ServicesSection = () => {
           </div>
         </div>
 
-        {/* Neural Development Process */}
         <div className="mt-20">
           <NeuralDevelopmentProcess />
         </div>
