@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Code, Cloud, Smartphone, Brain, Database, Shield } from 'lucide-react';
 import NeuralDevelopmentProcess from '@/components/ui/neural-development-process';
@@ -21,7 +20,7 @@ const ServicesSection = () => {
       title: 'Custom Software Development',
       description: 'Bespoke applications tailored to your unique business requirements and workflows.',
       features: ['Full-stack development', 'Legacy system modernization', 'API integration', 'Code auditing'],
-      position: { x: 15, y: 35 },
+      position: { x: 15, y: 25 },
       connections: [1, 5]
     },
     {
@@ -29,7 +28,7 @@ const ServicesSection = () => {
       title: 'Cloud Architecture & DevOps',
       description: 'Scalable cloud solutions with automated deployment and infrastructure management.',
       features: ['AWS/Azure/GCP setup', 'CI/CD pipelines', 'Container orchestration', 'Monitoring & logging'],
-      position: { x: 50, y: 20 },
+      position: { x: 50, y: 10 },
       connections: [0, 2]
     },
     {
@@ -37,7 +36,7 @@ const ServicesSection = () => {
       title: 'AI & Machine Learning',
       description: 'Intelligent solutions that learn and adapt to drive business insights and automation.',
       features: ['Predictive analytics', 'Natural language processing', 'Computer vision', 'Recommendation systems'],
-      position: { x: 85, y: 35 },
+      position: { x: 85, y: 25 },
       connections: [1, 3]
     },
     {
@@ -107,10 +106,10 @@ const ServicesSection = () => {
           </div>
         </div>
 
-        {/* Neural Services Network with improved alignment and larger cards */}
+        {/* Neural Services Network with increased vertical lines */}
         <div className="relative max-w-8xl mx-auto mb-32 mt-32">
-          <div className="relative h-[1000px] w-full flex items-center justify-center">
-            {/* Neural connections */}
+          <div className="relative h-[1200px] w-full flex items-center justify-center">
+            {/* Enhanced Neural connections with thicker vertical lines */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none">
               {services.map((service, index) => 
                 service.connections.map(connIndex => (
@@ -120,31 +119,57 @@ const ServicesSection = () => {
                     y1={`${service.position.y}%`}
                     x2={`${services[connIndex].position.x}%`}
                     y2={`${services[connIndex].position.y}%`}
-                    stroke={activeService === index || activeService === connIndex ? "rgb(0, 212, 255)" : "rgba(0, 212, 255, 0.3)"}
-                    strokeWidth={activeService === index || activeService === connIndex ? "3" : "2"}
+                    stroke={activeService === index || activeService === connIndex ? "rgb(0, 212, 255)" : "rgba(0, 212, 255, 0.4)"}
+                    strokeWidth={activeService === index || activeService === connIndex ? "6" : "4"}
                     className={`transition-all duration-500 ${
                       activeService === index || activeService === connIndex ? 'animate-synaptic-fire' : ''
                     }`}
+                    strokeLinecap="round"
                   />
                 ))
               )}
 
-              {/* Pulsing connection points */}
+              {/* Enhanced pulsing connection points */}
               {services.map((service, index) => (
                 <circle
                   key={`pulse-${index}`}
                   cx={`${service.position.x}%`}
                   cy={`${service.position.y}%`}
-                  r="10"
+                  r="12"
                   fill="rgb(0, 212, 255)"
                   className={`transition-all duration-300 ${
-                    neuralPulse === index ? 'animate-ping' : 'opacity-60'
+                    neuralPulse === index ? 'animate-ping' : 'opacity-70'
                   }`}
                 />
               ))}
+
+              {/* Additional vertical emphasis lines */}
+              <defs>
+                <linearGradient id="verticalLineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="rgba(0, 212, 255, 0.8)" />
+                  <stop offset="50%" stopColor="rgba(0, 212, 255, 1)" />
+                  <stop offset="100%" stopColor="rgba(0, 212, 255, 0.8)" />
+                </linearGradient>
+              </defs>
+              
+              {/* Vertical connection enhancement between specific services */}
+              <line
+                x1="15%" y1="25%" x2="15%" y2="75%"
+                stroke="url(#verticalLineGradient)"
+                strokeWidth="3"
+                className="animate-pulse"
+                opacity="0.6"
+              />
+              <line
+                x1="85%" y1="25%" x2="85%" y2="75%"
+                stroke="url(#verticalLineGradient)"
+                strokeWidth="3"
+                className="animate-pulse"
+                opacity="0.6"
+              />
             </svg>
 
-            {/* Service nodes with improved centering and larger size */}
+            {/* Service nodes with improved sizing */}
             {services.map((service, index) => (
               <div
                 key={index}
@@ -154,13 +179,13 @@ const ServicesSection = () => {
                   top: `${service.position.y}%`,
                   transform: 'translate(-50%, -50%)',
                   zIndex: activeService === index ? 50 : 10,
-                  width: '380px'
+                  width: '420px'
                 }}
                 onMouseEnter={() => setActiveService(index)}
                 onMouseLeave={() => setActiveService(-1)}
               >
-                {/* Neural aura with larger sizing */}
-                <div className={`absolute inset-0 w-96 h-96 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-2xl transition-all duration-500 -translate-x-1/2 -translate-y-1/2 ${
+                {/* Enhanced neural aura with larger sizing */}
+                <div className={`absolute inset-0 w-[500px] h-[500px] bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-3xl transition-all duration-500 -translate-x-1/2 -translate-y-1/2 ${
                   activeService === index ? 'scale-110 opacity-100' : 'scale-100 opacity-30'
                 }`}></div>
 
@@ -181,7 +206,7 @@ const ServicesSection = () => {
                   </div>
                 )}
 
-                {/* Hexagon-shaped card with larger sizing */}
+                {/* Enhanced hexagon-shaped card */}
                 <div className={`relative bg-black/40 backdrop-blur-sm p-8 rounded-3xl border transition-all duration-500 w-full min-h-[340px] flex flex-col justify-between ${
                   activeService === index ? 'border-cyan-400 shadow-2xl scale-105' : 'border-white/20 group-hover:border-cyan-400/50'
                 }`}>
@@ -234,7 +259,7 @@ const ServicesSection = () => {
           </div>
         </div>
 
-        {/* Neural Development Process - New Enhanced Version */}
+        {/* Neural Development Process */}
         <div className="mt-20">
           <NeuralDevelopmentProcess />
         </div>
