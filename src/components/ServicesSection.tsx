@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Code, Cloud, Smartphone, Brain, Database, Shield } from 'lucide-react';
 import NeuralDevelopmentProcess from '@/components/ui/neural-development-process';
@@ -20,7 +21,7 @@ const ServicesSection = () => {
       title: 'Custom Software Development',
       description: 'Bespoke applications tailored to your unique business requirements and workflows.',
       features: ['Full-stack development', 'Legacy system modernization', 'API integration', 'Code auditing'],
-      position: { x: 15, y: 25 },
+      position: { x: 15, y: 30 },
       connections: [1, 5]
     },
     {
@@ -28,7 +29,7 @@ const ServicesSection = () => {
       title: 'Cloud Architecture & DevOps',
       description: 'Scalable cloud solutions with automated deployment and infrastructure management.',
       features: ['AWS/Azure/GCP setup', 'CI/CD pipelines', 'Container orchestration', 'Monitoring & logging'],
-      position: { x: 50, y: 10 },
+      position: { x: 50, y: 15 },
       connections: [0, 2]
     },
     {
@@ -36,7 +37,7 @@ const ServicesSection = () => {
       title: 'AI & Machine Learning',
       description: 'Intelligent solutions that learn and adapt to drive business insights and automation.',
       features: ['Predictive analytics', 'Natural language processing', 'Computer vision', 'Recommendation systems'],
-      position: { x: 85, y: 25 },
+      position: { x: 85, y: 30 },
       connections: [1, 3]
     },
     {
@@ -44,7 +45,7 @@ const ServicesSection = () => {
       title: 'Mobile App Development',
       description: 'Native and cross-platform mobile applications for iOS and Android.',
       features: ['React Native', 'Flutter development', 'Progressive Web Apps', 'App store optimization'],
-      position: { x: 85, y: 75 },
+      position: { x: 85, y: 70 },
       connections: [2, 4]
     },
     {
@@ -52,7 +53,7 @@ const ServicesSection = () => {
       title: 'Data Engineering',
       description: 'Robust data pipelines and analytics platforms for data-driven decision making.',
       features: ['ETL pipelines', 'Data warehousing', 'Real-time analytics', 'Data visualization'],
-      position: { x: 50, y: 90 },
+      position: { x: 50, y: 85 },
       connections: [3, 5]
     },
     {
@@ -60,7 +61,7 @@ const ServicesSection = () => {
       title: 'Cybersecurity Solutions',
       description: 'Comprehensive security measures to protect your digital assets and infrastructure.',
       features: ['Security audits', 'Penetration testing', 'Compliance consulting', 'Incident response'],
-      position: { x: 15, y: 75 },
+      position: { x: 15, y: 70 },
       connections: [4, 0]
     }
   ];
@@ -106,9 +107,9 @@ const ServicesSection = () => {
           </div>
         </div>
 
-        {/* Neural Services Network with increased vertical lines */}
+        {/* Neural Services Network with reduced card size */}
         <div className="relative max-w-8xl mx-auto mb-32 mt-32">
-          <div className="relative h-[1200px] w-full flex items-center justify-center">
+          <div className="relative h-[1000px] w-full flex items-center justify-center">
             {/* Enhanced Neural connections with thicker vertical lines */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none">
               {services.map((service, index) => 
@@ -154,22 +155,22 @@ const ServicesSection = () => {
               
               {/* Vertical connection enhancement between specific services */}
               <line
-                x1="15%" y1="25%" x2="15%" y2="75%"
+                x1="15%" y1="30%" x2="15%" y2="70%"
                 stroke="url(#verticalLineGradient)"
-                strokeWidth="3"
+                strokeWidth="6"
                 className="animate-pulse"
-                opacity="0.6"
+                opacity="0.8"
               />
               <line
-                x1="85%" y1="25%" x2="85%" y2="75%"
+                x1="85%" y1="30%" x2="85%" y2="70%"
                 stroke="url(#verticalLineGradient)"
-                strokeWidth="3"
+                strokeWidth="6"
                 className="animate-pulse"
-                opacity="0.6"
+                opacity="0.8"
               />
             </svg>
 
-            {/* Service nodes with improved sizing */}
+            {/* Service nodes with reduced sizing */}
             {services.map((service, index) => (
               <div
                 key={index}
@@ -179,13 +180,13 @@ const ServicesSection = () => {
                   top: `${service.position.y}%`,
                   transform: 'translate(-50%, -50%)',
                   zIndex: activeService === index ? 50 : 10,
-                  width: '420px'
+                  width: '300px'
                 }}
                 onMouseEnter={() => setActiveService(index)}
                 onMouseLeave={() => setActiveService(-1)}
               >
-                {/* Enhanced neural aura with larger sizing */}
-                <div className={`absolute inset-0 w-[500px] h-[500px] bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-3xl transition-all duration-500 -translate-x-1/2 -translate-y-1/2 ${
+                {/* Neural aura with smaller sizing */}
+                <div className={`absolute inset-0 w-[350px] h-[350px] bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-3xl transition-all duration-500 -translate-x-1/2 -translate-y-1/2 ${
                   activeService === index ? 'scale-110 opacity-100' : 'scale-100 opacity-30'
                 }`}></div>
 
@@ -206,29 +207,29 @@ const ServicesSection = () => {
                   </div>
                 )}
 
-                {/* Enhanced hexagon-shaped card */}
-                <div className={`relative bg-black/40 backdrop-blur-sm p-8 rounded-3xl border transition-all duration-500 w-full min-h-[340px] flex flex-col justify-between ${
+                {/* Reduced hexagon-shaped card */}
+                <div className={`relative bg-black/40 backdrop-blur-sm p-6 rounded-3xl border transition-all duration-500 w-full min-h-[260px] flex flex-col justify-between ${
                   activeService === index ? 'border-cyan-400 shadow-2xl scale-105' : 'border-white/20 group-hover:border-cyan-400/50'
                 }`}>
-                  <div className="mb-6">
-                    <div className={`w-14 h-14 rounded-lg bg-gradient-to-r from-cyan-500/20 to-blue-500/20 flex items-center justify-center mb-4 transition-transform duration-500 ${
+                  <div className="mb-4">
+                    <div className={`w-10 h-10 rounded-lg bg-gradient-to-r from-cyan-500/20 to-blue-500/20 flex items-center justify-center mb-3 transition-transform duration-500 ${
                       activeService === index ? 'scale-110 rotate-12' : 'group-hover:scale-105'
                     }`}>
-                      <service.icon className="w-7 h-7 text-neon" />
+                      <service.icon className="w-5 h-5 text-neon" />
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-neon transition-colors">
+                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-neon transition-colors">
                       {service.title}
                     </h3>
-                    <p className="text-gray-300 mb-4 text-base leading-relaxed">
+                    <p className="text-gray-300 mb-3 text-sm leading-relaxed">
                       {service.description}
                     </p>
                   </div>
 
                   <div className="flex-grow">
-                    <ul className="space-y-2 mb-6">
+                    <ul className="space-y-1 mb-4">
                       {service.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-center text-sm text-gray-400">
-                          <div className={`w-2 h-2 rounded-full bg-cyan-400 mr-3 transition-all ${
+                        <li key={featureIndex} className="flex items-center text-xs text-gray-400">
+                          <div className={`w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2 transition-all ${
                             activeService === index ? 'animate-pulse scale-125' : ''
                           }`}></div>
                           {feature}
@@ -238,16 +239,16 @@ const ServicesSection = () => {
                   </div>
 
                   <div>
-                    <button className={`w-full py-3 text-cyan-400 border border-cyan-400/30 rounded-lg transition-all text-base ${
+                    <button className={`w-full py-2 text-cyan-400 border border-cyan-400/30 rounded-lg transition-all text-sm ${
                       activeService === index ? 'bg-cyan-400/20 border-cyan-400' : 'hover:bg-cyan-400/10 group-hover:border-cyan-400'
                     }`}>
                       Neural Sync
                     </button>
 
                     {activeService === index && (
-                      <div className="mt-4 pt-4 border-t border-cyan-500/30 animate-fade-in">
-                        <div className="flex items-center text-sm text-cyan-400">
-                          <div className="w-2 h-2 bg-cyan-400 rounded-full mr-3 animate-pulse"></div>
+                      <div className="mt-3 pt-3 border-t border-cyan-500/30 animate-fade-in">
+                        <div className="flex items-center text-xs text-cyan-400">
+                          <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full mr-2 animate-pulse"></div>
                           Neural pathways activated - analyzing connections...
                         </div>
                       </div>
