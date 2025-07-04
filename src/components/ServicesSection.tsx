@@ -21,7 +21,7 @@ const ServicesSection = () => {
       title: 'Custom Software Development',
       description: 'Bespoke applications tailored to your unique business requirements and workflows.',
       features: ['Full-stack development', 'Legacy system modernization', 'API integration', 'Code auditing'],
-      position: { x: 15, y: 20 },
+      position: { x: 20, y: 25 },
       connections: [1, 5]
     },
     {
@@ -29,7 +29,7 @@ const ServicesSection = () => {
       title: 'Cloud Architecture & DevOps',
       description: 'Scalable cloud solutions with automated deployment and infrastructure management.',
       features: ['AWS/Azure/GCP setup', 'CI/CD pipelines', 'Container orchestration', 'Monitoring & logging'],
-      position: { x: 50, y: 10 },
+      position: { x: 50, y: 15 },
       connections: [0, 2]
     },
     {
@@ -37,7 +37,7 @@ const ServicesSection = () => {
       title: 'AI & Machine Learning',
       description: 'Intelligent solutions that learn and adapt to drive business insights and automation.',
       features: ['Predictive analytics', 'Natural language processing', 'Computer vision', 'Recommendation systems'],
-      position: { x: 85, y: 20 },
+      position: { x: 80, y: 25 },
       connections: [1, 3]
     },
     {
@@ -45,7 +45,7 @@ const ServicesSection = () => {
       title: 'Mobile App Development',
       description: 'Native and cross-platform mobile applications for iOS and Android.',
       features: ['React Native', 'Flutter development', 'Progressive Web Apps', 'App store optimization'],
-      position: { x: 85, y: 80 },
+      position: { x: 80, y: 75 },
       connections: [2, 4]
     },
     {
@@ -53,7 +53,7 @@ const ServicesSection = () => {
       title: 'Data Engineering',
       description: 'Robust data pipelines and analytics platforms for data-driven decision making.',
       features: ['ETL pipelines', 'Data warehousing', 'Real-time analytics', 'Data visualization'],
-      position: { x: 50, y: 90 },
+      position: { x: 50, y: 85 },
       connections: [3, 5]
     },
     {
@@ -61,7 +61,7 @@ const ServicesSection = () => {
       title: 'Cybersecurity Solutions',
       description: 'Comprehensive security measures to protect your digital assets and infrastructure.',
       features: ['Security audits', 'Penetration testing', 'Compliance consulting', 'Incident response'],
-      position: { x: 15, y: 80 },
+      position: { x: 20, y: 75 },
       connections: [4, 0]
     }
   ];
@@ -107,9 +107,9 @@ const ServicesSection = () => {
           </div>
         </div>
 
-        {/* Neural Services Network with added top spacing */}
+        {/* Neural Services Network with improved alignment */}
         <div className="relative max-w-7xl mx-auto mb-32 mt-20">
-          <div className="relative h-[700px] w-full">
+          <div className="relative h-[800px] w-full flex items-center justify-center">
             {/* Neural connections */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none">
               {services.map((service, index) => 
@@ -144,7 +144,7 @@ const ServicesSection = () => {
               ))}
             </svg>
 
-            {/* Service nodes */}
+            {/* Service nodes with improved centering */}
             {services.map((service, index) => (
               <div
                 key={index}
@@ -154,13 +154,13 @@ const ServicesSection = () => {
                   top: `${service.position.y}%`,
                   transform: 'translate(-50%, -50%)',
                   zIndex: activeService === index ? 50 : 10,
-                  width: '320px'
+                  width: '300px'
                 }}
                 onMouseEnter={() => setActiveService(index)}
                 onMouseLeave={() => setActiveService(-1)}
               >
-                {/* Neural aura */}
-                <div className={`absolute inset-0 w-80 h-80 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-2xl transition-all duration-500 -translate-x-1/2 -translate-y-1/2 ${
+                {/* Neural aura with consistent sizing */}
+                <div className={`absolute inset-0 w-72 h-72 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-2xl transition-all duration-500 -translate-x-1/2 -translate-y-1/2 ${
                   activeService === index ? 'scale-110 opacity-100' : 'scale-100 opacity-30'
                 }`}></div>
 
@@ -181,7 +181,8 @@ const ServicesSection = () => {
                   </div>
                 )}
 
-                <div className={`relative bg-black/40 backdrop-blur-sm p-6 rounded-3xl border transition-all duration-500 w-full ${
+                {/* Hexagon-shaped card with consistent styling */}
+                <div className={`relative bg-black/40 backdrop-blur-sm p-6 rounded-3xl border transition-all duration-500 w-full min-h-[280px] flex flex-col justify-between ${
                   activeService === index ? 'border-cyan-400 shadow-2xl scale-105' : 'border-white/20 group-hover:border-cyan-400/50'
                 }`}>
                   <div className="mb-4">
@@ -193,36 +194,40 @@ const ServicesSection = () => {
                     <h3 className="text-lg font-bold text-white mb-2 group-hover:text-neon transition-colors">
                       {service.title}
                     </h3>
-                    <p className="text-gray-300 mb-3 text-sm">
+                    <p className="text-gray-300 mb-3 text-sm leading-relaxed">
                       {service.description}
                     </p>
                   </div>
 
-                  <ul className="space-y-1 mb-4">
-                    {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-xs text-gray-400">
-                        <div className={`w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2 transition-all ${
-                          activeService === index ? 'animate-pulse scale-125' : ''
-                        }`}></div>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="flex-grow">
+                    <ul className="space-y-1 mb-4">
+                      {service.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center text-xs text-gray-400">
+                          <div className={`w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2 transition-all ${
+                            activeService === index ? 'animate-pulse scale-125' : ''
+                          }`}></div>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
-                  <button className={`w-full py-2 text-cyan-400 border border-cyan-400/30 rounded-lg transition-all text-sm ${
-                    activeService === index ? 'bg-cyan-400/20 border-cyan-400' : 'hover:bg-cyan-400/10 group-hover:border-cyan-400'
-                  }`}>
-                    Neural Sync
-                  </button>
+                  <div>
+                    <button className={`w-full py-2 text-cyan-400 border border-cyan-400/30 rounded-lg transition-all text-sm ${
+                      activeService === index ? 'bg-cyan-400/20 border-cyan-400' : 'hover:bg-cyan-400/10 group-hover:border-cyan-400'
+                    }`}>
+                      Neural Sync
+                    </button>
 
-                  {activeService === index && (
-                    <div className="mt-3 pt-3 border-t border-cyan-500/30 animate-fade-in">
-                      <div className="flex items-center text-xs text-cyan-400">
-                        <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full mr-2 animate-pulse"></div>
-                        Neural pathways activated - analyzing connections...
+                    {activeService === index && (
+                      <div className="mt-3 pt-3 border-t border-cyan-500/30 animate-fade-in">
+                        <div className="flex items-center text-xs text-cyan-400">
+                          <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full mr-2 animate-pulse"></div>
+                          Neural pathways activated - analyzing connections...
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
