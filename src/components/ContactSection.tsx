@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Brain, Mail, Phone, MapPin, Send, Calendar, Clock, Users, Zap, Target, BarChart3, Settings, MessageSquare, Database, Shield, Cpu, Cloud, Code, Bot } from 'lucide-react';
 
@@ -11,6 +12,7 @@ const ContactSection = () => {
     customProjectType: '',
     timeline: '',
     budget: '',
+    budgetCurrency: 'USD',
     features: []
   });
 
@@ -75,7 +77,7 @@ Thank you ${formData.name || 'valued client'}, your digital transformation reque
 • Company: ${formData.company || 'Individual/Startup'}
 • Project Type: ${formData.projectType === 'other' ? formData.customProjectType : formData.projectType || 'Custom Solution'}
 • Timeline: ${formData.timeline || 'To be discussed'}
-• Budget Range: ${formData.budget || 'To be determined'}
+• Budget Range: ${formData.budget || 'To be determined'} ${formData.budgetCurrency}
 • Selected Features: ${selectedFeatureNames.length > 0 ? selectedFeatureNames.join(', ') : 'Basic consultation package'}
 
 🚀 NEXT STEPS:
@@ -104,6 +106,7 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
         customProjectType: '',
         timeline: '',
         budget: '',
+        budgetCurrency: 'USD',
         features: []
       });
       setSelectedFeatures([]);
@@ -129,6 +132,26 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
           .custom-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
+          }
+          
+          /* Fix autocomplete styling */
+          input:-webkit-autofill,
+          input:-webkit-autofill:hover,
+          input:-webkit-autofill:focus,
+          input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px rgba(0, 0, 0, 0.4) inset !important;
+            -webkit-text-fill-color: white !important;
+            transition: background-color 5000s;
+          }
+          
+          /* Enhanced scrolling for features */
+          .features-grid {
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+          }
+          .features-grid::-webkit-scrollbar {
+            display: none;
           }
         `}
       </style>
@@ -278,12 +301,12 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
                           backdropFilter: 'blur(10px)',
                         }}
                       >
-                        <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Select timeline</option>
-                        <option value="urgent" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>ASAP (Rush project)</option>
-                        <option value="1-3-months" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>1-3 months</option>
-                        <option value="3-6-months" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>3-6 months</option>
-                        <option value="6-12-months" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>6-12 months</option>
-                        <option value="ongoing" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Ongoing partnership</option>
+                        <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Select innovation timeline</option>
+                        <option value="lightning-sprint" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>⚡ Lightning Sprint (2-4 weeks)</option>
+                        <option value="neural-acceleration" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>🧠 Neural Acceleration (1-3 months)</option>
+                        <option value="quantum-development" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>⚛️ Quantum Development (3-6 months)</option>
+                        <option value="digital-evolution" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>🚀 Digital Evolution (6-12 months)</option>
+                        <option value="infinite-partnership" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>♾️ Infinite Partnership (Ongoing)</option>
                       </select>
                       <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                         <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -294,28 +317,62 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
                   </div>
                   <div>
                     <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Budget Range</label>
-                    <div className="relative">
-                      <select
-                        name="budget"
-                        value={formData.budget}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
-                        style={{
-                          background: 'rgba(0, 0, 0, 0.4)',
-                          backdropFilter: 'blur(10px)',
-                        }}
-                      >
-                        <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Select budget range</option>
-                        <option value="10k-25k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$10k - $25k</option>
-                        <option value="25k-50k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$25k - $50k</option>
-                        <option value="50k-100k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$50k - $100k</option>
-                        <option value="100k-250k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$100k - $250k</option>
-                        <option value="250k+" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$250k+</option>
-                      </select>
-                      <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                        <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
+                    <div className="flex gap-2">
+                      <div className="relative flex-1">
+                        <select
+                          name="budgetCurrency"
+                          value={formData.budgetCurrency}
+                          onChange={handleInputChange}
+                          className="w-full px-3 py-3 border border-cyan-400/50 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
+                          style={{
+                            background: 'rgba(0, 0, 0, 0.4)',
+                            backdropFilter: 'blur(10px)',
+                          }}
+                        >
+                          <option value="USD" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>USD $</option>
+                          <option value="INR" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>INR ₹</option>
+                        </select>
+                        <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                          <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="relative flex-[2]">
+                        <select
+                          name="budget"
+                          value={formData.budget}
+                          onChange={handleInputChange}
+                          className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
+                          style={{
+                            background: 'rgba(0, 0, 0, 0.4)',
+                            backdropFilter: 'blur(10px)',
+                          }}
+                        >
+                          <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Select range</option>
+                          {formData.budgetCurrency === 'USD' ? (
+                            <>
+                              <option value="10k-25k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$10k - $25k</option>
+                              <option value="25k-50k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$25k - $50k</option>
+                              <option value="50k-100k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$50k - $100k</option>
+                              <option value="100k-250k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$100k - $250k</option>
+                              <option value="250k+" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$250k+</option>
+                            </>
+                          ) : (
+                            <>
+                              <option value="8L-20L" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>₹8L - ₹20L</option>
+                              <option value="20L-40L" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>₹20L - ₹40L</option>
+                              <option value="40L-80L" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>₹40L - ₹80L</option>
+                              <option value="80L-2Cr" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>₹80L - ₹2Cr</option>
+                              <option value="2Cr+" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>₹2Cr+</option>
+                            </>
+                          )}
+                        </select>
+                        <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                          <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                          </svg>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -326,7 +383,7 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
                   <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-4">
                     Productivity Features You're Interested In:
                   </label>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-80 overflow-y-auto custom-scrollbar pr-2">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-80 features-grid pr-2">
                     {productivityFeatures.map((feature) => (
                       <div
                         key={feature.id}
@@ -397,81 +454,87 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
             {/* Contact Info & Quick Stats */}
             <div className="space-y-8">
               {/* Contact Information */}
-              <div className="glassmorphism p-8 rounded-2xl border border-cyan-400/30">
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Connect Directly</h3>
-                
-                <div className="space-y-6">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 rounded-lg glassmorphism border border-cyan-400/30 flex items-center justify-center">
-                      <Mail className="w-6 h-6 text-neon" />
+              <div className="glassmorphism p-8 rounded-2xl border-2 border-transparent bg-gradient-to-r from-cyan-400/30 via-blue-500/30 to-purple-600/30 bg-clip-border">
+                <div className="bg-black/40 backdrop-blur-md rounded-xl p-6 -m-2">
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Connect Directly</h3>
+                  
+                  <div className="space-y-6">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 rounded-lg glassmorphism border border-cyan-400/30 flex items-center justify-center">
+                        <Mail className="w-6 h-6 text-neon" />
+                      </div>
+                      <div>
+                        <p className="bg-gradient-to-r from-orange-400 via-red-500 to-pink-600 bg-clip-text text-transparent font-semibold text-lg">Email</p>
+                        <p className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent font-medium text-lg">syedmusthaqk786@gmail.com</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent font-semibold">Email</p>
-                      <p className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent font-medium">syedmusthaqk786@gmail.com</p>
-                    </div>
-                  </div>
 
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 rounded-lg glassmorphism border border-cyan-400/30 flex items-center justify-center">
-                      <Phone className="w-6 h-6 text-neon" />
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 rounded-lg glassmorphism border border-cyan-400/30 flex items-center justify-center">
+                        <Phone className="w-6 h-6 text-neon" />
+                      </div>
+                      <div>
+                        <p className="bg-gradient-to-r from-orange-400 via-red-500 to-pink-600 bg-clip-text text-transparent font-semibold text-lg">Phone</p>
+                        <p className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent font-medium text-lg">7013425496</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent font-semibold">Phone</p>
-                      <p className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent font-medium">7013425496</p>
-                    </div>
-                  </div>
 
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 rounded-lg glassmorphism border border-cyan-400/30 flex items-center justify-center">
-                      <MapPin className="w-6 h-6 text-neon" />
-                    </div>
-                    <div>
-                      <p className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent font-semibold">Location</p>
-                      <p className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent font-medium">Andhra Pradesh, India</p>
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 rounded-lg glassmorphism border border-cyan-400/30 flex items-center justify-center">
+                        <MapPin className="w-6 h-6 text-neon" />
+                      </div>
+                      <div>
+                        <p className="bg-gradient-to-r from-orange-400 via-red-500 to-pink-600 bg-clip-text text-transparent font-semibold text-lg">Location</p>
+                        <p className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent font-medium text-lg">Andhra Pradesh, India</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Response Time & Stats */}
-              <div className="glassmorphism p-8 rounded-2xl border border-cyan-400/30">
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Our Commitment</h3>
-                
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-cyan-500/10 to-blue-500/10">
-                    <span className="text-white">Response Time</span>
-                    <span className="text-neon font-bold">&lt; 4 hours</span>
-                  </div>
+              <div className="glassmorphism p-8 rounded-2xl border-2 border-transparent bg-gradient-to-r from-cyan-400/30 via-blue-500/30 to-purple-600/30 bg-clip-border">
+                <div className="bg-black/40 backdrop-blur-md rounded-xl p-6 -m-2">
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Our Commitment</h3>
                   
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-purple-500/10 to-pink-500/10">
-                    <span className="text-white">Project Success Rate</span>
-                    <span className="text-neon font-bold">98.5%</span>
-                  </div>
-                  
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-blue-500/10 to-cyan-500/10">
-                    <span className="text-white">Average Productivity Boost</span>
-                    <span className="text-neon font-bold">245%</span>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-cyan-500/10 to-blue-500/10">
+                      <span className="text-white">Response Time</span>
+                      <span className="text-neon font-bold">&lt; 4 hours</span>
+                    </div>
+                    
+                    <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-purple-500/10 to-pink-500/10">
+                      <span className="text-white">Project Success Rate</span>
+                      <span className="text-neon font-bold">98.5%</span>
+                    </div>
+                    
+                    <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-blue-500/10 to-cyan-500/10">
+                      <span className="text-white">Average Productivity Boost</span>
+                      <span className="text-neon font-bold">245%</span>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Quick Benefits */}
-              <div className="glassmorphism p-8 rounded-2xl border border-cyan-400/30">
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Why Choose Us?</h3>
-                
-                <div className="space-y-3">
-                  {[
-                    'Free initial consultation & project scope',
-                    'Dedicated project manager assigned',
-                    'Weekly progress reports & demos',
-                    'Post-launch support & optimization',
-                    'Scalable solutions that grow with you'
-                  ].map((benefit, index) => (
-                    <div key={index} className="flex items-center space-x-3">
-                      <div className="w-2 h-2 rounded-full bg-neon"></div>
-                      <span className="text-gray-300">{benefit}</span>
-                    </div>
-                  ))}
+              <div className="glassmorphism p-8 rounded-2xl border-2 border-transparent bg-gradient-to-r from-cyan-400/30 via-blue-500/30 to-purple-600/30 bg-clip-border">
+                <div className="bg-black/40 backdrop-blur-md rounded-xl p-6 -m-2">
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Why Choose Us?</h3>
+                  
+                  <div className="space-y-3">
+                    {[
+                      'Free initial consultation & project scope',
+                      'Dedicated project manager assigned',
+                      'Weekly progress reports & demos',
+                      'Post-launch support & optimization',
+                      'Scalable solutions that grow with you'
+                    ].map((benefit, index) => (
+                      <div key={index} className="flex items-center space-x-3">
+                        <div className="w-2 h-2 rounded-full bg-neon"></div>
+                        <span className="text-gray-300">{benefit}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
