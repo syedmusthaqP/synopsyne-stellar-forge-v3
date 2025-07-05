@@ -277,7 +277,7 @@ const ContactSection = () => {
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-cyan-500/10 to-blue-500/10">
                   <span className="text-white">Response Time</span>
-                  <span className="text-neon font-bold">< 4 hours</span>
+                  <span className="text-neon font-bold">&lt; 4 hours</span>
                 </div>
                 
                 <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-purple-500/10 to-pink-500/10">
