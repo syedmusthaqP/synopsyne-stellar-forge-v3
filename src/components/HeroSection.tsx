@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, Rocket, Brain } from 'lucide-react';
+import { ArrowRight, Rocket, Brain, Code, Database, Cpu } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
@@ -29,89 +29,104 @@ const HeroSection = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center relative pt-20">
-      {/* AI/Software Neural Network Background */}
+      {/* Professional AI/Software Background */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Dynamic gradient overlay */}
         <div 
-          className="absolute inset-0 opacity-40 transition-all duration-1000"
+          className="absolute inset-0 opacity-30 transition-all duration-1000"
           style={{
-            background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(0, 212, 255, 0.3) 0%, rgba(147, 51, 234, 0.2) 50%, transparent 70%)`
+            background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(0, 212, 255, 0.2) 0%, rgba(147, 51, 234, 0.1) 50%, transparent 70%)`
           }}
         ></div>
 
-        {/* Animated Neural Network Nodes */}
-        <div className="absolute inset-0">
-          {/* Central AI Brain Hub */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-400/40 to-blue-500/40 animate-pulse flex items-center justify-center">
-              <Brain className="w-10 h-10 text-cyan-300" />
-            </div>
-            
-            {/* Neural Connection Lines */}
-            <svg className="absolute inset-0 w-96 h-96 transform -translate-x-1/2 -translate-y-1/2" viewBox="0 0 400 400">
-              {/* Connection lines with animation */}
-              <g className="animate-pulse">
-                <line x1="200" y1="200" x2="80" y2="120" stroke="rgba(0, 212, 255, 0.6)" strokeWidth="2" strokeDasharray="4,4">
-                  <animate attributeName="stroke-dashoffset" values="0;8" dur="2s" repeatCount="indefinite"/>
-                </line>
-                <line x1="200" y1="200" x2="320" y2="120" stroke="rgba(0, 212, 255, 0.6)" strokeWidth="2" strokeDasharray="4,4">
-                  <animate attributeName="stroke-dashoffset" values="0;8" dur="2.5s" repeatCount="indefinite"/>
-                </line>
-                <line x1="200" y1="200" x2="80" y2="280" stroke="rgba(147, 51, 234, 0.6)" strokeWidth="2" strokeDasharray="4,4">
-                  <animate attributeName="stroke-dashoffset" values="0;8" dur="3s" repeatCount="indefinite"/>
-                </line>
-                <line x1="200" y1="200" x2="320" y2="280" stroke="rgba(147, 51, 234, 0.6)" strokeWidth="2" strokeDasharray="4,4">
-                  <animate attributeName="stroke-dashoffset" values="0;8" dur="1.8s" repeatCount="indefinite"/>
-                </line>
-                <line x1="200" y1="200" x2="200" y2="80" stroke="rgba(0, 212, 255, 0.6)" strokeWidth="2" strokeDasharray="4,4">
-                  <animate attributeName="stroke-dashoffset" values="0;8" dur="2.2s" repeatCount="indefinite"/>
-                </line>
-                <line x1="200" y1="200" x2="200" y2="320" stroke="rgba(147, 51, 234, 0.6)" strokeWidth="2" strokeDasharray="4,4">
-                  <animate attributeName="stroke-dashoffset" values="0;8" dur="2.8s" repeatCount="indefinite"/>
-                </line>
-              </g>
-            </svg>
-          </div>
-
-          {/* Software/Code Elements */}
-          <div className="absolute top-20 left-20 w-12 h-12 border border-cyan-400/30 rounded-lg animate-float flex items-center justify-center">
-            <div className="text-cyan-400 text-xs font-mono">&lt;/&gt;</div>
-          </div>
-          <div className="absolute top-32 right-32 w-10 h-10 border border-purple-400/30 rounded-lg animate-float flex items-center justify-center" style={{animationDelay: '1s'}}>
-            <div className="text-purple-400 text-xs font-mono">AI</div>
-          </div>
-          <div className="absolute bottom-32 left-32 w-14 h-14 border border-blue-400/30 rounded-lg animate-float flex items-center justify-center" style={{animationDelay: '2s'}}>
-            <div className="text-blue-400 text-xs font-mono">ML</div>
-          </div>
-          <div className="absolute bottom-20 right-20 w-12 h-12 border border-pink-400/30 rounded-lg animate-float flex items-center justify-center" style={{animationDelay: '1.5s'}}>
-            <div className="text-pink-400 text-xs font-mono">DB</div>
-          </div>
-
-          {/* Neural Nodes */}
-          <div className="absolute top-1/4 left-1/4 w-6 h-6 rounded-full bg-gradient-to-br from-cyan-400/50 to-blue-500/50 animate-pulse"></div>
-          <div className="absolute top-1/4 right-1/4 w-4 h-4 rounded-full bg-gradient-to-br from-purple-400/50 to-pink-500/50 animate-pulse" style={{animationDelay: '0.5s'}}></div>
-          <div className="absolute bottom-1/4 left-1/4 w-5 h-5 rounded-full bg-gradient-to-br from-blue-400/50 to-cyan-500/50 animate-pulse" style={{animationDelay: '1s'}}></div>
-          <div className="absolute bottom-1/4 right-1/4 w-6 h-6 rounded-full bg-gradient-to-br from-pink-400/50 to-purple-500/50 animate-pulse" style={{animationDelay: '1.5s'}}></div>
-
-          {/* Data Flow Particles */}
-          <div className="absolute top-1/3 left-1/6 w-2 h-2 bg-cyan-400 rounded-full animate-ping opacity-75"></div>
-          <div className="absolute top-2/3 right-1/6 w-2 h-2 bg-purple-400 rounded-full animate-ping opacity-75" style={{animationDelay: '1s'}}></div>
-          <div className="absolute top-1/2 left-1/12 w-2 h-2 bg-blue-400 rounded-full animate-ping opacity-75" style={{animationDelay: '2s'}}></div>
-          <div className="absolute top-1/2 right-1/12 w-2 h-2 bg-pink-400 rounded-full animate-ping opacity-75" style={{animationDelay: '0.5s'}}></div>
-        </div>
-
-        {/* Circuit Board Pattern */}
-        <div className="absolute inset-0 opacity-5">
+        {/* Professional Grid Pattern */}
+        <div className="absolute inset-0 opacity-10">
           <div className="w-full h-full" style={{
             backgroundImage: `
-              linear-gradient(rgba(0, 212, 255, 0.3) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0, 212, 255, 0.3) 1px, transparent 1px),
-              linear-gradient(rgba(147, 51, 234, 0.2) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(147, 51, 234, 0.2) 1px, transparent 1px)
+              linear-gradient(rgba(0, 212, 255, 0.5) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(0, 212, 255, 0.5) 1px, transparent 1px)
             `,
-            backgroundSize: '60px 60px, 60px 60px, 20px 20px, 20px 20px'
+            backgroundSize: '40px 40px'
           }}></div>
         </div>
+
+        {/* Animated Code Blocks */}
+        <div className="absolute inset-0">
+          {/* Central Neural Hub */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-cyan-400/30 to-blue-500/30 animate-pulse flex items-center justify-center backdrop-blur-sm border border-cyan-400/20">
+              <Brain className="w-8 h-8 text-cyan-300" />
+            </div>
+          </div>
+
+          {/* Floating Tech Icons */}
+          <div className="absolute top-1/4 left-1/4 w-12 h-12 rounded-lg bg-black/20 backdrop-blur-sm border border-cyan-400/30 animate-float flex items-center justify-center">
+            <Code className="w-6 h-6 text-cyan-400" />
+          </div>
+          <div className="absolute top-1/3 right-1/4 w-10 h-10 rounded-lg bg-black/20 backdrop-blur-sm border border-purple-400/30 animate-float flex items-center justify-center" style={{animationDelay: '1s'}}>
+            <Database className="w-5 h-5 text-purple-400" />
+          </div>
+          <div className="absolute bottom-1/3 left-1/3 w-14 h-14 rounded-lg bg-black/20 backdrop-blur-sm border border-blue-400/30 animate-float flex items-center justify-center" style={{animationDelay: '2s'}}>
+            <Cpu className="w-7 h-7 text-blue-400" />
+          </div>
+
+          {/* Binary Data Stream */}
+          <div className="absolute top-20 left-10 opacity-20">
+            <div className="text-cyan-400 font-mono text-xs space-y-1 animate-pulse">
+              <div>01001000 01100101</div>
+              <div>01101100 01101100</div>
+              <div>01101111 00100000</div>
+            </div>
+          </div>
+          <div className="absolute bottom-20 right-10 opacity-20">
+            <div className="text-purple-400 font-mono text-xs space-y-1 animate-pulse" style={{animationDelay: '1s'}}>
+              <div>function AI() {</div>
+              <div>  return future;</div>
+              <div>}</div>
+            </div>
+          </div>
+
+          {/* Connection Lines */}
+          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="line1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="rgba(0, 212, 255, 0.6)" />
+                <stop offset="100%" stopColor="rgba(147, 51, 234, 0.3)" />
+              </linearGradient>
+            </defs>
+            <line x1="25" y1="25" x2="75" y2="75" stroke="url(#line1)" strokeWidth="0.1" strokeDasharray="2,2" opacity="0.6">
+              <animate attributeName="stroke-dashoffset" values="0;4" dur="3s" repeatCount="indefinite"/>
+            </line>
+            <line x1="75" y1="25" x2="25" y2="75" stroke="url(#line1)" strokeWidth="0.1" strokeDasharray="2,2" opacity="0.4">
+              <animate attributeName="stroke-dashoffset" values="0;4" dur="4s" repeatCount="indefinite"/>
+            </line>
+          </svg>
+
+          {/* Floating Data Points */}
+          <div className="absolute top-1/6 left-1/6 w-2 h-2 bg-cyan-400 rounded-full animate-ping opacity-60"></div>
+          <div className="absolute top-5/6 right-1/6 w-2 h-2 bg-purple-400 rounded-full animate-ping opacity-60" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-1/2 left-1/12 w-1 h-1 bg-blue-400 rounded-full animate-ping opacity-50" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-1/2 right-1/12 w-1 h-1 bg-pink-400 rounded-full animate-ping opacity-50" style={{animationDelay: '0.5s'}}></div>
+
+          {/* Professional Hexagon Pattern */}
+          <div className="absolute top-10 right-20 opacity-10">
+            <svg width="60" height="60" viewBox="0 0 60 60">
+              <polygon points="30,5 50,15 50,35 30,45 10,35 10,15" fill="none" stroke="rgba(0, 212, 255, 0.8)" strokeWidth="1">
+                <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/>
+              </polygon>
+            </svg>
+          </div>
+          <div className="absolute bottom-10 left-20 opacity-10">
+            <svg width="40" height="40" viewBox="0 0 40 40">
+              <polygon points="20,3 33,10 33,23 20,30 7,23 7,10" fill="none" stroke="rgba(147, 51, 234, 0.8)" strokeWidth="1">
+                <animate attributeName="stroke-opacity" values="0.8;0.3;0.8" dur="2.5s" repeatCount="indefinite"/>
+              </polygon>
+            </svg>
+          </div>
+        </div>
+
+        {/* Subtle Tech Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-transparent to-black/60"></div>
       </div>
 
       <div className="container mx-auto px-6 text-center relative z-10">

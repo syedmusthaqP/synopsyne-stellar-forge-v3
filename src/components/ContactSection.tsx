@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Brain, Mail, Phone, MapPin, Send, Calendar, Clock, Users, Zap, Target, BarChart3, Settings, MessageSquare } from 'lucide-react';
+import { Brain, Mail, Phone, MapPin, Send, Calendar, Clock, Users, Zap, Target, BarChart3, Settings, MessageSquare, Database, Shield, Cpu, Cloud, Code, Bot } from 'lucide-react';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +15,8 @@ const ContactSection = () => {
   });
 
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
 
   const productivityFeatures = [
     { id: 'ai-automation', name: 'AI Process Automation', icon: Zap, description: 'Automate repetitive tasks with intelligent workflows' },
@@ -24,7 +26,13 @@ const ContactSection = () => {
     { id: 'performance-tracking', name: 'Performance Optimization', icon: Target, description: 'Track and optimize team productivity metrics' },
     { id: 'workflow-integration', name: 'Workflow Integration Hub', icon: Settings, description: 'Connect all your tools in one unified platform' },
     { id: 'intelligent-reporting', name: 'Intelligent Reporting', icon: MessageSquare, description: 'Auto-generated insights and progress reports' },
-    { id: 'time-management', name: 'Smart Time Management', icon: Clock, description: 'AI-driven time tracking and optimization suggestions' }
+    { id: 'time-management', name: 'Smart Time Management', icon: Clock, description: 'AI-driven time tracking and optimization suggestions' },
+    { id: 'data-visualization', name: 'Advanced Data Visualization', icon: Database, description: 'Interactive charts and comprehensive data insights' },
+    { id: 'security-compliance', name: 'Security & Compliance Suite', icon: Shield, description: 'Enterprise-grade security with compliance automation' },
+    { id: 'machine-learning', name: 'Custom ML Models', icon: Cpu, description: 'Tailored machine learning solutions for your business' },
+    { id: 'cloud-integration', name: 'Multi-Cloud Integration', icon: Cloud, description: 'Seamless integration across AWS, Azure, and GCP' },
+    { id: 'api-development', name: 'Custom API Development', icon: Code, description: 'RESTful and GraphQL APIs for seamless integrations' },
+    { id: 'chatbot-ai', name: 'AI-Powered Chatbots', icon: Bot, description: 'Intelligent customer service and internal support bots' }
   ];
 
   const handleFeatureToggle = (featureId: string) => {
@@ -35,10 +43,34 @@ const ContactSection = () => {
     );
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', { ...formData, features: selectedFeatures });
-    // Handle form submission logic here
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    setTimeout(() => {
+      const selectedFeatureNames = selectedFeatures
+        .map(id => productivityFeatures.find(f => f.id === id)?.name)
+        .filter(Boolean);
+      
+      console.log('Neural Connection Request Submitted:', {
+        ...formData,
+        features: selectedFeatureNames,
+        timestamp: new Date().toISOString()
+      });
+      
+      setSubmitMessage(`🧠 Neural Connection Established! 
+      
+Thank you ${formData.name || 'valued client'}, your request for ${formData.projectType || 'custom solution'} has been transmitted to our AI systems. 
+
+Selected Features: ${selectedFeatureNames.length > 0 ? selectedFeatureNames.join(', ') : 'Basic consultation'}
+Timeline: ${formData.timeline || 'To be discussed'}
+Budget Range: ${formData.budget || 'To be determined'}
+
+Our neural network is processing your requirements. Expect a response within 4 hours with a personalized solution architecture.`);
+      
+      setIsSubmitting(false);
+    }, 2000);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -78,6 +110,12 @@ const ContactSection = () => {
           <div className="glassmorphism p-8 rounded-2xl neon-border">
             <h2 className="text-2xl font-bold text-white mb-6">Start Your Digital Transformation</h2>
             
+            {submitMessage && (
+              <div className="mb-6 p-4 rounded-lg bg-gradient-to-r from-green-500/20 to-cyan-500/20 border border-green-400/30">
+                <pre className="text-green-300 text-sm whitespace-pre-wrap">{submitMessage}</pre>
+              </div>
+            )}
+            
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -87,7 +125,7 @@ const ContactSection = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 glassmorphism rounded-lg text-white placeholder-gray-400 focus:neon-border focus:outline-none transition-all"
+                    className="w-full px-4 py-3 bg-black/30 backdrop-blur-md border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none transition-all"
                     placeholder="Your full name"
                     required
                   />
@@ -99,7 +137,7 @@ const ContactSection = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 glassmorphism rounded-lg text-white placeholder-gray-400 focus:neon-border focus:outline-none transition-all"
+                    className="w-full px-4 py-3 bg-black/30 backdrop-blur-md border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none transition-all"
                     placeholder="your.email@company.com"
                     required
                   />
@@ -114,7 +152,7 @@ const ContactSection = () => {
                     name="company"
                     value={formData.company}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 glassmorphism rounded-lg text-white placeholder-gray-400 focus:neon-border focus:outline-none transition-all"
+                    className="w-full px-4 py-3 bg-black/30 backdrop-blur-md border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none transition-all"
                     placeholder="Your company name"
                   />
                 </div>
@@ -124,15 +162,19 @@ const ContactSection = () => {
                     name="projectType"
                     value={formData.projectType}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 glassmorphism rounded-lg text-white focus:neon-border focus:outline-none transition-all"
+                    className="w-full px-4 py-3 bg-black/30 backdrop-blur-md border border-white/20 rounded-lg text-white focus:border-cyan-400 focus:outline-none transition-all"
+                    style={{
+                      backgroundImage: 'none',
+                      appearance: 'none'
+                    }}
                   >
-                    <option value="">Select project type</option>
-                    <option value="web-app">Web Application</option>
-                    <option value="mobile-app">Mobile Application</option>
-                    <option value="ai-integration">AI Integration</option>
-                    <option value="cloud-solution">Cloud Solution</option>
-                    <option value="consulting">Consulting</option>
-                    <option value="other">Other</option>
+                    <option value="" className="bg-gray-900 text-white">Select project type</option>
+                    <option value="web-app" className="bg-gray-900 text-white">Web Application</option>
+                    <option value="mobile-app" className="bg-gray-900 text-white">Mobile Application</option>
+                    <option value="ai-integration" className="bg-gray-900 text-white">AI Integration</option>
+                    <option value="cloud-solution" className="bg-gray-900 text-white">Cloud Solution</option>
+                    <option value="consulting" className="bg-gray-900 text-white">Consulting</option>
+                    <option value="other" className="bg-gray-900 text-white">Other</option>
                   </select>
                 </div>
               </div>
@@ -144,14 +186,18 @@ const ContactSection = () => {
                     name="timeline"
                     value={formData.timeline}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 glassmorphism rounded-lg text-white focus:neon-border focus:outline-none transition-all"
+                    className="w-full px-4 py-3 bg-black/30 backdrop-blur-md border border-white/20 rounded-lg text-white focus:border-cyan-400 focus:outline-none transition-all"
+                    style={{
+                      backgroundImage: 'none',
+                      appearance: 'none'
+                    }}
                   >
-                    <option value="">Select timeline</option>
-                    <option value="urgent">ASAP (Rush project)</option>
-                    <option value="1-3-months">1-3 months</option>
-                    <option value="3-6-months">3-6 months</option>
-                    <option value="6-12-months">6-12 months</option>
-                    <option value="ongoing">Ongoing partnership</option>
+                    <option value="" className="bg-gray-900 text-white">Select timeline</option>
+                    <option value="urgent" className="bg-gray-900 text-white">ASAP (Rush project)</option>
+                    <option value="1-3-months" className="bg-gray-900 text-white">1-3 months</option>
+                    <option value="3-6-months" className="bg-gray-900 text-white">3-6 months</option>
+                    <option value="6-12-months" className="bg-gray-900 text-white">6-12 months</option>
+                    <option value="ongoing" className="bg-gray-900 text-white">Ongoing partnership</option>
                   </select>
                 </div>
                 <div>
@@ -160,14 +206,18 @@ const ContactSection = () => {
                     name="budget"
                     value={formData.budget}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 glassmorphism rounded-lg text-white focus:neon-border focus:outline-none transition-all"
+                    className="w-full px-4 py-3 bg-black/30 backdrop-blur-md border border-white/20 rounded-lg text-white focus:border-cyan-400 focus:outline-none transition-all"
+                    style={{
+                      backgroundImage: 'none',
+                      appearance: 'none'
+                    }}
                   >
-                    <option value="">Select budget range</option>
-                    <option value="10k-25k">$10k - $25k</option>
-                    <option value="25k-50k">$25k - $50k</option>
-                    <option value="50k-100k">$50k - $100k</option>
-                    <option value="100k-250k">$100k - $250k</option>
-                    <option value="250k+">$250k+</option>
+                    <option value="" className="bg-gray-900 text-white">Select budget range</option>
+                    <option value="10k-25k" className="bg-gray-900 text-white">$10k - $25k</option>
+                    <option value="25k-50k" className="bg-gray-900 text-white">$25k - $50k</option>
+                    <option value="50k-100k" className="bg-gray-900 text-white">$50k - $100k</option>
+                    <option value="100k-250k" className="bg-gray-900 text-white">$100k - $250k</option>
+                    <option value="250k+" className="bg-gray-900 text-white">$250k+</option>
                   </select>
                 </div>
               </div>
@@ -177,7 +227,7 @@ const ContactSection = () => {
                 <label className="block text-white text-sm font-medium mb-4">
                   Productivity Features You're Interested In:
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-64 overflow-y-auto">
                   {productivityFeatures.map((feature) => (
                     <div
                       key={feature.id}
@@ -215,7 +265,7 @@ const ContactSection = () => {
                   value={formData.message}
                   onChange={handleInputChange}
                   rows={5}
-                  className="w-full px-4 py-3 glassmorphism rounded-lg text-white placeholder-gray-400 focus:neon-border focus:outline-none transition-all resize-none"
+                  className="w-full px-4 py-3 bg-black/30 backdrop-blur-md border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none transition-all resize-none"
                   placeholder="Tell us about your project, goals, and any specific requirements..."
                   required
                 ></textarea>
@@ -223,10 +273,20 @@ const ContactSection = () => {
 
               <button
                 type="submit"
-                className="w-full neon-border px-8 py-4 rounded-lg text-white font-semibold hover:bg-cyan-500/10 transition-all transform hover:scale-105 flex items-center justify-center"
+                disabled={isSubmitting}
+                className="w-full neon-border px-8 py-4 rounded-lg text-white font-semibold hover:bg-cyan-500/10 transition-all transform hover:scale-105 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <Send className="w-5 h-5 mr-2" />
-                Send Neural Connection Request
+                {isSubmitting ? (
+                  <>
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-cyan-400 mr-2"></div>
+                    Processing Neural Connection...
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-5 h-5 mr-2" />
+                    Send Neural Connection Request
+                  </>
+                )}
               </button>
             </form>
           </div>
@@ -244,7 +304,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-white font-semibold">Email</p>
-                    <p className="text-gray-300">hello@synopsyne.com</p>
+                    <p className="text-gray-300">syedmusthaqk786@gmail.com</p>
                   </div>
                 </div>
 
@@ -254,7 +314,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-white font-semibold">Phone</p>
-                    <p className="text-gray-300">+1 (555) 123-4567</p>
+                    <p className="text-gray-300">7013425496</p>
                   </div>
                 </div>
 
@@ -264,7 +324,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-white font-semibold">Location</p>
-                    <p className="text-gray-300">San Francisco, CA</p>
+                    <p className="text-gray-300">Andhra Pradesh, India</p>
                   </div>
                 </div>
               </div>
