@@ -9,6 +9,7 @@ const ContactSection = () => {
     company: '',
     message: '',
     projectType: '',
+    customProjectType: '',
     timeline: '',
     budget: '',
     features: []
@@ -73,7 +74,7 @@ Thank you ${formData.name || 'valued client'}, your digital transformation reque
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 • Client: ${formData.name || 'To be provided'}
 • Company: ${formData.company || 'Individual/Startup'}
-• Project Type: ${formData.projectType || 'Custom Solution'}
+• Project Type: ${formData.projectType === 'other' ? formData.customProjectType : formData.projectType || 'Custom Solution'}
 • Timeline: ${formData.timeline || 'To be discussed'}
 • Budget Range: ${formData.budget || 'To be determined'}
 • Selected Features: ${selectedFeatureNames.length > 0 ? selectedFeatureNames.join(', ') : 'Basic consultation package'}
@@ -94,6 +95,20 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
 
 🔗 Connection Status: ACTIVE | Priority: HIGH | Response Time: < 4 Hours`);
       
+      // Clear form data after submission
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        message: '',
+        projectType: '',
+        customProjectType: '',
+        timeline: '',
+        budget: '',
+        features: []
+      });
+      setSelectedFeatures([]);
+      
       setIsSubmitting(false);
     }, 2000);
   };
@@ -104,6 +119,29 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
       [e.target.name]: e.target.value
     }));
   };
+
+  const productivityFeatures = [
+    { id: 'ai-automation', name: 'AI Process Automation', icon: Zap, description: 'Automate repetitive tasks with intelligent workflows' },
+    { id: 'real-time-analytics', name: 'Real-time Analytics Dashboard', icon: BarChart3, description: 'Monitor performance and KPIs in real-time' },
+    { id: 'team-collaboration', name: 'Advanced Team Collaboration', icon: Users, description: 'Seamless communication and project management tools' },
+    { id: 'smart-scheduling', name: 'AI-Powered Scheduling', icon: Calendar, description: 'Intelligent meeting and resource scheduling' },
+    { id: 'performance-tracking', name: 'Performance Optimization', icon: Target, description: 'Track and optimize team productivity metrics' },
+    { id: 'workflow-integration', name: 'Workflow Integration Hub', icon: Settings, description: 'Connect all your tools in one unified platform' },
+    { id: 'intelligent-reporting', name: 'Intelligent Reporting', icon: MessageSquare, description: 'Auto-generated insights and progress reports' },
+    { id: 'time-management', name: 'Smart Time Management', icon: Clock, description: 'AI-driven time tracking and optimization suggestions' },
+    { id: 'data-visualization', name: 'Advanced Data Visualization', icon: Database, description: 'Interactive charts and comprehensive data insights' },
+    { id: 'security-compliance', name: 'Security & Compliance Suite', icon: Shield, description: 'Enterprise-grade security with compliance automation' },
+    { id: 'machine-learning', name: 'Custom ML Models', icon: Cpu, description: 'Tailored machine learning solutions for your business' },
+    { id: 'cloud-integration', name: 'Multi-Cloud Integration', icon: Cloud, description: 'Seamless integration across AWS, Azure, and GCP' },
+    { id: 'api-development', name: 'Custom API Development', icon: Code, description: 'RESTful and GraphQL APIs for seamless integrations' },
+    { id: 'chatbot-ai', name: 'AI-Powered Chatbots', icon: Bot, description: 'Intelligent customer service and internal support bots' },
+    { id: 'predictive-analytics', name: 'Predictive Analytics Engine', icon: BarChart3, description: 'Forecast trends and make data-driven decisions' },
+    { id: 'voice-recognition', name: 'Voice Recognition System', icon: MessageSquare, description: 'Advanced voice commands and speech-to-text capabilities' },
+    { id: 'blockchain-integration', name: 'Blockchain Solutions', icon: Shield, description: 'Secure and transparent blockchain implementations' },
+    { id: 'iot-connectivity', name: 'IoT Device Management', icon: Cpu, description: 'Connect and manage Internet of Things devices' },
+    { id: 'augmented-reality', name: 'AR/VR Integration', icon: Code, description: 'Immersive augmented and virtual reality experiences' },
+    { id: 'automated-testing', name: 'Automated Testing Suite', icon: Settings, description: 'Comprehensive automated testing and quality assurance' }
+  ];
 
   return (
     <section className="min-h-screen flex items-center justify-center relative pt-20">
@@ -144,33 +182,33 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-white text-sm font-medium mb-2">Name *</label>
+                  <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Name *</label>
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 glassmorphism border border-cyan-400/30 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                    className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all"
                     placeholder="Your full name"
                     required
                     style={{
-                      background: 'rgba(0, 0, 0, 0.2)',
+                      background: 'rgba(0, 0, 0, 0.4)',
                       backdropFilter: 'blur(10px)',
                     }}
                   />
                 </div>
                 <div>
-                  <label className="block text-white text-sm font-medium mb-2">Email *</label>
+                  <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Email *</label>
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 glassmorphism border border-cyan-400/30 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                    className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all"
                     placeholder="your.email@company.com"
                     required
                     style={{
-                      background: 'rgba(0, 0, 0, 0.2)',
+                      background: 'rgba(0, 0, 0, 0.4)',
                       backdropFilter: 'blur(10px)',
                     }}
                   />
@@ -179,40 +217,40 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-white text-sm font-medium mb-2">Company</label>
+                  <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Company</label>
                   <input
                     type="text"
                     name="company"
                     value={formData.company}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 glassmorphism border border-cyan-400/30 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                    className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all"
                     placeholder="Your company name"
                     style={{
-                      background: 'rgba(0, 0, 0, 0.2)',
+                      background: 'rgba(0, 0, 0, 0.4)',
                       backdropFilter: 'blur(10px)',
                     }}
                   />
                 </div>
                 <div>
-                  <label className="block text-white text-sm font-medium mb-2">Project Type</label>
+                  <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Project Type</label>
                   <div className="relative">
                     <select
                       name="projectType"
                       value={formData.projectType}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 glassmorphism border border-cyan-400/30 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
+                      className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
                       style={{
-                        background: 'rgba(0, 0, 0, 0.2)',
+                        background: 'rgba(0, 0, 0, 0.4)',
                         backdropFilter: 'blur(10px)',
                       }}
                     >
-                      <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>Select project type</option>
-                      <option value="web-app" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>Web Application</option>
-                      <option value="mobile-app" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>Mobile Application</option>
-                      <option value="ai-integration" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>AI Integration</option>
-                      <option value="cloud-solution" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>Cloud Solution</option>
-                      <option value="consulting" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>Consulting</option>
-                      <option value="other" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>Other</option>
+                      <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Select project type</option>
+                      <option value="web-app" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Web Application</option>
+                      <option value="mobile-app" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Mobile Application</option>
+                      <option value="ai-integration" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>AI Integration</option>
+                      <option value="cloud-solution" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Cloud Solution</option>
+                      <option value="consulting" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Consulting</option>
+                      <option value="other" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Other</option>
                     </select>
                     <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                       <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -220,29 +258,43 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
                       </svg>
                     </div>
                   </div>
+                  {formData.projectType === 'other' && (
+                    <input
+                      type="text"
+                      name="customProjectType"
+                      value={formData.customProjectType}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all mt-2"
+                      placeholder="Please specify your project type"
+                      style={{
+                        background: 'rgba(0, 0, 0, 0.4)',
+                        backdropFilter: 'blur(10px)',
+                      }}
+                    />
+                  )}
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-white text-sm font-medium mb-2">Timeline</label>
+                  <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Timeline</label>
                   <div className="relative">
                     <select
                       name="timeline"
                       value={formData.timeline}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 glassmorphism border border-cyan-400/30 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
+                      className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
                       style={{
-                        background: 'rgba(0, 0, 0, 0.2)',
+                        background: 'rgba(0, 0, 0, 0.4)',
                         backdropFilter: 'blur(10px)',
                       }}
                     >
-                      <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>Select timeline</option>
-                      <option value="urgent" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>ASAP (Rush project)</option>
-                      <option value="1-3-months" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>1-3 months</option>
-                      <option value="3-6-months" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>3-6 months</option>
-                      <option value="6-12-months" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>6-12 months</option>
-                      <option value="ongoing" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>Ongoing partnership</option>
+                      <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Select timeline</option>
+                      <option value="urgent" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>ASAP (Rush project)</option>
+                      <option value="1-3-months" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>1-3 months</option>
+                      <option value="3-6-months" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>3-6 months</option>
+                      <option value="6-12-months" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>6-12 months</option>
+                      <option value="ongoing" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Ongoing partnership</option>
                     </select>
                     <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                       <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -252,24 +304,24 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
                   </div>
                 </div>
                 <div>
-                  <label className="block text-white text-sm font-medium mb-2">Budget Range</label>
+                  <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Budget Range</label>
                   <div className="relative">
                     <select
                       name="budget"
                       value={formData.budget}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 glassmorphism border border-cyan-400/30 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
+                      className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
                       style={{
-                        background: 'rgba(0, 0, 0, 0.2)',
+                        background: 'rgba(0, 0, 0, 0.4)',
                         backdropFilter: 'blur(10px)',
                       }}
                     >
-                      <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>Select budget range</option>
-                      <option value="10k-25k" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>$10k - $25k</option>
-                      <option value="25k-50k" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>$25k - $50k</option>
-                      <option value="50k-100k" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>$50k - $100k</option>
-                      <option value="100k-250k" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>$100k - $250k</option>
-                      <option value="250k+" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>$250k+</option>
+                      <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Select budget range</option>
+                      <option value="10k-25k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$10k - $25k</option>
+                      <option value="25k-50k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$25k - $50k</option>
+                      <option value="50k-100k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$50k - $100k</option>
+                      <option value="100k-250k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$100k - $250k</option>
+                      <option value="250k+" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$250k+</option>
                     </select>
                     <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                       <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -285,7 +337,12 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
                 <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-4">
                   Productivity Features You're Interested In:
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 h-80 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-cyan-400/50 scrollbar-track-transparent">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-80 overflow-y-auto pr-2" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                  <style jsx>{`
+                    div::-webkit-scrollbar {
+                      display: none;
+                    }
+                  `}</style>
                   {productivityFeatures.map((feature) => (
                     <div
                       key={feature.id}
@@ -317,17 +374,17 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
               </div>
 
               <div>
-                <label className="block text-white text-sm font-medium mb-2">Project Details *</label>
+                <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Project Details *</label>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleInputChange}
                   rows={5}
-                  className="w-full px-4 py-3 glassmorphism border border-cyan-400/30 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all resize-none"
+                  className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all resize-none"
                   placeholder="Tell us about your project, goals, and any specific requirements..."
                   required
                   style={{
-                    background: 'rgba(0, 0, 0, 0.2)',
+                    background: 'rgba(0, 0, 0, 0.4)',
                     backdropFilter: 'blur(10px)',
                   }}
                 ></textarea>
@@ -356,8 +413,7 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
           {/* Contact Info & Quick Stats */}
           <div className="space-y-8">
             {/* Contact Information */}
-            <div className="glassmorphism p-8 rounded-2xl border-2 border-transparent bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 relative">
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/30 via-blue-500/30 to-purple-500/30 blur-sm -z-10"></div>
+            <div className="glassmorphism p-8 rounded-2xl neon-border">
               <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Connect Directly</h3>
               
               <div className="space-y-6">
@@ -366,8 +422,8 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
                     <Mail className="w-6 h-6 text-neon" />
                   </div>
                   <div>
-                    <p className="text-white font-semibold">Email</p>
-                    <p className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent font-medium">syedmusthaqk786@gmail.com</p>
+                    <p className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent font-semibold">Email</p>
+                    <p className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent font-medium">syedmusthaqk786@gmail.com</p>
                   </div>
                 </div>
 
@@ -376,8 +432,8 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
                     <Phone className="w-6 h-6 text-neon" />
                   </div>
                   <div>
-                    <p className="text-white font-semibold">Phone</p>
-                    <p className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent font-medium">7013425496</p>
+                    <p className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent font-semibold">Phone</p>
+                    <p className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent font-medium">7013425496</p>
                   </div>
                 </div>
 
@@ -386,16 +442,15 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
                     <MapPin className="w-6 h-6 text-neon" />
                   </div>
                   <div>
-                    <p className="text-white font-semibold">Location</p>
-                    <p className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent font-medium">Andhra Pradesh, India</p>
+                    <p className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent font-semibold">Location</p>
+                    <p className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent font-medium">Andhra Pradesh, India</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Response Time & Stats */}
-            <div className="glassmorphism p-8 rounded-2xl border-2 border-transparent bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 relative">
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/30 via-blue-500/30 to-purple-500/30 blur-sm -z-10"></div>
+            <div className="glassmorphism p-8 rounded-2xl neon-border">
               <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Our Commitment</h3>
               
               <div className="space-y-4">
@@ -417,8 +472,7 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
             </div>
 
             {/* Quick Benefits */}
-            <div className="glassmorphism p-8 rounded-2xl border-2 border-transparent bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 relative">
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/30 via-blue-500/30 to-purple-500/30 blur-sm -z-10"></div>
+            <div className="glassmorphism p-8 rounded-2xl neon-border">
               <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Why Choose Us?</h3>
               
               <div className="space-y-3">
