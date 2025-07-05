@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, Rocket, Brain, Code, Database, Cpu } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -73,18 +74,18 @@ const HeroSection = () => {
           {/* Code Snippets */}
           <div className="absolute top-20 left-10 opacity-20">
             <div className="text-cyan-400 font-mono text-xs space-y-1 animate-pulse glassmorphism p-3 rounded border border-cyan-400/20">
-              <div>const AI = () =&gt; {</div>
+              <div>const AI = () =&gt; &#123;</div>
               <div>  return future;</div>
-              <div>};</div>
+              <div>&#125;;</div>
             </div>
           </div>
           <div className="absolute bottom-20 right-10 opacity-20">
             <div className="text-purple-400 font-mono text-xs space-y-1 animate-pulse glassmorphism p-3 rounded border border-purple-400/20" style={{animationDelay: '1s'}}>
-              <div>class Neural {</div>
-              <div>  process() {</div>
+              <div>class Neural &#123;</div>
+              <div>  process() &#123;</div>
               <div>    return data;</div>
-              <div>  }</div>
-              <div>}</div>
+              <div>  &#125;</div>
+              <div>&#125;</div>
             </div>
           </div>
 
