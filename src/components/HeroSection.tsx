@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, Rocket, Brain } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -28,37 +29,87 @@ const HeroSection = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center relative pt-20">
-      {/* New Geometric Pattern Background */}
+      {/* AI/Software Neural Network Background */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Dynamic gradient overlay based on mouse position */}
+        {/* Dynamic gradient overlay */}
         <div 
-          className="absolute inset-0 opacity-30 transition-all duration-1000"
+          className="absolute inset-0 opacity-40 transition-all duration-1000"
           style={{
-            background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(0, 212, 255, 0.2) 0%, rgba(147, 51, 234, 0.1) 50%, transparent 70%)`
+            background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(0, 212, 255, 0.3) 0%, rgba(147, 51, 234, 0.2) 50%, transparent 70%)`
           }}
         ></div>
 
-        {/* Animated geometric shapes */}
+        {/* Animated Neural Network Nodes */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-32 h-32 border border-cyan-400/20 rotate-45 animate-pulse"></div>
-          <div className="absolute top-40 right-20 w-20 h-20 border border-purple-500/20 rotate-12 animate-float"></div>
-          <div className="absolute bottom-40 left-20 w-24 h-24 border border-blue-400/20 rotate-45 animate-float" style={{animationDelay: '1s'}}></div>
-          <div className="absolute bottom-20 right-40 w-16 h-16 border border-pink-400/20 rotate-12 animate-pulse"></div>
-          
-          {/* Floating orbs */}
-          <div className="absolute top-1/3 left-1/4 w-4 h-4 bg-gradient-to-br from-cyan-400/40 to-blue-500/40 rounded-full blur-sm animate-float"></div>
-          <div className="absolute top-2/3 right-1/3 w-6 h-6 bg-gradient-to-br from-purple-400/40 to-pink-500/40 rounded-full blur-sm animate-float" style={{animationDelay: '2s'}}></div>
-          <div className="absolute top-1/2 left-1/2 w-3 h-3 bg-gradient-to-br from-blue-400/40 to-cyan-500/40 rounded-full blur-sm animate-float" style={{animationDelay: '1.5s'}}></div>
+          {/* Central AI Brain Hub */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-400/40 to-blue-500/40 animate-pulse flex items-center justify-center">
+              <Brain className="w-10 h-10 text-cyan-300" />
+            </div>
+            
+            {/* Neural Connection Lines */}
+            <svg className="absolute inset-0 w-96 h-96 transform -translate-x-1/2 -translate-y-1/2" viewBox="0 0 400 400">
+              {/* Connection lines with animation */}
+              <g className="animate-pulse">
+                <line x1="200" y1="200" x2="80" y2="120" stroke="rgba(0, 212, 255, 0.6)" strokeWidth="2" strokeDasharray="4,4">
+                  <animate attributeName="stroke-dashoffset" values="0;8" dur="2s" repeatCount="indefinite"/>
+                </line>
+                <line x1="200" y1="200" x2="320" y2="120" stroke="rgba(0, 212, 255, 0.6)" strokeWidth="2" strokeDasharray="4,4">
+                  <animate attributeName="stroke-dashoffset" values="0;8" dur="2.5s" repeatCount="indefinite"/>
+                </line>
+                <line x1="200" y1="200" x2="80" y2="280" stroke="rgba(147, 51, 234, 0.6)" strokeWidth="2" strokeDasharray="4,4">
+                  <animate attributeName="stroke-dashoffset" values="0;8" dur="3s" repeatCount="indefinite"/>
+                </line>
+                <line x1="200" y1="200" x2="320" y2="280" stroke="rgba(147, 51, 234, 0.6)" strokeWidth="2" strokeDasharray="4,4">
+                  <animate attributeName="stroke-dashoffset" values="0;8" dur="1.8s" repeatCount="indefinite"/>
+                </line>
+                <line x1="200" y1="200" x2="200" y2="80" stroke="rgba(0, 212, 255, 0.6)" strokeWidth="2" strokeDasharray="4,4">
+                  <animate attributeName="stroke-dashoffset" values="0;8" dur="2.2s" repeatCount="indefinite"/>
+                </line>
+                <line x1="200" y1="200" x2="200" y2="320" stroke="rgba(147, 51, 234, 0.6)" strokeWidth="2" strokeDasharray="4,4">
+                  <animate attributeName="stroke-dashoffset" values="0;8" dur="2.8s" repeatCount="indefinite"/>
+                </line>
+              </g>
+            </svg>
+          </div>
+
+          {/* Software/Code Elements */}
+          <div className="absolute top-20 left-20 w-12 h-12 border border-cyan-400/30 rounded-lg animate-float flex items-center justify-center">
+            <div className="text-cyan-400 text-xs font-mono">&lt;/&gt;</div>
+          </div>
+          <div className="absolute top-32 right-32 w-10 h-10 border border-purple-400/30 rounded-lg animate-float flex items-center justify-center" style={{animationDelay: '1s'}}>
+            <div className="text-purple-400 text-xs font-mono">AI</div>
+          </div>
+          <div className="absolute bottom-32 left-32 w-14 h-14 border border-blue-400/30 rounded-lg animate-float flex items-center justify-center" style={{animationDelay: '2s'}}>
+            <div className="text-blue-400 text-xs font-mono">ML</div>
+          </div>
+          <div className="absolute bottom-20 right-20 w-12 h-12 border border-pink-400/30 rounded-lg animate-float flex items-center justify-center" style={{animationDelay: '1.5s'}}>
+            <div className="text-pink-400 text-xs font-mono">DB</div>
+          </div>
+
+          {/* Neural Nodes */}
+          <div className="absolute top-1/4 left-1/4 w-6 h-6 rounded-full bg-gradient-to-br from-cyan-400/50 to-blue-500/50 animate-pulse"></div>
+          <div className="absolute top-1/4 right-1/4 w-4 h-4 rounded-full bg-gradient-to-br from-purple-400/50 to-pink-500/50 animate-pulse" style={{animationDelay: '0.5s'}}></div>
+          <div className="absolute bottom-1/4 left-1/4 w-5 h-5 rounded-full bg-gradient-to-br from-blue-400/50 to-cyan-500/50 animate-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="absolute bottom-1/4 right-1/4 w-6 h-6 rounded-full bg-gradient-to-br from-pink-400/50 to-purple-500/50 animate-pulse" style={{animationDelay: '1.5s'}}></div>
+
+          {/* Data Flow Particles */}
+          <div className="absolute top-1/3 left-1/6 w-2 h-2 bg-cyan-400 rounded-full animate-ping opacity-75"></div>
+          <div className="absolute top-2/3 right-1/6 w-2 h-2 bg-purple-400 rounded-full animate-ping opacity-75" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-1/2 left-1/12 w-2 h-2 bg-blue-400 rounded-full animate-ping opacity-75" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-1/2 right-1/12 w-2 h-2 bg-pink-400 rounded-full animate-ping opacity-75" style={{animationDelay: '0.5s'}}></div>
         </div>
 
-        {/* Grid pattern overlay */}
-        <div className="absolute inset-0 opacity-10">
+        {/* Circuit Board Pattern */}
+        <div className="absolute inset-0 opacity-5">
           <div className="w-full h-full" style={{
             backgroundImage: `
-              linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px)
+              linear-gradient(rgba(0, 212, 255, 0.3) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(0, 212, 255, 0.3) 1px, transparent 1px),
+              linear-gradient(rgba(147, 51, 234, 0.2) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(147, 51, 234, 0.2) 1px, transparent 1px)
             `,
-            backgroundSize: '50px 50px'
+            backgroundSize: '60px 60px, 60px 60px, 20px 20px, 20px 20px'
           }}></div>
         </div>
       </div>

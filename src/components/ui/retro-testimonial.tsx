@@ -62,21 +62,21 @@ const Carousel = ({items, initialScroll = 0}: iCarouselProps) => {
 
 	const handleScrollLeft = () => {
 		if (carouselRef.current) {
-			const scrollAmount = isMobile() ? 250 : 400;
+			const scrollAmount = isMobile() ? 200 : 320; // Reduced scroll amount for smaller cards
 			carouselRef.current.scrollBy({left: -scrollAmount, behavior: "smooth"});
 		}
 	};
 
 	const handleScrollRight = () => {
 		if (carouselRef.current) {
-			const scrollAmount = isMobile() ? 250 : 400;
+			const scrollAmount = isMobile() ? 200 : 320; // Reduced scroll amount for smaller cards
 			carouselRef.current.scrollBy({left: scrollAmount, behavior: "smooth"});
 		}
 	};
 
 	const handleCardClose = (index: number) => {
 		if (carouselRef.current) {
-			const cardWidth = isMobile() ? 230 : 384;
+			const cardWidth = isMobile() ? 180 : 300; // Adjusted for smaller card width
 			const gap = isMobile() ? 4 : 8;
 			const scrollPosition = (cardWidth + gap) * (index + 1);
 			carouselRef.current.scrollTo({
@@ -300,7 +300,7 @@ const TestimonialCard = ({
 				}}
 			>
 				<div
-					className={`${index % 2 === 0 ? "rotate-0" : "-rotate-0"} rounded-3xl glassmorphism h-[500px] md:h-[550px] w-80 md:w-96 overflow-hidden flex flex-col items-center justify-center relative z-10 shadow-md neon-border`}
+					className={`${index % 2 === 0 ? "rotate-0" : "-rotate-0"} rounded-3xl glassmorphism h-[400px] md:h-[420px] w-64 md:w-80 overflow-hidden flex flex-col items-center justify-center relative z-10 shadow-md neon-border`}
 				>
 					<div className="absolute opacity-20" style={{inset: "-1px 0 0"}}>
 						<div className="absolute inset-0">
@@ -315,24 +315,24 @@ const TestimonialCard = ({
 					<ProfileImage src={testimonial.profileImage} alt={testimonial.name} />
 					<motion.p
 						layoutId={layout ? `title-${testimonial.name}` : undefined}
-						className="text-gray-300 text-2xl md:text-2xl font-normal text-center [text-wrap:balance] mt-4 lowercase px-3"
+						className="text-gray-300 text-xl md:text-xl font-normal text-center [text-wrap:balance] mt-4 lowercase px-3"
 					>
-						{testimonial.description.length > 100
-							? `${testimonial.description.slice(0, 100)}...`
+						{testimonial.description.length > 80
+							? `${testimonial.description.slice(0, 80)}...`
 							: testimonial.description}
 					</motion.p>
 					<motion.p
 						layoutId={layout ? `category-${testimonial.name}` : undefined}
-						className="text-cyan-400 text-xl md:text-2xl font-thin italic text-center mt-5 lowercase"
+						className="text-cyan-400 text-lg md:text-xl font-thin italic text-center mt-4 lowercase"
 					>
 						{testimonial.name}.
 					</motion.p>
 					<motion.p
 						layoutId={layout ? `category-${testimonial.name}` : undefined}
-						className="text-gray-400 text-base md:text-base font-thin italic text-center mt-1 lowercase underline underline-offset-8 decoration-1"
+						className="text-gray-400 text-sm md:text-sm font-thin italic text-center mt-1 lowercase underline underline-offset-8 decoration-1"
 					>
-						{testimonial.designation.length > 25
-							? `${testimonial.designation.slice(0, 25)}...`
+						{testimonial.designation.length > 22
+							? `${testimonial.designation.slice(0, 22)}...`
 							: testimonial.designation}
 					</motion.p>
 				</div>
@@ -345,7 +345,7 @@ const ProfileImage = ({src, alt, ...rest}: {src: string; alt: string; className?
 	const [isLoading, setLoading] = useState(true);
 
 	return (
-		<div className="w-[90px] h-[90px] md:w-[150px] md:h-[150px] opacity-80 overflow-hidden rounded-[1000px] border-[3px] border-solid border-cyan-400/60 aspect-[1/1] flex-none saturate-[0.2] sepia-[0.46] relative">
+		<div className="w-[80px] h-[80px] md:w-[120px] md:h-[120px] opacity-80 overflow-hidden rounded-[1000px] border-[3px] border-solid border-cyan-400/60 aspect-[1/1] flex-none saturate-[0.2] sepia-[0.46] relative">
 			<img
 				className={cn(
 					"transition duration-300 absolute top-0 inset-0 rounded-inherit object-cover z-50",
@@ -355,8 +355,8 @@ const ProfileImage = ({src, alt, ...rest}: {src: string; alt: string; className?
 					return setLoading(false);
 				}}
 				src={src}
-				width={150}
-				height={150}
+				width={120}
+				height={120}
 				loading="lazy"
 				decoding="async"
 				alt={alt || "Profile image"}
