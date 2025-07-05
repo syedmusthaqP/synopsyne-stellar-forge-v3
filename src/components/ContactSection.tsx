@@ -32,7 +32,13 @@ const ContactSection = () => {
     { id: 'machine-learning', name: 'Custom ML Models', icon: Cpu, description: 'Tailored machine learning solutions for your business' },
     { id: 'cloud-integration', name: 'Multi-Cloud Integration', icon: Cloud, description: 'Seamless integration across AWS, Azure, and GCP' },
     { id: 'api-development', name: 'Custom API Development', icon: Code, description: 'RESTful and GraphQL APIs for seamless integrations' },
-    { id: 'chatbot-ai', name: 'AI-Powered Chatbots', icon: Bot, description: 'Intelligent customer service and internal support bots' }
+    { id: 'chatbot-ai', name: 'AI-Powered Chatbots', icon: Bot, description: 'Intelligent customer service and internal support bots' },
+    { id: 'predictive-analytics', name: 'Predictive Analytics Engine', icon: BarChart3, description: 'Forecast trends and make data-driven decisions' },
+    { id: 'voice-recognition', name: 'Voice Recognition System', icon: MessageSquare, description: 'Advanced voice commands and speech-to-text capabilities' },
+    { id: 'blockchain-integration', name: 'Blockchain Solutions', icon: Shield, description: 'Secure and transparent blockchain implementations' },
+    { id: 'iot-connectivity', name: 'IoT Device Management', icon: Cpu, description: 'Connect and manage Internet of Things devices' },
+    { id: 'augmented-reality', name: 'AR/VR Integration', icon: Code, description: 'Immersive augmented and virtual reality experiences' },
+    { id: 'automated-testing', name: 'Automated Testing Suite', icon: Settings, description: 'Comprehensive automated testing and quality assurance' }
   ];
 
   const handleFeatureToggle = (featureId: string) => {
@@ -59,15 +65,34 @@ const ContactSection = () => {
         timestamp: new Date().toISOString()
       });
       
-      setSubmitMessage(`🧠 Neural Connection Established! 
-      
-Thank you ${formData.name || 'valued client'}, your request for ${formData.projectType || 'custom solution'} has been transmitted to our AI systems. 
+      setSubmitMessage(`🧠 Neural Connection Established Successfully! 
 
-Selected Features: ${selectedFeatureNames.length > 0 ? selectedFeatureNames.join(', ') : 'Basic consultation'}
-Timeline: ${formData.timeline || 'To be discussed'}
-Budget Range: ${formData.budget || 'To be determined'}
+Thank you ${formData.name || 'valued client'}, your digital transformation request has been processed by our AI systems.
 
-Our neural network is processing your requirements. Expect a response within 4 hours with a personalized solution architecture.`);
+📋 PROJECT SUMMARY:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Client: ${formData.name || 'To be provided'}
+• Company: ${formData.company || 'Individual/Startup'}
+• Project Type: ${formData.projectType || 'Custom Solution'}
+• Timeline: ${formData.timeline || 'To be discussed'}
+• Budget Range: ${formData.budget || 'To be determined'}
+• Selected Features: ${selectedFeatureNames.length > 0 ? selectedFeatureNames.join(', ') : 'Basic consultation package'}
+
+🚀 NEXT STEPS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Initial consultation call within 4 hours
+2. Technical requirements analysis
+3. Custom solution architecture design
+4. Project timeline and milestone planning
+5. Development team assignment
+
+💡 INNOVATION PREVIEW:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Based on your selections, we'll incorporate cutting-edge AI technologies including machine learning algorithms, cloud-native architecture, and advanced automation systems to deliver a solution that exceeds your expectations.
+
+Our neural network has analyzed your requirements and prepared a preliminary solution blueprint. Expect a detailed proposal with cost analysis, technical specifications, and implementation roadmap.
+
+🔗 Connection Status: ACTIVE | Priority: HIGH | Response Time: < 4 Hours`);
       
       setIsSubmitting(false);
     }, 2000);
@@ -91,7 +116,7 @@ Our neural network is processing your requirements. Expect a response within 4 h
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            Get In <span className="text-neon animate-text-glow">Touch</span>
+            Get In <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-pulse">Touch</span>
           </h1>
 
           <div className="relative mb-12 max-w-3xl mx-auto">
@@ -108,7 +133,7 @@ Our neural network is processing your requirements. Expect a response within 4 h
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <div className="glassmorphism p-8 rounded-2xl neon-border">
-            <h2 className="text-2xl font-bold text-white mb-6">Start Your Digital Transformation</h2>
+            <h2 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Start Your Digital Transformation</h2>
             
             {submitMessage && (
               <div className="mb-6 p-4 rounded-lg bg-gradient-to-r from-green-500/20 to-cyan-500/20 border border-green-400/30">
@@ -125,9 +150,13 @@ Our neural network is processing your requirements. Expect a response within 4 h
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-black/30 backdrop-blur-md border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none transition-all"
+                    className="w-full px-4 py-3 glassmorphism border border-cyan-400/30 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all"
                     placeholder="Your full name"
                     required
+                    style={{
+                      background: 'rgba(0, 0, 0, 0.2)',
+                      backdropFilter: 'blur(10px)',
+                    }}
                   />
                 </div>
                 <div>
@@ -137,9 +166,13 @@ Our neural network is processing your requirements. Expect a response within 4 h
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-black/30 backdrop-blur-md border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none transition-all"
+                    className="w-full px-4 py-3 glassmorphism border border-cyan-400/30 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all"
                     placeholder="your.email@company.com"
                     required
+                    style={{
+                      background: 'rgba(0, 0, 0, 0.2)',
+                      backdropFilter: 'blur(10px)',
+                    }}
                   />
                 </div>
               </div>
@@ -152,82 +185,107 @@ Our neural network is processing your requirements. Expect a response within 4 h
                     name="company"
                     value={formData.company}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-black/30 backdrop-blur-md border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none transition-all"
+                    className="w-full px-4 py-3 glassmorphism border border-cyan-400/30 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all"
                     placeholder="Your company name"
+                    style={{
+                      background: 'rgba(0, 0, 0, 0.2)',
+                      backdropFilter: 'blur(10px)',
+                    }}
                   />
                 </div>
                 <div>
                   <label className="block text-white text-sm font-medium mb-2">Project Type</label>
-                  <select
-                    name="projectType"
-                    value={formData.projectType}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-black/30 backdrop-blur-md border border-white/20 rounded-lg text-white focus:border-cyan-400 focus:outline-none transition-all"
-                    style={{
-                      backgroundImage: 'none',
-                      appearance: 'none'
-                    }}
-                  >
-                    <option value="" className="bg-gray-900 text-white">Select project type</option>
-                    <option value="web-app" className="bg-gray-900 text-white">Web Application</option>
-                    <option value="mobile-app" className="bg-gray-900 text-white">Mobile Application</option>
-                    <option value="ai-integration" className="bg-gray-900 text-white">AI Integration</option>
-                    <option value="cloud-solution" className="bg-gray-900 text-white">Cloud Solution</option>
-                    <option value="consulting" className="bg-gray-900 text-white">Consulting</option>
-                    <option value="other" className="bg-gray-900 text-white">Other</option>
-                  </select>
+                  <div className="relative">
+                    <select
+                      name="projectType"
+                      value={formData.projectType}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 glassmorphism border border-cyan-400/30 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
+                      style={{
+                        background: 'rgba(0, 0, 0, 0.2)',
+                        backdropFilter: 'blur(10px)',
+                      }}
+                    >
+                      <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>Select project type</option>
+                      <option value="web-app" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>Web Application</option>
+                      <option value="mobile-app" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>Mobile Application</option>
+                      <option value="ai-integration" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>AI Integration</option>
+                      <option value="cloud-solution" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>Cloud Solution</option>
+                      <option value="consulting" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>Consulting</option>
+                      <option value="other" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>Other</option>
+                    </select>
+                    <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                      <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                    </div>
+                  </div>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-white text-sm font-medium mb-2">Timeline</label>
-                  <select
-                    name="timeline"
-                    value={formData.timeline}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-black/30 backdrop-blur-md border border-white/20 rounded-lg text-white focus:border-cyan-400 focus:outline-none transition-all"
-                    style={{
-                      backgroundImage: 'none',
-                      appearance: 'none'
-                    }}
-                  >
-                    <option value="" className="bg-gray-900 text-white">Select timeline</option>
-                    <option value="urgent" className="bg-gray-900 text-white">ASAP (Rush project)</option>
-                    <option value="1-3-months" className="bg-gray-900 text-white">1-3 months</option>
-                    <option value="3-6-months" className="bg-gray-900 text-white">3-6 months</option>
-                    <option value="6-12-months" className="bg-gray-900 text-white">6-12 months</option>
-                    <option value="ongoing" className="bg-gray-900 text-white">Ongoing partnership</option>
-                  </select>
+                  <div className="relative">
+                    <select
+                      name="timeline"
+                      value={formData.timeline}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 glassmorphism border border-cyan-400/30 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
+                      style={{
+                        background: 'rgba(0, 0, 0, 0.2)',
+                        backdropFilter: 'blur(10px)',
+                      }}
+                    >
+                      <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>Select timeline</option>
+                      <option value="urgent" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>ASAP (Rush project)</option>
+                      <option value="1-3-months" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>1-3 months</option>
+                      <option value="3-6-months" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>3-6 months</option>
+                      <option value="6-12-months" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>6-12 months</option>
+                      <option value="ongoing" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>Ongoing partnership</option>
+                    </select>
+                    <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                      <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                    </div>
+                  </div>
                 </div>
                 <div>
                   <label className="block text-white text-sm font-medium mb-2">Budget Range</label>
-                  <select
-                    name="budget"
-                    value={formData.budget}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-black/30 backdrop-blur-md border border-white/20 rounded-lg text-white focus:border-cyan-400 focus:outline-none transition-all"
-                    style={{
-                      backgroundImage: 'none',
-                      appearance: 'none'
-                    }}
-                  >
-                    <option value="" className="bg-gray-900 text-white">Select budget range</option>
-                    <option value="10k-25k" className="bg-gray-900 text-white">$10k - $25k</option>
-                    <option value="25k-50k" className="bg-gray-900 text-white">$25k - $50k</option>
-                    <option value="50k-100k" className="bg-gray-900 text-white">$50k - $100k</option>
-                    <option value="100k-250k" className="bg-gray-900 text-white">$100k - $250k</option>
-                    <option value="250k+" className="bg-gray-900 text-white">$250k+</option>
-                  </select>
+                  <div className="relative">
+                    <select
+                      name="budget"
+                      value={formData.budget}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 glassmorphism border border-cyan-400/30 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
+                      style={{
+                        background: 'rgba(0, 0, 0, 0.2)',
+                        backdropFilter: 'blur(10px)',
+                      }}
+                    >
+                      <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>Select budget range</option>
+                      <option value="10k-25k" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>$10k - $25k</option>
+                      <option value="25k-50k" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>$25k - $50k</option>
+                      <option value="50k-100k" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>$50k - $100k</option>
+                      <option value="100k-250k" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>$100k - $250k</option>
+                      <option value="250k+" style={{ background: 'rgba(0, 0, 0, 0.9)', backdropFilter: 'blur(10px)' }}>$250k+</option>
+                    </select>
+                    <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                      <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                    </div>
+                  </div>
                 </div>
               </div>
 
               {/* Productivity Features Selection */}
               <div>
-                <label className="block text-white text-sm font-medium mb-4">
+                <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-4">
                   Productivity Features You're Interested In:
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-64 overflow-y-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 h-80 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-cyan-400/50 scrollbar-track-transparent">
                   {productivityFeatures.map((feature) => (
                     <div
                       key={feature.id}
@@ -265,9 +323,13 @@ Our neural network is processing your requirements. Expect a response within 4 h
                   value={formData.message}
                   onChange={handleInputChange}
                   rows={5}
-                  className="w-full px-4 py-3 bg-black/30 backdrop-blur-md border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none transition-all resize-none"
+                  className="w-full px-4 py-3 glassmorphism border border-cyan-400/30 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all resize-none"
                   placeholder="Tell us about your project, goals, and any specific requirements..."
                   required
+                  style={{
+                    background: 'rgba(0, 0, 0, 0.2)',
+                    backdropFilter: 'blur(10px)',
+                  }}
                 ></textarea>
               </div>
 
@@ -294,8 +356,9 @@ Our neural network is processing your requirements. Expect a response within 4 h
           {/* Contact Info & Quick Stats */}
           <div className="space-y-8">
             {/* Contact Information */}
-            <div className="glassmorphism p-8 rounded-2xl border border-white/20">
-              <h3 className="text-2xl font-bold text-white mb-6">Connect Directly</h3>
+            <div className="glassmorphism p-8 rounded-2xl border-2 border-transparent bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 relative">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/30 via-blue-500/30 to-purple-500/30 blur-sm -z-10"></div>
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Connect Directly</h3>
               
               <div className="space-y-6">
                 <div className="flex items-center space-x-4">
@@ -304,7 +367,7 @@ Our neural network is processing your requirements. Expect a response within 4 h
                   </div>
                   <div>
                     <p className="text-white font-semibold">Email</p>
-                    <p className="text-gray-300">syedmusthaqk786@gmail.com</p>
+                    <p className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent font-medium">syedmusthaqk786@gmail.com</p>
                   </div>
                 </div>
 
@@ -314,7 +377,7 @@ Our neural network is processing your requirements. Expect a response within 4 h
                   </div>
                   <div>
                     <p className="text-white font-semibold">Phone</p>
-                    <p className="text-gray-300">7013425496</p>
+                    <p className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent font-medium">7013425496</p>
                   </div>
                 </div>
 
@@ -324,15 +387,16 @@ Our neural network is processing your requirements. Expect a response within 4 h
                   </div>
                   <div>
                     <p className="text-white font-semibold">Location</p>
-                    <p className="text-gray-300">Andhra Pradesh, India</p>
+                    <p className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent font-medium">Andhra Pradesh, India</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Response Time & Stats */}
-            <div className="glassmorphism p-8 rounded-2xl border border-white/20">
-              <h3 className="text-2xl font-bold text-white mb-6">Our Commitment</h3>
+            <div className="glassmorphism p-8 rounded-2xl border-2 border-transparent bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 relative">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/30 via-blue-500/30 to-purple-500/30 blur-sm -z-10"></div>
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Our Commitment</h3>
               
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-cyan-500/10 to-blue-500/10">
@@ -353,8 +417,9 @@ Our neural network is processing your requirements. Expect a response within 4 h
             </div>
 
             {/* Quick Benefits */}
-            <div className="glassmorphism p-8 rounded-2xl border border-white/20">
-              <h3 className="text-2xl font-bold text-white mb-6">Why Choose Us?</h3>
+            <div className="glassmorphism p-8 rounded-2xl border-2 border-transparent bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 relative">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/30 via-blue-500/30 to-purple-500/30 blur-sm -z-10"></div>
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Why Choose Us?</h3>
               
               <div className="space-y-3">
                 {[
