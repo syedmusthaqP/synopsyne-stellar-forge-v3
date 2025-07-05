@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, Rocket, Brain, Code, Database, Cpu } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -50,77 +49,82 @@ const HeroSection = () => {
           }}></div>
         </div>
 
-        {/* Animated Code Blocks */}
+        {/* Neural Network Nodes */}
         <div className="absolute inset-0">
-          {/* Central Neural Hub */}
+          {/* Central Processing Unit */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-cyan-400/30 to-blue-500/30 animate-pulse flex items-center justify-center backdrop-blur-sm border border-cyan-400/20">
-              <Brain className="w-8 h-8 text-cyan-300" />
+            <div className="w-20 h-20 rounded-lg bg-gradient-to-br from-cyan-400/20 to-blue-500/20 animate-pulse flex items-center justify-center backdrop-blur-sm border border-cyan-400/30">
+              <Brain className="w-10 h-10 text-cyan-300" />
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg animate-ping"></div>
             </div>
           </div>
 
-          {/* Floating Tech Icons */}
-          <div className="absolute top-1/4 left-1/4 w-12 h-12 rounded-lg bg-black/20 backdrop-blur-sm border border-cyan-400/30 animate-float flex items-center justify-center">
+          {/* Neural Network Nodes */}
+          <div className="absolute top-1/4 left-1/4 w-12 h-12 rounded-lg bg-black/30 backdrop-blur-sm border border-cyan-400/40 animate-float flex items-center justify-center">
             <Code className="w-6 h-6 text-cyan-400" />
           </div>
-          <div className="absolute top-1/3 right-1/4 w-10 h-10 rounded-lg bg-black/20 backdrop-blur-sm border border-purple-400/30 animate-float flex items-center justify-center" style={{animationDelay: '1s'}}>
+          <div className="absolute top-1/3 right-1/4 w-10 h-10 rounded-lg bg-black/30 backdrop-blur-sm border border-purple-400/40 animate-float flex items-center justify-center" style={{animationDelay: '1s'}}>
             <Database className="w-5 h-5 text-purple-400" />
           </div>
-          <div className="absolute bottom-1/3 left-1/3 w-14 h-14 rounded-lg bg-black/20 backdrop-blur-sm border border-blue-400/30 animate-float flex items-center justify-center" style={{animationDelay: '2s'}}>
+          <div className="absolute bottom-1/3 left-1/3 w-14 h-14 rounded-lg bg-black/30 backdrop-blur-sm border border-blue-400/40 animate-float flex items-center justify-center" style={{animationDelay: '2s'}}>
             <Cpu className="w-7 h-7 text-blue-400" />
           </div>
 
-          {/* Binary Data Stream */}
+          {/* Code Snippets */}
           <div className="absolute top-20 left-10 opacity-20">
-            <div className="text-cyan-400 font-mono text-xs space-y-1 animate-pulse">
-              <div>01001000 01100101</div>
-              <div>01101100 01101100</div>
-              <div>01101111 00100000</div>
+            <div className="text-cyan-400 font-mono text-xs space-y-1 animate-pulse glassmorphism p-3 rounded border border-cyan-400/20">
+              <div>const AI = () =&gt; {</div>
+              <div>  return future;</div>
+              <div>};</div>
             </div>
           </div>
           <div className="absolute bottom-20 right-10 opacity-20">
-            <div className="text-purple-400 font-mono text-xs space-y-1 animate-pulse" style={{animationDelay: '1s'}}>
-              <div>function AI() {</div>
-              <div>  return future;</div>
+            <div className="text-purple-400 font-mono text-xs space-y-1 animate-pulse glassmorphism p-3 rounded border border-purple-400/20" style={{animationDelay: '1s'}}>
+              <div>class Neural {</div>
+              <div>  process() {</div>
+              <div>    return data;</div>
+              <div>  }</div>
               <div>}</div>
             </div>
           </div>
 
-          {/* Connection Lines */}
+          {/* Data Flow Lines */}
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
             <defs>
-              <linearGradient id="line1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id="dataFlow" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="rgba(0, 212, 255, 0.6)" />
                 <stop offset="100%" stopColor="rgba(147, 51, 234, 0.3)" />
               </linearGradient>
             </defs>
-            <line x1="25" y1="25" x2="75" y2="75" stroke="url(#line1)" strokeWidth="0.1" strokeDasharray="2,2" opacity="0.6">
+            <line x1="25" y1="25" x2="75" y2="75" stroke="url(#dataFlow)" strokeWidth="0.1" strokeDasharray="2,2" opacity="0.6">
               <animate attributeName="stroke-dashoffset" values="0;4" dur="3s" repeatCount="indefinite"/>
             </line>
-            <line x1="75" y1="25" x2="25" y2="75" stroke="url(#line1)" strokeWidth="0.1" strokeDasharray="2,2" opacity="0.4">
+            <line x1="75" y1="25" x2="25" y2="75" stroke="url(#dataFlow)" strokeWidth="0.1" strokeDasharray="2,2" opacity="0.4">
               <animate attributeName="stroke-dashoffset" values="0;4" dur="4s" repeatCount="indefinite"/>
             </line>
           </svg>
 
-          {/* Floating Data Points */}
+          {/* Matrix-style Data Points */}
           <div className="absolute top-1/6 left-1/6 w-2 h-2 bg-cyan-400 rounded-full animate-ping opacity-60"></div>
           <div className="absolute top-5/6 right-1/6 w-2 h-2 bg-purple-400 rounded-full animate-ping opacity-60" style={{animationDelay: '1s'}}></div>
           <div className="absolute top-1/2 left-1/12 w-1 h-1 bg-blue-400 rounded-full animate-ping opacity-50" style={{animationDelay: '2s'}}></div>
           <div className="absolute top-1/2 right-1/12 w-1 h-1 bg-pink-400 rounded-full animate-ping opacity-50" style={{animationDelay: '0.5s'}}></div>
 
-          {/* Professional Hexagon Pattern */}
-          <div className="absolute top-10 right-20 opacity-10">
-            <svg width="60" height="60" viewBox="0 0 60 60">
-              <polygon points="30,5 50,15 50,35 30,45 10,35 10,15" fill="none" stroke="rgba(0, 212, 255, 0.8)" strokeWidth="1">
-                <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/>
-              </polygon>
+          {/* Tech Architecture Diagrams */}
+          <div className="absolute top-10 right-20 opacity-15">
+            <svg width="80" height="60" viewBox="0 0 80 60">
+              <rect x="10" y="10" width="15" height="10" fill="none" stroke="rgba(0, 212, 255, 0.8)" strokeWidth="1"/>
+              <rect x="35" y="10" width="15" height="10" fill="none" stroke="rgba(147, 51, 234, 0.8)" strokeWidth="1"/>
+              <rect x="60" y="10" width="15" height="10" fill="none" stroke="rgba(0, 212, 255, 0.8)" strokeWidth="1"/>
+              <line x1="25" y1="15" x2="35" y2="15" stroke="rgba(0, 212, 255, 0.6)" strokeWidth="1"/>
+              <line x1="50" y1="15" x2="60" y2="15" stroke="rgba(147, 51, 234, 0.6)" strokeWidth="1"/>
             </svg>
           </div>
-          <div className="absolute bottom-10 left-20 opacity-10">
-            <svg width="40" height="40" viewBox="0 0 40 40">
-              <polygon points="20,3 33,10 33,23 20,30 7,23 7,10" fill="none" stroke="rgba(147, 51, 234, 0.8)" strokeWidth="1">
-                <animate attributeName="stroke-opacity" values="0.8;0.3;0.8" dur="2.5s" repeatCount="indefinite"/>
-              </polygon>
+          <div className="absolute bottom-10 left-20 opacity-15">
+            <svg width="60" height="40" viewBox="0 0 60 40">
+              <circle cx="20" cy="20" r="8" fill="none" stroke="rgba(147, 51, 234, 0.8)" strokeWidth="1"/>
+              <circle cx="40" cy="20" r="6" fill="none" stroke="rgba(0, 212, 255, 0.8)" strokeWidth="1"/>
+              <line x1="28" y1="20" x2="34" y2="20" stroke="rgba(147, 51, 234, 0.6)" strokeWidth="1"/>
             </svg>
           </div>
         </div>
