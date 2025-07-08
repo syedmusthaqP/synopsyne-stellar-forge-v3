@@ -31,20 +31,12 @@ const HeroSection = () => {
     <section className="min-h-screen flex items-center justify-center relative pt-20">
       {/* Professional AI/Software Background */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Dynamic gradient overlay */}
-        <div 
-          className="absolute inset-0 opacity-30 transition-all duration-1000"
-          style={{
-            background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(0, 212, 255, 0.2) 0%, rgba(147, 51, 234, 0.1) 50%, transparent 70%)`
-          }}
-        ></div>
-
         {/* Professional Grid Pattern */}
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-20">
           <div className="w-full h-full" style={{
             backgroundImage: `
-              linear-gradient(rgba(0, 212, 255, 0.5) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0, 212, 255, 0.5) 1px, transparent 1px)
+              linear-gradient(rgba(0, 212, 255, 0.8) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(0, 212, 255, 0.8) 1px, transparent 1px)
             `,
             backgroundSize: '40px 40px'
           }}></div>
