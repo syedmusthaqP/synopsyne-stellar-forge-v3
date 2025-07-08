@@ -17,6 +17,7 @@ const Contact = () => {
       
       <Header />
       <ContactSection />
+      <div className="pb-12"></div>
       <Footer />
     </div>
   );
