@@ -141,6 +141,8 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
           input:-webkit-autofill:active {
             -webkit-box-shadow: 0 0 0 30px rgba(0, 0, 0, 0.4) inset !important;
             -webkit-text-fill-color: white !important;
+            background: rgba(0, 0, 0, 0.4) !important;
+            backdrop-filter: blur(10px) !important;
             transition: background-color 5000s;
           }
           
@@ -454,38 +456,42 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
             {/* Contact Info & Quick Stats */}
             <div className="space-y-8">
               {/* Contact Information */}
-              <div className="glassmorphism p-8 rounded-2xl border-2 border-transparent bg-gradient-to-r from-cyan-400/30 via-blue-500/30 to-purple-600/30 bg-clip-border">
-                <div className="bg-black/40 backdrop-blur-md rounded-xl p-6 -m-2">
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Connect Directly</h3>
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 via-blue-500/20 to-purple-600/20 rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity"></div>
+                <div className="relative glassmorphism p-8 rounded-2xl border border-cyan-400/20 backdrop-blur-xl">
+                  <div className="flex items-center mb-6">
+                    <div className="w-3 h-3 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 mr-3"></div>
+                    <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">Connect Directly</h3>
+                  </div>
                   
                   <div className="space-y-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 rounded-lg glassmorphism border border-cyan-400/30 flex items-center justify-center">
-                        <Mail className="w-6 h-6 text-neon" />
+                    <div className="flex items-center space-x-4 p-4 rounded-xl bg-gradient-to-r from-cyan-500/5 to-blue-500/5 border border-cyan-400/10 hover:border-cyan-400/30 transition-all">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/30 flex items-center justify-center">
+                        <Mail className="w-6 h-6 text-cyan-400" />
                       </div>
                       <div>
-                        <p className="bg-gradient-to-r from-orange-400 via-red-500 to-pink-600 bg-clip-text text-transparent font-semibold text-lg">Email</p>
-                        <p className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent font-medium text-lg">syedmusthaqk786@gmail.com</p>
+                        <p className="text-cyan-300 font-semibold text-sm uppercase tracking-wide mb-1">Email</p>
+                        <p className="text-white font-medium text-lg">syedmusthaqk786@gmail.com</p>
                       </div>
                     </div>
 
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 rounded-lg glassmorphism border border-cyan-400/30 flex items-center justify-center">
-                        <Phone className="w-6 h-6 text-neon" />
+                    <div className="flex items-center space-x-4 p-4 rounded-xl bg-gradient-to-r from-blue-500/5 to-purple-500/5 border border-blue-400/10 hover:border-blue-400/30 transition-all">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-400/30 flex items-center justify-center">
+                        <Phone className="w-6 h-6 text-blue-400" />
                       </div>
                       <div>
-                        <p className="bg-gradient-to-r from-orange-400 via-red-500 to-pink-600 bg-clip-text text-transparent font-semibold text-lg">Phone</p>
-                        <p className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent font-medium text-lg">7013425496</p>
+                        <p className="text-blue-300 font-semibold text-sm uppercase tracking-wide mb-1">Phone</p>
+                        <p className="text-white font-medium text-lg">7013425496</p>
                       </div>
                     </div>
 
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 rounded-lg glassmorphism border border-cyan-400/30 flex items-center justify-center">
-                        <MapPin className="w-6 h-6 text-neon" />
+                    <div className="flex items-center space-x-4 p-4 rounded-xl bg-gradient-to-r from-purple-500/5 to-pink-500/5 border border-purple-400/10 hover:border-purple-400/30 transition-all">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/30 flex items-center justify-center">
+                        <MapPin className="w-6 h-6 text-purple-400" />
                       </div>
                       <div>
-                        <p className="bg-gradient-to-r from-orange-400 via-red-500 to-pink-600 bg-clip-text text-transparent font-semibold text-lg">Location</p>
-                        <p className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent font-medium text-lg">Andhra Pradesh, India</p>
+                        <p className="text-purple-300 font-semibold text-sm uppercase tracking-wide mb-1">Location</p>
+                        <p className="text-white font-medium text-lg">Andhra Pradesh, India</p>
                       </div>
                     </div>
                   </div>
@@ -493,45 +499,73 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
               </div>
 
               {/* Response Time & Stats */}
-              <div className="glassmorphism p-8 rounded-2xl border-2 border-transparent bg-gradient-to-r from-cyan-400/30 via-blue-500/30 to-purple-600/30 bg-clip-border">
-                <div className="bg-black/40 backdrop-blur-md rounded-xl p-6 -m-2">
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Our Commitment</h3>
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 via-cyan-500/20 to-blue-600/20 rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity"></div>
+                <div className="relative glassmorphism p-8 rounded-2xl border border-green-400/20 backdrop-blur-xl">
+                  <div className="flex items-center mb-6">
+                    <div className="w-3 h-3 rounded-full bg-gradient-to-r from-green-400 to-cyan-500 mr-3"></div>
+                    <h3 className="text-2xl font-bold bg-gradient-to-r from-green-400 via-cyan-500 to-blue-600 bg-clip-text text-transparent">Our Commitment</h3>
+                  </div>
                   
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-cyan-500/10 to-blue-500/10">
-                      <span className="text-white">Response Time</span>
-                      <span className="text-neon font-bold">&lt; 4 hours</span>
+                    <div className="flex items-center justify-between p-5 rounded-xl bg-gradient-to-r from-green-500/10 to-cyan-500/10 border border-green-400/20 hover:border-green-400/40 transition-all group">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                        <span className="text-white font-medium">Response Time</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-green-400 font-bold text-xl">&lt; 4</span>
+                        <span className="text-green-300 text-sm">hours</span>
+                      </div>
                     </div>
                     
-                    <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-purple-500/10 to-pink-500/10">
-                      <span className="text-white">Project Success Rate</span>
-                      <span className="text-neon font-bold">98.5%</span>
+                    <div className="flex items-center justify-between p-5 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-400/20 hover:border-cyan-400/40 transition-all group">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-2 h-2 rounded-full bg-cyan-400"></div>
+                        <span className="text-white font-medium">Project Success Rate</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-cyan-400 font-bold text-xl">98.5</span>
+                        <span className="text-cyan-300 text-sm">%</span>
+                      </div>
                     </div>
                     
-                    <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-blue-500/10 to-cyan-500/10">
-                      <span className="text-white">Average Productivity Boost</span>
-                      <span className="text-neon font-bold">245%</span>
+                    <div className="flex items-center justify-between p-5 rounded-xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-400/20 hover:border-blue-400/40 transition-all group">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-2 h-2 rounded-full bg-blue-400"></div>
+                        <span className="text-white font-medium">Average Productivity Boost</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-blue-400 font-bold text-xl">245</span>
+                        <span className="text-blue-300 text-sm">%</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Quick Benefits */}
-              <div className="glassmorphism p-8 rounded-2xl border-2 border-transparent bg-gradient-to-r from-cyan-400/30 via-blue-500/30 to-purple-600/30 bg-clip-border">
-                <div className="bg-black/40 backdrop-blur-md rounded-xl p-6 -m-2">
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Why Choose Us?</h3>
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-500/20 to-rose-600/20 rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity"></div>
+                <div className="relative glassmorphism p-8 rounded-2xl border border-purple-400/20 backdrop-blur-xl">
+                  <div className="flex items-center mb-6">
+                    <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 to-pink-500 mr-3"></div>
+                    <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-rose-600 bg-clip-text text-transparent">Why Choose Us?</h3>
+                  </div>
                   
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {[
-                      'Free initial consultation & project scope',
-                      'Dedicated project manager assigned',
-                      'Weekly progress reports & demos',
-                      'Post-launch support & optimization',
-                      'Scalable solutions that grow with you'
+                      { text: 'Free initial consultation & project scope', icon: '🎯' },
+                      { text: 'Dedicated project manager assigned', icon: '👤' },
+                      { text: 'Weekly progress reports & demos', icon: '📊' },
+                      { text: 'Post-launch support & optimization', icon: '🚀' },
+                      { text: 'Scalable solutions that grow with you', icon: '📈' }
                     ].map((benefit, index) => (
-                      <div key={index} className="flex items-center space-x-3">
-                        <div className="w-2 h-2 rounded-full bg-neon"></div>
-                        <span className="text-gray-300">{benefit}</span>
+                      <div key={index} className="flex items-center space-x-4 p-4 rounded-xl bg-gradient-to-r from-purple-500/5 to-pink-500/5 border border-purple-400/10 hover:border-purple-400/30 transition-all group">
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/30 flex items-center justify-center text-sm">
+                          {benefit.icon}
+                        </div>
+                        <span className="text-gray-200 font-medium group-hover:text-white transition-colors">{benefit.text}</span>
                       </div>
                     ))}
                   </div>
