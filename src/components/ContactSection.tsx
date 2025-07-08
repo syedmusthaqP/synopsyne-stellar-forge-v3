@@ -184,7 +184,8 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <div className="glassmorphism p-8 rounded-2xl border border-cyan-400/30">
+            <div className="relative glassmorphism p-8 rounded-2xl border border-cyan-400/30">
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-t-2xl"></div>
               <h2 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Start Your Digital Transformation</h2>
               
               {submitMessage && (
@@ -456,44 +457,46 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
             {/* Contact Info & Quick Stats */}
             <div className="space-y-8">
               {/* Contact Information */}
-              <div className="glassmorphism p-8 rounded-2xl border border-cyan-400/30">
+              <div className="relative glassmorphism p-8 rounded-2xl border border-cyan-400/30">
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-t-2xl"></div>
                 <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Connect Directly</h3>
                 
-                <div className="space-y-6">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 rounded-lg glassmorphism border border-cyan-400/30 flex items-center justify-center">
-                      <Mail className="w-6 h-6 text-cyan-400" />
+                  <div className="space-y-6">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 rounded-lg glassmorphism border border-cyan-400/30 flex items-center justify-center">
+                        <Mail className="w-6 h-6 text-cyan-400" />
+                      </div>
+                      <div>
+                        <p className="text-cyan-300 font-semibold text-sm uppercase tracking-wide mb-1">Email</p>
+                        <p className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent font-medium text-lg">syedmusthaqk786@gmail.com</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-cyan-300 font-semibold text-sm uppercase tracking-wide mb-1">Email</p>
-                      <p className="text-white font-medium text-lg">syedmusthaqk786@gmail.com</p>
-                    </div>
-                  </div>
 
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 rounded-lg glassmorphism border border-blue-400/30 flex items-center justify-center">
-                      <Phone className="w-6 h-6 text-blue-400" />
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 rounded-lg glassmorphism border border-blue-400/30 flex items-center justify-center">
+                        <Phone className="w-6 h-6 text-blue-400" />
+                      </div>
+                      <div>
+                        <p className="text-blue-300 font-semibold text-sm uppercase tracking-wide mb-1">Phone</p>
+                        <p className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent font-medium text-lg">+91 7013425496</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-blue-300 font-semibold text-sm uppercase tracking-wide mb-1">Phone</p>
-                      <p className="text-white font-medium text-lg">7013425496</p>
-                    </div>
-                  </div>
 
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 rounded-lg glassmorphism border border-purple-400/30 flex items-center justify-center">
-                      <MapPin className="w-6 h-6 text-purple-400" />
-                    </div>
-                    <div>
-                      <p className="text-purple-300 font-semibold text-sm uppercase tracking-wide mb-1">Location</p>
-                      <p className="text-white font-medium text-lg">Andhra Pradesh, India</p>
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 rounded-lg glassmorphism border border-purple-400/30 flex items-center justify-center">
+                        <MapPin className="w-6 h-6 text-purple-400" />
+                      </div>
+                      <div>
+                        <p className="text-purple-300 font-semibold text-sm uppercase tracking-wide mb-1">Location</p>
+                        <p className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent font-medium text-lg">Andhra Pradesh, India</p>
+                      </div>
                     </div>
                   </div>
-                </div>
               </div>
 
               {/* Response Time & Stats */}
-              <div className="glassmorphism p-8 rounded-2xl border border-cyan-400/30">
+              <div className="relative glassmorphism p-8 rounded-2xl border border-cyan-400/30">
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-t-2xl"></div>
                 <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Our Commitment</h3>
                 
                 <div className="space-y-4">
@@ -515,7 +518,8 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
               </div>
 
               {/* Quick Benefits */}
-              <div className="glassmorphism p-8 rounded-2xl border border-cyan-400/30">
+              <div className="relative glassmorphism p-8 rounded-2xl border border-cyan-400/30">
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-t-2xl"></div>
                 <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Why Choose Us?</h3>
                 
                 <div className="space-y-3">
