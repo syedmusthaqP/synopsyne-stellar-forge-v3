@@ -19,6 +19,7 @@ const ContactSection = () => {
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const productivityFeatures = [
     { id: 'ai-automation', name: 'AI Process Automation', icon: Zap, description: 'Automate repetitive tasks with intelligent workflows' },
@@ -110,6 +111,7 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
         features: []
       });
       setSelectedFeatures([]);
+      setShowModal(true);
       
       setIsSubmitting(false);
     }, 2000);
@@ -188,11 +190,6 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
               <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-t-2xl"></div>
               <h2 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Start Your Digital Transformation</h2>
               
-              {submitMessage && (
-                <div className="mb-6 p-4 rounded-lg bg-gradient-to-r from-green-500/20 to-cyan-500/20 border border-green-400/30">
-                  <pre className="text-green-300 text-sm whitespace-pre-wrap">{submitMessage}</pre>
-                </div>
-              )}
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -461,37 +458,39 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
                 <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-t-2xl"></div>
                 <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Connect Directly</h3>
                 
-                  <div className="space-y-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 rounded-lg glassmorphism border border-cyan-400/30 flex items-center justify-center">
-                        <Mail className="w-6 h-6 text-cyan-400" />
-                      </div>
-                      <div>
-                        <p className="text-cyan-300 font-semibold text-sm uppercase tracking-wide mb-1">Email</p>
-                        <p className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent font-medium text-lg">syedmusthaqk786@gmail.com</p>
-                      </div>
-                    </div>
+                   <div className="space-y-6">
+                     <div className="flex items-center space-x-4">
+                       <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 border border-cyan-400/30 flex items-center justify-center">
+                         <Mail className="w-5 h-5 text-cyan-400" />
+                       </div>
+                       <div>
+                         <h4 className="text-white font-semibold text-lg mb-1">Email Us</h4>
+                         <p className="text-cyan-400 font-medium text-base">syedmusthaqk786@gmail.com</p>
+                         <p className="text-gray-400 text-sm">We respond within 24 hours</p>
+                       </div>
+                     </div>
 
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 rounded-lg glassmorphism border border-blue-400/30 flex items-center justify-center">
-                        <Phone className="w-6 h-6 text-blue-400" />
-                      </div>
-                      <div>
-                        <p className="text-blue-300 font-semibold text-sm uppercase tracking-wide mb-1">Phone</p>
-                        <p className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent font-medium text-lg">+91 7013425496</p>
-                      </div>
-                    </div>
+                     <div className="flex items-center space-x-4">
+                       <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 border border-cyan-400/30 flex items-center justify-center">
+                         <Phone className="w-5 h-5 text-cyan-400" />
+                       </div>
+                       <div>
+                         <h4 className="text-white font-semibold text-lg mb-1">Call Us</h4>
+                         <p className="text-cyan-400 font-medium text-base">+91 7013425496</p>
+                         <p className="text-gray-400 text-sm">Mon-Fri 9AM-6PM IST</p>
+                       </div>
+                     </div>
 
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 rounded-lg glassmorphism border border-purple-400/30 flex items-center justify-center">
-                        <MapPin className="w-6 h-6 text-purple-400" />
-                      </div>
-                      <div>
-                        <p className="text-purple-300 font-semibold text-sm uppercase tracking-wide mb-1">Location</p>
-                        <p className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent font-medium text-lg">Andhra Pradesh, India</p>
-                      </div>
-                    </div>
-                  </div>
+                     <div className="flex items-center space-x-4">
+                       <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 border border-cyan-400/30 flex items-center justify-center">
+                         <MapPin className="w-5 h-5 text-cyan-400" />
+                       </div>
+                       <div>
+                         <h4 className="text-white font-semibold text-lg mb-1">Visit Us</h4>
+                         <p className="text-cyan-400 font-medium text-base">Andhra Pradesh, India</p>
+                       </div>
+                     </div>
+                   </div>
               </div>
 
               {/* Response Time & Stats */}
@@ -540,6 +539,42 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
             </div>
           </div>
         </div>
+
+        {/* Success Modal */}
+        {showModal && (
+          <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className="relative max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="relative glassmorphism p-8 rounded-2xl border border-cyan-400/30">
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-t-2xl"></div>
+                
+                {/* Close button */}
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="absolute top-4 right-4 w-8 h-8 rounded-full glassmorphism border border-cyan-400/30 flex items-center justify-center text-cyan-400 hover:bg-cyan-500/10 transition-all"
+                >
+                  ✕
+                </button>
+
+                <div className="mb-6">
+                  <h2 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-4">Neural Connection Status</h2>
+                </div>
+                
+                <div className="p-6 rounded-lg bg-gradient-to-r from-green-500/20 to-cyan-500/20 border border-green-400/30">
+                  <pre className="text-green-300 text-sm whitespace-pre-wrap font-mono leading-relaxed">{submitMessage}</pre>
+                </div>
+
+                <div className="mt-6 flex justify-center">
+                  <button
+                    onClick={() => setShowModal(false)}
+                    className="px-6 py-3 neon-border rounded-lg text-white font-semibold hover:bg-cyan-500/10 transition-all"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </section>
     </>
   );
