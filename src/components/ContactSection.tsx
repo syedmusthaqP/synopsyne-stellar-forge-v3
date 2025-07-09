@@ -113,7 +113,7 @@ const ContactSection = () => {
     );
   };
 
-  // Generate dynamic blueprint based on selected features
+  // Enhanced dynamic blueprint generator with comprehensive analysis
   const generateBlueprint = () => {
     const selectedFeatureData = selectedFeatures
       .map(id => getAllFeatures().find(f => f.id === id))
@@ -123,48 +123,102 @@ const ContactSection = () => {
     const projectScope = formData.projectType === 'other' ? formData.customProjectType : formData.projectType;
     const timelineText = formData.timeline.replace(/-/g, ' ').toUpperCase();
     
-    // Dynamic solution description based on feature combinations
-    const generateSolutionDescription = () => {
-      if (selectedFeatures.length === 0) {
-        return "A comprehensive consultation to analyze your specific requirements and design a custom digital transformation strategy.";
-      }
-
-      const featureCategories = {
-        'ai': selectedFeatures.filter(id => ['ai-automation', 'machine-learning', 'chatbot-ai', 'predictive-analytics', 'nlp-processing'].includes(id)),
-        'vision': selectedFeatures.filter(id => ['computer-vision', 'voice-recognition'].includes(id)),
-        'cloud': selectedFeatures.filter(id => ['cloud-integration', 'auto-scaling', 'serverless', 'microservices'].includes(id)),
-        'data': selectedFeatures.filter(id => ['real-time-analytics', 'data-visualization', 'big-data', 'business-intelligence'].includes(id)),
-        'security': selectedFeatures.filter(id => ['security-compliance', 'blockchain-integration', 'encryption'].includes(id)),
-        'automation': selectedFeatures.filter(id => ['workflow-automation', 'email-automation', 'smart-scheduling'].includes(id))
+    // Advanced feature classification system
+    const classifyFeatures = () => {
+      const categories = {
+        'ai_ml': selectedFeatures.filter(id => ['ai-automation', 'machine-learning', 'chatbot-ai', 'predictive-analytics', 'nlp-processing', 'computer-vision', 'voice-recognition'].includes(id)),
+        'cloud_infra': selectedFeatures.filter(id => ['cloud-integration', 'auto-scaling', 'serverless', 'microservices', 'containerization', 'cdn-optimization'].includes(id)),
+        'data_analytics': selectedFeatures.filter(id => ['real-time-analytics', 'data-visualization', 'big-data', 'business-intelligence', 'data-pipeline', 'data-warehouse'].includes(id)),
+        'security_compliance': selectedFeatures.filter(id => ['security-compliance', 'blockchain-integration', 'encryption', 'identity-management', 'audit-logging', 'vulnerability-scanning'].includes(id)),
+        'integration_apis': selectedFeatures.filter(id => ['api-development', 'workflow-integration', 'payment-gateway', 'crm-integration', 'erp-integration', 'social-media'].includes(id)),
+        'collaboration': selectedFeatures.filter(id => ['team-collaboration', 'video-conferencing', 'document-sharing', 'project-management', 'knowledge-base', 'communication-hub'].includes(id)),
+        'productivity_automation': selectedFeatures.filter(id => ['smart-scheduling', 'time-management', 'performance-tracking', 'automated-testing', 'intelligent-reporting', 'workflow-automation', 'email-automation'].includes(id)),
+        'iot_emerging': selectedFeatures.filter(id => ['iot-connectivity', 'augmented-reality', 'edge-computing', 'smart-sensors', 'digital-twin', 'robotics'].includes(id)),
+        'custom': selectedFeatures.filter(id => id.startsWith('custom-'))
       };
-
-      let description = "";
-
-      if (featureCategories.ai.length > 0 && featureCategories.automation.length > 0) {
-        description = "An intelligent automation platform combining AI-powered decision making with workflow optimization to eliminate manual processes and boost operational efficiency.";
-      } else if (featureCategories.vision.length > 0 && featureCategories.data.length > 0) {
-        description = "A computer vision and analytics solution that processes visual data to generate actionable insights, enabling predictive maintenance and quality control.";
-      } else if (featureCategories.cloud.length > 0 && featureCategories.security.length > 0) {
-        description = "A secure cloud-native architecture with enterprise-grade security protocols, scalable infrastructure, and compliance-ready data protection.";
-      } else if (featureCategories.ai.length > 0 && featureCategories.data.length > 0) {
-        description = "An AI-driven analytics platform that transforms raw data into intelligent insights, featuring machine learning models for predictive business intelligence.";
-      } else if (featureCategories.automation.length > 0) {
-        description = "A comprehensive business process automation suite designed to streamline operations, reduce human error, and accelerate productivity across departments.";
-      } else if (featureCategories.ai.length > 0) {
-        description = "An artificial intelligence solution leveraging machine learning algorithms and neural networks to automate complex decision-making processes.";
-      } else if (featureCategories.data.length > 0) {
-        description = "A robust data management and analytics platform providing real-time insights, advanced visualizations, and business intelligence capabilities.";
-      } else if (featureCategories.cloud.length > 0) {
-        description = "A scalable cloud infrastructure solution with microservices architecture, auto-scaling capabilities, and multi-region deployment.";
-      } else {
-        description = "A custom digital solution tailored to your specific business requirements with modern technology stack and scalable architecture.";
-      }
-
-      return description;
+      
+      return categories;
     };
 
-    // Dynamic technical stack based on features
+    // Intelligent solution description generator
+    const generateSolutionDescription = () => {
+      if (selectedFeatures.length === 0) {
+        return "A comprehensive consultation to analyze your specific requirements and design a custom digital transformation strategy tailored to your business objectives.";
+      }
+
+      const categories = classifyFeatures();
+      const customFeatures = categories.custom.length;
+      
+      // Complex multi-category solutions
+      if (categories.ai_ml.length >= 2 && categories.cloud_infra.length >= 2) {
+        return `An enterprise-grade AI-powered cloud platform featuring ${categories.ai_ml.length} advanced machine learning components and ${categories.cloud_infra.length} cloud infrastructure modules. This solution combines neural network processing, intelligent automation, and scalable cloud architecture to deliver unprecedented business intelligence and operational efficiency.`;
+      }
+      
+      if (categories.ai_ml.length > 0 && categories.data_analytics.length > 0 && categories.productivity_automation.length > 0) {
+        return "An integrated AI-driven business intelligence and automation ecosystem that transforms raw data into actionable insights while automating complex workflows. Features intelligent decision-making algorithms, real-time analytics processing, and adaptive automation systems.";
+      }
+      
+      if (categories.iot_emerging.length > 0 && categories.ai_ml.length > 0) {
+        return "A next-generation IoT and AI convergence platform that combines edge computing, smart sensor networks, and machine learning to create intelligent connected systems. Enables real-time data processing, predictive analytics, and autonomous decision-making at the edge.";
+      }
+      
+      if (categories.security_compliance.length >= 2 && (categories.cloud_infra.length > 0 || categories.integration_apis.length > 0)) {
+        return "An enterprise security-first architecture featuring zero-trust protocols, compliance automation, and secure integration capabilities. Implements advanced encryption, identity management, and comprehensive audit trails while maintaining scalable performance.";
+      }
+
+      // Two-category combinations
+      if (categories.ai_ml.length > 0 && categories.productivity_automation.length > 0) {
+        return "An intelligent productivity acceleration platform that leverages AI to automate complex business processes, optimize workflows, and enhance team collaboration through smart decision-making algorithms.";
+      }
+      
+      if (categories.data_analytics.length > 0 && categories.integration_apis.length > 0) {
+        return "A comprehensive data integration and analytics hub that connects disparate systems, processes real-time data streams, and delivers unified business intelligence across all operational touchpoints.";
+      }
+      
+      if (categories.cloud_infra.length > 0 && categories.collaboration.length > 0) {
+        return "A cloud-native collaboration and communication platform featuring microservices architecture, real-time synchronization, and enterprise-grade scalability for distributed teams.";
+      }
+
+      // Single category focus
+      if (categories.ai_ml.length >= 3) {
+        return "A comprehensive artificial intelligence solution featuring multiple ML models, neural network processing, and intelligent automation capabilities designed to transform business operations through advanced cognitive computing.";
+      }
+      
+      if (categories.data_analytics.length >= 3) {
+        return "An advanced analytics and business intelligence platform providing real-time data processing, predictive modeling, and comprehensive visualization capabilities for data-driven decision making.";
+      }
+      
+      if (categories.cloud_infra.length >= 2) {
+        return "A robust cloud infrastructure solution featuring auto-scaling capabilities, microservices architecture, and multi-region deployment for enterprise-grade reliability and performance.";
+      }
+      
+      if (categories.productivity_automation.length >= 3) {
+        return "A comprehensive business process automation suite designed to eliminate manual tasks, optimize workflows, and enhance organizational productivity through intelligent automation.";
+      }
+
+      // Custom feature handling
+      if (customFeatures > 0) {
+        const standardFeatures = selectedFeatures.length - customFeatures;
+        return `A bespoke solution combining ${standardFeatures} proven technology components with ${customFeatures} custom-developed features specifically designed for your unique business requirements and operational challenges.`;
+      }
+
+      // Default fallback with feature count context
+      const featureCount = selectedFeatures.length;
+      if (featureCount >= 5) {
+        return "A comprehensive enterprise digital transformation platform integrating multiple advanced technologies to create a unified, scalable solution that addresses complex business challenges across multiple domains.";
+      } else if (featureCount >= 3) {
+        return "A focused technology solution combining complementary features to address specific business needs while maintaining flexibility for future expansion and integration requirements.";
+      } else {
+        return "A targeted digital solution designed to address specific business requirements with proven technologies and best practices for optimal performance and reliability.";
+      }
+    };
+
+    // Advanced technical stack generator with intelligent recommendations
     const generateTechnicalStack = () => {
+      const categories = classifyFeatures();
+      const projectComplexity = selectedFeatures.length;
+      const budgetTier = getBudgetTier();
+      
       let stack: {
         frontend: string;
         backend: string;
@@ -173,9 +227,13 @@ const ContactSection = () => {
         security: string;
         monitoring: string;
         devops: string;
-        ai?: string;
-        processing?: string;
+        ai_ml?: string;
+        data_processing?: string;
         blockchain?: string;
+        mobile?: string;
+        real_time?: string;
+        testing?: string;
+        integration?: string;
       } = {
         frontend: "React.js, TypeScript, Tailwind CSS",
         backend: "Node.js, Express.js, RESTful APIs",
@@ -186,109 +244,581 @@ const ContactSection = () => {
         devops: "CI/CD pipeline with automated testing"
       };
 
-      // Customize based on selected features
-      if (selectedFeatures.includes('ai-automation') || selectedFeatures.includes('machine-learning')) {
-        stack.ai = "TensorFlow, PyTorch, scikit-learn";
-        stack.backend += ", Python Flask/FastAPI";
+      // Frontend optimization based on project type and complexity
+      if (formData.projectType === 'mobile-app') {
+        stack.mobile = "React Native, Expo, Native Base";
+        stack.frontend = "React Native, TypeScript, NativeWind";
+      } else if (projectComplexity >= 5) {
+        stack.frontend = "Next.js, React 18, TypeScript, Tailwind CSS, Framer Motion";
+      } else if (categories.collaboration.length > 0) {
+        stack.frontend = "React.js, TypeScript, Socket.io Client, Tailwind CSS";
       }
-      
-      if (selectedFeatures.includes('computer-vision')) {
-        stack.ai = (stack.ai || "") + ", OpenCV, YOLO, TensorFlow Vision";
+
+      // Backend architecture based on features and scale
+      if (categories.ai_ml.length >= 2 || categories.data_analytics.length >= 2) {
+        stack.backend = "Python FastAPI, Node.js Express, GraphQL, Microservices";
+      } else if (categories.cloud_infra.includes('serverless')) {
+        stack.backend = "Serverless Functions, Node.js, Edge Computing";
+      } else if (categories.integration_apis.length >= 3) {
+        stack.backend = "Node.js, Express.js, GraphQL, API Gateway, Webhook Hub";
+      } else if (projectComplexity >= 6) {
+        stack.backend = "Node.js, Express.js, GraphQL, Microservices Architecture";
       }
-      
-      if (selectedFeatures.includes('nlp-processing')) {
-        stack.ai = (stack.ai || "") + ", Transformers, BERT, spaCy";
+
+      // AI/ML stack based on specific features
+      if (categories.ai_ml.length > 0) {
+        let aiComponents = [];
+        
+        if (selectedFeatures.includes('machine-learning') || selectedFeatures.includes('predictive-analytics')) {
+          aiComponents.push("TensorFlow", "PyTorch", "scikit-learn");
+        }
+        
+        if (selectedFeatures.includes('computer-vision')) {
+          aiComponents.push("OpenCV", "YOLO v8", "TensorFlow Vision", "MediaPipe");
+        }
+        
+        if (selectedFeatures.includes('nlp-processing') || selectedFeatures.includes('chatbot-ai')) {
+          aiComponents.push("Transformers", "OpenAI GPT-4", "LangChain", "spaCy");
+        }
+        
+        if (selectedFeatures.includes('voice-recognition')) {
+          aiComponents.push("Whisper AI", "Speech Recognition", "Text-to-Speech");
+        }
+        
+        if (aiComponents.length === 0) {
+          aiComponents = ["TensorFlow", "Hugging Face", "AutoML"];
+        }
+        
+        stack.ai_ml = aiComponents.join(", ");
       }
-      
-      if (selectedFeatures.includes('big-data')) {
-        stack.database = "MongoDB, Apache Kafka, Elasticsearch";
-        stack.processing = "Apache Spark, Hadoop";
+
+      // Database optimization based on data requirements
+      if (categories.data_analytics.includes('big-data')) {
+        stack.database = "MongoDB, Apache Kafka, Elasticsearch, Hadoop HDFS";
+        stack.data_processing = "Apache Spark, Apache Flink, Databricks";
+      } else if (categories.data_analytics.length >= 2) {
+        stack.database = "PostgreSQL, Redis, InfluxDB, Neo4j";
+        stack.data_processing = "Apache Airflow, Pandas, NumPy";
+      } else if (categories.ai_ml.length > 0) {
+        stack.database = "PostgreSQL, Vector DB (Pinecone), Redis, S3";
+      } else if (selectedFeatures.includes('real-time-analytics')) {
+        stack.database = "PostgreSQL, Redis, Apache Kafka";
+        stack.real_time = "WebSocket, Server-Sent Events, Real-time Sync";
       }
-      
-      if (selectedFeatures.includes('blockchain-integration')) {
-        stack.blockchain = "Ethereum, Web3.js, Solidity";
+
+      // Cloud infrastructure based on scale and requirements
+      if (budgetTier === 'enterprise' || projectComplexity >= 8) {
+        stack.cloud = "Multi-Cloud (AWS + Azure), Kubernetes, Terraform, CDN";
+      } else if (categories.cloud_infra.includes('auto-scaling')) {
+        stack.cloud = "AWS Auto Scaling, Load Balancers, CloudFront CDN";
+      } else if (categories.cloud_infra.includes('serverless')) {
+        stack.cloud = "AWS Lambda, Vercel, Serverless Framework";
       }
-      
-      if (selectedFeatures.includes('serverless')) {
-        stack.cloud = "AWS Lambda, Azure Functions, Serverless Framework";
+
+      // Security enhancements based on requirements
+      if (categories.security_compliance.length >= 2) {
+        stack.security = "Zero Trust Architecture, OAuth2, Multi-Factor Auth, End-to-End Encryption, Vault";
+      } else if (categories.security_compliance.length > 0) {
+        stack.security = "OAuth2, JWT, SSL/TLS, RBAC, Security Headers";
+      } else if (selectedFeatures.includes('payment-gateway')) {
+        stack.security = "PCI DSS Compliance, Stripe Security, JWT, SSL";
+      }
+
+      // Blockchain integration
+      if (categories.security_compliance.includes('blockchain-integration')) {
+        stack.blockchain = "Ethereum, Polygon, Web3.js, Solidity, IPFS";
+      }
+
+      // Real-time features
+      if (categories.collaboration.length >= 2 || selectedFeatures.includes('video-conferencing')) {
+        stack.real_time = "WebRTC, Socket.io, Redis Pub/Sub, WebSocket";
+      }
+
+      // Testing strategy based on complexity
+      if (projectComplexity >= 5) {
+        stack.testing = "Jest, Cypress, Playwright, Unit Testing, Integration Testing";
+      } else if (selectedFeatures.includes('automated-testing')) {
+        stack.testing = "Jest, React Testing Library, Automated E2E Testing";
+      }
+
+      // Integration layer
+      if (categories.integration_apis.length >= 2) {
+        stack.integration = "Zapier, REST APIs, GraphQL, Webhook Management, API Gateway";
+      }
+
+      // IoT and emerging tech
+      if (categories.iot_emerging.length > 0) {
+        let iotComponents = [];
+        if (selectedFeatures.includes('iot-connectivity')) {
+          iotComponents.push("MQTT", "AWS IoT Core", "Device Management");
+        }
+        if (selectedFeatures.includes('edge-computing')) {
+          iotComponents.push("Edge Computing", "AWS Greengrass", "Edge Analytics");
+        }
+        if (selectedFeatures.includes('augmented-reality')) {
+          iotComponents.push("AR.js", "Three.js", "WebXR");
+        }
+        if (iotComponents.length > 0) {
+          stack.integration = (stack.integration || "") + ", " + iotComponents.join(", ");
+        }
       }
 
       return stack;
     };
 
-    // Dynamic key components based on features
-    const generateKeyComponents = () => {
-      const components = [];
+    // Budget tier helper function
+    const getBudgetTier = (): 'startup' | 'growth' | 'enterprise' => {
+      const budget = formData.budget;
+      const currency = formData.budgetCurrency;
       
-      selectedFeatureData.forEach(feature => {
-        switch(feature.id) {
-          case 'ai-automation':
-            components.push("• Intelligent Process Automation Engine with ML-based decision trees");
-            components.push("• Workflow Orchestration System with smart routing capabilities");
-            break;
-          case 'computer-vision':
-            components.push("• Computer Vision Pipeline with real-time image processing");
-            components.push("• Object Detection and Classification Models");
-            break;
-          case 'nlp-processing':
-            components.push("• Natural Language Processing Engine with sentiment analysis");
-            components.push("• Text Analytics and Information Extraction System");
-            break;
-          case 'predictive-analytics':
-            components.push("• Predictive Analytics Engine with forecasting algorithms");
-            components.push("• Machine Learning Pipeline for pattern recognition");
-            break;
-          case 'real-time-analytics':
-            components.push("• Real-time Data Streaming and Processing Infrastructure");
-            components.push("• Interactive Analytics Dashboard with live metrics");
-            break;
-          case 'blockchain-integration':
-            components.push("• Blockchain Integration Layer with smart contract deployment");
-            components.push("• Decentralized Identity and Transaction Management");
-            break;
-          case 'chatbot-ai':
-            components.push("• Conversational AI Framework with intent recognition");
-            components.push("• Multi-channel Chatbot Deployment System");
-            break;
-          default:
-            components.push(`• ${feature.name} Implementation with best practices integration`);
-        }
-      });
+      if (!budget) return 'growth';
       
-      if (components.length === 0) {
-        components.push("• Custom Requirements Analysis and Solution Design");
-        components.push("• Technical Architecture Planning and Documentation");
+      if (currency === 'USD') {
+        if (budget.includes('250k+') || budget.includes('100k-250k')) return 'enterprise';
+        if (budget.includes('50k-100k') || budget.includes('25k-50k')) return 'growth';
+        return 'startup';
+      } else {
+        if (budget.includes('2Cr+') || budget.includes('80L-2Cr')) return 'enterprise';
+        if (budget.includes('40L-80L') || budget.includes('20L-40L')) return 'growth';
+        return 'startup';
       }
-      
-      return components.slice(0, 8); // Limit to 8 components for readability
     };
 
-    // Dynamic expected outcomes
+    // Advanced key components generator with intelligent grouping
+    const generateKeyComponents = () => {
+      const categories = classifyFeatures();
+      const components = [];
+      
+      // AI/ML Components
+      if (categories.ai_ml.length > 0) {
+        if (selectedFeatures.includes('ai-automation')) {
+          components.push("• Intelligent Process Automation Engine with neural decision trees and adaptive workflows");
+        }
+        if (selectedFeatures.includes('machine-learning')) {
+          components.push("• Custom ML Model Pipeline with automated training, validation, and deployment");
+        }
+        if (selectedFeatures.includes('computer-vision')) {
+          components.push("• Computer Vision Processing System with real-time object detection and analysis");
+        }
+        if (selectedFeatures.includes('nlp-processing')) {
+          components.push("• Advanced NLP Engine with sentiment analysis, entity extraction, and language understanding");
+        }
+        if (selectedFeatures.includes('chatbot-ai')) {
+          components.push("• Conversational AI Framework with multi-turn dialogue and context awareness");
+        }
+        if (selectedFeatures.includes('predictive-analytics')) {
+          components.push("• Predictive Analytics Suite with forecasting models and trend analysis");
+        }
+        if (selectedFeatures.includes('voice-recognition')) {
+          components.push("• Voice Processing System with speech-to-text and voice command integration");
+        }
+      }
+
+      // Cloud & Infrastructure Components  
+      if (categories.cloud_infra.length > 0) {
+        if (selectedFeatures.includes('cloud-integration')) {
+          components.push("• Multi-Cloud Integration Hub with cross-platform synchronization");
+        }
+        if (selectedFeatures.includes('auto-scaling')) {
+          components.push("• Auto-Scaling Infrastructure with intelligent resource allocation");
+        }
+        if (selectedFeatures.includes('serverless')) {
+          components.push("• Serverless Computing Framework with event-driven architecture");
+        }
+        if (selectedFeatures.includes('microservices')) {
+          components.push("• Microservices Architecture with service mesh and API gateway");
+        }
+        if (selectedFeatures.includes('containerization')) {
+          components.push("• Container Orchestration Platform with Kubernetes and Docker management");
+        }
+        if (selectedFeatures.includes('cdn-optimization')) {
+          components.push("• Global CDN Network with edge caching and performance optimization");
+        }
+      }
+
+      // Data & Analytics Components
+      if (categories.data_analytics.length > 0) {
+        if (selectedFeatures.includes('real-time-analytics')) {
+          components.push("• Real-time Data Streaming Pipeline with live dashboard visualization");
+        }
+        if (selectedFeatures.includes('big-data')) {
+          components.push("• Big Data Processing Engine with distributed computing and data lakes");
+        }
+        if (selectedFeatures.includes('data-visualization')) {
+          components.push("• Interactive Data Visualization Suite with custom chart libraries");
+        }
+        if (selectedFeatures.includes('business-intelligence')) {
+          components.push("• Business Intelligence Platform with automated reporting and KPI tracking");
+        }
+        if (selectedFeatures.includes('data-pipeline')) {
+          components.push("• Automated Data Pipeline with ETL/ELT processing and quality validation");
+        }
+        if (selectedFeatures.includes('data-warehouse')) {
+          components.push("• Enterprise Data Warehouse with dimensional modeling and OLAP cubes");
+        }
+      }
+
+      // Security & Compliance Components
+      if (categories.security_compliance.length > 0) {
+        if (selectedFeatures.includes('security-compliance')) {
+          components.push("• Comprehensive Security Suite with threat detection and compliance automation");
+        }
+        if (selectedFeatures.includes('blockchain-integration')) {
+          components.push("• Blockchain Integration Layer with smart contracts and decentralized identity");
+        }
+        if (selectedFeatures.includes('encryption')) {
+          components.push("• End-to-End Encryption System with key management and secure communication");
+        }
+        if (selectedFeatures.includes('identity-management')) {
+          components.push("• Identity & Access Management with SSO and role-based permissions");
+        }
+        if (selectedFeatures.includes('audit-logging')) {
+          components.push("• Comprehensive Audit System with activity tracking and compliance reporting");
+        }
+        if (selectedFeatures.includes('vulnerability-scanning')) {
+          components.push("• Automated Security Scanning with vulnerability assessment and remediation");
+        }
+      }
+
+      // Integration & API Components
+      if (categories.integration_apis.length > 0) {
+        if (selectedFeatures.includes('api-development')) {
+          components.push("• API Gateway and Management Platform with rate limiting and documentation");
+        }
+        if (selectedFeatures.includes('workflow-integration')) {
+          components.push("• Workflow Integration Hub connecting all business tools and systems");
+        }
+        if (selectedFeatures.includes('payment-gateway')) {
+          components.push("• Secure Payment Processing System with multiple gateway support");
+        }
+        if (selectedFeatures.includes('crm-integration')) {
+          components.push("• CRM Integration Module with customer data synchronization");
+        }
+        if (selectedFeatures.includes('erp-integration')) {
+          components.push("• ERP System Connector with real-time business data exchange");
+        }
+        if (selectedFeatures.includes('social-media')) {
+          components.push("• Social Media API Integration with content management and analytics");
+        }
+      }
+
+      // Collaboration Components
+      if (categories.collaboration.length > 0) {
+        if (selectedFeatures.includes('team-collaboration')) {
+          components.push("• Advanced Collaboration Platform with real-time communication and project tracking");
+        }
+        if (selectedFeatures.includes('video-conferencing')) {
+          components.push("• Video Conferencing Solution with HD streaming and screen sharing");
+        }
+        if (selectedFeatures.includes('document-sharing')) {
+          components.push("• Smart Document Management with version control and collaborative editing");
+        }
+        if (selectedFeatures.includes('project-management')) {
+          components.push("• Project Management Suite with task automation and progress tracking");
+        }
+        if (selectedFeatures.includes('knowledge-base')) {
+          components.push("• Knowledge Management System with AI-powered search and content organization");
+        }
+        if (selectedFeatures.includes('communication-hub')) {
+          components.push("• Unified Communication Hub with multi-channel messaging and notifications");
+        }
+      }
+
+      // Productivity & Automation Components
+      if (categories.productivity_automation.length > 0) {
+        if (selectedFeatures.includes('smart-scheduling')) {
+          components.push("• AI-Powered Scheduling Engine with calendar optimization and resource management");
+        }
+        if (selectedFeatures.includes('time-management')) {
+          components.push("• Intelligent Time Tracking with productivity analytics and optimization suggestions");
+        }
+        if (selectedFeatures.includes('performance-tracking')) {
+          components.push("• Performance Optimization Dashboard with team productivity metrics");
+        }
+        if (selectedFeatures.includes('automated-testing')) {
+          components.push("• Automated Testing Framework with continuous integration and quality assurance");
+        }
+        if (selectedFeatures.includes('intelligent-reporting')) {
+          components.push("• Intelligent Reporting System with auto-generated insights and trend analysis");
+        }
+        if (selectedFeatures.includes('workflow-automation')) {
+          components.push("• Business Process Automation with intelligent routing and approval workflows");
+        }
+        if (selectedFeatures.includes('email-automation')) {
+          components.push("• Email Marketing Automation with personalization and campaign analytics");
+        }
+      }
+
+      // IoT & Emerging Tech Components
+      if (categories.iot_emerging.length > 0) {
+        if (selectedFeatures.includes('iot-connectivity')) {
+          components.push("• IoT Device Management Platform with real-time monitoring and control");
+        }
+        if (selectedFeatures.includes('augmented-reality')) {
+          components.push("• AR/VR Integration Framework with immersive user experiences");
+        }
+        if (selectedFeatures.includes('edge-computing')) {
+          components.push("• Edge Computing Infrastructure with local processing and reduced latency");
+        }
+        if (selectedFeatures.includes('smart-sensors')) {
+          components.push("• Smart Sensor Network with environmental monitoring and data collection");
+        }
+        if (selectedFeatures.includes('digital-twin')) {
+          components.push("• Digital Twin Technology with virtual modeling and simulation capabilities");
+        }
+        if (selectedFeatures.includes('robotics')) {
+          components.push("• Robotics Process Automation with intelligent task execution");
+        }
+      }
+
+      // Custom feature handling
+      categories.custom.forEach(customId => {
+        components.push(`• Custom Solution Component: Advanced implementation for specialized requirements`);
+      });
+      
+      // Fallback components if none selected
+      if (components.length === 0) {
+        components.push("• Comprehensive Requirements Analysis and Solution Architecture Design");
+        components.push("• Technical Specification Documentation and System Planning");
+        components.push("• Custom Development Roadmap with Milestone Planning");
+      }
+      
+      // Add integration layer if multiple categories
+      const categoryCount = Object.values(categories).filter(cat => cat.length > 0).length;
+      if (categoryCount >= 3) {
+        components.push("• Cross-System Integration Layer with unified data flow and communication protocols");
+      }
+      
+      return components.slice(0, 12); // Increased limit for complex solutions
+    };
+
+    // Dynamic implementation phases based on features and timeline
+    const generateImplementationPhases = () => {
+      const categories = classifyFeatures();
+      const timelineMap = {
+        'rapid-prototype': { weeks: 3, phases: 2 },
+        'agile-development': { weeks: 8, phases: 3 },
+        'enterprise-solution': { weeks: 16, phases: 4 },
+        'comprehensive-platform': { weeks: 24, phases: 5 },
+        'digital-transformation': { weeks: 48, phases: 6 },
+        'ongoing-partnership': { weeks: 52, phases: 6 }
+      };
+      
+      const timeline = timelineMap[formData.timeline as keyof typeof timelineMap] || { weeks: 12, phases: 4 };
+      const complexity = selectedFeatures.length;
+      
+      let phases = [];
+      
+      // Phase 1: Discovery & Architecture (Always present)
+      let phase1Tasks = [
+        "• Comprehensive requirements analysis and stakeholder interviews",
+        "• Technical architecture design and system blueprints",
+        "• UI/UX design and user experience optimization"
+      ];
+      
+      if (categories.ai_ml.length > 0) {
+        phase1Tasks.push("• AI/ML model selection and data requirements analysis");
+      }
+      if (categories.data_analytics.length > 0) {
+        phase1Tasks.push("• Data architecture design and analytics strategy planning");
+      }
+      if (categories.security_compliance.length > 0) {
+        phase1Tasks.push("• Security architecture and compliance framework design");
+      }
+      if (categories.integration_apis.length > 0) {
+        phase1Tasks.push("• API design and integration architecture planning");
+      }
+      
+      phases.push(`Phase 1: Discovery & Architecture    (Week 1-${Math.ceil(timeline.weeks * 0.15)})\n${phase1Tasks.join('\n')}`);
+      
+      // Phase 2: Foundation Development
+      let phase2Tasks = [
+        "• Backend API development and database implementation",
+        "• Frontend core components and responsive design",
+        "• Authentication and user management system"
+      ];
+      
+      if (categories.cloud_infra.length > 0) {
+        phase2Tasks.push("• Cloud infrastructure setup and deployment pipeline");
+      }
+      if (categories.security_compliance.length > 0) {
+        phase2Tasks.push("• Security layer implementation and encryption setup");
+      }
+      
+      const phase2Start = Math.ceil(timeline.weeks * 0.15) + 1;
+      const phase2End = Math.ceil(timeline.weeks * 0.4);
+      phases.push(`Phase 2: Foundation Development     (Week ${phase2Start}-${phase2End})\n${phase2Tasks.join('\n')}`);
+      
+      // Phase 3: Feature Implementation (if sufficient timeline)
+      if (timeline.phases >= 3) {
+        let phase3Tasks = [];
+        
+        if (categories.ai_ml.length > 0) {
+          phase3Tasks.push("• AI/ML model development, training, and optimization");
+          phase3Tasks.push("• Machine learning pipeline deployment and testing");
+        }
+        
+        if (categories.data_analytics.length > 0) {
+          phase3Tasks.push("• Analytics dashboard development and data visualization");
+          phase3Tasks.push("• Real-time data processing and reporting systems");
+        }
+        
+        if (categories.integration_apis.length > 0) {
+          phase3Tasks.push("• Third-party API integrations and webhook development");
+          phase3Tasks.push("• External system connectivity and data synchronization");
+        }
+        
+        if (categories.productivity_automation.length > 0) {
+          phase3Tasks.push("• Workflow automation and business process implementation");
+          phase3Tasks.push("• Productivity tools integration and optimization");
+        }
+        
+        if (categories.collaboration.length > 0) {
+          phase3Tasks.push("• Collaboration features and real-time communication setup");
+          phase3Tasks.push("• Team management and project coordination tools");
+        }
+        
+        if (phase3Tasks.length === 0) {
+          phase3Tasks = [
+            "• Advanced feature development and customization",
+            "• Business logic implementation and workflow optimization",
+            "• Performance optimization and system scaling"
+          ];
+        }
+        
+        const phase3Start = phase2End + 1;
+        const phase3End = Math.ceil(timeline.weeks * 0.65);
+        phases.push(`Phase 3: Feature Implementation     (Week ${phase3Start}-${phase3End})\n${phase3Tasks.join('\n')}`);
+      }
+      
+      // Phase 4: Advanced Integration (for complex projects)
+      if (timeline.phases >= 4) {
+        let phase4Tasks = [];
+        
+        if (categories.iot_emerging.length > 0) {
+          phase4Tasks.push("• IoT device integration and edge computing setup");
+          phase4Tasks.push("• Emerging technology implementation and testing");
+        }
+        
+        if (categories.ai_ml.length >= 2) {
+          phase4Tasks.push("• Advanced AI model fine-tuning and optimization");
+          phase4Tasks.push("• Intelligent automation and decision-making systems");
+        }
+        
+        if (categories.security_compliance.includes('blockchain-integration')) {
+          phase4Tasks.push("• Blockchain integration and smart contract deployment");
+          phase4Tasks.push("• Decentralized system testing and security validation");
+        }
+        
+        if (complexity >= 5) {
+          phase4Tasks.push("• Cross-system integration and data flow optimization");
+          phase4Tasks.push("• Performance testing and scalability improvements");
+        }
+        
+        if (phase4Tasks.length === 0) {
+          phase4Tasks = [
+            "• Advanced system optimization and performance tuning",
+            "• Integration testing and cross-platform compatibility",
+            "• Security hardening and vulnerability assessment"
+          ];
+        }
+        
+        const phase4Start = Math.ceil(timeline.weeks * 0.65) + 1;
+        const phase4End = Math.ceil(timeline.weeks * 0.85);
+        phases.push(`Phase 4: Advanced Integration       (Week ${phase4Start}-${phase4End})\n${phase4Tasks.join('\n')}`);
+      }
+      
+      // Phase 5: Enterprise Features (for large projects)
+      if (timeline.phases >= 5) {
+        let phase5Tasks = [
+          "• Enterprise-grade monitoring and alerting systems",
+          "• Advanced analytics and business intelligence dashboards",
+          "• Compliance automation and audit trail implementation"
+        ];
+        
+        if (categories.ai_ml.length >= 3) {
+          phase5Tasks.push("• AI model ensemble and advanced machine learning features");
+        }
+        
+        if (getBudgetTier() === 'enterprise') {
+          phase5Tasks.push("• Multi-tenant architecture and enterprise integrations");
+          phase5Tasks.push("• Advanced security protocols and compliance certification");
+        }
+        
+        const phase5Start = Math.ceil(timeline.weeks * 0.85) + 1;
+        const phase5End = Math.ceil(timeline.weeks * 0.95);
+        phases.push(`Phase 5: Enterprise Features        (Week ${phase5Start}-${phase5End})\n${phase5Tasks.join('\n')}`);
+      }
+      
+      // Final Phase: Testing & Deployment (Always present)
+      let finalTasks = [
+        "• Comprehensive testing suite and quality assurance",
+        "• User acceptance testing and stakeholder feedback",
+        "• Production deployment and monitoring setup",
+        "• Go-live support and team training",
+        "• Documentation delivery and knowledge transfer"
+      ];
+      
+      if (categories.ai_ml.length > 0) {
+        finalTasks.push("• AI model validation and performance monitoring setup");
+      }
+      
+      if (complexity >= 5) {
+        finalTasks.push("• Performance optimization and load testing validation");
+      }
+      
+      const finalStart = Math.ceil(timeline.weeks * 0.95) + 1;
+      const finalPhaseNumber = timeline.phases;
+      phases.push(`Phase ${finalPhaseNumber}: Testing & Deployment        (Week ${finalStart}-${timeline.weeks})\n${finalTasks.join('\n')}`);
+      
+      // Add ongoing support note for long-term projects
+      if (formData.timeline === 'ongoing-partnership') {
+        phases.push(`\nOngoing: Continuous Support & Evolution\n• Monthly feature updates and system improvements\n• Continuous monitoring and performance optimization\n• Regular security updates and compliance maintenance\n• Strategic technology roadmap planning and implementation`);
+      }
+      
+      return phases.join('\n\n');
+    };
+
+    // Enhanced dynamic expected outcomes based on feature analysis
     const generateExpectedOutcomes = () => {
+      const categories = classifyFeatures();
       const outcomes = [];
+      const complexity = selectedFeatures.length;
       
-      if (selectedFeatures.includes('ai-automation')) {
-        outcomes.push("• 80-95% reduction in manual processing time");
-        outcomes.push("• 99.5% accuracy in automated decision making");
+      // AI/ML specific outcomes
+      if (categories.ai_ml.length >= 2) {
+        outcomes.push(`• ${85 + categories.ai_ml.length * 5}%+ improvement in decision-making accuracy`);
+        outcomes.push("• 90-95% reduction in manual processing time through intelligent automation");
+      } else if (categories.ai_ml.length > 0) {
+        outcomes.push("• 70-85% reduction in manual tasks through AI automation");
+        outcomes.push("• Enhanced decision-making with 90%+ accuracy in pattern recognition");
       }
       
-      if (selectedFeatures.includes('predictive-analytics')) {
-        outcomes.push("• 85-92% improvement in forecasting accuracy");
-        outcomes.push("• Early trend detection with 7-14 day advance notice");
+      // Data & Analytics outcomes
+      if (categories.data_analytics.length >= 2) {
+        outcomes.push("• Real-time business insights with sub-second data processing");
+        outcomes.push("• 200-300% improvement in data-driven decision speed");
+      } else if (categories.data_analytics.length > 0) {
+        outcomes.push("• 150-250% faster access to business-critical insights");
       }
       
-      if (selectedFeatures.includes('real-time-analytics')) {
-        outcomes.push("• Sub-second data processing and visualization");
-        outcomes.push("• 360° real-time business visibility");
+      // Productivity & Automation outcomes
+      if (categories.productivity_automation.length >= 2) {
+        outcomes.push(`• ${200 + complexity * 25}%+ overall productivity improvement`);
+        outcomes.push("• 80-90% reduction in repetitive task completion time");
       }
       
-      if (selectedFeatures.includes('computer-vision')) {
-        outcomes.push("• 95%+ accuracy in visual inspection and quality control");
-        outcomes.push("• Real-time object detection and classification");
+      // Cloud & Infrastructure outcomes
+      if (categories.cloud_infra.length >= 2) {
+        outcomes.push("• 99.9% uptime with auto-scaling infrastructure");
+        outcomes.push("• 60-80% reduction in infrastructure management overhead");
       }
       
-      if (selectedFeatures.includes('chatbot-ai')) {
-        outcomes.push("• 70-85% reduction in customer service response time");
+      // Security outcomes
+      if (categories.security_compliance.length > 0) {
+        outcomes.push("• Enterprise-grade security with 99.95% threat prevention");
+        outcomes.push("• Automated compliance reporting and audit readiness");
+      }
         outcomes.push("• 24/7 automated customer support availability");
       }
       
@@ -338,7 +868,7 @@ Database:              ${stack.database}
 Cloud Infrastructure:  ${stack.cloud}
 Security:              ${stack.security}
 Monitoring:            ${stack.monitoring}
-DevOps:               ${stack.devops}${stack.ai ? `\nAI/ML Stack:           ${stack.ai}` : ''}${stack.processing ? `\nData Processing:       ${stack.processing}` : ''}${stack.blockchain ? `\nBlockchain:            ${stack.blockchain}` : ''}
+DevOps:               ${stack.devops}${stack.ai_ml ? `\nAI/ML Stack:           ${stack.ai_ml}` : ''}${stack.data_processing ? `\nData Processing:       ${stack.data_processing}` : ''}${stack.blockchain ? `\nBlockchain:            ${stack.blockchain}` : ''}${stack.mobile ? `\nMobile:                ${stack.mobile}` : ''}${stack.real_time ? `\nReal-time:             ${stack.real_time}` : ''}${stack.testing ? `\nTesting:               ${stack.testing}` : ''}${stack.integration ? `\nIntegration:           ${stack.integration}` : ''}
 
 🔧 KEY COMPONENTS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -346,29 +876,7 @@ ${keyComponents.join('\n')}
 
 📊 IMPLEMENTATION PHASES
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Phase 1: Discovery & Design     (Week 1-2)
-   • Detailed requirements analysis and feature mapping
-   • Technical architecture design and system blueprints
-   • UI/UX mockups and user experience optimization
-   • Database schema design and optimization
-
-Phase 2: Core Development       (Week 3-6)
-   • Backend API development and integration setup
-   • Frontend component development and responsive design
-   • Database implementation and data migration
-   • Core feature development and testing
-
-Phase 3: Advanced Integration   (Week 7-10)
-   • AI/ML model training and deployment (if applicable)
-   • Third-party API integrations and webhook setup
-   • Performance optimization and load testing
-   • Security implementation and vulnerability assessment
-
-Phase 4: Testing & Deployment   (Week 11-12)
-   • Comprehensive testing suite and quality assurance
-   • User acceptance testing and feedback integration
-   • Production deployment and monitoring setup
-   • Go-live support and team training
+${generateImplementationPhases()}
 
 💼 TEAM ALLOCATION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
