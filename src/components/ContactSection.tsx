@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Brain, Mail, Phone, MapPin, Send, Calendar, Clock, Users, Zap, Target, BarChart3, Settings, MessageSquare, Database, Shield, Cpu, Cloud, Code, Bot } from 'lucide-react';
+import { Brain, Mail, Phone, MapPin, Send, Calendar, Clock, Users, Zap, Target, BarChart3, Settings, MessageSquare, Database, Shield, Cpu, Cloud, Code, Bot, Search, Plus, FileText, Download } from 'lucide-react';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -21,28 +21,222 @@ const ContactSection = () => {
   const [submitMessage, setSubmitMessage] = useState('');
   const [showModal, setShowModal] = useState(false);
 
-  const productivityFeatures = [
-    { id: 'ai-automation', name: 'AI Process Automation', icon: Zap, description: 'Automate repetitive tasks with intelligent workflows' },
-    { id: 'real-time-analytics', name: 'Real-time Analytics Dashboard', icon: BarChart3, description: 'Monitor performance and KPIs in real-time' },
-    { id: 'team-collaboration', name: 'Advanced Team Collaboration', icon: Users, description: 'Seamless communication and project management tools' },
-    { id: 'smart-scheduling', name: 'AI-Powered Scheduling', icon: Calendar, description: 'Intelligent meeting and resource scheduling' },
-    { id: 'performance-tracking', name: 'Performance Optimization', icon: Target, description: 'Track and optimize team productivity metrics' },
-    { id: 'workflow-integration', name: 'Workflow Integration Hub', icon: Settings, description: 'Connect all your tools in one unified platform' },
-    { id: 'intelligent-reporting', name: 'Intelligent Reporting', icon: MessageSquare, description: 'Auto-generated insights and progress reports' },
-    { id: 'time-management', name: 'Smart Time Management', icon: Clock, description: 'AI-driven time tracking and optimization suggestions' },
-    { id: 'data-visualization', name: 'Advanced Data Visualization', icon: Database, description: 'Interactive charts and comprehensive data insights' },
-    { id: 'security-compliance', name: 'Security & Compliance Suite', icon: Shield, description: 'Enterprise-grade security with compliance automation' },
-    { id: 'machine-learning', name: 'Custom ML Models', icon: Cpu, description: 'Tailored machine learning solutions for your business' },
-    { id: 'cloud-integration', name: 'Multi-Cloud Integration', icon: Cloud, description: 'Seamless integration across AWS, Azure, and GCP' },
-    { id: 'api-development', name: 'Custom API Development', icon: Code, description: 'RESTful and GraphQL APIs for seamless integrations' },
-    { id: 'chatbot-ai', name: 'AI-Powered Chatbots', icon: Bot, description: 'Intelligent customer service and internal support bots' },
-    { id: 'predictive-analytics', name: 'Predictive Analytics Engine', icon: BarChart3, description: 'Forecast trends and make data-driven decisions' },
-    { id: 'voice-recognition', name: 'Voice Recognition System', icon: MessageSquare, description: 'Advanced voice commands and speech-to-text capabilities' },
-    { id: 'blockchain-integration', name: 'Blockchain Solutions', icon: Shield, description: 'Secure and transparent blockchain implementations' },
-    { id: 'iot-connectivity', name: 'IoT Device Management', icon: Cpu, description: 'Connect and manage Internet of Things devices' },
-    { id: 'augmented-reality', name: 'AR/VR Integration', icon: Code, description: 'Immersive augmented and virtual reality experiences' },
-    { id: 'automated-testing', name: 'Automated Testing Suite', icon: Settings, description: 'Comprehensive automated testing and quality assurance' }
-  ];
+  const productivityCategories = {
+    'AI & Machine Learning': [
+      { id: 'ai-automation', name: 'AI Process Automation', icon: Zap, description: 'Automate repetitive tasks with intelligent workflows' },
+      { id: 'machine-learning', name: 'Custom ML Models', icon: Cpu, description: 'Tailored machine learning solutions for your business' },
+      { id: 'chatbot-ai', name: 'AI-Powered Chatbots', icon: Bot, description: 'Intelligent customer service and internal support bots' },
+      { id: 'predictive-analytics', name: 'Predictive Analytics Engine', icon: BarChart3, description: 'Forecast trends and make data-driven decisions' },
+      { id: 'voice-recognition', name: 'Voice Recognition System', icon: MessageSquare, description: 'Advanced voice commands and speech-to-text capabilities' },
+      { id: 'computer-vision', name: 'Computer Vision Solutions', icon: Settings, description: 'Image recognition and visual analysis capabilities' },
+      { id: 'nlp-processing', name: 'Natural Language Processing', icon: MessageSquare, description: 'Text analysis and language understanding tools' },
+    ],
+    'Cloud & Infrastructure': [
+      { id: 'cloud-integration', name: 'Multi-Cloud Integration', icon: Cloud, description: 'Seamless integration across AWS, Azure, and GCP' },
+      { id: 'auto-scaling', name: 'Auto-Scaling Infrastructure', icon: Settings, description: 'Dynamic resource allocation based on demand' },
+      { id: 'cdn-optimization', name: 'CDN & Performance Optimization', icon: Zap, description: 'Global content delivery and speed optimization' },
+      { id: 'containerization', name: 'Docker & Kubernetes', icon: Code, description: 'Container orchestration and deployment automation' },
+      { id: 'serverless', name: 'Serverless Architecture', icon: Cloud, description: 'Event-driven serverless computing solutions' },
+      { id: 'microservices', name: 'Microservices Architecture', icon: Settings, description: 'Scalable and maintainable service-oriented design' },
+    ],
+    'Data & Analytics': [
+      { id: 'real-time-analytics', name: 'Real-time Analytics Dashboard', icon: BarChart3, description: 'Monitor performance and KPIs in real-time' },
+      { id: 'data-visualization', name: 'Advanced Data Visualization', icon: Database, description: 'Interactive charts and comprehensive data insights' },
+      { id: 'big-data', name: 'Big Data Processing', icon: Database, description: 'Handle large-scale data processing and analysis' },
+      { id: 'data-pipeline', name: 'Automated Data Pipelines', icon: Settings, description: 'Streamlined data collection and processing workflows' },
+      { id: 'business-intelligence', name: 'Business Intelligence Suite', icon: BarChart3, description: 'Comprehensive BI tools and reporting dashboards' },
+      { id: 'data-warehouse', name: 'Data Warehouse Solutions', icon: Database, description: 'Centralized data storage and management systems' },
+    ],
+    'Security & Compliance': [
+      { id: 'security-compliance', name: 'Security & Compliance Suite', icon: Shield, description: 'Enterprise-grade security with compliance automation' },
+      { id: 'blockchain-integration', name: 'Blockchain Solutions', icon: Shield, description: 'Secure and transparent blockchain implementations' },
+      { id: 'encryption', name: 'End-to-End Encryption', icon: Shield, description: 'Advanced data encryption and security protocols' },
+      { id: 'identity-management', name: 'Identity & Access Management', icon: Shield, description: 'Secure user authentication and authorization' },
+      { id: 'audit-logging', name: 'Comprehensive Audit Logging', icon: Settings, description: 'Detailed activity tracking and compliance reporting' },
+      { id: 'vulnerability-scanning', name: 'Vulnerability Assessment', icon: Shield, description: 'Automated security scanning and threat detection' },
+    ],
+    'Integration & APIs': [
+      { id: 'api-development', name: 'Custom API Development', icon: Code, description: 'RESTful and GraphQL APIs for seamless integrations' },
+      { id: 'workflow-integration', name: 'Workflow Integration Hub', icon: Settings, description: 'Connect all your tools in one unified platform' },
+      { id: 'payment-gateway', name: 'Payment Gateway Integration', icon: Code, description: 'Secure payment processing and e-commerce solutions' },
+      { id: 'crm-integration', name: 'CRM System Integration', icon: Users, description: 'Seamless customer relationship management connections' },
+      { id: 'erp-integration', name: 'ERP System Integration', icon: Settings, description: 'Enterprise resource planning system connectivity' },
+      { id: 'social-media', name: 'Social Media API Integration', icon: Code, description: 'Connect with major social media platforms' },
+    ],
+    'Collaboration & Communication': [
+      { id: 'team-collaboration', name: 'Advanced Team Collaboration', icon: Users, description: 'Seamless communication and project management tools' },
+      { id: 'video-conferencing', name: 'Video Conferencing Platform', icon: Users, description: 'High-quality video meetings and webinar solutions' },
+      { id: 'document-sharing', name: 'Smart Document Sharing', icon: Users, description: 'Collaborative document editing and version control' },
+      { id: 'project-management', name: 'Project Management Suite', icon: Target, description: 'Comprehensive project tracking and team coordination' },
+      { id: 'knowledge-base', name: 'Knowledge Management System', icon: Users, description: 'Centralized information sharing and documentation' },
+      { id: 'communication-hub', name: 'Unified Communication Hub', icon: MessageSquare, description: 'All-in-one messaging and notification system' },
+    ],
+    'Productivity & Automation': [
+      { id: 'smart-scheduling', name: 'AI-Powered Scheduling', icon: Calendar, description: 'Intelligent meeting and resource scheduling' },
+      { id: 'time-management', name: 'Smart Time Management', icon: Clock, description: 'AI-driven time tracking and optimization suggestions' },
+      { id: 'performance-tracking', name: 'Performance Optimization', icon: Target, description: 'Track and optimize team productivity metrics' },
+      { id: 'automated-testing', name: 'Automated Testing Suite', icon: Settings, description: 'Comprehensive automated testing and quality assurance' },
+      { id: 'intelligent-reporting', name: 'Intelligent Reporting', icon: MessageSquare, description: 'Auto-generated insights and progress reports' },
+      { id: 'workflow-automation', name: 'Business Process Automation', icon: Zap, description: 'Streamline repetitive business processes' },
+      { id: 'email-automation', name: 'Email Marketing Automation', icon: Mail, description: 'Automated email campaigns and nurture sequences' },
+    ],
+    'IoT & Emerging Tech': [
+      { id: 'iot-connectivity', name: 'IoT Device Management', icon: Cpu, description: 'Connect and manage Internet of Things devices' },
+      { id: 'augmented-reality', name: 'AR/VR Integration', icon: Code, description: 'Immersive augmented and virtual reality experiences' },
+      { id: 'edge-computing', name: 'Edge Computing Solutions', icon: Cpu, description: 'Process data closer to the source for faster response' },
+      { id: 'smart-sensors', name: 'Smart Sensor Networks', icon: Cpu, description: 'Environmental monitoring and data collection systems' },
+      { id: 'digital-twin', name: 'Digital Twin Technology', icon: Settings, description: 'Virtual replicas for simulation and optimization' },
+      { id: 'robotics', name: 'Robotics Process Automation', icon: Bot, description: 'Automated robotic solutions for various industries' },
+    ]
+  };
+
+  const [selectedCategory, setSelectedCategory] = useState('AI & Machine Learning');
+  const [customFeature, setCustomFeature] = useState('');
+  const [showCustomInput, setShowCustomInput] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showBlueprint, setShowBlueprint] = useState(false);
+  const [generatedBlueprint, setGeneratedBlueprint] = useState('');
+
+  // Get all features from all categories
+  const getAllFeatures = () => {
+    return Object.values(productivityCategories).flat();
+  };
+
+  // Filter features based on search term
+  const getFilteredFeatures = () => {
+    const allFeatures = getAllFeatures();
+    if (!searchTerm) return productivityCategories[selectedCategory] || [];
+    
+    return allFeatures.filter(feature => 
+      feature.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      feature.description.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  };
+
+  // Generate automatic blueprint
+  const generateBlueprint = () => {
+    const selectedFeatureNames = selectedFeatures
+      .map(id => getAllFeatures().find(f => f.id === id)?.name)
+      .filter(Boolean);
+
+    const projectScope = formData.projectType === 'other' ? formData.customProjectType : formData.projectType;
+    const timelineText = formData.timeline.replace(/-/g, ' ').toUpperCase();
+    
+    return `
+╔══════════════════════════════════════════════════════════════════════════════════════╗
+║                           🧠 NEURAL SOLUTION BLUEPRINT                               ║
+║                              Automatically Generated                                 ║
+╠══════════════════════════════════════════════════════════════════════════════════════╣
+
+📋 PROJECT OVERVIEW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Client Name:           ${formData.name || 'Valued Client'}
+Organization:          ${formData.company || 'Individual/Startup'}
+Project Type:          ${projectScope || 'Custom Solution'}
+Timeline:              ${timelineText || 'To be determined'}
+Budget Allocation:     ${formData.budget || 'Flexible'} ${formData.budgetCurrency}
+Generation Date:       ${new Date().toLocaleDateString()}
+Blueprint ID:          NB-${Date.now().toString().slice(-6)}
+
+🎯 SOLUTION ARCHITECTURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Based on your requirements analysis, our AI systems have designed a comprehensive 
+solution that integrates the following core technologies:
+
+${selectedFeatureNames.length > 0 ? `🔧 SELECTED FEATURES:
+${selectedFeatureNames.map((name, i) => `   ${i + 1}. ${name}`).join('\n')}` : '🔧 CORE PACKAGE: Consultation and custom requirement analysis'}
+
+🏗️ TECHNICAL STACK RECOMMENDATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Frontend:              React.js, TypeScript, Tailwind CSS
+Backend:               Node.js, Express.js, RESTful APIs
+Database:              PostgreSQL with Redis caching
+Cloud Infrastructure:  AWS/Azure multi-region deployment
+Security:              JWT authentication, SSL encryption
+Monitoring:            Real-time analytics and logging
+DevOps:               CI/CD pipeline with automated testing
+
+📊 IMPLEMENTATION PHASES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Phase 1: Discovery & Design     (Week 1-2)
+   • Requirements gathering and analysis
+   • Technical architecture design
+   • UI/UX mockups and prototypes
+   • Database schema optimization
+
+Phase 2: Core Development       (Week 3-6)
+   • Backend API development
+   • Frontend component creation
+   • Database implementation
+   • Integration layer setup
+
+Phase 3: Feature Integration    (Week 7-10)
+   • Advanced feature development
+   • Third-party integrations
+   • Performance optimization
+   • Security implementation
+
+Phase 4: Testing & Deployment   (Week 11-12)
+   • Comprehensive testing suite
+   • User acceptance testing
+   • Production deployment
+   • Go-live support
+
+💼 TEAM ALLOCATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Project Manager:       1x Senior PM (Full-time)
+Lead Developer:        1x Full-stack Engineer (Full-time)
+Frontend Specialist:   1x React Developer (Part-time)
+Backend Engineer:      1x Node.js Developer (Part-time)
+UI/UX Designer:        1x Design Specialist (Part-time)
+QA Engineer:          1x Testing Specialist (Part-time)
+DevOps Consultant:     1x Infrastructure Expert (As needed)
+
+📈 EXPECTED OUTCOMES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• ${selectedFeatureNames.length > 5 ? '300-500%' : selectedFeatureNames.length > 2 ? '200-350%' : '150-250%'} productivity improvement
+• ${selectedFeatureNames.includes('AI Process Automation') ? '80-90%' : '50-70%'} reduction in manual tasks
+• Real-time performance monitoring and analytics
+• Scalable architecture supporting 10x growth
+• Enterprise-grade security and compliance
+• Comprehensive documentation and training
+
+🔐 SECURITY & COMPLIANCE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• End-to-end encryption for all data transfers
+• GDPR and SOC 2 compliance ready
+• Multi-factor authentication implementation
+• Regular security audits and penetration testing
+• Automated backup and disaster recovery
+• 99.9% uptime SLA guarantee
+
+💡 INNOVATION OPPORTUNITIES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Based on current market trends and your selected features, we recommend 
+considering these emerging technologies for future enhancements:
+• AI-powered predictive analytics
+• Machine learning optimization
+• IoT device integration capabilities
+• Blockchain for enhanced security
+• Voice and visual recognition systems
+
+📞 NEXT STEPS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Schedule technical consultation call within 4 hours
+2. Finalize requirements and technical specifications  
+3. Prepare detailed project proposal with cost breakdown
+4. Define project milestones and delivery schedule
+5. Assign dedicated project team and kick-off meeting
+
+╚══════════════════════════════════════════════════════════════════════════════════════╝
+
+This blueprint is automatically generated based on your inputs and represents 
+our initial technical assessment. The final solution will be customized during 
+our consultation phase to perfectly match your specific business needs.
+
+Generated by Neural AI Systems v2.1 | Confidence Score: 98.7%
+    `.trim();
+  };
 
   const handleFeatureToggle = (featureId: string) => {
     setSelectedFeatures(prev => 
@@ -56,10 +250,14 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
+    // Generate blueprint
+    const blueprint = generateBlueprint();
+    setGeneratedBlueprint(blueprint);
+    
     // Simulate form submission
     setTimeout(() => {
       const selectedFeatureNames = selectedFeatures
-        .map(id => productivityFeatures.find(f => f.id === id)?.name)
+        .map(id => getAllFeatures().find(f => f.id === id)?.name)
         .filter(Boolean);
       
       console.log('Neural Connection Request Submitted:', {
@@ -301,12 +499,13 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
                           backdropFilter: 'blur(10px)',
                         }}
                       >
-                        <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Select innovation timeline</option>
-                        <option value="lightning-sprint" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>⚡ Lightning Sprint (2-4 weeks)</option>
-                        <option value="neural-acceleration" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>🧠 Neural Acceleration (1-3 months)</option>
-                        <option value="quantum-development" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>⚛️ Quantum Development (3-6 months)</option>
-                        <option value="digital-evolution" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>🚀 Digital Evolution (6-12 months)</option>
-                        <option value="infinite-partnership" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>♾️ Infinite Partnership (Ongoing)</option>
+                        <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Select development timeline</option>
+                        <option value="rapid-prototype" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>🚀 Rapid Prototype (2-3 weeks)</option>
+                        <option value="agile-development" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>⚡ Agile Development (1-2 months)</option>
+                        <option value="enterprise-solution" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>🏢 Enterprise Solution (3-4 months)</option>
+                        <option value="comprehensive-platform" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>🌐 Comprehensive Platform (4-6 months)</option>
+                        <option value="digital-transformation" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>🔄 Digital Transformation (6-12 months)</option>
+                        <option value="ongoing-partnership" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>🤝 Ongoing Partnership (Long-term)</option>
                       </select>
                       <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                         <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -381,14 +580,53 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
                 {/* Productivity Features Selection */}
                 <div>
                   <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-4">
-                    Productivity Features You're Interested In:
+                    Technology Solutions & Features:
                   </label>
+                  
+                  {/* Search and Category Controls */}
+                  <div className="mb-4 space-y-3">
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                      <input
+                        type="text"
+                        placeholder="Search features..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="w-full pl-10 pr-4 py-2 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all text-sm"
+                        style={{
+                          background: 'rgba(0, 0, 0, 0.4)',
+                          backdropFilter: 'blur(10px)',
+                        }}
+                      />
+                    </div>
+                    
+                    {!searchTerm && (
+                      <div className="flex flex-wrap gap-2">
+                        {Object.keys(productivityCategories).map((category) => (
+                          <button
+                            key={category}
+                            type="button"
+                            onClick={() => setSelectedCategory(category)}
+                            className={`px-3 py-1 rounded-full text-xs transition-all ${
+                              selectedCategory === category
+                                ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-400/50'
+                                : 'bg-gray-800/50 text-gray-400 border border-gray-600 hover:border-cyan-400/50 hover:text-cyan-400'
+                            }`}
+                          >
+                            {category}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Features Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-80 features-grid pr-2">
-                    {productivityFeatures.map((feature) => (
+                    {getFilteredFeatures().map((feature) => (
                       <div
                         key={feature.id}
                         onClick={() => handleFeatureToggle(feature.id)}
-                        className={`p-4 rounded-lg cursor-pointer transition-all border-2 ${
+                        className={`p-3 rounded-lg cursor-pointer transition-all border-2 ${
                           selectedFeatures.includes(feature.id)
                             ? 'border-cyan-400/50 bg-cyan-500/10'
                             : 'border-gray-600 hover:border-cyan-400/50 bg-gray-800/30'
@@ -396,12 +634,12 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
                       >
                         <div className="flex items-start space-x-3">
                           <feature.icon 
-                            className={`w-5 h-5 mt-0.5 ${
+                            className={`w-4 h-4 mt-0.5 ${
                               selectedFeatures.includes(feature.id) ? 'text-neon' : 'text-gray-400'
                             }`} 
                           />
                           <div>
-                            <h4 className={`font-medium ${
+                            <h4 className={`font-medium text-sm ${
                               selectedFeatures.includes(feature.id) ? 'text-neon' : 'text-white'
                             }`}>
                               {feature.name}
@@ -411,6 +649,48 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
                         </div>
                       </div>
                     ))}
+                  </div>
+
+                  {/* Custom Feature Input */}
+                  <div className="mt-4">
+                    <button
+                      type="button"
+                      onClick={() => setShowCustomInput(!showCustomInput)}
+                      className="flex items-center space-x-2 text-cyan-400 hover:text-cyan-300 transition-colors text-sm"
+                    >
+                      <Plus className="w-4 h-4" />
+                      <span>Need something specific? Add custom requirement</span>
+                    </button>
+                    
+                    {showCustomInput && (
+                      <div className="mt-3">
+                        <input
+                          type="text"
+                          placeholder="Describe your custom requirement..."
+                          value={customFeature}
+                          onChange={(e) => setCustomFeature(e.target.value)}
+                          className="w-full px-4 py-2 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all text-sm"
+                          style={{
+                            background: 'rgba(0, 0, 0, 0.4)',
+                            backdropFilter: 'blur(10px)',
+                          }}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (customFeature.trim()) {
+                              const customId = `custom-${Date.now()}`;
+                              setSelectedFeatures(prev => [...prev, customId]);
+                              setCustomFeature('');
+                              setShowCustomInput(false);
+                            }
+                          }}
+                          className="mt-2 px-4 py-2 bg-cyan-500/20 text-cyan-400 border border-cyan-400/50 rounded-lg hover:bg-cyan-500/30 transition-all text-sm"
+                        >
+                          Add Custom Feature
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -559,8 +839,49 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
                   <h2 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-4">Neural Connection Status</h2>
                 </div>
                 
-                <div className="p-6 rounded-lg bg-gradient-to-r from-green-500/20 to-cyan-500/20 border border-green-400/30">
-                  <pre className="text-green-300 text-sm whitespace-pre-wrap font-mono leading-relaxed">{submitMessage}</pre>
+                <div className="space-y-6">
+                  <div className="p-6 rounded-lg bg-gradient-to-r from-green-500/20 to-cyan-500/20 border border-green-400/30">
+                    <pre className="text-green-300 text-sm whitespace-pre-wrap font-mono leading-relaxed">{submitMessage}</pre>
+                  </div>
+
+                  {/* Blueprint Section */}
+                  <div className="p-6 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-400/30">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-lg font-semibold text-white flex items-center">
+                        <FileText className="w-5 h-5 mr-2 text-blue-400" />
+                        Generated Solution Blueprint
+                      </h3>
+                      <button
+                        onClick={() => setShowBlueprint(!showBlueprint)}
+                        className="flex items-center px-3 py-1 bg-blue-500/20 text-blue-400 border border-blue-400/50 rounded-lg hover:bg-blue-500/30 transition-all text-sm"
+                      >
+                        {showBlueprint ? 'Hide' : 'View'} Blueprint
+                      </button>
+                    </div>
+                    
+                    {showBlueprint && (
+                      <div className="relative">
+                        <pre className="text-blue-300 text-xs whitespace-pre-wrap font-mono leading-relaxed bg-black/30 p-4 rounded-lg border border-blue-400/20 max-h-96 overflow-y-auto custom-scrollbar">
+                          {generatedBlueprint}
+                        </pre>
+                        <button
+                          onClick={() => {
+                            const blob = new Blob([generatedBlueprint], { type: 'text/plain' });
+                            const url = URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = `neural-blueprint-${Date.now()}.txt`;
+                            a.click();
+                            URL.revokeObjectURL(url);
+                          }}
+                          className="absolute top-2 right-2 flex items-center px-2 py-1 bg-blue-500/20 text-blue-400 border border-blue-400/50 rounded hover:bg-blue-500/30 transition-all text-xs"
+                        >
+                          <Download className="w-3 h-3 mr-1" />
+                          Download
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 <div className="mt-6 flex justify-center">
