@@ -113,19 +113,204 @@ const ContactSection = () => {
     );
   };
 
-  // Generate automatic blueprint
+  // Generate dynamic blueprint based on selected features
   const generateBlueprint = () => {
-    const selectedFeatureNames = selectedFeatures
-      .map(id => getAllFeatures().find(f => f.id === id)?.name)
+    const selectedFeatureData = selectedFeatures
+      .map(id => getAllFeatures().find(f => f.id === id))
       .filter(Boolean);
 
+    const selectedFeatureNames = selectedFeatureData.map(f => f.name);
     const projectScope = formData.projectType === 'other' ? formData.customProjectType : formData.projectType;
     const timelineText = formData.timeline.replace(/-/g, ' ').toUpperCase();
+    
+    // Dynamic solution description based on feature combinations
+    const generateSolutionDescription = () => {
+      if (selectedFeatures.length === 0) {
+        return "A comprehensive consultation to analyze your specific requirements and design a custom digital transformation strategy.";
+      }
+
+      const featureCategories = {
+        'ai': selectedFeatures.filter(id => ['ai-automation', 'machine-learning', 'chatbot-ai', 'predictive-analytics', 'nlp-processing'].includes(id)),
+        'vision': selectedFeatures.filter(id => ['computer-vision', 'voice-recognition'].includes(id)),
+        'cloud': selectedFeatures.filter(id => ['cloud-integration', 'auto-scaling', 'serverless', 'microservices'].includes(id)),
+        'data': selectedFeatures.filter(id => ['real-time-analytics', 'data-visualization', 'big-data', 'business-intelligence'].includes(id)),
+        'security': selectedFeatures.filter(id => ['security-compliance', 'blockchain-integration', 'encryption'].includes(id)),
+        'automation': selectedFeatures.filter(id => ['workflow-automation', 'email-automation', 'smart-scheduling'].includes(id))
+      };
+
+      let description = "";
+
+      if (featureCategories.ai.length > 0 && featureCategories.automation.length > 0) {
+        description = "An intelligent automation platform combining AI-powered decision making with workflow optimization to eliminate manual processes and boost operational efficiency.";
+      } else if (featureCategories.vision.length > 0 && featureCategories.data.length > 0) {
+        description = "A computer vision and analytics solution that processes visual data to generate actionable insights, enabling predictive maintenance and quality control.";
+      } else if (featureCategories.cloud.length > 0 && featureCategories.security.length > 0) {
+        description = "A secure cloud-native architecture with enterprise-grade security protocols, scalable infrastructure, and compliance-ready data protection.";
+      } else if (featureCategories.ai.length > 0 && featureCategories.data.length > 0) {
+        description = "An AI-driven analytics platform that transforms raw data into intelligent insights, featuring machine learning models for predictive business intelligence.";
+      } else if (featureCategories.automation.length > 0) {
+        description = "A comprehensive business process automation suite designed to streamline operations, reduce human error, and accelerate productivity across departments.";
+      } else if (featureCategories.ai.length > 0) {
+        description = "An artificial intelligence solution leveraging machine learning algorithms and neural networks to automate complex decision-making processes.";
+      } else if (featureCategories.data.length > 0) {
+        description = "A robust data management and analytics platform providing real-time insights, advanced visualizations, and business intelligence capabilities.";
+      } else if (featureCategories.cloud.length > 0) {
+        description = "A scalable cloud infrastructure solution with microservices architecture, auto-scaling capabilities, and multi-region deployment.";
+      } else {
+        description = "A custom digital solution tailored to your specific business requirements with modern technology stack and scalable architecture.";
+      }
+
+      return description;
+    };
+
+    // Dynamic technical stack based on features
+    const generateTechnicalStack = () => {
+      let stack: {
+        frontend: string;
+        backend: string;
+        database: string;
+        cloud: string;
+        security: string;
+        monitoring: string;
+        devops: string;
+        ai?: string;
+        processing?: string;
+        blockchain?: string;
+      } = {
+        frontend: "React.js, TypeScript, Tailwind CSS",
+        backend: "Node.js, Express.js, RESTful APIs",
+        database: "PostgreSQL with Redis caching",
+        cloud: "AWS/Azure multi-region deployment",
+        security: "JWT authentication, SSL encryption",
+        monitoring: "Real-time analytics and logging",
+        devops: "CI/CD pipeline with automated testing"
+      };
+
+      // Customize based on selected features
+      if (selectedFeatures.includes('ai-automation') || selectedFeatures.includes('machine-learning')) {
+        stack.ai = "TensorFlow, PyTorch, scikit-learn";
+        stack.backend += ", Python Flask/FastAPI";
+      }
+      
+      if (selectedFeatures.includes('computer-vision')) {
+        stack.ai = (stack.ai || "") + ", OpenCV, YOLO, TensorFlow Vision";
+      }
+      
+      if (selectedFeatures.includes('nlp-processing')) {
+        stack.ai = (stack.ai || "") + ", Transformers, BERT, spaCy";
+      }
+      
+      if (selectedFeatures.includes('big-data')) {
+        stack.database = "MongoDB, Apache Kafka, Elasticsearch";
+        stack.processing = "Apache Spark, Hadoop";
+      }
+      
+      if (selectedFeatures.includes('blockchain-integration')) {
+        stack.blockchain = "Ethereum, Web3.js, Solidity";
+      }
+      
+      if (selectedFeatures.includes('serverless')) {
+        stack.cloud = "AWS Lambda, Azure Functions, Serverless Framework";
+      }
+
+      return stack;
+    };
+
+    // Dynamic key components based on features
+    const generateKeyComponents = () => {
+      const components = [];
+      
+      selectedFeatureData.forEach(feature => {
+        switch(feature.id) {
+          case 'ai-automation':
+            components.push("• Intelligent Process Automation Engine with ML-based decision trees");
+            components.push("• Workflow Orchestration System with smart routing capabilities");
+            break;
+          case 'computer-vision':
+            components.push("• Computer Vision Pipeline with real-time image processing");
+            components.push("• Object Detection and Classification Models");
+            break;
+          case 'nlp-processing':
+            components.push("• Natural Language Processing Engine with sentiment analysis");
+            components.push("• Text Analytics and Information Extraction System");
+            break;
+          case 'predictive-analytics':
+            components.push("• Predictive Analytics Engine with forecasting algorithms");
+            components.push("• Machine Learning Pipeline for pattern recognition");
+            break;
+          case 'real-time-analytics':
+            components.push("• Real-time Data Streaming and Processing Infrastructure");
+            components.push("• Interactive Analytics Dashboard with live metrics");
+            break;
+          case 'blockchain-integration':
+            components.push("• Blockchain Integration Layer with smart contract deployment");
+            components.push("• Decentralized Identity and Transaction Management");
+            break;
+          case 'chatbot-ai':
+            components.push("• Conversational AI Framework with intent recognition");
+            components.push("• Multi-channel Chatbot Deployment System");
+            break;
+          default:
+            components.push(`• ${feature.name} Implementation with best practices integration`);
+        }
+      });
+      
+      if (components.length === 0) {
+        components.push("• Custom Requirements Analysis and Solution Design");
+        components.push("• Technical Architecture Planning and Documentation");
+      }
+      
+      return components.slice(0, 8); // Limit to 8 components for readability
+    };
+
+    // Dynamic expected outcomes
+    const generateExpectedOutcomes = () => {
+      const outcomes = [];
+      
+      if (selectedFeatures.includes('ai-automation')) {
+        outcomes.push("• 80-95% reduction in manual processing time");
+        outcomes.push("• 99.5% accuracy in automated decision making");
+      }
+      
+      if (selectedFeatures.includes('predictive-analytics')) {
+        outcomes.push("• 85-92% improvement in forecasting accuracy");
+        outcomes.push("• Early trend detection with 7-14 day advance notice");
+      }
+      
+      if (selectedFeatures.includes('real-time-analytics')) {
+        outcomes.push("• Sub-second data processing and visualization");
+        outcomes.push("• 360° real-time business visibility");
+      }
+      
+      if (selectedFeatures.includes('computer-vision')) {
+        outcomes.push("• 95%+ accuracy in visual inspection and quality control");
+        outcomes.push("• Real-time object detection and classification");
+      }
+      
+      if (selectedFeatures.includes('chatbot-ai')) {
+        outcomes.push("• 70-85% reduction in customer service response time");
+        outcomes.push("• 24/7 automated customer support availability");
+      }
+      
+      // Generic outcomes if specific ones aren't available
+      if (outcomes.length < 4) {
+        outcomes.push(`• ${selectedFeatures.length > 5 ? '300-500%' : selectedFeatures.length > 2 ? '200-350%' : '150-250%'} productivity improvement`);
+        outcomes.push("• Scalable architecture supporting 10x business growth");
+        outcomes.push("• Enterprise-grade security and compliance ready");
+        outcomes.push("• Comprehensive documentation and training materials");
+      }
+      
+      return outcomes.slice(0, 6);
+    };
+
+    const stack = generateTechnicalStack();
+    const keyComponents = generateKeyComponents();
+    const expectedOutcomes = generateExpectedOutcomes();
     
     return `
 ╔══════════════════════════════════════════════════════════════════════════════════════╗
 ║                           🧠 NEURAL SOLUTION BLUEPRINT                               ║
-║                              Automatically Generated                                 ║
+║                              Dynamically Generated                                   ║
 ╠══════════════════════════════════════════════════════════════════════════════════════╣
 
 📋 PROJECT OVERVIEW
@@ -140,101 +325,98 @@ Blueprint ID:          NB-${Date.now().toString().slice(-6)}
 
 🎯 SOLUTION ARCHITECTURE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Based on your requirements analysis, our AI systems have designed a comprehensive 
-solution that integrates the following core technologies:
+${generateSolutionDescription()}
 
 ${selectedFeatureNames.length > 0 ? `🔧 SELECTED FEATURES:
 ${selectedFeatureNames.map((name, i) => `   ${i + 1}. ${name}`).join('\n')}` : '🔧 CORE PACKAGE: Consultation and custom requirement analysis'}
 
 🏗️ TECHNICAL STACK RECOMMENDATION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Frontend:              React.js, TypeScript, Tailwind CSS
-Backend:               Node.js, Express.js, RESTful APIs
-Database:              PostgreSQL with Redis caching
-Cloud Infrastructure:  AWS/Azure multi-region deployment
-Security:              JWT authentication, SSL encryption
-Monitoring:            Real-time analytics and logging
-DevOps:               CI/CD pipeline with automated testing
+Frontend:              ${stack.frontend}
+Backend:               ${stack.backend}
+Database:              ${stack.database}
+Cloud Infrastructure:  ${stack.cloud}
+Security:              ${stack.security}
+Monitoring:            ${stack.monitoring}
+DevOps:               ${stack.devops}${stack.ai ? `\nAI/ML Stack:           ${stack.ai}` : ''}${stack.processing ? `\nData Processing:       ${stack.processing}` : ''}${stack.blockchain ? `\nBlockchain:            ${stack.blockchain}` : ''}
+
+🔧 KEY COMPONENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${keyComponents.join('\n')}
 
 📊 IMPLEMENTATION PHASES
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Phase 1: Discovery & Design     (Week 1-2)
-   • Requirements gathering and analysis
-   • Technical architecture design
-   • UI/UX mockups and prototypes
-   • Database schema optimization
+   • Detailed requirements analysis and feature mapping
+   • Technical architecture design and system blueprints
+   • UI/UX mockups and user experience optimization
+   • Database schema design and optimization
 
 Phase 2: Core Development       (Week 3-6)
-   • Backend API development
-   • Frontend component creation
-   • Database implementation
-   • Integration layer setup
+   • Backend API development and integration setup
+   • Frontend component development and responsive design
+   • Database implementation and data migration
+   • Core feature development and testing
 
-Phase 3: Feature Integration    (Week 7-10)
-   • Advanced feature development
-   • Third-party integrations
-   • Performance optimization
-   • Security implementation
+Phase 3: Advanced Integration   (Week 7-10)
+   • AI/ML model training and deployment (if applicable)
+   • Third-party API integrations and webhook setup
+   • Performance optimization and load testing
+   • Security implementation and vulnerability assessment
 
 Phase 4: Testing & Deployment   (Week 11-12)
-   • Comprehensive testing suite
-   • User acceptance testing
-   • Production deployment
-   • Go-live support
+   • Comprehensive testing suite and quality assurance
+   • User acceptance testing and feedback integration
+   • Production deployment and monitoring setup
+   • Go-live support and team training
 
 💼 TEAM ALLOCATION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Project Manager:       1x Senior PM (Full-time)
-Lead Developer:        1x Full-stack Engineer (Full-time)
+Lead Developer:        1x Full-stack Engineer (Full-time)${selectedFeatures.some(f => ['ai-automation', 'machine-learning', 'computer-vision', 'nlp-processing'].includes(f)) ? '\nAI/ML Engineer:        1x AI Specialist (Full-time)' : ''}
 Frontend Specialist:   1x React Developer (Part-time)
 Backend Engineer:      1x Node.js Developer (Part-time)
 UI/UX Designer:        1x Design Specialist (Part-time)
 QA Engineer:          1x Testing Specialist (Part-time)
-DevOps Consultant:     1x Infrastructure Expert (As needed)
+DevOps Consultant:     1x Infrastructure Expert (As needed)${selectedFeatures.includes('security-compliance') || selectedFeatures.includes('blockchain-integration') ? '\nSecurity Expert:       1x Cybersecurity Specialist (Part-time)' : ''}
 
 📈 EXPECTED OUTCOMES
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• ${selectedFeatureNames.length > 5 ? '300-500%' : selectedFeatureNames.length > 2 ? '200-350%' : '150-250%'} productivity improvement
-• ${selectedFeatureNames.includes('AI Process Automation') ? '80-90%' : '50-70%'} reduction in manual tasks
-• Real-time performance monitoring and analytics
-• Scalable architecture supporting 10x growth
-• Enterprise-grade security and compliance
-• Comprehensive documentation and training
+${expectedOutcomes.join('\n')}
 
 🔐 SECURITY & COMPLIANCE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• End-to-end encryption for all data transfers
-• GDPR and SOC 2 compliance ready
-• Multi-factor authentication implementation
+• End-to-end encryption for all data transfers and storage
+• GDPR, SOC 2, and industry-specific compliance ready
+• Multi-factor authentication and role-based access control
 • Regular security audits and penetration testing
-• Automated backup and disaster recovery
-• 99.9% uptime SLA guarantee
+• Automated backup and disaster recovery protocols
+• 99.9% uptime SLA with monitoring and alerting
 
 💡 INNOVATION OPPORTUNITIES
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Based on current market trends and your selected features, we recommend 
-considering these emerging technologies for future enhancements:
-• AI-powered predictive analytics
-• Machine learning optimization
-• IoT device integration capabilities
-• Blockchain for enhanced security
-• Voice and visual recognition systems
+Based on your selected features and current market trends, future enhancement 
+opportunities include:${selectedFeatures.includes('ai-automation') ? '\n• Advanced neural network optimization and deep learning integration' : ''}${selectedFeatures.includes('computer-vision') ? '\n• Augmented reality overlay and enhanced image recognition capabilities' : ''}${selectedFeatures.includes('predictive-analytics') ? '\n• Real-time anomaly detection and automated response systems' : ''}${selectedFeatures.includes('blockchain-integration') ? '\n• DeFi integration and smart contract automation' : ''}
+• Edge computing implementation for reduced latency
+• IoT device integration and sensor data processing
+• Advanced analytics with machine learning insights
+• Voice and conversational AI integration
 
 📞 NEXT STEPS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-1. Schedule technical consultation call within 4 hours
-2. Finalize requirements and technical specifications  
-3. Prepare detailed project proposal with cost breakdown
-4. Define project milestones and delivery schedule
-5. Assign dedicated project team and kick-off meeting
+1. Technical consultation call scheduled within 4 hours
+2. Feature specification and requirement finalization
+3. Detailed project proposal with timeline and cost breakdown
+4. Architecture review and technology stack confirmation
+5. Development team assignment and project kickoff
 
 ╚══════════════════════════════════════════════════════════════════════════════════════╝
 
-This blueprint is automatically generated based on your inputs and represents 
-our initial technical assessment. The final solution will be customized during 
-our consultation phase to perfectly match your specific business needs.
+This blueprint is dynamically generated based on your specific feature selection 
+and represents our AI-analyzed technical assessment. The solution architecture 
+adapts to your chosen combination of features for optimal implementation.
 
-Generated by Neural AI Systems v2.1 | Confidence Score: 98.7%
+Generated by Neural AI Systems v3.0 | Confidence Score: ${selectedFeatures.length > 0 ? '98.7%' : '95.2%'}
     `.trim();
   };
 
