@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Brain, Mail, Phone, MapPin, Send, Calendar, Clock, Users, Zap, Target, BarChart3, Settings, MessageSquare, Database, Shield, Cpu, Cloud, Code, Bot, Search, Plus, FileText, Download } from 'lucide-react';
 
@@ -48,44 +47,43 @@ const ContactSection = () => {
       { id: 'data-warehouse', name: 'Data Warehouse Solutions', icon: Database, description: 'Centralized data storage and management systems' },
     ],
     'Security & Compliance': [
-      { id: 'security-compliance', name: 'Security & Compliance Suite', icon: Shield, description: 'Enterprise-grade security with compliance automation' },
-      { id: 'blockchain-integration', name: 'Blockchain Solutions', icon: Shield, description: 'Secure and transparent blockchain implementations' },
-      { id: 'encryption', name: 'End-to-End Encryption', icon: Shield, description: 'Advanced data encryption and security protocols' },
-      { id: 'identity-management', name: 'Identity & Access Management', icon: Shield, description: 'Secure user authentication and authorization' },
-      { id: 'audit-logging', name: 'Comprehensive Audit Logging', icon: Settings, description: 'Detailed activity tracking and compliance reporting' },
-      { id: 'vulnerability-scanning', name: 'Vulnerability Assessment', icon: Shield, description: 'Automated security scanning and threat detection' },
+      { id: 'multi-factor-auth', name: 'Multi-Factor Authentication', icon: Shield, description: 'Enhanced security with multiple verification layers' },
+      { id: 'data-encryption', name: 'End-to-End Encryption', icon: Shield, description: 'Advanced data protection and secure communications' },
+      { id: 'compliance-gdpr', name: 'GDPR Compliance Suite', icon: Shield, description: 'European data protection regulation compliance tools' },
+      { id: 'security-audit', name: 'Security Audit & Monitoring', icon: Shield, description: 'Continuous security assessment and threat detection' },
+      { id: 'access-control', name: 'Role-Based Access Control', icon: Shield, description: 'Granular permission management and user access control' },
+      { id: 'backup-recovery', name: 'Backup & Disaster Recovery', icon: Shield, description: 'Automated backup systems and disaster recovery protocols' },
     ],
     'Integration & APIs': [
-      { id: 'api-development', name: 'Custom API Development', icon: Code, description: 'RESTful and GraphQL APIs for seamless integrations' },
-      { id: 'workflow-integration', name: 'Workflow Integration Hub', icon: Settings, description: 'Connect all your tools in one unified platform' },
-      { id: 'payment-gateway', name: 'Payment Gateway Integration', icon: Code, description: 'Secure payment processing and e-commerce solutions' },
-      { id: 'crm-integration', name: 'CRM System Integration', icon: Users, description: 'Seamless customer relationship management connections' },
-      { id: 'erp-integration', name: 'ERP System Integration', icon: Settings, description: 'Enterprise resource planning system connectivity' },
-      { id: 'social-media', name: 'Social Media API Integration', icon: Code, description: 'Connect with major social media platforms' },
+      { id: 'api-development', name: 'RESTful API Development', icon: Code, description: 'Scalable and secure API endpoints for integration' },
+      { id: 'webhook-integration', name: 'Webhook & Event Processing', icon: Code, description: 'Real-time event-driven integrations and notifications' },
+      { id: 'third-party-apis', name: 'Third-Party API Integration', icon: Code, description: 'Seamless connection with external services and platforms' },
+      { id: 'graphql-apis', name: 'GraphQL API Gateway', icon: Code, description: 'Efficient data querying and flexible API architecture' },
+      { id: 'middleware-solutions', name: 'Custom Middleware Solutions', icon: Code, description: 'Bridge different systems and enable seamless data flow' },
+      { id: 'api-documentation', name: 'Interactive API Documentation', icon: Code, description: 'Comprehensive API documentation and testing tools' },
     ],
-    'Collaboration & Communication': [
-      { id: 'team-collaboration', name: 'Advanced Team Collaboration', icon: Users, description: 'Seamless communication and project management tools' },
-      { id: 'video-conferencing', name: 'Video Conferencing Platform', icon: Users, description: 'High-quality video meetings and webinar solutions' },
-      { id: 'document-sharing', name: 'Smart Document Sharing', icon: Users, description: 'Collaborative document editing and version control' },
-      { id: 'project-management', name: 'Project Management Suite', icon: Target, description: 'Comprehensive project tracking and team coordination' },
-      { id: 'knowledge-base', name: 'Knowledge Management System', icon: Users, description: 'Centralized information sharing and documentation' },
-      { id: 'communication-hub', name: 'Unified Communication Hub', icon: MessageSquare, description: 'All-in-one messaging and notification system' },
+    'Communication & Collaboration': [
+      { id: 'video-conferencing', name: 'Integrated Video Conferencing', icon: MessageSquare, description: 'Built-in video calling and screen sharing capabilities' },
+      { id: 'team-messaging', name: 'Real-time Team Messaging', icon: MessageSquare, description: 'Instant messaging and team communication tools' },
+      { id: 'file-sharing', name: 'Secure File Sharing Platform', icon: MessageSquare, description: 'Encrypted file sharing and collaborative document editing' },
+      { id: 'project-management', name: 'Integrated Project Management', icon: Target, description: 'Task tracking, milestone management, and team coordination' },
+      { id: 'notification-system', name: 'Smart Notification System', icon: MessageSquare, description: 'Intelligent alerts and customizable notification preferences' },
+      { id: 'collaborative-workspace', name: 'Digital Collaborative Workspace', icon: Users, description: 'Virtual workspace for remote team collaboration' },
     ],
-    'Productivity & Automation': [
-      { id: 'smart-scheduling', name: 'AI-Powered Scheduling', icon: Calendar, description: 'Intelligent meeting and resource scheduling' },
-      { id: 'time-management', name: 'Smart Time Management', icon: Clock, description: 'AI-driven time tracking and optimization suggestions' },
-      { id: 'performance-tracking', name: 'Performance Optimization', icon: Target, description: 'Track and optimize team productivity metrics' },
-      { id: 'automated-testing', name: 'Automated Testing Suite', icon: Settings, description: 'Comprehensive automated testing and quality assurance' },
-      { id: 'intelligent-reporting', name: 'Intelligent Reporting', icon: MessageSquare, description: 'Auto-generated insights and progress reports' },
-      { id: 'workflow-automation', name: 'Business Process Automation', icon: Zap, description: 'Streamline repetitive business processes' },
-      { id: 'email-automation', name: 'Email Marketing Automation', icon: Mail, description: 'Automated email campaigns and nurture sequences' },
+    'Productivity & Workflow': [
+      { id: 'workflow-automation', name: 'Workflow Automation Engine', icon: Zap, description: 'Automate complex business processes and approvals' },
+      { id: 'document-management', name: 'Document Management System', icon: FileText, description: 'Organize, version control, and manage digital documents' },
+      { id: 'task-scheduling', name: 'Advanced Task Scheduling', icon: Calendar, description: 'Intelligent task assignment and deadline management' },
+      { id: 'time-tracking', name: 'Time Tracking & Analytics', icon: Clock, description: 'Monitor productivity and analyze time allocation patterns' },
+      { id: 'resource-planning', name: 'Resource Planning Tools', icon: Target, description: 'Optimize resource allocation and capacity planning' },
+      { id: 'performance-analytics', name: 'Performance Analytics Dashboard', icon: BarChart3, description: 'Track KPIs and measure organizational performance' },
     ],
     'IoT & Emerging Tech': [
-      { id: 'iot-connectivity', name: 'IoT Device Management', icon: Cpu, description: 'Connect and manage Internet of Things devices' },
-      { id: 'augmented-reality', name: 'AR/VR Integration', icon: Code, description: 'Immersive augmented and virtual reality experiences' },
-      { id: 'edge-computing', name: 'Edge Computing Solutions', icon: Cpu, description: 'Process data closer to the source for faster response' },
-      { id: 'smart-sensors', name: 'Smart Sensor Networks', icon: Cpu, description: 'Environmental monitoring and data collection systems' },
-      { id: 'digital-twin', name: 'Digital Twin Technology', icon: Settings, description: 'Virtual replicas for simulation and optimization' },
+      { id: 'iot-sensors', name: 'IoT Sensor Integration', icon: Settings, description: 'Connect and manage IoT devices and sensor networks' },
+      { id: 'blockchain-integration', name: 'Blockchain Solutions', icon: Shield, description: 'Secure transactions and decentralized data management' },
+      { id: 'ar-vr-experiences', name: 'AR/VR Experiences', icon: Settings, description: 'Immersive augmented and virtual reality applications' },
+      { id: 'edge-computing', name: 'Edge Computing Solutions', icon: Cpu, description: 'Process data closer to source for reduced latency' },
+      { id: 'quantum-ready', name: 'Quantum-Ready Architecture', icon: Cpu, description: 'Future-proof systems for quantum computing integration' },
       { id: 'robotics', name: 'Robotics Process Automation', icon: Bot, description: 'Automated robotic solutions for various industries' },
     ]
   };
@@ -94,8 +92,8 @@ const ContactSection = () => {
   const [customFeature, setCustomFeature] = useState('');
   const [showCustomInput, setShowCustomInput] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [showBlueprint, setShowBlueprint] = useState(false);
-  const [generatedBlueprint, setGeneratedBlueprint] = useState('');
+  const [showOutput, setShowOutput] = useState(false);
+  const [generatedOutput, setGeneratedOutput] = useState('');
 
   // Get all features from all categories
   const getAllFeatures = () => {
@@ -113,8 +111,8 @@ const ContactSection = () => {
     );
   };
 
-  // Enhanced dynamic blueprint generator with comprehensive analysis
-  const generateBlueprint = () => {
+  // Enhanced dynamic solution generator with comprehensive analysis
+  const generateOutput = () => {
     const selectedFeatureData = selectedFeatures
       .map(id => getAllFeatures().find(f => f.id === id))
       .filter(Boolean);
@@ -128,15 +126,14 @@ const ContactSection = () => {
       const categories = {
         'ai_ml': selectedFeatures.filter(id => ['ai-automation', 'machine-learning', 'chatbot-ai', 'predictive-analytics', 'nlp-processing', 'computer-vision', 'voice-recognition'].includes(id)),
         'cloud_infra': selectedFeatures.filter(id => ['cloud-integration', 'auto-scaling', 'serverless', 'microservices', 'containerization', 'cdn-optimization'].includes(id)),
-        'data_analytics': selectedFeatures.filter(id => ['real-time-analytics', 'data-visualization', 'big-data', 'business-intelligence', 'data-pipeline', 'data-warehouse'].includes(id)),
-        'security_compliance': selectedFeatures.filter(id => ['security-compliance', 'blockchain-integration', 'encryption', 'identity-management', 'audit-logging', 'vulnerability-scanning'].includes(id)),
-        'integration_apis': selectedFeatures.filter(id => ['api-development', 'workflow-integration', 'payment-gateway', 'crm-integration', 'erp-integration', 'social-media'].includes(id)),
-        'collaboration': selectedFeatures.filter(id => ['team-collaboration', 'video-conferencing', 'document-sharing', 'project-management', 'knowledge-base', 'communication-hub'].includes(id)),
-        'productivity_automation': selectedFeatures.filter(id => ['smart-scheduling', 'time-management', 'performance-tracking', 'automated-testing', 'intelligent-reporting', 'workflow-automation', 'email-automation'].includes(id)),
-        'iot_emerging': selectedFeatures.filter(id => ['iot-connectivity', 'augmented-reality', 'edge-computing', 'smart-sensors', 'digital-twin', 'robotics'].includes(id)),
-        'custom': selectedFeatures.filter(id => id.startsWith('custom-'))
+        'data_analytics': selectedFeatures.filter(id => ['real-time-analytics', 'data-visualization', 'big-data', 'data-pipeline', 'business-intelligence', 'data-warehouse'].includes(id)),
+        'security_compliance': selectedFeatures.filter(id => ['multi-factor-auth', 'data-encryption', 'compliance-gdpr', 'security-audit', 'access-control', 'backup-recovery'].includes(id)),
+        'integration_apis': selectedFeatures.filter(id => ['api-development', 'webhook-integration', 'third-party-apis', 'graphql-apis', 'middleware-solutions', 'api-documentation'].includes(id)),
+        'communication_collab': selectedFeatures.filter(id => ['video-conferencing', 'team-messaging', 'file-sharing', 'project-management', 'notification-system', 'collaborative-workspace'].includes(id)),
+        'productivity_automation': selectedFeatures.filter(id => ['workflow-automation', 'document-management', 'task-scheduling', 'time-tracking', 'resource-planning', 'performance-analytics'].includes(id)),
+        'iot_emerging': selectedFeatures.filter(id => ['iot-sensors', 'blockchain-integration', 'ar-vr-experiences', 'edge-computing', 'quantum-ready', 'robotics'].includes(id)),
+        'custom': customFeature ? [customFeature] : []
       };
-      
       return categories;
     };
 
@@ -162,34 +159,28 @@ const ContactSection = () => {
         return "A next-generation IoT and AI convergence platform that combines edge computing, smart sensor networks, and machine learning to create intelligent connected systems. Enables real-time data processing, predictive analytics, and autonomous decision-making at the edge.";
       }
       
-      if (categories.security_compliance.length >= 2 && (categories.cloud_infra.length > 0 || categories.integration_apis.length > 0)) {
-        return "An enterprise security-first architecture featuring zero-trust protocols, compliance automation, and secure integration capabilities. Implements advanced encryption, identity management, and comprehensive audit trails while maintaining scalable performance.";
-      }
-
-      // Two-category combinations
-      if (categories.ai_ml.length > 0 && categories.productivity_automation.length > 0) {
-        return "An intelligent productivity acceleration platform that leverages AI to automate complex business processes, optimize workflows, and enhance team collaboration through smart decision-making algorithms.";
+      if (categories.security_compliance.length >= 2 && (categories.cloud_infra.length > 0 || categories.data_analytics.length > 0)) {
+        return "A security-first digital platform that prioritizes data protection, compliance, and risk management while delivering powerful business capabilities. Features multi-layered security architecture, compliance automation, and continuous threat monitoring.";
       }
       
-      if (categories.data_analytics.length > 0 && categories.integration_apis.length > 0) {
-        return "A comprehensive data integration and analytics hub that connects disparate systems, processes real-time data streams, and delivers unified business intelligence across all operational touchpoints.";
+      if (categories.integration_apis.length >= 2 && categories.data_analytics.length > 0) {
+        return "A data-centric integration hub that connects disparate systems, enables seamless data flow, and provides comprehensive analytics capabilities. Designed for organizations requiring complex system integration and data unification.";
       }
       
-      if (categories.cloud_infra.length > 0 && categories.collaboration.length > 0) {
-        return "A cloud-native collaboration and communication platform featuring microservices architecture, real-time synchronization, and enterprise-grade scalability for distributed teams.";
+      if (categories.communication_collab.length >= 3) {
+        return "A unified communication and collaboration ecosystem that breaks down silos, enhances team productivity, and enables seamless remote work capabilities. Features integrated messaging, video conferencing, and collaborative workspace tools.";
       }
-
-      // Single category focus
+      
       if (categories.ai_ml.length >= 3) {
-        return "A comprehensive artificial intelligence solution featuring multiple ML models, neural network processing, and intelligent automation capabilities designed to transform business operations through advanced cognitive computing.";
+        return "An advanced AI and machine learning platform that leverages cutting-edge algorithms to deliver intelligent automation, predictive insights, and adaptive learning capabilities across multiple business domains.";
+      }
+      
+      if (categories.cloud_infra.length >= 3) {
+        return "A robust cloud-native infrastructure solution designed for scalability, reliability, and performance. Features microservices architecture, auto-scaling capabilities, and enterprise-grade cloud integration.";
       }
       
       if (categories.data_analytics.length >= 3) {
-        return "An advanced analytics and business intelligence platform providing real-time data processing, predictive modeling, and comprehensive visualization capabilities for data-driven decision making.";
-      }
-      
-      if (categories.cloud_infra.length >= 2) {
-        return "A robust cloud infrastructure solution featuring auto-scaling capabilities, microservices architecture, and multi-region deployment for enterprise-grade reliability and performance.";
+        return "A comprehensive data analytics and business intelligence platform that transforms raw data into actionable insights through advanced visualization, real-time processing, and predictive modeling.";
       }
       
       if (categories.productivity_automation.length >= 3) {
@@ -209,7 +200,7 @@ const ContactSection = () => {
       } else if (featureCount >= 3) {
         return "A focused technology solution combining complementary features to address specific business needs while maintaining flexibility for future expansion and integration requirements.";
       } else {
-        return "A targeted digital solution designed to address specific business requirements with proven technologies and best practices for optimal performance and reliability.";
+        return "A targeted solution designed to address specific business challenges with precision and efficiency, providing immediate value while establishing a foundation for future growth.";
       }
     };
 
@@ -218,149 +209,76 @@ const ContactSection = () => {
       const categories = classifyFeatures();
       const projectComplexity = selectedFeatures.length;
       const budgetTier = getBudgetTier();
-      
-      let stack: {
-        frontend: string;
-        backend: string;
-        database: string;
-        cloud: string;
-        security: string;
-        monitoring: string;
-        devops: string;
-        ai_ml?: string;
-        data_processing?: string;
-        blockchain?: string;
-        mobile?: string;
-        real_time?: string;
-        testing?: string;
-        integration?: string;
-      } = {
-        frontend: "React.js, TypeScript, Tailwind CSS",
-        backend: "Node.js, Express.js, RESTful APIs",
-        database: "PostgreSQL with Redis caching",
-        cloud: "AWS/Azure multi-region deployment",
-        security: "JWT authentication, SSL encryption",
-        monitoring: "Real-time analytics and logging",
-        devops: "CI/CD pipeline with automated testing"
+
+      const stack: any = {
+        frontend: budgetTier === 'startup' ? 'React.js, Tailwind CSS' : 'React.js/Next.js, TypeScript, Tailwind CSS',
+        backend: 'Node.js/Express, TypeScript',
+        database: budgetTier === 'startup' ? 'PostgreSQL' : 'PostgreSQL, Redis Cache',
+        cloud: budgetTier === 'startup' ? 'AWS/Vercel' : 'AWS/GCP, Docker, Kubernetes',
+        security: 'JWT, OAuth2, SSL/TLS',
+        monitoring: budgetTier === 'startup' ? 'Basic Logging' : 'Datadog, Sentry, CloudWatch',
+        devops: budgetTier === 'startup' ? 'GitHub Actions' : 'GitHub Actions, Terraform, CI/CD'
       };
 
-      // Frontend optimization based on project type and complexity
-      if (formData.projectType === 'mobile-app') {
-        stack.mobile = "React Native, Expo, Native Base";
-        stack.frontend = "React Native, TypeScript, NativeWind";
-      } else if (projectComplexity >= 5) {
-        stack.frontend = "Next.js, React 18, TypeScript, Tailwind CSS, Framer Motion";
-      } else if (categories.collaboration.length > 0) {
-        stack.frontend = "React.js, TypeScript, Socket.io Client, Tailwind CSS";
-      }
-
-      // Backend architecture based on features and scale
-      if (categories.ai_ml.length >= 2 || categories.data_analytics.length >= 2) {
-        stack.backend = "Python FastAPI, Node.js Express, GraphQL, Microservices";
-      } else if (categories.cloud_infra.includes('serverless')) {
-        stack.backend = "Serverless Functions, Node.js, Edge Computing";
-      } else if (categories.integration_apis.length >= 3) {
-        stack.backend = "Node.js, Express.js, GraphQL, API Gateway, Webhook Hub";
-      } else if (projectComplexity >= 6) {
-        stack.backend = "Node.js, Express.js, GraphQL, Microservices Architecture";
-      }
-
-      // AI/ML stack based on specific features
+      // Add specialized stacks based on features
       if (categories.ai_ml.length > 0) {
-        let aiComponents = [];
+        stack.ai_ml = budgetTier === 'startup' 
+          ? 'Python, scikit-learn, OpenAI API' 
+          : 'Python, TensorFlow/PyTorch, Hugging Face, MLflow, Jupyter';
         
-        if (selectedFeatures.includes('machine-learning') || selectedFeatures.includes('predictive-analytics')) {
-          aiComponents.push("TensorFlow", "PyTorch", "scikit-learn");
+        if (categories.ai_ml.includes('computer-vision')) {
+          stack.ai_ml += ', OpenCV, YOLO';
         }
-        
-        if (selectedFeatures.includes('computer-vision')) {
-          aiComponents.push("OpenCV", "YOLO v8", "TensorFlow Vision", "MediaPipe");
+        if (categories.ai_ml.includes('nlp-processing')) {
+          stack.ai_ml += ', spaCy, BERT, Transformers';
         }
-        
-        if (selectedFeatures.includes('nlp-processing') || selectedFeatures.includes('chatbot-ai')) {
-          aiComponents.push("Transformers", "OpenAI GPT-4", "LangChain", "spaCy");
+        if (categories.ai_ml.includes('voice-recognition')) {
+          stack.ai_ml += ', Speech-to-Text APIs, WebRTC';
         }
+      }
+
+      if (categories.data_analytics.length > 0) {
+        stack.data_processing = budgetTier === 'startup' 
+          ? 'Pandas, NumPy, Chart.js' 
+          : 'Apache Spark, Pandas, D3.js, Plotly, Apache Airflow';
         
-        if (selectedFeatures.includes('voice-recognition')) {
-          aiComponents.push("Whisper AI", "Speech Recognition", "Text-to-Speech");
+        if (categories.data_analytics.includes('big-data')) {
+          stack.data_processing += ', Hadoop, Apache Kafka';
         }
-        
-        if (aiComponents.length === 0) {
-          aiComponents = ["TensorFlow", "Hugging Face", "AutoML"];
+        if (categories.data_analytics.includes('real-time-analytics')) {
+          stack.data_processing += ', WebSockets, Server-Sent Events';
         }
-        
-        stack.ai_ml = aiComponents.join(", ");
       }
 
-      // Database optimization based on data requirements
-      if (categories.data_analytics.includes('big-data')) {
-        stack.database = "MongoDB, Apache Kafka, Elasticsearch, Hadoop HDFS";
-        stack.data_processing = "Apache Spark, Apache Flink, Databricks";
-      } else if (categories.data_analytics.length >= 2) {
-        stack.database = "PostgreSQL, Redis, InfluxDB, Neo4j";
-        stack.data_processing = "Apache Airflow, Pandas, NumPy";
-      } else if (categories.ai_ml.length > 0) {
-        stack.database = "PostgreSQL, Vector DB (Pinecone), Redis, S3";
-      } else if (selectedFeatures.includes('real-time-analytics')) {
-        stack.database = "PostgreSQL, Redis, Apache Kafka";
-        stack.real_time = "WebSocket, Server-Sent Events, Real-time Sync";
-      }
-
-      // Cloud infrastructure based on scale and requirements
-      if (budgetTier === 'enterprise' || projectComplexity >= 8) {
-        stack.cloud = "Multi-Cloud (AWS + Azure), Kubernetes, Terraform, CDN";
-      } else if (categories.cloud_infra.includes('auto-scaling')) {
-        stack.cloud = "AWS Auto Scaling, Load Balancers, CloudFront CDN";
-      } else if (categories.cloud_infra.includes('serverless')) {
-        stack.cloud = "AWS Lambda, Vercel, Serverless Framework";
-      }
-
-      // Security enhancements based on requirements
-      if (categories.security_compliance.length >= 2) {
-        stack.security = "Zero Trust Architecture, OAuth2, Multi-Factor Auth, End-to-End Encryption, Vault";
-      } else if (categories.security_compliance.length > 0) {
-        stack.security = "OAuth2, JWT, SSL/TLS, RBAC, Security Headers";
-      } else if (selectedFeatures.includes('payment-gateway')) {
-        stack.security = "PCI DSS Compliance, Stripe Security, JWT, SSL";
-      }
-
-      // Blockchain integration
-      if (categories.security_compliance.includes('blockchain-integration')) {
-        stack.blockchain = "Ethereum, Polygon, Web3.js, Solidity, IPFS";
-      }
-
-      // Real-time features
-      if (categories.collaboration.length >= 2 || selectedFeatures.includes('video-conferencing')) {
-        stack.real_time = "WebRTC, Socket.io, Redis Pub/Sub, WebSocket";
-      }
-
-      // Testing strategy based on complexity
-      if (projectComplexity >= 5) {
-        stack.testing = "Jest, Cypress, Playwright, Unit Testing, Integration Testing";
-      } else if (selectedFeatures.includes('automated-testing')) {
-        stack.testing = "Jest, React Testing Library, Automated E2E Testing";
-      }
-
-      // Integration layer
-      if (categories.integration_apis.length >= 2) {
-        stack.integration = "Zapier, REST APIs, GraphQL, Webhook Management, API Gateway";
-      }
-
-      // IoT and emerging tech
       if (categories.iot_emerging.length > 0) {
-        let iotComponents = [];
-        if (selectedFeatures.includes('iot-connectivity')) {
-          iotComponents.push("MQTT", "AWS IoT Core", "Device Management");
+        stack.iot = 'MQTT, WebSocket, Edge Computing';
+        
+        if (categories.iot_emerging.includes('blockchain-integration')) {
+          stack.blockchain = 'Ethereum, Web3.js, Smart Contracts';
         }
-        if (selectedFeatures.includes('edge-computing')) {
-          iotComponents.push("Edge Computing", "AWS Greengrass", "Edge Analytics");
+        if (categories.iot_emerging.includes('edge-computing')) {
+          stack.edge = 'Edge Functions, IoT Core, Raspberry Pi';
         }
-        if (selectedFeatures.includes('augmented-reality')) {
-          iotComponents.push("AR.js", "Three.js", "WebXR");
+      }
+
+      if (categories.cloud_infra.length >= 2) {
+        stack.cloud = budgetTier === 'startup' 
+          ? 'AWS Lambda, S3, RDS' 
+          : 'Multi-Cloud (AWS, Azure), Kubernetes, Terraform, CDN';
+        
+        if (categories.cloud_infra.includes('serverless')) {
+          stack.serverless = 'AWS Lambda, Vercel Functions, Serverless Framework';
         }
-        if (iotComponents.length > 0) {
-          stack.integration = (stack.integration || "") + ", " + iotComponents.join(", ");
+        if (categories.cloud_infra.includes('microservices')) {
+          stack.microservices = 'Docker, Kubernetes, API Gateway, Service Mesh';
         }
+      }
+
+      if (projectComplexity >= 5 && budgetTier !== 'startup') {
+        stack.mobile = 'React Native, Expo';
+        stack.real_time = 'WebSocket, Socket.io, Server-Sent Events';
+        stack.testing = 'Jest, Cypress, Playwright, Postman';
+        stack.integration = 'Zapier, Webhooks, REST/GraphQL APIs';
       }
 
       return stack;
@@ -373,223 +291,231 @@ const ContactSection = () => {
       
       if (!budget) return 'growth';
       
+      const amount = parseInt(budget.replace(/[^\d]/g, ''));
+      
       if (currency === 'USD') {
-        if (budget.includes('250k+') || budget.includes('100k-250k')) return 'enterprise';
-        if (budget.includes('50k-100k') || budget.includes('25k-50k')) return 'growth';
-        return 'startup';
-      } else {
-        if (budget.includes('2Cr+') || budget.includes('80L-2Cr')) return 'enterprise';
-        if (budget.includes('40L-80L') || budget.includes('20L-40L')) return 'growth';
-        return 'startup';
+        if (amount < 50000) return 'startup';
+        if (amount < 200000) return 'growth';
+        return 'enterprise';
       }
+      
+      return 'growth';
     };
 
     // Advanced key components generator with intelligent grouping
     const generateKeyComponents = () => {
       const categories = classifyFeatures();
       const components = [];
-      
+
       // AI/ML Components
       if (categories.ai_ml.length > 0) {
-        if (selectedFeatures.includes('ai-automation')) {
-          components.push("• Intelligent Process Automation Engine with neural decision trees and adaptive workflows");
+        if (categories.ai_ml.includes('ai-automation')) {
+          components.push('🤖 Intelligent Process Automation Engine');
+          components.push('   • Rule-based workflow automation');
+          components.push('   • Decision tree optimization');
+          components.push('   • Smart task routing and assignment');
         }
-        if (selectedFeatures.includes('machine-learning')) {
-          components.push("• Custom ML Model Pipeline with automated training, validation, and deployment");
+        if (categories.ai_ml.includes('machine-learning')) {
+          components.push('🧠 Custom ML Model Training Pipeline');
+          components.push('   • Data preprocessing and feature engineering');
+          components.push('   • Model training and validation framework');
+          components.push('   • A/B testing for model performance');
         }
-        if (selectedFeatures.includes('computer-vision')) {
-          components.push("• Computer Vision Processing System with real-time object detection and analysis");
+        if (categories.ai_ml.includes('chatbot-ai')) {
+          components.push('💬 AI-Powered Conversational Interface');
+          components.push('   • Natural language understanding');
+          components.push('   • Context-aware response generation');
+          components.push('   • Multi-channel support (web, mobile, social)');
         }
-        if (selectedFeatures.includes('nlp-processing')) {
-          components.push("• Advanced NLP Engine with sentiment analysis, entity extraction, and language understanding");
+        if (categories.ai_ml.includes('predictive-analytics')) {
+          components.push('📊 Predictive Analytics Engine');
+          components.push('   • Time series forecasting models');
+          components.push('   • Anomaly detection algorithms');
+          components.push('   • Trend analysis and pattern recognition');
         }
-        if (selectedFeatures.includes('chatbot-ai')) {
-          components.push("• Conversational AI Framework with multi-turn dialogue and context awareness");
+        if (categories.ai_ml.includes('computer-vision')) {
+          components.push('👁️ Computer Vision Processing System');
+          components.push('   • Image classification and object detection');
+          components.push('   • Real-time video analysis');
+          components.push('   • OCR and document processing');
         }
-        if (selectedFeatures.includes('predictive-analytics')) {
-          components.push("• Predictive Analytics Suite with forecasting models and trend analysis");
+        if (categories.ai_ml.includes('nlp-processing')) {
+          components.push('📝 Natural Language Processing Suite');
+          components.push('   • Sentiment analysis and emotion detection');
+          components.push('   • Text summarization and keyword extraction');
+          components.push('   • Multi-language support and translation');
         }
-        if (selectedFeatures.includes('voice-recognition')) {
-          components.push("• Voice Processing System with speech-to-text and voice command integration");
+        if (categories.ai_ml.includes('voice-recognition')) {
+          components.push('🎤 Voice Recognition and Processing');
+          components.push('   • Speech-to-text conversion');
+          components.push('   • Voice command processing');
+          components.push('   • Audio quality enhancement');
         }
       }
 
-      // Cloud & Infrastructure Components  
+      // Cloud Infrastructure Components
       if (categories.cloud_infra.length > 0) {
-        if (selectedFeatures.includes('cloud-integration')) {
-          components.push("• Multi-Cloud Integration Hub with cross-platform synchronization");
+        if (categories.cloud_infra.includes('cloud-integration')) {
+          components.push('☁️ Multi-Cloud Integration Platform');
+          components.push('   • Cross-cloud resource management');
+          components.push('   • Unified monitoring and logging');
+          components.push('   • Cost optimization across providers');
         }
-        if (selectedFeatures.includes('auto-scaling')) {
-          components.push("• Auto-Scaling Infrastructure with intelligent resource allocation");
+        if (categories.cloud_infra.includes('auto-scaling')) {
+          components.push('📈 Auto-Scaling Infrastructure');
+          components.push('   • Dynamic resource allocation');
+          components.push('   • Load-based scaling triggers');
+          components.push('   • Cost-efficient resource management');
         }
-        if (selectedFeatures.includes('serverless')) {
-          components.push("• Serverless Computing Framework with event-driven architecture");
+        if (categories.cloud_infra.includes('serverless')) {
+          components.push('⚡ Serverless Computing Architecture');
+          components.push('   • Function-as-a-Service implementation');
+          components.push('   • Event-driven processing');
+          components.push('   • Zero-infrastructure management');
         }
-        if (selectedFeatures.includes('microservices')) {
-          components.push("• Microservices Architecture with service mesh and API gateway");
+        if (categories.cloud_infra.includes('microservices')) {
+          components.push('🔧 Microservices Architecture');
+          components.push('   • Service decomposition and isolation');
+          components.push('   • API gateway and service mesh');
+          components.push('   • Independent deployment and scaling');
         }
-        if (selectedFeatures.includes('containerization')) {
-          components.push("• Container Orchestration Platform with Kubernetes and Docker management");
+        if (categories.cloud_infra.includes('containerization')) {
+          components.push('📦 Container Orchestration Platform');
+          components.push('   • Docker containerization');
+          components.push('   • Kubernetes cluster management');
+          components.push('   • Automated deployment pipelines');
         }
-        if (selectedFeatures.includes('cdn-optimization')) {
-          components.push("• Global CDN Network with edge caching and performance optimization");
+        if (categories.cloud_infra.includes('cdn-optimization')) {
+          components.push('🌐 Global CDN and Performance Optimization');
+          components.push('   • Edge caching and content delivery');
+          components.push('   • Image and asset optimization');
+          components.push('   • Geographic performance optimization');
         }
       }
 
-      // Data & Analytics Components
+      // Data Analytics Components
       if (categories.data_analytics.length > 0) {
-        if (selectedFeatures.includes('real-time-analytics')) {
-          components.push("• Real-time Data Streaming Pipeline with live dashboard visualization");
+        if (categories.data_analytics.includes('real-time-analytics')) {
+          components.push('📊 Real-Time Analytics Dashboard');
+          components.push('   • Live data streaming and processing');
+          components.push('   • Interactive visualization widgets');
+          components.push('   • Customizable KPI monitoring');
         }
-        if (selectedFeatures.includes('big-data')) {
-          components.push("• Big Data Processing Engine with distributed computing and data lakes");
+        if (categories.data_analytics.includes('data-visualization')) {
+          components.push('📈 Advanced Data Visualization Suite');
+          components.push('   • Interactive charts and graphs');
+          components.push('   • Custom dashboard builder');
+          components.push('   • Export and sharing capabilities');
         }
-        if (selectedFeatures.includes('data-visualization')) {
-          components.push("• Interactive Data Visualization Suite with custom chart libraries");
+        if (categories.data_analytics.includes('big-data')) {
+          components.push('🗃️ Big Data Processing Engine');
+          components.push('   • Distributed data processing');
+          components.push('   • Batch and stream processing');
+          components.push('   • Data lake and warehouse integration');
         }
-        if (selectedFeatures.includes('business-intelligence')) {
-          components.push("• Business Intelligence Platform with automated reporting and KPI tracking");
+        if (categories.data_analytics.includes('data-pipeline')) {
+          components.push('🔄 Automated Data Pipeline');
+          components.push('   • ETL/ELT process automation');
+          components.push('   • Data quality validation');
+          components.push('   • Error handling and recovery');
         }
-        if (selectedFeatures.includes('data-pipeline')) {
-          components.push("• Automated Data Pipeline with ETL/ELT processing and quality validation");
+        if (categories.data_analytics.includes('business-intelligence')) {
+          components.push('💼 Business Intelligence Platform');
+          components.push('   • Executive reporting dashboards');
+          components.push('   • Drill-down analysis capabilities');
+          components.push('   • Automated insight generation');
         }
-        if (selectedFeatures.includes('data-warehouse')) {
-          components.push("• Enterprise Data Warehouse with dimensional modeling and OLAP cubes");
+        if (categories.data_analytics.includes('data-warehouse')) {
+          components.push('🏢 Enterprise Data Warehouse');
+          components.push('   • Centralized data repository');
+          components.push('   • Historical data preservation');
+          components.push('   • OLAP cube generation');
         }
       }
 
-      // Security & Compliance Components
+      // Security Components
       if (categories.security_compliance.length > 0) {
-        if (selectedFeatures.includes('security-compliance')) {
-          components.push("• Comprehensive Security Suite with threat detection and compliance automation");
+        if (categories.security_compliance.includes('multi-factor-auth')) {
+          components.push('🔐 Multi-Factor Authentication System');
+          components.push('   • SMS, email, and app-based verification');
+          components.push('   • Biometric authentication support');
+          components.push('   • Single sign-on (SSO) integration');
         }
-        if (selectedFeatures.includes('blockchain-integration')) {
-          components.push("• Blockchain Integration Layer with smart contracts and decentralized identity");
+        if (categories.security_compliance.includes('data-encryption')) {
+          components.push('🛡️ End-to-End Encryption Framework');
+          components.push('   • AES-256 data encryption');
+          components.push('   • TLS 1.3 transport security');
+          components.push('   • Key management and rotation');
         }
-        if (selectedFeatures.includes('encryption')) {
-          components.push("• End-to-End Encryption System with key management and secure communication");
+        if (categories.security_compliance.includes('compliance-gdpr')) {
+          components.push('📋 GDPR Compliance Management');
+          components.push('   • Data privacy controls');
+          components.push('   • Consent management system');
+          components.push('   • Right to be forgotten implementation');
         }
-        if (selectedFeatures.includes('identity-management')) {
-          components.push("• Identity & Access Management with SSO and role-based permissions");
+        if (categories.security_compliance.includes('security-audit')) {
+          components.push('🔍 Security Audit and Monitoring');
+          components.push('   • Continuous vulnerability scanning');
+          components.push('   • Intrusion detection system');
+          components.push('   • Security incident response');
         }
-        if (selectedFeatures.includes('audit-logging')) {
-          components.push("• Comprehensive Audit System with activity tracking and compliance reporting");
+        if (categories.security_compliance.includes('access-control')) {
+          components.push('👥 Role-Based Access Control');
+          components.push('   • Granular permission management');
+          components.push('   • Dynamic role assignment');
+          components.push('   • Access audit trails');
         }
-        if (selectedFeatures.includes('vulnerability-scanning')) {
-          components.push("• Automated Security Scanning with vulnerability assessment and remediation");
+        if (categories.security_compliance.includes('backup-recovery')) {
+          components.push('💾 Backup and Disaster Recovery');
+          components.push('   • Automated backup scheduling');
+          components.push('   • Point-in-time recovery');
+          components.push('   • Multi-region data replication');
         }
       }
 
-      // Integration & API Components
+      // Add more components for other categories...
       if (categories.integration_apis.length > 0) {
-        if (selectedFeatures.includes('api-development')) {
-          components.push("• API Gateway and Management Platform with rate limiting and documentation");
-        }
-        if (selectedFeatures.includes('workflow-integration')) {
-          components.push("• Workflow Integration Hub connecting all business tools and systems");
-        }
-        if (selectedFeatures.includes('payment-gateway')) {
-          components.push("• Secure Payment Processing System with multiple gateway support");
-        }
-        if (selectedFeatures.includes('crm-integration')) {
-          components.push("• CRM Integration Module with customer data synchronization");
-        }
-        if (selectedFeatures.includes('erp-integration')) {
-          components.push("• ERP System Connector with real-time business data exchange");
-        }
-        if (selectedFeatures.includes('social-media')) {
-          components.push("• Social Media API Integration with content management and analytics");
-        }
+        components.push('🔗 API Integration Hub');
+        components.push('   • RESTful and GraphQL API endpoints');
+        components.push('   • Third-party service connectors');
+        components.push('   • Webhook processing and management');
       }
 
-      // Collaboration Components
-      if (categories.collaboration.length > 0) {
-        if (selectedFeatures.includes('team-collaboration')) {
-          components.push("• Advanced Collaboration Platform with real-time communication and project tracking");
-        }
-        if (selectedFeatures.includes('video-conferencing')) {
-          components.push("• Video Conferencing Solution with HD streaming and screen sharing");
-        }
-        if (selectedFeatures.includes('document-sharing')) {
-          components.push("• Smart Document Management with version control and collaborative editing");
-        }
-        if (selectedFeatures.includes('project-management')) {
-          components.push("• Project Management Suite with task automation and progress tracking");
-        }
-        if (selectedFeatures.includes('knowledge-base')) {
-          components.push("• Knowledge Management System with AI-powered search and content organization");
-        }
-        if (selectedFeatures.includes('communication-hub')) {
-          components.push("• Unified Communication Hub with multi-channel messaging and notifications");
-        }
+      if (categories.communication_collab.length > 0) {
+        components.push('💬 Unified Communication Platform');
+        components.push('   • Real-time messaging and video conferencing');
+        components.push('   • File sharing and collaborative editing');
+        components.push('   • Project management integration');
       }
 
-      // Productivity & Automation Components
       if (categories.productivity_automation.length > 0) {
-        if (selectedFeatures.includes('smart-scheduling')) {
-          components.push("• AI-Powered Scheduling Engine with calendar optimization and resource management");
-        }
-        if (selectedFeatures.includes('time-management')) {
-          components.push("• Intelligent Time Tracking with productivity analytics and optimization suggestions");
-        }
-        if (selectedFeatures.includes('performance-tracking')) {
-          components.push("• Performance Optimization Dashboard with team productivity metrics");
-        }
-        if (selectedFeatures.includes('automated-testing')) {
-          components.push("• Automated Testing Framework with continuous integration and quality assurance");
-        }
-        if (selectedFeatures.includes('intelligent-reporting')) {
-          components.push("• Intelligent Reporting System with auto-generated insights and trend analysis");
-        }
-        if (selectedFeatures.includes('workflow-automation')) {
-          components.push("• Business Process Automation with intelligent routing and approval workflows");
-        }
-        if (selectedFeatures.includes('email-automation')) {
-          components.push("• Email Marketing Automation with personalization and campaign analytics");
-        }
+        components.push('⚡ Workflow Automation Engine');
+        components.push('   • Process automation and optimization');
+        components.push('   • Task scheduling and resource planning');
+        components.push('   • Performance analytics and reporting');
       }
 
-      // IoT & Emerging Tech Components
       if (categories.iot_emerging.length > 0) {
-        if (selectedFeatures.includes('iot-connectivity')) {
-          components.push("• IoT Device Management Platform with real-time monitoring and control");
-        }
-        if (selectedFeatures.includes('augmented-reality')) {
-          components.push("• AR/VR Integration Framework with immersive user experiences");
-        }
-        if (selectedFeatures.includes('edge-computing')) {
-          components.push("• Edge Computing Infrastructure with local processing and reduced latency");
-        }
-        if (selectedFeatures.includes('smart-sensors')) {
-          components.push("• Smart Sensor Network with environmental monitoring and data collection");
-        }
-        if (selectedFeatures.includes('digital-twin')) {
-          components.push("• Digital Twin Technology with virtual modeling and simulation capabilities");
-        }
-        if (selectedFeatures.includes('robotics')) {
-          components.push("• Robotics Process Automation with intelligent task execution");
-        }
+        components.push('🌐 IoT and Emerging Tech Integration');
+        components.push('   • Sensor data collection and processing');
+        components.push('   • Edge computing capabilities');
+        components.push('   • Blockchain and AR/VR integration');
       }
 
-      // Custom feature handling
-      categories.custom.forEach(customId => {
-        components.push(`• Custom Solution Component: Advanced implementation for specialized requirements`);
-      });
-      
-      // Fallback components if none selected
-      if (components.length === 0) {
-        components.push("• Comprehensive Requirements Analysis and Solution Architecture Design");
-        components.push("• Technical Specification Documentation and System Planning");
-        components.push("• Custom Development Roadmap with Milestone Planning");
+      // Custom components
+      if (categories.custom.length > 0) {
+        components.push('🎯 Custom Feature Implementation');
+        components.push(`   • ${customFeature}`);
+        components.push('   • Tailored business logic and workflows');
+        components.push('   • Integration with existing systems');
       }
-      
-      // Add integration layer if multiple categories
-      const categoryCount = Object.values(categories).filter(cat => cat.length > 0).length;
-      if (categoryCount >= 3) {
-        components.push("• Cross-System Integration Layer with unified data flow and communication protocols");
-      }
-      
-      return components.slice(0, 12); // Increased limit for complex solutions
+
+      return components.length > 0 ? components : [
+        '📋 Requirements Analysis and Consultation',
+        '   • Business process mapping',
+        '   • Technical architecture planning',
+        '   • Solution roadmap development'
+      ];
     };
 
     // Dynamic implementation phases based on features and timeline
@@ -598,236 +524,252 @@ const ContactSection = () => {
       const timelineMap = {
         'rapid-prototype': { weeks: 3, phases: 2 },
         'agile-development': { weeks: 8, phases: 3 },
-        'enterprise-solution': { weeks: 16, phases: 4 },
-        'comprehensive-platform': { weeks: 24, phases: 5 },
-        'digital-transformation': { weeks: 48, phases: 6 },
+        'enterprise-deployment': { weeks: 16, phases: 4 },
+        'long-term-project': { weeks: 24, phases: 5 },
         'ongoing-partnership': { weeks: 52, phases: 6 }
       };
-      
-      const timeline = timelineMap[formData.timeline as keyof typeof timelineMap] || { weeks: 12, phases: 4 };
-      const complexity = selectedFeatures.length;
-      
-      let phases = [];
+
+      const timeline = timelineMap[formData.timeline] || timelineMap['agile-development'];
+      const phases = [];
       
       // Phase 1: Discovery & Architecture (Always present)
       let phase1Tasks = [
         "• Comprehensive requirements analysis and stakeholder interviews",
-        "• Technical architecture design and system blueprints",
+        "• Technical architecture design and system specifications",
         "• UI/UX design and user experience optimization"
       ];
       
       if (categories.ai_ml.length > 0) {
-        phase1Tasks.push("• AI/ML model selection and data requirements analysis");
+        phase1Tasks.push("• AI model requirements and data strategy planning");
+      }
+      if (categories.security_compliance.length > 0) {
+        phase1Tasks.push("• Security assessment and compliance framework design");
       }
       if (categories.data_analytics.length > 0) {
-        phase1Tasks.push("• Data architecture design and analytics strategy planning");
-      }
-      if (categories.security_compliance.length > 0) {
-        phase1Tasks.push("• Security architecture and compliance framework design");
+        phase1Tasks.push("• Data architecture and analytics framework planning");
       }
       if (categories.integration_apis.length > 0) {
-        phase1Tasks.push("• API design and integration architecture planning");
+        phase1Tasks.push("• API architecture and integration strategy development");
       }
-      
-      phases.push(`Phase 1: Discovery & Architecture    (Week 1-${Math.ceil(timeline.weeks * 0.15)})\n${phase1Tasks.join('\n')}`);
-      
-      // Phase 2: Foundation Development
-      let phase2Tasks = [
-        "• Backend API development and database implementation",
-        "• Frontend core components and responsive design",
-        "• Authentication and user management system"
-      ];
-      
-      if (categories.cloud_infra.length > 0) {
-        phase2Tasks.push("• Cloud infrastructure setup and deployment pipeline");
-      }
-      if (categories.security_compliance.length > 0) {
-        phase2Tasks.push("• Security layer implementation and encryption setup");
-      }
-      
-      const phase2Start = Math.ceil(timeline.weeks * 0.15) + 1;
-      const phase2End = Math.ceil(timeline.weeks * 0.4);
-      phases.push(`Phase 2: Foundation Development     (Week ${phase2Start}-${phase2End})\n${phase2Tasks.join('\n')}`);
-      
-      // Phase 3: Feature Implementation (if sufficient timeline)
-      if (timeline.phases >= 3) {
-        let phase3Tasks = [];
-        
-        if (categories.ai_ml.length > 0) {
-          phase3Tasks.push("• AI/ML model development, training, and optimization");
-          phase3Tasks.push("• Machine learning pipeline deployment and testing");
-        }
-        
-        if (categories.data_analytics.length > 0) {
-          phase3Tasks.push("• Analytics dashboard development and data visualization");
-          phase3Tasks.push("• Real-time data processing and reporting systems");
-        }
-        
-        if (categories.integration_apis.length > 0) {
-          phase3Tasks.push("• Third-party API integrations and webhook development");
-          phase3Tasks.push("• External system connectivity and data synchronization");
-        }
-        
-        if (categories.productivity_automation.length > 0) {
-          phase3Tasks.push("• Workflow automation and business process implementation");
-          phase3Tasks.push("• Productivity tools integration and optimization");
-        }
-        
-        if (categories.collaboration.length > 0) {
-          phase3Tasks.push("• Collaboration features and real-time communication setup");
-          phase3Tasks.push("• Team management and project coordination tools");
-        }
-        
-        if (phase3Tasks.length === 0) {
-          phase3Tasks = [
-            "• Advanced feature development and customization",
-            "• Business logic implementation and workflow optimization",
-            "• Performance optimization and system scaling"
-          ];
-        }
-        
-        const phase3Start = phase2End + 1;
-        const phase3End = Math.ceil(timeline.weeks * 0.65);
-        phases.push(`Phase 3: Feature Implementation     (Week ${phase3Start}-${phase3End})\n${phase3Tasks.join('\n')}`);
-      }
-      
-      // Phase 4: Advanced Integration (for complex projects)
-      if (timeline.phases >= 4) {
-        let phase4Tasks = [];
-        
-        if (categories.iot_emerging.length > 0) {
-          phase4Tasks.push("• IoT device integration and edge computing setup");
-          phase4Tasks.push("• Emerging technology implementation and testing");
-        }
-        
-        if (categories.ai_ml.length >= 2) {
-          phase4Tasks.push("• Advanced AI model fine-tuning and optimization");
-          phase4Tasks.push("• Intelligent automation and decision-making systems");
-        }
-        
-        if (categories.security_compliance.includes('blockchain-integration')) {
-          phase4Tasks.push("• Blockchain integration and smart contract deployment");
-          phase4Tasks.push("• Decentralized system testing and security validation");
-        }
-        
-        if (complexity >= 5) {
-          phase4Tasks.push("• Cross-system integration and data flow optimization");
-          phase4Tasks.push("• Performance testing and scalability improvements");
-        }
-        
-        if (phase4Tasks.length === 0) {
-          phase4Tasks = [
-            "• Advanced system optimization and performance tuning",
-            "• Integration testing and cross-platform compatibility",
-            "• Security hardening and vulnerability assessment"
-          ];
-        }
-        
-        const phase4Start = Math.ceil(timeline.weeks * 0.65) + 1;
-        const phase4End = Math.ceil(timeline.weeks * 0.85);
-        phases.push(`Phase 4: Advanced Integration       (Week ${phase4Start}-${phase4End})\n${phase4Tasks.join('\n')}`);
-      }
-      
-      // Phase 5: Enterprise Features (for large projects)
-      if (timeline.phases >= 5) {
-        let phase5Tasks = [
-          "• Enterprise-grade monitoring and alerting systems",
-          "• Advanced analytics and business intelligence dashboards",
-          "• Compliance automation and audit trail implementation"
+
+      phases.push({
+        phase: 1,
+        title: "Discovery & Architecture",
+        duration: `${Math.ceil(timeline.weeks * 0.25)} weeks`,
+        tasks: phase1Tasks
+      });
+
+      // Phase 2: Core Development
+      if (timeline.phases >= 2) {
+        let phase2Tasks = [
+          "• Core platform development and database setup",
+          "• User authentication and authorization implementation",
+          "• Basic UI components and navigation structure"
         ];
-        
-        if (categories.ai_ml.length >= 3) {
-          phase5Tasks.push("• AI model ensemble and advanced machine learning features");
+
+        if (categories.ai_ml.length > 0) {
+          phase2Tasks.push("• ML model development and training pipeline setup");
         }
-        
-        if (getBudgetTier() === 'enterprise') {
-          phase5Tasks.push("• Multi-tenant architecture and enterprise integrations");
-          phase5Tasks.push("• Advanced security protocols and compliance certification");
+        if (categories.cloud_infra.length > 0) {
+          phase2Tasks.push("• Cloud infrastructure setup and containerization");
         }
-        
-        const phase5Start = Math.ceil(timeline.weeks * 0.85) + 1;
-        const phase5End = Math.ceil(timeline.weeks * 0.95);
-        phases.push(`Phase 5: Enterprise Features        (Week ${phase5Start}-${phase5End})\n${phase5Tasks.join('\n')}`);
+        if (categories.data_analytics.length > 0) {
+          phase2Tasks.push("• Data processing pipeline and basic analytics implementation");
+        }
+
+        phases.push({
+          phase: 2,
+          title: "Core Development",
+          duration: `${Math.ceil(timeline.weeks * 0.35)} weeks`,
+          tasks: phase2Tasks
+        });
       }
-      
-      // Final Phase: Testing & Deployment (Always present)
-      let finalTasks = [
-        "• Comprehensive testing suite and quality assurance",
-        "• User acceptance testing and stakeholder feedback",
-        "• Production deployment and monitoring setup",
-        "• Go-live support and team training",
-        "• Documentation delivery and knowledge transfer"
-      ];
-      
-      if (categories.ai_ml.length > 0) {
-        finalTasks.push("• AI model validation and performance monitoring setup");
+
+      // Phase 3: Feature Integration
+      if (timeline.phases >= 3) {
+        let phase3Tasks = [
+          "• Advanced feature development and integration",
+          "• Third-party service integration and API connections",
+          "• Performance optimization and security hardening"
+        ];
+
+        if (categories.ai_ml.length > 0) {
+          phase3Tasks.push("• AI model training, validation, and deployment");
+        }
+        if (categories.communication_collab.length > 0) {
+          phase3Tasks.push("• Communication features and collaboration tools");
+        }
+        if (categories.productivity_automation.length > 0) {
+          phase3Tasks.push("• Workflow automation and productivity enhancement features");
+        }
+
+        phases.push({
+          phase: 3,
+          title: "Feature Integration",
+          duration: `${Math.ceil(timeline.weeks * 0.25)} weeks`,
+          tasks: phase3Tasks
+        });
       }
-      
-      if (complexity >= 5) {
-        finalTasks.push("• Performance optimization and load testing validation");
+
+      // Phase 4: Testing & Optimization
+      if (timeline.phases >= 4) {
+        phases.push({
+          phase: 4,
+          title: "Testing & Optimization",
+          duration: `${Math.ceil(timeline.weeks * 0.15)} weeks`,
+          tasks: [
+            "• Comprehensive testing (unit, integration, performance)",
+            "• User acceptance testing and feedback integration",
+            "• Performance optimization and bug fixes",
+            "• Security penetration testing and vulnerability assessment",
+            "• Final UI/UX refinements and accessibility improvements"
+          ]
+        });
       }
-      
-      const finalStart = Math.ceil(timeline.weeks * 0.95) + 1;
-      const finalPhaseNumber = timeline.phases;
-      phases.push(`Phase ${finalPhaseNumber}: Testing & Deployment        (Week ${finalStart}-${timeline.weeks})\n${finalTasks.join('\n')}`);
-      
-      // Add ongoing support note for long-term projects
-      if (formData.timeline === 'ongoing-partnership') {
-        phases.push(`\nOngoing: Continuous Support & Evolution\n• Monthly feature updates and system improvements\n• Continuous monitoring and performance optimization\n• Regular security updates and compliance maintenance\n• Strategic technology roadmap planning and implementation`);
+
+      // Phase 5: Deployment & Launch
+      if (timeline.phases >= 5) {
+        phases.push({
+          phase: 5,
+          title: "Deployment & Launch",
+          duration: `${Math.ceil(timeline.weeks * 0.1)} weeks`,
+          tasks: [
+            "• Production environment setup and deployment",
+            "• Monitoring and logging system configuration",
+            "• User training and documentation delivery",
+            "• Go-live support and launch coordination",
+            "• Post-launch performance monitoring and optimization"
+          ]
+        });
       }
-      
-      return phases.join('\n\n');
+
+      // Phase 6: Ongoing Support (for long-term projects)
+      if (timeline.phases >= 6) {
+        phases.push({
+          phase: 6,
+          title: "Ongoing Support & Enhancement",
+          duration: "Ongoing",
+          tasks: [
+            "• Continuous monitoring and maintenance",
+            "• Feature enhancements and updates",
+            "• Performance optimization and scaling",
+            "• Security updates and compliance maintenance",
+            "• User feedback integration and iterative improvements"
+          ]
+        });
+      }
+
+      return phases;
     };
 
     // Enhanced dynamic expected outcomes based on feature analysis
     const generateExpectedOutcomes = () => {
       const categories = classifyFeatures();
       const outcomes = [];
-      const complexity = selectedFeatures.length;
-      
-      // AI/ML specific outcomes
-      if (categories.ai_ml.length >= 2) {
-        outcomes.push(`• ${85 + categories.ai_ml.length * 5}%+ improvement in decision-making accuracy`);
-        outcomes.push("• 90-95% reduction in manual processing time through intelligent automation");
-      } else if (categories.ai_ml.length > 0) {
-        outcomes.push("• 70-85% reduction in manual tasks through AI automation");
-        outcomes.push("• Enhanced decision-making with 90%+ accuracy in pattern recognition");
+
+      // AI/ML Outcomes
+      if (categories.ai_ml.length > 0) {
+        if (categories.ai_ml.includes('ai-automation')) {
+          outcomes.push("🎯 75-90% reduction in manual processing time");
+          outcomes.push("🔄 Automated workflow efficiency gains of 3-5x");
+        }
+        if (categories.ai_ml.includes('predictive-analytics')) {
+          outcomes.push("📈 15-25% improvement in forecasting accuracy");
+          outcomes.push("⚡ Real-time insights for faster decision-making");
+        }
+        if (categories.ai_ml.includes('chatbot-ai')) {
+          outcomes.push("💬 24/7 automated customer support availability");
+          outcomes.push("📞 60-80% reduction in support ticket volume");
+        }
+        if (categories.ai_ml.includes('computer-vision')) {
+          outcomes.push("👁️ 95%+ accuracy in image/document processing");
+          outcomes.push("⚡ 10-20x faster visual data processing");
+        }
+        if (categories.ai_ml.includes('nlp-processing')) {
+          outcomes.push("📝 Automated text analysis and sentiment tracking");
+          outcomes.push("🌐 Multi-language support with 95%+ accuracy");
+        }
       }
-      
-      // Data & Analytics outcomes
-      if (categories.data_analytics.length >= 2) {
-        outcomes.push("• Real-time business insights with sub-second data processing");
-        outcomes.push("• 200-300% improvement in data-driven decision speed");
-      } else if (categories.data_analytics.length > 0) {
-        outcomes.push("• 150-250% faster access to business-critical insights");
+
+      // Cloud Infrastructure Outcomes
+      if (categories.cloud_infra.length > 0) {
+        outcomes.push("☁️ 99.9% uptime with auto-scaling capabilities");
+        outcomes.push("💰 20-40% reduction in infrastructure costs");
+        if (categories.cloud_infra.includes('serverless')) {
+          outcomes.push("⚡ Zero-downtime deployments and infinite scalability");
+        }
+        if (categories.cloud_infra.includes('microservices')) {
+          outcomes.push("🔧 Independent service scaling and faster development cycles");
+        }
       }
-      
-      // Productivity & Automation outcomes
-      if (categories.productivity_automation.length >= 2) {
-        outcomes.push(`• ${200 + complexity * 25}%+ overall productivity improvement`);
-        outcomes.push("• 80-90% reduction in repetitive task completion time");
+
+      // Data Analytics Outcomes
+      if (categories.data_analytics.length > 0) {
+        outcomes.push("📊 Real-time business intelligence and KPI tracking");
+        outcomes.push("📈 Data-driven decision making with actionable insights");
+        if (categories.data_analytics.includes('big-data')) {
+          outcomes.push("🗃️ Processing of petabyte-scale data with sub-second queries");
+        }
+        if (categories.data_analytics.includes('real-time-analytics')) {
+          outcomes.push("⚡ Instant alerts and real-time performance monitoring");
+        }
       }
-      
-      // Cloud & Infrastructure outcomes
-      if (categories.cloud_infra.length >= 2) {
-        outcomes.push("• 99.9% uptime with auto-scaling infrastructure");
-        outcomes.push("• 60-80% reduction in infrastructure management overhead");
-      }
-      
-      // Security outcomes
+
+      // Security Outcomes
       if (categories.security_compliance.length > 0) {
-        outcomes.push("• Enterprise-grade security with 99.95% threat prevention");
-        outcomes.push("• Automated compliance reporting and audit readiness");
+        outcomes.push("🛡️ Enterprise-grade security with 99.99% threat protection");
+        outcomes.push("📋 Full compliance with industry standards (GDPR, SOC2, ISO27001)");
+        if (categories.security_compliance.includes('multi-factor-auth')) {
+          outcomes.push("🔐 99.9% reduction in unauthorized access attempts");
+        }
       }
-        outcomes.push("• 24/7 automated customer support availability");
+
+      // Integration Outcomes
+      if (categories.integration_apis.length > 0) {
+        outcomes.push("🔗 Seamless integration with 100+ third-party services");
+        outcomes.push("⚡ API response times under 100ms with 99.9% reliability");
       }
-      
-      // Generic outcomes if specific ones aren't available
-      if (outcomes.length < 4) {
-        outcomes.push(`• ${selectedFeatures.length > 5 ? '300-500%' : selectedFeatures.length > 2 ? '200-350%' : '150-250%'} productivity improvement`);
-        outcomes.push("• Scalable architecture supporting 10x business growth");
-        outcomes.push("• Enterprise-grade security and compliance ready");
-        outcomes.push("• Comprehensive documentation and training materials");
+
+      // Communication & Collaboration Outcomes
+      if (categories.communication_collab.length > 0) {
+        outcomes.push("💬 50-70% improvement in team communication efficiency");
+        outcomes.push("🤝 Enhanced remote collaboration with real-time sync");
+      }
+
+      // Productivity Outcomes
+      if (categories.productivity_automation.length > 0) {
+        outcomes.push("⚡ 40-60% increase in overall team productivity");
+        outcomes.push("📋 Automated task management and resource optimization");
+      }
+
+      // IoT & Emerging Tech Outcomes
+      if (categories.iot_emerging.length > 0) {
+        outcomes.push("🌐 Connected ecosystem with real-time device monitoring");
+        outcomes.push("🔮 Future-proof architecture ready for emerging technologies");
+        if (categories.iot_emerging.includes('blockchain-integration')) {
+          outcomes.push("⛓️ Immutable transaction history with 100% transparency");
+        }
+      }
+
+      // Custom Feature Outcomes
+      if (categories.custom.length > 0) {
+        outcomes.push("🎯 Custom solution perfectly aligned with business requirements");
+        outcomes.push("🚀 Competitive advantage through unique feature implementation");
+      }
+
+      // General Business Outcomes
+      if (selectedFeatures.length >= 5) {
+        outcomes.push("💼 Enterprise-scale digital transformation with measurable ROI");
+        outcomes.push("📈 20-50% improvement in overall business efficiency");
+      } else if (selectedFeatures.length >= 3) {
+        outcomes.push("🎯 Targeted solution delivering immediate business value");
+        outcomes.push("📊 Clear performance metrics and success indicators");
+      } else if (selectedFeatures.length > 0) {
+        outcomes.push("🚀 Focused implementation with quick time-to-value");
+        outcomes.push("📈 Foundation for future digital expansion");
+      } else {
+        outcomes.push("📋 Strategic consultation and roadmap for digital transformation");
+        outcomes.push("🎯 Clear action plan with prioritized technology initiatives");
       }
       
       return outcomes.slice(0, 6);
@@ -839,7 +781,7 @@ const ContactSection = () => {
     
     return `
 ╔══════════════════════════════════════════════════════════════════════════════════════╗
-║                           🧠 NEURAL SOLUTION BLUEPRINT                               ║
+║                           🧠 NEURAL SOLUTION OVERVIEW                                ║
 ║                              Dynamically Generated                                   ║
 ╠══════════════════════════════════════════════════════════════════════════════════════╣
 
@@ -851,16 +793,17 @@ Project Type:          ${projectScope || 'Custom Solution'}
 Timeline:              ${timelineText || 'To be determined'}
 Budget Allocation:     ${formData.budget || 'Flexible'} ${formData.budgetCurrency}
 Generation Date:       ${new Date().toLocaleDateString()}
-Blueprint ID:          NB-${Date.now().toString().slice(-6)}
+Solution ID:           NS-${Date.now().toString().slice(-6)}
 
 🎯 SOLUTION ARCHITECTURE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ${generateSolutionDescription()}
 
-${selectedFeatureNames.length > 0 ? `🔧 SELECTED FEATURES:
-${selectedFeatureNames.map((name, i) => `   ${i + 1}. ${name}`).join('\n')}` : '🔧 CORE PACKAGE: Consultation and custom requirement analysis'}
+🔧 SELECTED FEATURES & CAPABILITIES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${selectedFeatureNames.length > 0 ? selectedFeatureNames.map((name, i) => `   ${i + 1}. ${name}`).join('\n') : '🔧 CORE PACKAGE: Consultation and custom requirement analysis'}
 
-🏗️ TECHNICAL STACK RECOMMENDATION
+💻 TECHNICAL STACK RECOMMENDATION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Frontend:              ${stack.frontend}
 Backend:               ${stack.backend}
@@ -870,57 +813,38 @@ Security:              ${stack.security}
 Monitoring:            ${stack.monitoring}
 DevOps:               ${stack.devops}${stack.ai_ml ? `\nAI/ML Stack:           ${stack.ai_ml}` : ''}${stack.data_processing ? `\nData Processing:       ${stack.data_processing}` : ''}${stack.blockchain ? `\nBlockchain:            ${stack.blockchain}` : ''}${stack.mobile ? `\nMobile:                ${stack.mobile}` : ''}${stack.real_time ? `\nReal-time:             ${stack.real_time}` : ''}${stack.testing ? `\nTesting:               ${stack.testing}` : ''}${stack.integration ? `\nIntegration:           ${stack.integration}` : ''}
 
-🔧 KEY COMPONENTS
+🏗️ KEY SYSTEM COMPONENTS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ${keyComponents.join('\n')}
 
-📊 IMPLEMENTATION PHASES
+⏱️ IMPLEMENTATION ROADMAP
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-${generateImplementationPhases()}
+${generateImplementationPhases().map(phase => 
+  `Phase ${phase.phase}: ${phase.title} (${phase.duration})\n${phase.tasks.map(task => `   ${task}`).join('\n')}`
+).join('\n\n')}
 
-💼 TEAM ALLOCATION
+👥 RECOMMENDED TEAM STRUCTURE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Project Manager:       1x Senior PM (Full-time)
 Lead Developer:        1x Full-stack Engineer (Full-time)${selectedFeatures.some(f => ['ai-automation', 'machine-learning', 'computer-vision', 'nlp-processing'].includes(f)) ? '\nAI/ML Engineer:        1x AI Specialist (Full-time)' : ''}
-Frontend Specialist:   1x React Developer (Part-time)
-Backend Engineer:      1x Node.js Developer (Part-time)
-UI/UX Designer:        1x Design Specialist (Part-time)
-QA Engineer:          1x Testing Specialist (Part-time)
+UI/UX Designer:        1x Designer (Part-time)${selectedFeatures.some(f => ['real-time-analytics', 'data-visualization', 'big-data'].includes(f)) ? '\nData Engineer:         1x Data Specialist (Part-time)' : ''}
+QA Engineer:           1x Quality Assurance (Part-time)
 DevOps Consultant:     1x Infrastructure Expert (As needed)${selectedFeatures.includes('security-compliance') || selectedFeatures.includes('blockchain-integration') ? '\nSecurity Expert:       1x Cybersecurity Specialist (Part-time)' : ''}
 
-📈 EXPECTED OUTCOMES
+🎯 EXPECTED BUSINESS OUTCOMES
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ${expectedOutcomes.join('\n')}
 
-🔐 SECURITY & COMPLIANCE
+🚀 NEXT STEPS & ACTION ITEMS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• End-to-end encryption for all data transfers and storage
-• GDPR, SOC 2, and industry-specific compliance ready
-• Multi-factor authentication and role-based access control
-• Regular security audits and penetration testing
-• Automated backup and disaster recovery protocols
-• 99.9% uptime SLA with monitoring and alerting
-
-💡 INNOVATION OPPORTUNITIES
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Based on your selected features and current market trends, future enhancement 
-opportunities include:${selectedFeatures.includes('ai-automation') ? '\n• Advanced neural network optimization and deep learning integration' : ''}${selectedFeatures.includes('computer-vision') ? '\n• Augmented reality overlay and enhanced image recognition capabilities' : ''}${selectedFeatures.includes('predictive-analytics') ? '\n• Real-time anomaly detection and automated response systems' : ''}${selectedFeatures.includes('blockchain-integration') ? '\n• DeFi integration and smart contract automation' : ''}
-• Edge computing implementation for reduced latency
-• IoT device integration and sensor data processing
-• Advanced analytics with machine learning insights
-• Voice and conversational AI integration
-
-📞 NEXT STEPS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-1. Technical consultation call scheduled within 4 hours
-2. Feature specification and requirement finalization
-3. Detailed project proposal with timeline and cost breakdown
-4. Architecture review and technology stack confirmation
+1. Detailed requirements gathering and stakeholder alignment
+2. Technical architecture review and infrastructure planning
+3. Resource allocation and development team assembly
+4. Project timeline finalization and milestone definition
 5. Development team assignment and project kickoff
 
 ╚══════════════════════════════════════════════════════════════════════════════════════╝
 
-This blueprint is dynamically generated based on your specific feature selection 
+This solution overview is dynamically generated based on your specific feature selection 
 and represents our AI-analyzed technical assessment. The solution architecture 
 adapts to your chosen combination of features for optimal implementation.
 
@@ -940,9 +864,9 @@ Generated by Neural AI Systems v3.0 | Confidence Score: ${selectedFeatures.lengt
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Generate blueprint
-    const blueprint = generateBlueprint();
-    setGeneratedBlueprint(blueprint);
+    // Generate output
+    const output = generateOutput();
+    setGeneratedOutput(output);
     
     // Simulate form submission
     setTimeout(() => {
@@ -952,56 +876,59 @@ Generated by Neural AI Systems v3.0 | Confidence Score: ${selectedFeatures.lengt
       
       console.log('Neural Connection Request Submitted:', {
         ...formData,
-        features: selectedFeatureNames,
-        timestamp: new Date().toISOString()
+        selectedFeatures: selectedFeatureNames,
+        customFeature
       });
-      
-      setSubmitMessage(`🧠 Neural Connection Established Successfully! 
 
-Thank you ${formData.name || 'valued client'}, your digital transformation request has been processed by our AI systems.
+      setSubmitMessage(`🧠 NEURAL CONNECTION ESTABLISHED 🧠
 
-📋 PROJECT SUMMARY:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• Client: ${formData.name || 'To be provided'}
-• Company: ${formData.company || 'Individual/Startup'}
-• Project Type: ${formData.projectType === 'other' ? formData.customProjectType : formData.projectType || 'Custom Solution'}
-• Timeline: ${formData.timeline || 'To be discussed'}
-• Budget Range: ${formData.budget || 'To be determined'} ${formData.budgetCurrency}
-• Selected Features: ${selectedFeatureNames.length > 0 ? selectedFeatureNames.join(', ') : 'Basic consultation package'}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-🚀 NEXT STEPS:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-1. Initial consultation call within 4 hours
-2. Technical requirements analysis
-3. Custom solution architecture design
-4. Project timeline and milestone planning
-5. Development team assignment
+🎯 CONNECTION DETAILS:
+Submitted by:          ${formData.name || 'Valued Client'}
+Organization:          ${formData.company || 'Individual/Startup'}
+Contact Email:         ${formData.email}
+Project Type:          ${formData.projectType === 'other' ? formData.customProjectType : formData.projectType}
+Budget Range:          ${formData.budget} ${formData.budgetCurrency}
+Timeline:              ${formData.timeline?.replace(/-/g, ' ').toUpperCase()}
+
+📝 PROJECT SCOPE:
+${formData.message || 'Standard consultation and requirement analysis'}
+
+🔧 SELECTED PRODUCTIVITY FEATURES:
+${selectedFeatureNames.length > 0 ? selectedFeatureNames.map((name, i) => `   ${i + 1}. ${name}`).join('\n') : '   • Consultation and custom requirement analysis'}${customFeature ? `\n   • Custom Feature: ${customFeature}` : ''}
+
+🧠 AI ANALYSIS COMPLETE:
+Feature Complexity:    ${selectedFeatures.length >= 5 ? 'Enterprise-Scale' : selectedFeatures.length >= 3 ? 'Advanced Integration' : selectedFeatures.length >= 1 ? 'Focused Solution' : 'Consultation Package'}
+Recommended Approach:  ${selectedFeatures.length >= 5 ? 'Multi-phase enterprise deployment' : selectedFeatures.length >= 3 ? 'Agile development with iterative releases' : 'Rapid prototyping and focused development'}
+Estimated Timeline:    ${formData.timeline ? formData.timeline.replace(/-/g, ' ').toUpperCase() : 'To be determined based on requirements'}
 
 💡 INNOVATION PREVIEW:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Based on your selections, we'll incorporate cutting-edge AI technologies including machine learning algorithms, cloud-native architecture, and advanced automation systems to deliver a solution that exceeds your expectations.
 
-Our neural network has analyzed your requirements and prepared a preliminary solution blueprint. Expect a detailed proposal with cost analysis, technical specifications, and implementation roadmap.
+Our neural network has analyzed your requirements and prepared a preliminary solution overview. Expect a detailed proposal with cost analysis, technical specifications, and implementation roadmap.
 
 🔗 Connection Status: ACTIVE | Priority: HIGH | Response Time: < 4 Hours`);
       
       // Clear form data after submission
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        message: '',
-        projectType: '',
-        customProjectType: '',
-        timeline: '',
-        budget: '',
-        budgetCurrency: 'USD',
-        features: []
-      });
-      setSelectedFeatures([]);
-      setShowModal(true);
+      // setFormData({
+      //   name: '',
+      //   email: '',
+      //   company: '',
+      //   message: '',
+      //   projectType: '',
+      //   customProjectType: '',
+      //   timeline: '',
+      //   budget: '',
+      //   budgetCurrency: 'USD',
+      //   features: []
+      // });
+      // setSelectedFeatures([]);
+      // setCustomFeature('');
       
       setIsSubmitting(false);
+      setShowModal(true);
     }, 2000);
   };
 
@@ -1012,511 +939,404 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
     }));
   };
 
+  const addCustomFeature = () => {
+    if (customFeature.trim()) {
+      setSelectedFeatures(prev => [...prev, `custom-${Date.now()}`]);
+      setCustomFeature('');
+      setShowCustomInput(false);
+    }
+  };
+
   return (
     <>
-      <style>
-        {`
-          .custom-scrollbar::-webkit-scrollbar {
-            display: none;
-          }
-          .custom-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-          }
-          
-          /* Fix autocomplete styling */
-          input:-webkit-autofill,
-          input:-webkit-autofill:hover,
-          input:-webkit-autofill:focus,
-          input:-webkit-autofill:active {
-            -webkit-box-shadow: 0 0 0 30px rgba(0, 0, 0, 0.4) inset !important;
-            -webkit-text-fill-color: white !important;
-            background: rgba(0, 0, 0, 0.4) !important;
-            backdrop-filter: blur(10px) !important;
-            transition: background-color 5000s;
-          }
-          
-          /* Enhanced scrolling for features */
-          .features-grid {
-            overflow-y: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-          }
-          .features-grid::-webkit-scrollbar {
-            display: none;
-          }
-        `}
-      </style>
-    
-      <section className="min-h-screen flex items-center justify-center relative pt-20">
+      <section id="contact" className="py-20 bg-black relative overflow-hidden">
+        {/* Neural Network Background */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-cyan-900/20"></div>
+          <div className="neural-network-bg opacity-30"></div>
+        </div>
+
         <div className="container mx-auto px-6 relative z-10">
-          {/* Header */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center glassmorphism px-6 py-2 rounded-full mb-8 animate-float">
-              <Brain className="w-4 h-4 text-neon mr-2" />
-              <span className="text-white text-sm">Neural Connection Request</span>
-            </div>
-
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              Get In <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-pulse">Touch</span>
-            </h1>
-
-            <div className="relative mb-12 max-w-3xl mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 rounded-lg blur-xl"></div>
-              <div className="relative glassmorphism p-6 rounded-lg">
-                <p className="text-lg md:text-xl text-gray-300">
-                  Ready to transform your business with cutting-edge AI and software solutions? 
-                  Let's discuss how we can boost your productivity and efficiency.
-                </p>
-              </div>
-            </div>
+            <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">
+              Initiate Neural Connection
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Connect with our AI-powered development ecosystem. Select your desired productivity features and let our neural network design the perfect solution architecture for your business transformation.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <div className="relative glassmorphism p-8 rounded-2xl border border-cyan-400/30">
-              <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-t-2xl"></div>
-              <h2 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Start Your Digital Transformation</h2>
-              
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="max-w-6xl mx-auto">
+            <form onSubmit={handleSubmit} className="space-y-8">
+              {/* Basic Information */}
+              <div className="glassmorphism p-8 rounded-2xl border border-cyan-500/30 hover:border-cyan-400/50 transition-all duration-300">
+                <h3 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                  <Brain className="w-6 h-6 mr-3 text-cyan-400" />
+                  Neural Interface Configuration
+                </h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Name *</label>
+                    <label className="block text-cyan-300 mb-2">Name *</label>
                     <input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all"
-                      placeholder="Your full name"
                       required
-                      style={{
-                        background: 'rgba(0, 0, 0, 0.4)',
-                        backdropFilter: 'blur(10px)',
-                      }}
+                      className="w-full px-4 py-3 bg-black/50 border border-gray-600 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                      placeholder="Your full name"
                     />
                   </div>
+                  
                   <div>
-                    <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Email *</label>
+                    <label className="block text-cyan-300 mb-2">Email *</label>
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all"
-                      placeholder="your.email@company.com"
                       required
-                      style={{
-                        background: 'rgba(0, 0, 0, 0.4)',
-                        backdropFilter: 'blur(10px)',
-                      }}
+                      className="w-full px-4 py-3 bg-black/50 border border-gray-600 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                      placeholder="your.email@company.com"
                     />
                   </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  
                   <div>
-                    <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Company</label>
+                    <label className="block text-cyan-300 mb-2">Company/Organization</label>
                     <input
                       type="text"
                       name="company"
                       value={formData.company}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                      className="w-full px-4 py-3 bg-black/50 border border-gray-600 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
                       placeholder="Your company name"
-                      style={{
-                        background: 'rgba(0, 0, 0, 0.4)',
-                        backdropFilter: 'blur(10px)',
-                      }}
                     />
                   </div>
+
                   <div>
-                    <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Project Type</label>
-                    <div className="relative">
-                      <select
-                        name="projectType"
-                        value={formData.projectType}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
-                        style={{
-                          background: 'rgba(0, 0, 0, 0.4)',
-                          backdropFilter: 'blur(10px)',
-                        }}
-                      >
-                        <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Select project type</option>
-                        <option value="web-app" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Web Application</option>
-                        <option value="mobile-app" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Mobile Application</option>
-                        <option value="ai-integration" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>AI Integration</option>
-                        <option value="cloud-solution" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Cloud Solution</option>
-                        <option value="consulting" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Consulting</option>
-                        <option value="other" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Other</option>
-                      </select>
-                      <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                        <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                      </div>
-                    </div>
-                    {formData.projectType === 'other' && (
+                    <label className="block text-cyan-300 mb-2">Project Type</label>
+                    <select
+                      name="projectType"
+                      value={formData.projectType}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-black/50 border border-gray-600 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                    >
+                      <option value="">Select project type</option>
+                      <option value="web-application">Web Application</option>
+                      <option value="mobile-app">Mobile Application</option>
+                      <option value="enterprise-software">Enterprise Software</option>
+                      <option value="ai-ml-solution">AI/ML Solution</option>
+                      <option value="data-analytics">Data Analytics Platform</option>
+                      <option value="automation-system">Automation System</option>
+                      <option value="integration-platform">Integration Platform</option>
+                      <option value="other">Other (specify below)</option>
+                    </select>
+                  </div>
+
+                  {formData.projectType === 'other' && (
+                    <div className="md:col-span-2">
+                      <label className="block text-cyan-300 mb-2">Custom Project Type</label>
                       <input
                         type="text"
                         name="customProjectType"
                         value={formData.customProjectType}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all mt-2"
-                        placeholder="Please specify your project type"
-                        style={{
-                          background: 'rgba(0, 0, 0, 0.4)',
-                          backdropFilter: 'blur(10px)',
-                        }}
-                      />
-                    )}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Timeline</label>
-                    <div className="relative">
-                      <select
-                        name="timeline"
-                        value={formData.timeline}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
-                        style={{
-                          background: 'rgba(0, 0, 0, 0.4)',
-                          backdropFilter: 'blur(10px)',
-                        }}
-                      >
-                        <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Select development timeline</option>
-                        <option value="rapid-prototype" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>🚀 Rapid Prototype (2-3 weeks)</option>
-                        <option value="agile-development" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>⚡ Agile Development (1-2 months)</option>
-                        <option value="enterprise-solution" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>🏢 Enterprise Solution (3-4 months)</option>
-                        <option value="comprehensive-platform" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>🌐 Comprehensive Platform (4-6 months)</option>
-                        <option value="digital-transformation" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>🔄 Digital Transformation (6-12 months)</option>
-                        <option value="ongoing-partnership" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>🤝 Ongoing Partnership (Long-term)</option>
-                      </select>
-                      <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                        <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Budget Range</label>
-                    <div className="flex gap-2">
-                      <div className="relative flex-1">
-                        <select
-                          name="budgetCurrency"
-                          value={formData.budgetCurrency}
-                          onChange={handleInputChange}
-                          className="w-full px-3 py-3 border border-cyan-400/50 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
-                          style={{
-                            background: 'rgba(0, 0, 0, 0.4)',
-                            backdropFilter: 'blur(10px)',
-                          }}
-                        >
-                          <option value="USD" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>USD $</option>
-                          <option value="INR" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>INR ₹</option>
-                        </select>
-                        <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                          <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="relative flex-[2]">
-                        <select
-                          name="budget"
-                          value={formData.budget}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
-                          style={{
-                            background: 'rgba(0, 0, 0, 0.4)',
-                            backdropFilter: 'blur(10px)',
-                          }}
-                        >
-                          <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Select range</option>
-                          {formData.budgetCurrency === 'USD' ? (
-                            <>
-                              <option value="10k-25k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$10k - $25k</option>
-                              <option value="25k-50k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$25k - $50k</option>
-                              <option value="50k-100k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$50k - $100k</option>
-                              <option value="100k-250k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$100k - $250k</option>
-                              <option value="250k+" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$250k+</option>
-                            </>
-                          ) : (
-                            <>
-                              <option value="8L-20L" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>₹8L - ₹20L</option>
-                              <option value="20L-40L" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>₹20L - ₹40L</option>
-                              <option value="40L-80L" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>₹40L - ₹80L</option>
-                              <option value="80L-2Cr" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>₹80L - ₹2Cr</option>
-                              <option value="2Cr+" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>₹2Cr+</option>
-                            </>
-                          )}
-                        </select>
-                        <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                          <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Productivity Features Selection */}
-                <div>
-                  <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-4">
-                    Technology Solutions & Features:
-                  </label>
-                  
-                  {/* Search and Category Controls */}
-                  <div className="mb-4 space-y-3">
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-                      <input
-                        type="text"
-                        placeholder="Search features..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-10 pr-4 py-2 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all text-sm"
-                        style={{
-                          background: 'rgba(0, 0, 0, 0.4)',
-                          backdropFilter: 'blur(10px)',
-                        }}
+                        className="w-full px-4 py-3 bg-black/50 border border-gray-600 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                        placeholder="Describe your custom project type"
                       />
                     </div>
-                    
-                    {!searchTerm && (
-                      <div className="flex flex-wrap gap-2">
-                        {Object.keys(productivityCategories).map((category) => (
-                          <button
-                            key={category}
-                            type="button"
-                            onClick={() => setSelectedCategory(category)}
-                            className={`px-3 py-1 rounded-full text-xs transition-all ${
-                              selectedCategory === category
-                                ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-400/50'
-                                : 'bg-gray-800/50 text-gray-400 border border-gray-600 hover:border-cyan-400/50 hover:text-cyan-400'
-                            }`}
-                          >
-                            {category}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  )}
 
-                  {/* Features Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-80 features-grid pr-2">
-                    {getFilteredFeatures().map((feature) => (
-                      <div
-                        key={feature.id}
-                        onClick={() => handleFeatureToggle(feature.id)}
-                        className={`p-3 rounded-lg cursor-pointer transition-all border-2 ${
-                          selectedFeatures.includes(feature.id)
-                            ? 'border-cyan-400/50 bg-cyan-500/10'
-                            : 'border-gray-600 hover:border-cyan-400/50 bg-gray-800/30'
-                        }`}
-                      >
-                        <div className="flex items-start space-x-3">
-                          <feature.icon 
-                            className={`w-4 h-4 mt-0.5 ${
-                              selectedFeatures.includes(feature.id) ? 'text-neon' : 'text-gray-400'
-                            }`} 
-                          />
-                          <div>
-                            <h4 className={`font-medium text-sm ${
-                              selectedFeatures.includes(feature.id) ? 'text-neon' : 'text-white'
-                            }`}>
-                              {feature.name}
-                            </h4>
-                            <p className="text-xs text-gray-400 mt-1">{feature.description}</p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Custom Feature Input */}
-                  <div className="mt-4">
-                    <button
-                      type="button"
-                      onClick={() => setShowCustomInput(!showCustomInput)}
-                      className="flex items-center space-x-2 text-cyan-400 hover:text-cyan-300 transition-colors text-sm"
+                  <div>
+                    <label className="block text-cyan-300 mb-2">Timeline</label>
+                    <select
+                      name="timeline"
+                      value={formData.timeline}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-black/50 border border-gray-600 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
                     >
-                      <Plus className="w-4 h-4" />
-                      <span>Need something specific? Add custom requirement</span>
-                    </button>
-                    
-                    {showCustomInput && (
-                      <div className="mt-3">
-                        <input
-                          type="text"
-                          placeholder="Describe your custom requirement..."
-                          value={customFeature}
-                          onChange={(e) => setCustomFeature(e.target.value)}
-                          className="w-full px-4 py-2 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all text-sm"
-                          style={{
-                            background: 'rgba(0, 0, 0, 0.4)',
-                            backdropFilter: 'blur(10px)',
-                          }}
-                        />
-                        <button
-                          type="button"
-                          onClick={() => {
-                            if (customFeature.trim()) {
-                              const customId = `custom-${Date.now()}`;
-                              setSelectedFeatures(prev => [...prev, customId]);
-                              setCustomFeature('');
-                              setShowCustomInput(false);
-                            }
-                          }}
-                          className="mt-2 px-4 py-2 bg-cyan-500/20 text-cyan-400 border border-cyan-400/50 rounded-lg hover:bg-cyan-500/30 transition-all text-sm"
-                        >
-                          Add Custom Feature
-                        </button>
-                      </div>
-                    )}
+                      <option value="">Select timeline</option>
+                      <option value="rapid-prototype">Rapid Prototype (2-4 weeks)</option>
+                      <option value="agile-development">Agile Development (2-3 months)</option>
+                      <option value="enterprise-deployment">Enterprise Deployment (4-6 months)</option>
+                      <option value="long-term-project">Long-term Project (6+ months)</option>
+                      <option value="ongoing-partnership">Ongoing Partnership</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-cyan-300 mb-2">Budget Range</label>
+                    <div className="flex space-x-2">
+                      <select
+                        name="budgetCurrency"
+                        value={formData.budgetCurrency}
+                        onChange={handleInputChange}
+                        className="w-20 px-2 py-3 bg-black/50 border border-gray-600 rounded-lg focus:border-cyan-500 focus:outline-none text-white text-sm"
+                      >
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="GBP">GBP</option>
+                        <option value="CAD">CAD</option>
+                        <option value="AUD">AUD</option>
+                        <option value="INR">INR</option>
+                      </select>
+                      <select
+                        name="budget"
+                        value={formData.budget}
+                        onChange={handleInputChange}
+                        className="flex-1 px-4 py-3 bg-black/50 border border-gray-600 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                      >
+                        <option value="">Select budget range</option>
+                        <option value="$10,000 - $25,000">$10,000 - $25,000</option>
+                        <option value="$25,000 - $50,000">$25,000 - $50,000</option>
+                        <option value="$50,000 - $100,000">$50,000 - $100,000</option>
+                        <option value="$100,000 - $250,000">$100,000 - $250,000</option>
+                        <option value="$250,000 - $500,000">$250,000 - $500,000</option>
+                        <option value="$500,000+">$500,000+</option>
+                        <option value="Open to discussion">Open to discussion</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
 
-                <div>
-                  <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Project Details *</label>
+                <div className="mt-6">
+                  <label className="block text-cyan-300 mb-2">Project Description</label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
-                    rows={5}
-                    className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all resize-none"
-                    placeholder="Tell us about your project, goals, and any specific requirements..."
-                    required
-                    style={{
-                      background: 'rgba(0, 0, 0, 0.4)',
-                      backdropFilter: 'blur(10px)',
-                    }}
-                  ></textarea>
+                    rows={4}
+                    className="w-full px-4 py-3 bg-black/50 border border-gray-600 rounded-lg focus:border-cyan-500 focus:outline-none text-white resize-vertical"
+                    placeholder="Describe your project requirements, goals, and any specific challenges you're facing..."
+                  />
+                </div>
+              </div>
+
+              {/* Productivity Features Selection */}
+              <div className="glassmorphism p-8 rounded-2xl border border-cyan-500/30 hover:border-cyan-400/50 transition-all duration-300">
+                <h3 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                  <Zap className="w-6 h-6 mr-3 text-cyan-400" />
+                  Productivity Features Selection
+                </h3>
+                
+                <p className="text-gray-300 mb-6">
+                  Select the advanced features you're interested in. Our neural network will analyze your selection and recommend the optimal technical stack and architecture.
+                </p>
+
+                {/* Search Bar */}
+                <div className="mb-6">
+                  <div className="relative">
+                    <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                    <input
+                      type="text"
+                      placeholder="Search features across all categories..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="w-full pl-10 pr-4 py-3 bg-black/50 border border-gray-600 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                    />
+                  </div>
                 </div>
 
+                {/* Category Selector */}
+                {!searchTerm && (
+                  <div className="mb-6">
+                    <div className="flex flex-wrap gap-2">
+                      {Object.keys(productivityCategories).map((category) => (
+                        <button
+                          key={category}
+                          type="button"
+                          onClick={() => setSelectedCategory(category)}
+                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                            selectedCategory === category
+                              ? 'bg-cyan-500 text-black'
+                              : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                          }`}
+                        >
+                          {category}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Features Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                  {getFilteredFeatures().map((feature) => {
+                    const Icon = feature.icon;
+                    const isSelected = selectedFeatures.includes(feature.id);
+                    
+                    return (
+                      <div
+                        key={feature.id}
+                        onClick={() => handleFeatureToggle(feature.id)}
+                        className={`p-4 rounded-lg border cursor-pointer transition-all duration-300 hover:scale-105 ${
+                          isSelected
+                            ? 'bg-cyan-500/20 border-cyan-400 shadow-lg shadow-cyan-500/20'
+                            : 'bg-gray-800/50 border-gray-600 hover:border-gray-500'
+                        }`}
+                      >
+                        <div className="flex items-start space-x-3">
+                          <div className={`p-2 rounded-lg ${isSelected ? 'bg-cyan-500' : 'bg-gray-700'}`}>
+                            <Icon className={`w-5 h-5 ${isSelected ? 'text-black' : 'text-gray-300'}`} />
+                          </div>
+                          <div className="flex-1">
+                            <h4 className={`font-medium mb-1 ${isSelected ? 'text-cyan-300' : 'text-white'}`}>
+                              {feature.name}
+                            </h4>
+                            <p className="text-sm text-gray-400 leading-relaxed">
+                              {feature.description}
+                            </p>
+                          </div>
+                        </div>
+                        
+                        {isSelected && (
+                          <div className="mt-3 flex items-center text-cyan-400">
+                            <div className="w-4 h-4 rounded-full bg-cyan-500 flex items-center justify-center mr-2">
+                              <svg className="w-2 h-2 text-black" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <span className="text-sm font-medium">Selected</span>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Custom Feature Input */}
+                <div className="border-t border-gray-700 pt-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="text-lg font-medium text-white">Custom Feature Requirements</h4>
+                    <button
+                      type="button"
+                      onClick={() => setShowCustomInput(!showCustomInput)}
+                      className="flex items-center px-3 py-1 bg-purple-500/20 text-purple-400 border border-purple-400/50 rounded-lg hover:bg-purple-500/30 transition-all text-sm"
+                    >
+                      <Plus className="w-4 h-4 mr-1" />
+                      Add Custom
+                    </button>
+                  </div>
+                  
+                  {showCustomInput && (
+                    <div className="space-y-4">
+                      <textarea
+                        value={customFeature}
+                        onChange={(e) => setCustomFeature(e.target.value)}
+                        placeholder="Describe any custom features or specific requirements not covered above..."
+                        rows={3}
+                        className="w-full px-4 py-3 bg-black/50 border border-gray-600 rounded-lg focus:border-purple-500 focus:outline-none text-white resize-vertical"
+                      />
+                      <div className="flex space-x-3">
+                        <button
+                          type="button"
+                          onClick={addCustomFeature}
+                          className="px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-all text-sm"
+                        >
+                          Add Feature
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setShowCustomInput(false);
+                            setCustomFeature('');
+                          }}
+                          className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all text-sm"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {customFeature && !showCustomInput && (
+                    <div className="mt-4 p-4 bg-purple-500/20 border border-purple-400/50 rounded-lg">
+                      <div className="flex items-start justify-between">
+                        <div>
+                          <h5 className="text-purple-300 font-medium mb-1">Custom Feature</h5>
+                          <p className="text-gray-300 text-sm">{customFeature}</p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setCustomFeature('');
+                            setSelectedFeatures(prev => prev.filter(id => !id.startsWith('custom-')));
+                          }}
+                          className="text-purple-400 hover:text-purple-300 ml-4"
+                        >
+                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Selected Features Summary */}
+                {selectedFeatures.length > 0 && (
+                  <div className="mt-6 p-4 bg-cyan-500/10 border border-cyan-400/30 rounded-lg">
+                    <h4 className="text-lg font-medium text-cyan-300 mb-3">
+                      Selected Features ({selectedFeatures.length})
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedFeatures.map((featureId) => {
+                        const feature = getAllFeatures().find(f => f.id === featureId);
+                        if (!feature && !featureId.startsWith('custom-')) return null;
+                        
+                        return (
+                          <div
+                            key={featureId}
+                            className="flex items-center px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-sm"
+                          >
+                            <span>{feature?.name || 'Custom Feature'}</span>
+                            <button
+                              type="button"
+                              onClick={() => handleFeatureToggle(featureId)}
+                              className="ml-2 text-cyan-400 hover:text-cyan-300"
+                            >
+                              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                              </svg>
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Submit Button */}
+              <div className="text-center">
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full neon-border px-8 py-4 rounded-lg text-white font-semibold hover:bg-cyan-500/10 transition-all transform hover:scale-105 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-cyan-500/25"
                 >
                   {isSubmitting ? (
                     <>
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-cyan-400 mr-2"></div>
-                      Processing Neural Connection...
+                      <div className="animate-spin w-5 h-5 mr-3 border-2 border-white border-t-transparent rounded-full"></div>
+                      Establishing Neural Connection...
                     </>
                   ) : (
                     <>
-                      <Send className="w-5 h-5 mr-2" />
-                      Send Neural Connection Request
+                      <Send className="w-5 h-5 mr-3" />
+                      Initiate Neural Connection
                     </>
                   )}
                 </button>
-              </form>
-            </div>
-
-            {/* Contact Info & Quick Stats */}
-            <div className="space-y-8">
-              {/* Contact Information */}
-              <div className="relative glassmorphism p-8 rounded-2xl border border-cyan-400/30">
-                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-t-2xl"></div>
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Connect Directly</h3>
-                
-                   <div className="space-y-6">
-                     <div className="flex items-center space-x-4">
-                       <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 border border-cyan-400/30 flex items-center justify-center">
-                         <Mail className="w-5 h-5 text-cyan-400" />
-                       </div>
-                       <div>
-                         <h4 className="text-white font-semibold text-lg mb-1">Email Us</h4>
-                         <p className="text-cyan-400 font-medium text-base">syedmusthaqk786@gmail.com</p>
-                         <p className="text-gray-400 text-sm">We respond within 24 hours</p>
-                       </div>
-                     </div>
-
-                     <div className="flex items-center space-x-4">
-                       <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 border border-cyan-400/30 flex items-center justify-center">
-                         <Phone className="w-5 h-5 text-cyan-400" />
-                       </div>
-                       <div>
-                         <h4 className="text-white font-semibold text-lg mb-1">Call Us</h4>
-                         <p className="text-cyan-400 font-medium text-base">+91 7013425496</p>
-                         <p className="text-gray-400 text-sm">Mon-Fri 9AM-6PM IST</p>
-                       </div>
-                     </div>
-
-                     <div className="flex items-center space-x-4">
-                       <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 border border-cyan-400/30 flex items-center justify-center">
-                         <MapPin className="w-5 h-5 text-cyan-400" />
-                       </div>
-                       <div>
-                         <h4 className="text-white font-semibold text-lg mb-1">Visit Us</h4>
-                         <p className="text-cyan-400 font-medium text-base">Andhra Pradesh, India</p>
-                       </div>
-                     </div>
-                   </div>
               </div>
-
-              {/* Response Time & Stats */}
-              <div className="relative glassmorphism p-8 rounded-2xl border border-cyan-400/30">
-                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-t-2xl"></div>
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Our Commitment</h3>
-                
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-cyan-500/10 to-blue-500/10">
-                    <span className="text-white font-medium">Response Time</span>
-                    <span className="text-cyan-400 font-bold">&lt; 4 hours</span>
-                  </div>
-                  
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-purple-500/10 to-pink-500/10">
-                    <span className="text-white font-medium">Project Success Rate</span>
-                    <span className="text-purple-400 font-bold">98.5%</span>
-                  </div>
-                  
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-blue-500/10 to-cyan-500/10">
-                    <span className="text-white font-medium">Average Productivity Boost</span>
-                    <span className="text-blue-400 font-bold">245%</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Quick Benefits */}
-              <div className="relative glassmorphism p-8 rounded-2xl border border-cyan-400/30">
-                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-t-2xl"></div>
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Why Choose Us?</h3>
-                
-                <div className="space-y-3">
-                  {[
-                    'Free initial consultation & project scope',
-                    'Dedicated project manager assigned',
-                    'Weekly progress reports & demos',
-                    'Post-launch support & optimization',
-                    'Scalable solutions that grow with you'
-                  ].map((benefit, index) => (
-                    <div key={index} className="flex items-center space-x-3">
-                      <div className="w-2 h-2 rounded-full bg-cyan-400"></div>
-                      <span className="text-gray-300">{benefit}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            </form>
           </div>
         </div>
 
         {/* Success Modal */}
         {showModal && (
-          <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-            <div className="relative max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-              <div className="relative glassmorphism p-8 rounded-2xl border border-cyan-400/30">
-                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-t-2xl"></div>
-                
+          <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+            <div className="glassmorphism max-w-4xl w-full max-h-[90vh] overflow-hidden border border-cyan-500/30 rounded-2xl">
+              <div className="p-8 overflow-y-auto max-h-[90vh] custom-scrollbar">
                 {/* Close button */}
                 <button
                   onClick={() => setShowModal(false)}
@@ -1534,33 +1354,33 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
                     <pre className="text-green-300 text-sm whitespace-pre-wrap font-mono leading-relaxed">{submitMessage}</pre>
                   </div>
 
-                  {/* Blueprint Section */}
+                  {/* Output Section */}
                   <div className="p-6 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-400/30">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-lg font-semibold text-white flex items-center">
                         <FileText className="w-5 h-5 mr-2 text-blue-400" />
-                        Generated Solution Blueprint
+                        Generated Solution Overview
                       </h3>
                       <button
-                        onClick={() => setShowBlueprint(!showBlueprint)}
+                        onClick={() => setShowOutput(!showOutput)}
                         className="flex items-center px-3 py-1 bg-blue-500/20 text-blue-400 border border-blue-400/50 rounded-lg hover:bg-blue-500/30 transition-all text-sm"
                       >
-                        {showBlueprint ? 'Hide' : 'View'} Blueprint
+                        {showOutput ? 'Hide' : 'View'} Output
                       </button>
                     </div>
                     
-                    {showBlueprint && (
+                    {showOutput && (
                       <div className="relative">
                         <pre className="text-blue-300 text-xs whitespace-pre-wrap font-mono leading-relaxed bg-black/30 p-4 rounded-lg border border-blue-400/20 max-h-96 overflow-y-auto custom-scrollbar">
-                          {generatedBlueprint}
+                          {generatedOutput}
                         </pre>
                         <button
                           onClick={() => {
-                            const blob = new Blob([generatedBlueprint], { type: 'text/plain' });
+                            const blob = new Blob([generatedOutput], { type: 'text/plain' });
                             const url = URL.createObjectURL(blob);
                             const a = document.createElement('a');
                             a.href = url;
-                            a.download = `neural-blueprint-${Date.now()}.txt`;
+                            a.download = `neural-output-${Date.now()}.txt`;
                             a.click();
                             URL.revokeObjectURL(url);
                           }}
