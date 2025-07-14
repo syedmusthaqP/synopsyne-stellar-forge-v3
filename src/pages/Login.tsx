@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Brain, Lock, User } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
+import { Brain, Lock, User, ArrowLeft } from 'lucide-react';
 
 const Login = () => {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
@@ -27,6 +27,28 @@ const Login = () => {
     <div className="min-h-screen gradient-bg flex items-center justify-center relative overflow-hidden">
       {/* Particle background effect */}
       <div className="particle-bg"></div>
+      
+      {/* Back to website header */}
+      <header className="fixed top-0 w-full z-50 bg-transparent">
+        <nav className="container mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <Link to="/" className="text-2xl font-bold text-white">
+              <span className="text-neon">Synopsyne</span>
+              <span className="ml-1">Dynamics</span>
+            </Link>
+            
+            {/* Back button */}
+            <Link 
+              to="/" 
+              className="flex items-center text-white hover:text-neon transition-colors glassmorphism px-4 py-2 rounded-lg border border-cyan-500/20"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Website
+            </Link>
+          </div>
+        </nav>
+      </header>
       
       {/* Floating elements */}
       <div className="fixed top-20 left-10 w-32 h-32 rounded-full glassmorphism animate-float opacity-30"></div>

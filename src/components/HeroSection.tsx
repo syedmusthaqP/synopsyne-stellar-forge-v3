@@ -180,25 +180,6 @@ const HeroSection = () => {
             </span>
           </button>
         </div>
-
-        {/* Floating cards with stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-16 sm:mt-20 max-w-4xl mx-auto px-4">
-          {[
-            { label: 'Successful Projects', value: '' },
-            { label: 'Client Satisfaction', value: '' },
-            { label: 'Years of Excellence', value: '' }
-          ].map((stat, index) => (
-            <div 
-              key={index}
-              className="glassmorphism p-4 sm:p-6 rounded-xl text-center animate-float hover:neon-border transition-all group cursor-pointer min-h-[80px] sm:min-h-[90px] flex flex-col items-center justify-center"
-              style={{ animationDelay: `${index * 0.2}s` }}
-            >
-              {/* Value is intentionally left empty for user to add later */}
-              <div className="text-2xl sm:text-3xl font-bold text-neon mb-2 group-hover:animate-pulse">{stat.value}</div>
-              <div className="text-gray-300 text-sm sm:text-base">{stat.label}</div>
-            </div>
-          ))}
-        </div>
       </div>
 
       {/* Scroll indicator */}
