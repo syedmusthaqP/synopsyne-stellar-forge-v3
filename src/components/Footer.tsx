@@ -99,6 +99,7 @@ const Footer = () => {
             <a href="#" className="text-gray-400 hover:text-neon transition-colors">Privacy Policy</a>
             <a href="#" className="text-gray-400 hover:text-neon transition-colors">Terms of Service</a>
             <a href="#" className="text-gray-400 hover:text-neon transition-colors">Cookie Policy</a>
+            <Link to="/login" className="text-gray-400 hover:text-neon transition-colors">Admin</Link>
           </div>
         </div>
 

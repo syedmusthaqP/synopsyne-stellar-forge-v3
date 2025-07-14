@@ -68,6 +68,19 @@ const ContactSection = () => {
         timestamp: new Date().toISOString()
       });
       
+      // Store contact data for admin dashboard
+      const contactData = {
+        ...formData,
+        features: selectedFeatureNames,
+        timestamp: new Date().toISOString(),
+        id: Date.now()
+      };
+      
+      // Store in localStorage for demo purposes
+      const existingContacts = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
+      existingContacts.push(contactData);
+      localStorage.setItem('contactSubmissions', JSON.stringify(existingContacts));
+      
       setSubmitMessage(`🧠 Neural Connection Established Successfully! 
 
 Thank you ${formData.name || 'valued client'}, your digital transformation request has been processed by our AI systems.
@@ -93,7 +106,7 @@ Thank you ${formData.name || 'valued client'}, your digital transformation reque
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Based on your selections, we'll incorporate cutting-edge AI technologies including machine learning algorithms, cloud-native architecture, and advanced automation systems to deliver a solution that exceeds your expectations.
 
-Our neural network has analyzed your requirements and prepared a preliminary solution blueprint. Expect a detailed proposal with cost analysis, technical specifications, and implementation roadmap.
+Our neural network has analyzed your requirements and prepared a comprehensive solution overview. Expect a detailed proposal with cost analysis, technical specifications, and implementation roadmap.
 
 🔗 Connection Status: ACTIVE | Priority: HIGH | Response Time: < 4 Hours`);
       
@@ -540,35 +553,33 @@ Our neural network has analyzed your requirements and prepared a preliminary sol
           </div>
         </div>
 
-        {/* Success Modal */}
+        {/* Result Modal */}
         {showModal && (
           <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-            <div className="relative max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-              <div className="relative glassmorphism p-8 rounded-2xl border border-cyan-400/30">
-                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-t-2xl"></div>
-                
-                {/* Close button */}
-                <button
-                  onClick={() => setShowModal(false)}
-                  className="absolute top-4 right-4 w-8 h-8 rounded-full glassmorphism border border-cyan-400/30 flex items-center justify-center text-cyan-400 hover:bg-cyan-500/10 transition-all"
-                >
-                  ✕
-                </button>
-
-                <div className="mb-6">
-                  <h2 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-4">Neural Connection Status</h2>
-                </div>
-                
-                <div className="p-6 rounded-lg bg-gradient-to-r from-green-500/20 to-cyan-500/20 border border-green-400/30">
-                  <pre className="text-green-300 text-sm whitespace-pre-wrap font-mono leading-relaxed">{submitMessage}</pre>
-                </div>
-
-                <div className="mt-6 flex justify-center">
+            <div className="relative bg-slate-900/90 backdrop-blur-xl border border-cyan-400/30 rounded-2xl p-6 max-w-4xl w-full max-h-[80vh] overflow-y-auto custom-scrollbar">
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-t-2xl"></div>
+              
+              <div className="mb-6">
+                <pre className="text-green-400 text-sm leading-relaxed whitespace-pre-wrap font-mono">
+                  {submitMessage}
+                </pre>
+              </div>
+              
+              {/* Confirm close section */}
+              <div className="flex flex-col items-center space-y-4 pt-4 border-t border-gray-700">
+                <p className="text-gray-300 text-sm">Are you sure you want to close this window?</p>
+                <div className="flex space-x-4">
                   <button
                     onClick={() => setShowModal(false)}
-                    className="px-6 py-3 neon-border rounded-lg text-white font-semibold hover:bg-cyan-500/10 transition-all"
+                    className="px-6 py-2 neon-border rounded-lg text-white font-semibold hover:bg-cyan-500/10 transition-all"
                   >
-                    Close
+                    Yes, Close
+                  </button>
+                  <button
+                    onClick={() => {/* Keep modal open */}}
+                    className="px-6 py-2 border border-gray-500 rounded-lg text-gray-300 font-semibold hover:bg-gray-500/10 transition-all"
+                  >
+                    Keep Open
                   </button>
                 </div>
               </div>

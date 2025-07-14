@@ -5,7 +5,8 @@ import { Brain, LogOut, Plus, Edit2, Trash2, Upload, Image as ImageIcon, Home, U
 
 const CMS = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [activeSection, setActiveSection] = useState('testimonials');
+  const [activeSection, setActiveSection] = useState('contacts');
+  const [contacts, setContacts] = useState<any[]>([]);
   const [testimonials, setTestimonials] = useState([
     {
       id: 1,
@@ -101,6 +102,9 @@ const CMS = () => {
     const authStatus = localStorage.getItem('isAuthenticated');
     if (authStatus === 'true') {
       setIsAuthenticated(true);
+      // Load contacts from localStorage
+      const savedContacts = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
+      setContacts(savedContacts);
     } else {
       navigate('/login');
     }
@@ -295,6 +299,66 @@ const CMS = () => {
 
   const renderSectionContent = () => {
     switch (activeSection) {
+      case 'contacts':
+        return (
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-white">Contact Submissions</h2>
+              <span className="px-3 py-1 rounded-lg bg-cyan-500/20 text-cyan-400 text-sm">
+                {contacts.length} Total Submissions
+              </span>
+            </div>
+
+            <div className="space-y-4">
+              {contacts.length === 0 ? (
+                <div className="text-center py-12">
+                  <p className="text-gray-400">No contact submissions yet.</p>
+                </div>
+              ) : (
+                contacts.map((contact, index) => (
+                  <div key={contact.id} className="glassmorphism p-6 rounded-xl border border-white/20">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <h3 className="font-bold text-white text-lg">{contact.name}</h3>
+                        <p className="text-cyan-400">{contact.email}</p>
+                        <p className="text-gray-300">{contact.company || 'No company provided'}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm text-gray-400">
+                          {new Date(contact.timestamp).toLocaleDateString()} at {new Date(contact.timestamp).toLocaleTimeString()}
+                        </p>
+                        <p className="text-sm text-neon">{contact.projectType || 'No project type'}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                      <div>
+                        <span className="text-gray-400">Timeline:</span>
+                        <p className="text-white">{contact.timeline || 'Not specified'}</p>
+                      </div>
+                      <div>
+                        <span className="text-gray-400">Budget:</span>
+                        <p className="text-white">{contact.budget || 'Not specified'} {contact.budgetCurrency}</p>
+                      </div>
+                      <div>
+                        <span className="text-gray-400">Features:</span>
+                        <p className="text-white">{contact.features?.length > 0 ? contact.features.join(', ') : 'None selected'}</p>
+                      </div>
+                    </div>
+                    
+                    {contact.message && (
+                      <div className="mt-4">
+                        <span className="text-gray-400">Message:</span>
+                        <p className="text-gray-300 mt-1">{contact.message}</p>
+                      </div>
+                    )}
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        );
+
       case 'hero':
         return (
           <div className="space-y-6">
@@ -529,8 +593,9 @@ const CMS = () => {
           <nav className="w-64 glassmorphism border-r border-white/20 min-h-screen p-6">
             <div className="space-y-2">
               {[
-                { id: 'hero', label: 'Hero Section', icon: Home },
+                { id: 'contacts', label: 'Contact Submissions', icon: Users },
                 { id: 'testimonials', label: 'Testimonials', icon: Users },
+                { id: 'hero', label: 'Hero Section', icon: Home },
                 { id: 'photos', label: 'Photos', icon: ImageIcon },
               ].map((item) => (
                 <button
