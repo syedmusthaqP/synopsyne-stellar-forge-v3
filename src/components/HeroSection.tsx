@@ -134,7 +134,7 @@ const HeroSection = () => {
         </div>
 
         {/* Main headline */}
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
           We Engineer{' '}
           <span className="text-neon animate-text-glow">Software</span>
           <br />
@@ -147,8 +147,8 @@ const HeroSection = () => {
         {/* Subheadline */}
         <div className="relative mb-12 max-w-3xl mx-auto">
           <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 rounded-lg blur-xl"></div>
-          <div className="relative glassmorphism p-6 rounded-lg">
-            <p className="text-lg md:text-xl text-gray-300">
+          <div className="relative glassmorphism p-4 sm:p-6 rounded-lg">
+            <p className="text-base sm:text-lg md:text-xl text-gray-300">
               Custom solutions, cutting-edge technology, measurable results.
               We build the future, one neural connection at a time.
             </p>
@@ -156,15 +156,15 @@ const HeroSection = () => {
         </div>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4">
           {/* Primary CTA */}
           <button 
             onClick={handleNeuralTransformation}
-            className="group relative overflow-hidden neon-border px-8 py-4 rounded-lg text-white hover:bg-cyan-500/10 transition-all transform hover:scale-105"
+            className="w-full sm:w-auto group relative overflow-hidden neon-border px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-white hover:bg-cyan-500/10 transition-all transform hover:scale-105"
           >
-            <span className="relative z-10 flex items-center text-lg font-semibold">
+            <span className="relative z-10 flex items-center justify-center text-base sm:text-lg font-semibold">
               Start Your Neural Transformation
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
             </span>
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
           </button>
@@ -172,17 +172,17 @@ const HeroSection = () => {
           {/* Secondary CTA */}
           <button 
             onClick={handleExploreSolutions}
-            className="group glassmorphism px-8 py-4 rounded-lg text-white hover:bg-white/10 transition-all transform hover:scale-105"
+            className="w-full sm:w-auto group glassmorphism px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-white hover:bg-white/10 transition-all transform hover:scale-105"
           >
-            <span className="flex items-center text-lg font-semibold">
-              <Rocket className="mr-2 w-5 h-5 group-hover:rotate-12 transition-transform" />
+            <span className="flex items-center justify-center text-base sm:text-lg font-semibold">
+              <Rocket className="mr-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform" />
               Explore Neural Solutions
             </span>
           </button>
         </div>
 
         {/* Floating cards with stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-16 sm:mt-20 max-w-4xl mx-auto px-4">
           {[
             { label: 'Successful Projects', value: '' },
             { label: 'Client Satisfaction', value: '' },
@@ -190,12 +190,12 @@ const HeroSection = () => {
           ].map((stat, index) => (
             <div 
               key={index}
-              className="glassmorphism p-6 rounded-xl text-center animate-float hover:neon-border transition-all group cursor-pointer min-h-[90px] flex flex-col items-center justify-center"
+              className="glassmorphism p-4 sm:p-6 rounded-xl text-center animate-float hover:neon-border transition-all group cursor-pointer min-h-[80px] sm:min-h-[90px] flex flex-col items-center justify-center"
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               {/* Value is intentionally left empty for user to add later */}
-              <div className="text-3xl font-bold text-neon mb-2 group-hover:animate-pulse">{stat.value}</div>
-              <div className="text-gray-300 text-base">{stat.label}</div>
+              <div className="text-2xl sm:text-3xl font-bold text-neon mb-2 group-hover:animate-pulse">{stat.value}</div>
+              <div className="text-gray-300 text-sm sm:text-base">{stat.label}</div>
             </div>
           ))}
         </div>

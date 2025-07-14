@@ -11,12 +11,15 @@ const Login = () => {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Simple hardcoded credentials
-    if (credentials.username === 'admin' && credentials.password === 'synopsyne2024') {
+    // Simple hardcoded credentials - trim whitespace to avoid issues
+    const username = credentials.username.trim();
+    const password = credentials.password.trim();
+    
+    if (username === 'admin' && password === 'synopsyne2024') {
       localStorage.setItem('isAuthenticated', 'true');
       navigate('/cms');
     } else {
-      setError('Invalid credentials. Use admin/synopsyne2024');
+      setError('Invalid credentials. Use: admin / synopsyne2024');
     }
   };
 

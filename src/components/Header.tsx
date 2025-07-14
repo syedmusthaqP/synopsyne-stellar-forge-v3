@@ -135,12 +135,12 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 glassmorphism rounded-lg p-6">
-            <div className="flex flex-col space-y-6">
+          <div className="md:hidden mt-4 glassmorphism rounded-lg p-4 border border-cyan-500/20">
+            <div className="flex flex-col space-y-4">
               {Object.entries(navigationItems).map(([key, section]) => (
                 <div key={key}>
                   <button
-                    className="flex items-center justify-between w-full text-left text-white hover:text-neon transition-colors text-lg font-medium"
+                    className="flex items-center justify-between w-full text-left text-white hover:text-neon transition-colors text-base font-medium py-2 px-2 rounded-lg hover:bg-cyan-500/10"
                     onClick={() => handleDropdownToggle(key)}
                   >
                     {section.label}
@@ -150,12 +150,12 @@ const Header = () => {
                   </button>
                   
                   {activeDropdown === key && (
-                    <div className="mt-3 ml-4 space-y-2">
+                    <div className="mt-2 ml-4 space-y-1">
                       {section.items.map((item, index) => (
                         <div key={index}>
                           <Link
                             to={item.href}
-                            className="block text-gray-300 hover:text-neon transition-colors py-1"
+                            className="block text-gray-300 hover:text-neon transition-colors py-2 px-3 rounded-lg hover:bg-cyan-500/5 text-sm"
                             onClick={handleLinkClick}
                           >
                             • {item.label}
@@ -168,10 +168,10 @@ const Header = () => {
               ))}
               
               {/* Mobile Direct Links */}
-              <div>
+              <div className="border-t border-gray-600 pt-4">
                 <Link
                   to="/testimonials"
-                  className="block text-white hover:text-neon transition-colors text-lg font-medium py-2"
+                  className="block text-white hover:text-neon transition-colors text-base font-medium py-2 px-2 rounded-lg hover:bg-cyan-500/10"
                   onClick={handleLinkClick}
                 >
                   Testimonials
@@ -179,10 +179,10 @@ const Header = () => {
               </div>
               
               {/* Mobile Get In Touch Button */}
-              <div className="pt-4 border-t border-gray-600">
+              <div className="pt-2">
                 <Link 
                   to="/contact" 
-                  className="block neon-border px-6 py-3 rounded-lg text-neon hover:bg-cyan-500/10 transition-all text-center"
+                  className="block neon-border px-4 py-3 rounded-lg text-neon hover:bg-cyan-500/10 transition-all text-center font-semibold"
                   onClick={handleLinkClick}
                 >
                   Get In Touch
