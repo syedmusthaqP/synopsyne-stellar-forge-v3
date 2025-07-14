@@ -5,8 +5,15 @@ import HeroSection from '../components/HeroSection';
 import Footer from '../components/Footer';
 
 const Index = () => {
+  console.log('Index component rendering...');
+  
   return (
     <div className="min-h-screen gradient-bg relative overflow-hidden">
+      {/* Test visibility div */}
+      <div className="fixed top-0 left-0 bg-red-500 text-white p-4 z-50 m-4">
+        APP IS WORKING - INDEX PAGE LOADED
+      </div>
+      
       {/* Particle background effect */}
       <div className="particle-bg"></div>
       
