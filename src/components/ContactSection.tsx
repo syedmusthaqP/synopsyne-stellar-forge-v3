@@ -6,6 +6,7 @@ const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     company: '',
     message: '',
     projectType: '',
@@ -68,12 +69,15 @@ const ContactSection = () => {
         timestamp: new Date().toISOString()
       });
       
+      // Generate unique ID for submission
+      const uniqueId = `SYN-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+      
       // Store contact data for admin dashboard
       const contactData = {
         ...formData,
         features: selectedFeatureNames,
         timestamp: new Date().toISOString(),
-        id: Date.now()
+        id: uniqueId
       };
       
       // Store in localStorage for demo purposes
@@ -114,6 +118,7 @@ Our neural network has analyzed your requirements and prepared a comprehensive s
       setFormData({
         name: '',
         email: '',
+        phone: '',
         company: '',
         message: '',
         projectType: '',
@@ -242,6 +247,22 @@ Our neural network has analyzed your requirements and prepared a comprehensive s
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
+                    <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Phone Number *</label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                      placeholder="+1 (555) 123-4567"
+                      required
+                      style={{
+                        background: 'rgba(0, 0, 0, 0.4)',
+                        backdropFilter: 'blur(10px)',
+                      }}
+                    />
+                  </div>
+                  <div>
                     <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Company</label>
                     <input
                       type="text"
@@ -256,6 +277,9 @@ Our neural network has analyzed your requirements and prepared a comprehensive s
                       }}
                     />
                   </div>
+                </div>
+
+                <div className="grid grid-cols-1 gap-4">
                   <div>
                     <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Project Type</label>
                     <div className="relative">
