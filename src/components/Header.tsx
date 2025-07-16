@@ -51,9 +51,9 @@ const Header = () => {
 
   return (
     <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      scrolled ? 'glassmorphism backdrop-blur-lg mobile-header' : 'bg-transparent mobile-header'
+      scrolled ? 'glassmorphism backdrop-blur-lg' : 'bg-transparent'
     }`}>
-      <nav className="container mx-auto px-6 py-4">
+      <nav className="container mx-auto px-6 py-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="text-2xl font-bold text-white" onClick={handleLinkClick}>

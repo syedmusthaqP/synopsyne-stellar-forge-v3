@@ -99,10 +99,19 @@
   50% { transform: translateY(-10px); }
 }
 
-/* Desktop-Only Design - No Mobile Responsive (TCS Style) */
+/* Desktop-Only Design - No Scrollbars (TCS Style) */
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Remove all scrollbars */
+}
+
 body {
   min-width: 1200px;
-  overflow-x: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Remove all mobile-specific styles for TCS desktop-only approach */
@@ -113,11 +122,16 @@ body {
   padding: 0 2rem;
 }
 
-/* Ensure fixed desktop layout on all devices */
+/* Ensure fixed desktop layout on all devices with no scrollbars */
 @media (max-width: 768px) {
+  html, body {
+    overflow: hidden !important; /* No scrollbars */
+    width: 100% !important;
+    height: 100% !important;
+  }
+  
   body {
     min-width: 1200px !important;
-    overflow-x: auto !important;
   }
   
   .container {
@@ -393,11 +407,16 @@ body {
   }
 }
 
-/* Desktop Layout Preserved on All Devices (TCS Style) */
+/* Desktop Layout Preserved on All Devices - No Scrollbars (TCS Style) */
 @media (max-width: 640px) {
+  html, body {
+    overflow: hidden !important; /* Remove all scrollbars */
+    width: 100% !important;
+    height: 100% !important;
+  }
+  
   body {
     min-width: 1200px !important;
-    overflow-x: auto !important;
   }
   
   .container {

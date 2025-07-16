@@ -28,7 +28,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative pt-20">
+    <section className="min-h-screen flex items-center justify-center relative pt-24">
       {/* Professional AI/Software Background */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Professional Grid Pattern */}
