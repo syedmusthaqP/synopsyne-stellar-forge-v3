@@ -28,7 +28,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative pt-24">
+    <section className="min-h-screen flex items-center justify-center relative pt-20 mobile-section">
       {/* Professional AI/Software Background */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Professional Grid Pattern */}
@@ -134,7 +134,7 @@ const HeroSection = () => {
         </div>
 
         {/* Main headline */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight mobile-heading">
           We Engineer{' '}
           <span className="text-neon animate-text-glow">Software</span>
           <br />
@@ -156,7 +156,7 @@ const HeroSection = () => {
         </div>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4 mobile-grid">
           {/* Primary CTA */}
           <button 
             onClick={handleNeuralTransformation}

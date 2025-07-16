@@ -99,51 +99,88 @@
   50% { transform: translateY(-10px); }
 }
 
-/* Desktop-Only Design - No Scrollbars (TCS Style) */
-html, body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden; /* Remove all scrollbars */
-}
-
-body {
-  min-width: 1200px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Remove all mobile-specific styles for TCS desktop-only approach */
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-/* Ensure fixed desktop layout on all devices with no scrollbars */
+/* Professional Mobile Design - TCS Inspired */
 @media (max-width: 768px) {
-  html, body {
-    overflow: hidden !important; /* No scrollbars */
-    width: 100% !important;
-    height: 100% !important;
+  /* Corporate Mobile Header */
+  .mobile-header {
+    backdrop-filter: blur(20px);
+    background: rgba(0, 0, 0, 0.95);
+    border-bottom: 1px solid rgba(6, 182, 212, 0.2);
   }
   
-  body {
-    min-width: 1200px !important;
+  /* Mobile Navigation */
+  .mobile-nav {
+    background: rgba(0, 0, 0, 0.98);
+    backdrop-filter: blur(20px);
   }
   
-  .container {
-    width: 100% !important;
-    max-width: 1200px !important;
-    margin: 0 auto !important;
-    padding: 0 2rem !important;
+  /* Professional Mobile Cards */
+  .mobile-card {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(6, 182, 212, 0.15);
+    border-radius: 12px;
   }
   
-  /* Remove any mobile-specific transformations */
-  * {
-    transform: none !important;
+  /* Mobile Form Elements */
+  .mobile-input {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .mobile-input:focus {
+    border-color: rgba(6, 182, 212, 0.6);
+    box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.1);
+  }
+  
+  /* Corporate Mobile Typography */
+  .mobile-heading {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+  
+  .mobile-subheading {
+    font-size: 1.125rem;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+  
+  /* Professional Mobile Spacing */
+  .mobile-section {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Corporate Button Styles */
+  .mobile-btn-primary {
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.8), rgba(59, 130, 246, 0.8));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(6, 182, 212, 0.4);
+    border-radius: 8px;
+    padding: 0.875rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .mobile-btn-primary:hover {
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.9), rgba(59, 130, 246, 0.9));
+    transform: translateY(-1px);
+  }
+  
+  /* Professional Mobile Layout */
+  .mobile-container {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+  
+  .mobile-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
 
@@ -407,39 +444,19 @@ body {
   }
 }
 
-/* Desktop Layout Preserved on All Devices - No Scrollbars (TCS Style) */
 @media (max-width: 640px) {
-  html, body {
-    overflow: hidden !important; /* Remove all scrollbars */
-    width: 100% !important;
-    height: 100% !important;
-  }
-  
-  body {
-    min-width: 1200px !important;
-  }
-  
   .container {
-    width: 100% !important;
-    max-width: 1200px !important;
-    margin: 0 auto !important;
-    padding: 0 2rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
   }
-  
-  /* Ensure desktop typography is preserved */
-  h1, h2, h3, h4, h5, h6 {
-    font-size: inherit !important;
+  .min-h-screen {
+    min-height: 100vh !important;
   }
-  
-  /* Keep desktop button sizes */
-  button {
-    font-size: inherit !important;
-    padding: inherit !important;
+  .hero-section-stats {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
   }
-  
-  /* Keep desktop form sizes */
-  input, textarea, select {
-    font-size: inherit !important;
-    padding: inherit !important;
+  .glassmorphism {
+    padding: 1rem !important;
   }
 }
