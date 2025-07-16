@@ -28,7 +28,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative pt-20 mobile-section">
+    <section className="min-h-screen flex items-center justify-center relative pt-16 px-4 mobile-section">
       {/* Professional AI/Software Background */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Professional Grid Pattern */}
@@ -126,7 +126,7 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-transparent to-black/60"></div>
       </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10">
+      <div className="w-full max-w-4xl mx-auto px-4 text-center relative z-10 mobile-container">
         {/* Animated badge */}
         <div className="inline-flex items-center glassmorphism px-6 py-2 rounded-full mb-8 animate-float">
           <Brain className="w-4 h-4 text-neon mr-2" />
@@ -134,7 +134,7 @@ const HeroSection = () => {
         </div>
 
         {/* Main headline */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight mobile-heading">
+        <h1 className="mobile-heading text-white mb-6 leading-tight">
           We Engineer{' '}
           <span className="text-neon animate-text-glow">Software</span>
           <br />
@@ -156,7 +156,7 @@ const HeroSection = () => {
         </div>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4 mobile-grid">
+        <div className="flex flex-col gap-4 justify-center items-center w-full mobile-grid">
           {/* Primary CTA */}
           <button 
             onClick={handleNeuralTransformation}
