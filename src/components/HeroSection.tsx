@@ -28,7 +28,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative pt-20 mobile-section">
+    <section className="min-h-screen flex items-center justify-center relative pt-20">
       {/* Professional AI/Software Background */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Professional Grid Pattern */}
@@ -134,7 +134,7 @@ const HeroSection = () => {
         </div>
 
         {/* Main headline */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight mobile-heading">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
           We Engineer{' '}
           <span className="text-neon animate-text-glow">Software</span>
           <br />
@@ -156,11 +156,11 @@ const HeroSection = () => {
         </div>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4 mobile-grid">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4">
           {/* Primary CTA */}
           <button 
             onClick={handleNeuralTransformation}
-            className="w-full sm:w-auto group relative overflow-hidden mobile-btn-primary neon-border px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-white hover:bg-cyan-500/10 transition-all transform hover:scale-105"
+            className="w-full sm:w-auto group relative overflow-hidden neon-border px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-white hover:bg-cyan-500/10 transition-all transform hover:scale-105"
           >
             <span className="relative z-10 flex items-center justify-center text-base sm:text-lg font-semibold">
               Start Your Neural Transformation

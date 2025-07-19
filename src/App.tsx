@@ -16,7 +16,6 @@ import Services from "./pages/Services";
 import Testimonials from "./pages/Testimonials";
 import Login from "./pages/Login";
 import CMS from "./pages/CMS";
-import Blueprint from "./pages/Blueprint";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,7 +39,6 @@ const App = () => (
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cms" element={<CMS />} />
-          <Route path="/blueprint" element={<Blueprint />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -51,9 +51,9 @@ const Header = () => {
 
   return (
     <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      scrolled ? 'glassmorphism backdrop-blur-lg mobile-header' : 'bg-transparent mobile-header'
+      scrolled ? 'glassmorphism backdrop-blur-lg' : 'bg-transparent'
     }`}>
-      <nav className="container mx-auto px-6 py-4 mobile-container">
+      <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="text-2xl font-bold text-white" onClick={handleLinkClick}>
@@ -114,14 +114,6 @@ const Header = () => {
               Testimonials
             </Link>
             
-            <Link 
-              to="/blueprint" 
-              className="text-white hover:text-neon transition-colors"
-              onClick={handleLinkClick}
-            >
-              Blueprint Generator
-            </Link>
-            
             {/* Get In Touch Button */}
             <Link 
               to="/contact" 
@@ -143,7 +135,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 mobile-nav rounded-lg p-4 border border-cyan-500/20 mobile-card">
+          <div className="md:hidden mt-4 glassmorphism rounded-lg p-4 border border-cyan-500/20">
             <div className="flex flex-col space-y-4">
               {Object.entries(navigationItems).map(([key, section]) => (
                 <div key={key}>
@@ -176,21 +168,13 @@ const Header = () => {
               ))}
               
               {/* Mobile Direct Links */}
-              <div className="border-t border-gray-600 pt-4 space-y-2">
+              <div className="border-t border-gray-600 pt-4">
                 <Link
                   to="/testimonials"
                   className="block text-white hover:text-neon transition-colors text-base font-medium py-2 px-2 rounded-lg hover:bg-cyan-500/10"
                   onClick={handleLinkClick}
                 >
                   Testimonials
-                </Link>
-                
-                <Link
-                  to="/blueprint"
-                  className="block text-white hover:text-neon transition-colors text-base font-medium py-2 px-2 rounded-lg hover:bg-cyan-500/10"
-                  onClick={handleLinkClick}
-                >
-                  Blueprint Generator
                 </Link>
               </div>
               
