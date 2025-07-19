@@ -114,6 +114,14 @@ const Header = () => {
               Testimonials
             </Link>
             
+            <Link 
+              to="/blueprint" 
+              className="text-white hover:text-neon transition-colors"
+              onClick={handleLinkClick}
+            >
+              Blueprint Generator
+            </Link>
+            
             {/* Get In Touch Button */}
             <Link 
               to="/contact" 
@@ -168,13 +176,21 @@ const Header = () => {
               ))}
               
               {/* Mobile Direct Links */}
-              <div className="border-t border-gray-600 pt-4">
+              <div className="border-t border-gray-600 pt-4 space-y-2">
                 <Link
                   to="/testimonials"
                   className="block text-white hover:text-neon transition-colors text-base font-medium py-2 px-2 rounded-lg hover:bg-cyan-500/10"
                   onClick={handleLinkClick}
                 >
                   Testimonials
+                </Link>
+                
+                <Link
+                  to="/blueprint"
+                  className="block text-white hover:text-neon transition-colors text-base font-medium py-2 px-2 rounded-lg hover:bg-cyan-500/10"
+                  onClick={handleLinkClick}
+                >
+                  Blueprint Generator
                 </Link>
               </div>
               
