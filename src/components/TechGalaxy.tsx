@@ -609,49 +609,14 @@ const TechGalaxy = () => {
     }
   ];
 
-  // Function to calculate distance between two points
-  const calculateDistance = (x1: number, y1: number, x2: number, y2: number) => {
-    return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-  };
-
-  // Enhanced collision avoidance function
-  const getAdjustedPosition = (tech: TechNode, allTechs: TechNode[], currentRotation: number) => {
-    const angle = (tech.angle + currentRotation * tech.orbitSpeed) * (Math.PI / 180);
-    let x = Math.cos(angle) * tech.orbitRadius;
-    let y = Math.sin(angle) * tech.orbitRadius;
-
-    // Minimum distance based on node sizes plus buffer
-    const basePadding = 30;
-    let adjustmentAttempts = 0;
-    const maxAttempts = 5;
-
-    while (adjustmentAttempts < maxAttempts) {
-      let hasCollision = false;
-      
-      for (const otherTech of allTechs) {
-        if (otherTech.id === tech.id) continue;
-        
-        const otherAngle = (otherTech.angle + currentRotation * otherTech.orbitSpeed) * (Math.PI / 180);
-        const otherX = Math.cos(otherAngle) * otherTech.orbitRadius;
-        const otherY = Math.sin(otherAngle) * otherTech.orbitRadius;
-        
-        const distance = calculateDistance(x, y, otherX, otherY);
-        const requiredDistance = (tech.size + otherTech.size) / 2 + basePadding;
-        
-        if (distance < requiredDistance) {
-          hasCollision = true;
-          // Push away from collision with more force
-          const pushAngle = Math.atan2(y - otherY, x - otherX);
-          const pushForce = requiredDistance - distance + 10;
-          x += Math.cos(pushAngle) * pushForce * 0.5;
-          y += Math.sin(pushAngle) * pushForce * 0.5;
-          break;
-        }
-      }
-      
-      if (!hasCollision) break;
-      adjustmentAttempts++;
-    }
+  // Stable orbital position calculation - like planets around the sun
+  const getOrbitalPosition = (tech: TechNode, currentRotation: number) => {
+    // Calculate the current angle for this tech node
+    const currentAngle = (tech.angle + currentRotation * tech.orbitSpeed) * (Math.PI / 180);
+    
+    // Calculate stable orbital position
+    const x = Math.cos(currentAngle) * tech.orbitRadius;
+    const y = Math.sin(currentAngle) * tech.orbitRadius;
 
     return { x, y };
   };
@@ -733,7 +698,7 @@ const TechGalaxy = () => {
 
             {/* Technology Nodes */}
             {filteredTechnologies.map((tech) => {
-              const position = getAdjustedPosition(tech, filteredTechnologies, rotation);
+              const position = getOrbitalPosition(tech, rotation);
 
               return (
                 <div
