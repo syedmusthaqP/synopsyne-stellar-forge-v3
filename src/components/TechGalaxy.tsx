@@ -609,50 +609,49 @@ const TechGalaxy = () => {
     }
   ];
 
-  // Circular orbital positioning with proper ring distribution
+  // Proper circular ring positioning with guaranteed spacing
   const getOrbitalPosition = (tech: TechNode, currentRotation: number, allTechs: TechNode[]) => {
-    // Group technologies by orbital rings based on radius ranges
-    const orbitRings = {
-      inner: allTechs.filter(t => t.orbitRadius <= 160),
-      innerMid: allTechs.filter(t => t.orbitRadius > 160 && t.orbitRadius <= 200),
-      mid: allTechs.filter(t => t.orbitRadius > 200 && t.orbitRadius <= 240),
-      outerMid: allTechs.filter(t => t.orbitRadius > 240 && t.orbitRadius <= 280),
-      outer: allTechs.filter(t => t.orbitRadius > 280)
-    };
+    // Define fixed orbital rings with proper spacing
+    const orbitRings = [
+      { radius: 140, nodes: [] as TechNode[] },  // Inner ring
+      { radius: 180, nodes: [] as TechNode[] },  // Inner-mid ring
+      { radius: 220, nodes: [] as TechNode[] },  // Mid ring
+      { radius: 260, nodes: [] as TechNode[] },  // Outer-mid ring
+      { radius: 300, nodes: [] as TechNode[] },  // Outer ring
+    ];
     
-    // Determine which ring this tech belongs to and its position in that ring
-    let ring: TechNode[] = [];
-    let ringRadius = tech.orbitRadius;
+    // Distribute technologies across rings based on their category and original radius
+    allTechs.forEach((t, index) => {
+      const ringIndex = Math.min(Math.floor(index / Math.ceil(allTechs.length / 5)), 4);
+      orbitRings[ringIndex].nodes.push(t);
+    });
     
-    if (tech.orbitRadius <= 160) {
-      ring = orbitRings.inner;
-      ringRadius = 150;
-    } else if (tech.orbitRadius <= 200) {
-      ring = orbitRings.innerMid;
-      ringRadius = 190;
-    } else if (tech.orbitRadius <= 240) {
-      ring = orbitRings.mid;
-      ringRadius = 230;
-    } else if (tech.orbitRadius <= 280) {
-      ring = orbitRings.outerMid;
-      ringRadius = 270;
-    } else {
-      ring = orbitRings.outer;
-      ringRadius = 320;
+    // Find which ring and position this tech is in
+    let targetRing = orbitRings[0];
+    let positionInRing = 0;
+    
+    for (const ring of orbitRings) {
+      const techIndex = ring.nodes.findIndex(t => t.id === tech.id);
+      if (techIndex !== -1) {
+        targetRing = ring;
+        positionInRing = techIndex;
+        break;
+      }
     }
     
-    // Find position of this tech in its ring
-    const techIndexInRing = ring.findIndex(t => t.id === tech.id);
-    const totalInRing = ring.length;
+    // Calculate evenly spaced position in the ring
+    const totalNodesInRing = targetRing.nodes.length;
+    const angleStep = (Math.PI * 2) / totalNodesInRing;
+    const baseAngle = positionInRing * angleStep;
     
-    // Calculate evenly spaced angle for this ring
-    const baseAngle = (techIndexInRing / totalInRing) * (Math.PI * 2);
-    const rotationOffset = (currentRotation * tech.orbitSpeed * Math.PI) / 180;
+    // Add rotation animation
+    const rotationSpeed = tech.orbitSpeed * 0.01; // Slower rotation
+    const rotationOffset = currentRotation * rotationSpeed * (Math.PI / 180);
     const finalAngle = baseAngle + rotationOffset;
     
-    // Calculate position
-    const x = Math.cos(finalAngle) * ringRadius;
-    const y = Math.sin(finalAngle) * ringRadius;
+    // Calculate final position
+    const x = Math.cos(finalAngle) * targetRing.radius;
+    const y = Math.sin(finalAngle) * targetRing.radius;
 
     return { x, y };
   };
