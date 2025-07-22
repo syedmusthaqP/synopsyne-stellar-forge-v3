@@ -609,29 +609,50 @@ const TechGalaxy = () => {
     }
   ];
 
-  // Stable orbital position calculation with collision prevention
+  // Circular orbital positioning with proper ring distribution
   const getOrbitalPosition = (tech: TechNode, currentRotation: number, allTechs: TechNode[]) => {
-    // Calculate the current angle for this tech node
-    let currentAngle = (tech.angle + currentRotation * tech.orbitSpeed) * (Math.PI / 180);
+    // Group technologies by orbital rings based on radius ranges
+    const orbitRings = {
+      inner: allTechs.filter(t => t.orbitRadius <= 160),
+      innerMid: allTechs.filter(t => t.orbitRadius > 160 && t.orbitRadius <= 200),
+      mid: allTechs.filter(t => t.orbitRadius > 200 && t.orbitRadius <= 240),
+      outerMid: allTechs.filter(t => t.orbitRadius > 240 && t.orbitRadius <= 280),
+      outer: allTechs.filter(t => t.orbitRadius > 280)
+    };
     
-    // Group nodes by similar orbital radius to prevent overlap
-    const similarRadiusNodes = allTechs.filter(t => 
-      Math.abs(t.orbitRadius - tech.orbitRadius) < 40 && t.id !== tech.id
-    );
+    // Determine which ring this tech belongs to and its position in that ring
+    let ring: TechNode[] = [];
+    let ringRadius = tech.orbitRadius;
     
-    // Add angular offset for nodes on similar orbits to prevent overlap
-    if (similarRadiusNodes.length > 0) {
-      const nodeIndex = allTechs.findIndex(t => t.id === tech.id);
-      const nodesInOrbit = similarRadiusNodes.length + 1;
-      const angleSpacing = (Math.PI * 2) / Math.max(nodesInOrbit * 2, 8); // Minimum spacing
-      
-      // Apply spacing offset
-      currentAngle += (nodeIndex % nodesInOrbit) * angleSpacing;
+    if (tech.orbitRadius <= 160) {
+      ring = orbitRings.inner;
+      ringRadius = 150;
+    } else if (tech.orbitRadius <= 200) {
+      ring = orbitRings.innerMid;
+      ringRadius = 190;
+    } else if (tech.orbitRadius <= 240) {
+      ring = orbitRings.mid;
+      ringRadius = 230;
+    } else if (tech.orbitRadius <= 280) {
+      ring = orbitRings.outerMid;
+      ringRadius = 270;
+    } else {
+      ring = orbitRings.outer;
+      ringRadius = 320;
     }
     
-    // Calculate stable orbital position
-    const x = Math.cos(currentAngle) * tech.orbitRadius;
-    const y = Math.sin(currentAngle) * tech.orbitRadius;
+    // Find position of this tech in its ring
+    const techIndexInRing = ring.findIndex(t => t.id === tech.id);
+    const totalInRing = ring.length;
+    
+    // Calculate evenly spaced angle for this ring
+    const baseAngle = (techIndexInRing / totalInRing) * (Math.PI * 2);
+    const rotationOffset = (currentRotation * tech.orbitSpeed * Math.PI) / 180;
+    const finalAngle = baseAngle + rotationOffset;
+    
+    // Calculate position
+    const x = Math.cos(finalAngle) * ringRadius;
+    const y = Math.sin(finalAngle) * ringRadius;
 
     return { x, y };
   };
