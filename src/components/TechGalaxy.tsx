@@ -609,10 +609,25 @@ const TechGalaxy = () => {
     }
   ];
 
-  // Stable orbital position calculation - like planets around the sun
-  const getOrbitalPosition = (tech: TechNode, currentRotation: number) => {
+  // Stable orbital position calculation with collision prevention
+  const getOrbitalPosition = (tech: TechNode, currentRotation: number, allTechs: TechNode[]) => {
     // Calculate the current angle for this tech node
-    const currentAngle = (tech.angle + currentRotation * tech.orbitSpeed) * (Math.PI / 180);
+    let currentAngle = (tech.angle + currentRotation * tech.orbitSpeed) * (Math.PI / 180);
+    
+    // Group nodes by similar orbital radius to prevent overlap
+    const similarRadiusNodes = allTechs.filter(t => 
+      Math.abs(t.orbitRadius - tech.orbitRadius) < 40 && t.id !== tech.id
+    );
+    
+    // Add angular offset for nodes on similar orbits to prevent overlap
+    if (similarRadiusNodes.length > 0) {
+      const nodeIndex = allTechs.findIndex(t => t.id === tech.id);
+      const nodesInOrbit = similarRadiusNodes.length + 1;
+      const angleSpacing = (Math.PI * 2) / Math.max(nodesInOrbit * 2, 8); // Minimum spacing
+      
+      // Apply spacing offset
+      currentAngle += (nodeIndex % nodesInOrbit) * angleSpacing;
+    }
     
     // Calculate stable orbital position
     const x = Math.cos(currentAngle) * tech.orbitRadius;
@@ -698,7 +713,7 @@ const TechGalaxy = () => {
 
             {/* Technology Nodes */}
             {filteredTechnologies.map((tech) => {
-              const position = getOrbitalPosition(tech, rotation);
+              const position = getOrbitalPosition(tech, rotation, filteredTechnologies);
 
               return (
                 <div
