@@ -609,17 +609,17 @@ const TechGalaxy = () => {
     }
   ];
 
-  // Simple and reliable orbital positioning with guaranteed spacing
+  // Optimized orbital positioning with proper spacing and alignment
   const getOrbitalPosition = (tech: TechNode, currentRotation: number, allTechs: TechNode[]) => {
     // Calculate index of this technology in the full array
     const techIndex = allTechs.findIndex(t => t.id === tech.id);
     const totalTechs = allTechs.length;
     
-    // Distribute technologies evenly around 3 concentric circles
+    // Distribute technologies evenly around 3 concentric circles with more spacing
     const ringsConfig = [
-      { radius: 160, capacity: 8 },   // Inner ring - 8 nodes
-      { radius: 220, capacity: 12 },  // Middle ring - 12 nodes  
-      { radius: 290, capacity: 15 }   // Outer ring - remaining nodes
+      { radius: 180, capacity: 6 },   // Inner ring - fewer nodes for more space
+      { radius: 250, capacity: 10 },  // Middle ring - well spaced
+      { radius: 330, capacity: 20 }   // Outer ring - remaining nodes with plenty of space
     ];
     
     // Determine which ring this tech belongs to
@@ -643,17 +643,18 @@ const TechGalaxy = () => {
     }
     
     const ring = ringsConfig[currentRing];
-    const actualNodesInRing = Math.min(
-      ring.capacity, 
-      totalTechs - (currentRing === 0 ? 0 : ringsConfig.slice(0, currentRing).reduce((sum, r) => sum + r.capacity, 0))
-    );
+    const nodesInThisRing = currentRing === 0 ? 
+      Math.min(totalTechs, ring.capacity) :
+      currentRing === 1 ?
+        Math.min(totalTechs - ringsConfig[0].capacity, ring.capacity) :
+        totalTechs - ringsConfig[0].capacity - ringsConfig[1].capacity;
     
-    // Calculate evenly spaced angle
-    const angleStep = (Math.PI * 2) / Math.max(actualNodesInRing, 1);
+    // Calculate evenly spaced angle with extra spacing buffer
+    const angleStep = (Math.PI * 2) / Math.max(nodesInThisRing, 1);
     const baseAngle = positionInRing * angleStep;
     
     // Add smooth rotation
-    const rotationSpeed = 0.5; // Degrees per update
+    const rotationSpeed = 0.3; // Slower rotation for stability
     const rotationOffset = (currentRotation * rotationSpeed * Math.PI) / 180;
     const finalAngle = baseAngle + rotationOffset;
     
@@ -768,9 +769,9 @@ const TechGalaxy = () => {
                         boxShadow: `0 0 20px ${tech.color}40`
                       }}
                     >
-                      <span className="text-white text-xs font-bold text-center px-2">
-                        {tech.name}
-                      </span>
+                       <span className="text-white text-[10px] font-bold text-center leading-none px-1 break-words max-w-full overflow-hidden">
+                         {tech.name.length > 8 ? tech.name.split(/[\s\/]/).join('\n') : tech.name}
+                       </span>
                     </div>
 
                     {/* Expertise level indicator */}
