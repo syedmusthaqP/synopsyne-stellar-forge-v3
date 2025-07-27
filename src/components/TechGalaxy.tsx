@@ -769,12 +769,12 @@ const TechGalaxy = () => {
                         boxShadow: `0 0 20px ${tech.color}40`
                       }}
                     >
-                      <div className="text-white text-[10px] font-bold text-center leading-tight flex flex-col items-center justify-center h-full px-1">
+                      <div className="text-white text-[11px] font-semibold text-center leading-tight flex flex-col items-center justify-center h-full px-1 antialiased">
                         {tech.name.length > 8 ? 
                           tech.name.split(/[\s\/]/).map((part, index) => (
-                            <span key={index} className="block">{part}</span>
+                            <span key={index} className="block font-medium tracking-wide">{part}</span>
                           )) : 
-                          <span>{tech.name}</span>
+                          <span className="font-medium tracking-wide">{tech.name}</span>
                         }
                       </div>
                     </div>

@@ -1,69 +1,167 @@
 import React, { useState } from 'react';
-import { Code, Cloud, Smartphone, Brain, Database, Shield } from 'lucide-react';
+import { Code, Cloud, Smartphone, Brain, Database, Shield, Building, Users, GraduationCap, Settings } from 'lucide-react';
 import NeuralDevelopmentProcess from '@/components/ui/neural-development-process';
 
 const ServicesSection = () => {
   const [activeService, setActiveService] = useState(-1);
   const [neuralPulse, setNeuralPulse] = useState(0);
+  const [activeSector, setActiveSector] = useState('Software Development');
+
+  const sectors = [
+    { id: 'Software Development', name: 'Software Development', icon: Code, color: '#00d4ff' },
+    { id: 'BPO', name: 'BPO Services', icon: Building, color: '#9333ea' },
+    { id: 'Skill Development', name: 'Skill Development', icon: GraduationCap, color: '#ec4899' },
+    { id: 'Technology Consulting', name: 'Technology Consulting', icon: Settings, color: '#06b6d4' }
+  ];
+
+  const servicesBySector = {
+    'Software Development': [
+      {
+        icon: Code,
+        title: 'Custom Software Development',
+        description: 'Bespoke applications tailored to your unique business requirements and workflows.',
+        features: ['Full-stack development', 'Legacy system modernization', 'API integration', 'Code auditing'],
+        position: { x: 15, y: 20 },
+        connections: [1, 5]
+      },
+      {
+        icon: Cloud,
+        title: 'Cloud Architecture & DevOps',
+        description: 'Scalable cloud solutions with automated deployment and infrastructure management.',
+        features: ['AWS/Azure/GCP setup', 'CI/CD pipelines', 'Container orchestration', 'Monitoring & logging'],
+        position: { x: 50, y: 15 },
+        connections: [0, 2]
+      },
+      {
+        icon: Brain,
+        title: 'AI & Machine Learning',
+        description: 'Intelligent solutions that learn and adapt to drive business insights and automation.',
+        features: ['Predictive analytics', 'Natural language processing', 'Computer vision', 'Recommendation systems'],
+        position: { x: 85, y: 20 },
+        connections: [1, 3]
+      },
+      {
+        icon: Smartphone,
+        title: 'Mobile App Development',
+        description: 'Native and cross-platform mobile applications for iOS and Android.',
+        features: ['React Native', 'Flutter development', 'Progressive Web Apps', 'App store optimization'],
+        position: { x: 85, y: 80 },
+        connections: [2, 4]
+      },
+      {
+        icon: Database,
+        title: 'Data Engineering',
+        description: 'Robust data pipelines and analytics platforms for data-driven decision making.',
+        features: ['ETL pipelines', 'Data warehousing', 'Real-time analytics', 'Data visualization'],
+        position: { x: 50, y: 85 },
+        connections: [3, 5]
+      },
+      {
+        icon: Shield,
+        title: 'Cybersecurity Solutions',
+        description: 'Comprehensive security measures to protect your digital assets and infrastructure.',
+        features: ['Security audits', 'Penetration testing', 'Compliance consulting', 'Incident response'],
+        position: { x: 15, y: 80 },
+        connections: [4, 0]
+      }
+    ],
+    'BPO': [
+      {
+        icon: Users,
+        title: 'Customer Support Services',
+        description: '24/7 customer support with multi-channel communication capabilities.',
+        features: ['Live chat support', 'Email management', 'Phone support', 'Ticket resolution'],
+        position: { x: 25, y: 30 },
+        connections: [1, 2]
+      },
+      {
+        icon: Database,
+        title: 'Data Processing & Analysis',
+        description: 'Efficient data entry, processing, and analytical services for business insights.',
+        features: ['Data entry', 'Document processing', 'Quality assurance', 'Analytics reporting'],
+        position: { x: 75, y: 30 },
+        connections: [0, 2]
+      },
+      {
+        icon: Building,
+        title: 'Back Office Operations',
+        description: 'Streamlined administrative and operational support services.',
+        features: ['Document management', 'Invoice processing', 'HR administration', 'Compliance tracking'],
+        position: { x: 50, y: 70 },
+        connections: [0, 1]
+      }
+    ],
+    'Skill Development': [
+      {
+        icon: GraduationCap,
+        title: 'Technical Training Programs',
+        description: 'Comprehensive training in modern technologies and development practices.',
+        features: ['Programming bootcamps', 'Cloud certifications', 'DevOps training', 'AI/ML courses'],
+        position: { x: 20, y: 25 },
+        connections: [1, 3]
+      },
+      {
+        icon: Brain,
+        title: 'Professional Development',
+        description: 'Soft skills and leadership development for career advancement.',
+        features: ['Communication skills', 'Project management', 'Leadership training', 'Team collaboration'],
+        position: { x: 80, y: 25 },
+        connections: [0, 2]
+      },
+      {
+        icon: Code,
+        title: 'Certification Programs',
+        description: 'Industry-recognized certifications in various technology domains.',
+        features: ['AWS certifications', 'Microsoft Azure', 'Google Cloud', 'Agile methodologies'],
+        position: { x: 80, y: 75 },
+        connections: [1, 3]
+      },
+      {
+        icon: Users,
+        title: 'Corporate Training',
+        description: 'Customized training solutions for enterprise teams and organizations.',
+        features: ['Team workshops', 'Skills assessment', 'Learning paths', 'Progress tracking'],
+        position: { x: 20, y: 75 },
+        connections: [0, 2]
+      }
+    ],
+    'Technology Consulting': [
+      {
+        icon: Settings,
+        title: 'Digital Transformation',
+        description: 'Strategic guidance for modernizing business processes and technology stack.',
+        features: ['Technology roadmaps', 'Process optimization', 'Change management', 'ROI analysis'],
+        position: { x: 30, y: 20 },
+        connections: [1, 2]
+      },
+      {
+        icon: Shield,
+        title: 'IT Security Consulting',
+        description: 'Comprehensive security assessments and strategic security planning.',
+        features: ['Security audits', 'Risk assessment', 'Compliance consulting', 'Security training'],
+        position: { x: 70, y: 20 },
+        connections: [0, 2]
+      },
+      {
+        icon: Brain,
+        title: 'Technology Strategy',
+        description: 'Long-term technology planning and architectural decision support.',
+        features: ['Architecture reviews', 'Technology selection', 'Scalability planning', 'Innovation consulting'],
+        position: { x: 50, y: 80 },
+        connections: [0, 1]
+      }
+    ]
+  };
+
+  const services = servicesBySector[activeSector] || [];
 
   React.useEffect(() => {
     const pulseInterval = setInterval(() => {
-      setNeuralPulse(prev => (prev + 1) % 6);
+      setNeuralPulse(prev => (prev + 1) % services.length);
     }, 1500);
 
     return () => clearInterval(pulseInterval);
-  }, []);
-
-  const services = [
-    {
-      icon: Code,
-      title: 'Custom Software Development',
-      description: 'Bespoke applications tailored to your unique business requirements and workflows.',
-      features: ['Full-stack development', 'Legacy system modernization', 'API integration', 'Code auditing'],
-      position: { x: 15, y: 20 },
-      connections: [1, 5]
-    },
-    {
-      icon: Cloud,
-      title: 'Cloud Architecture & DevOps',
-      description: 'Scalable cloud solutions with automated deployment and infrastructure management.',
-      features: ['AWS/Azure/GCP setup', 'CI/CD pipelines', 'Container orchestration', 'Monitoring & logging'],
-      position: { x: 50, y: 15 },
-      connections: [0, 2]
-    },
-    {
-      icon: Brain,
-      title: 'AI & Machine Learning',
-      description: 'Intelligent solutions that learn and adapt to drive business insights and automation.',
-      features: ['Predictive analytics', 'Natural language processing', 'Computer vision', 'Recommendation systems'],
-      position: { x: 85, y: 20 },
-      connections: [1, 3]
-    },
-    {
-      icon: Smartphone,
-      title: 'Mobile App Development',
-      description: 'Native and cross-platform mobile applications for iOS and Android.',
-      features: ['React Native', 'Flutter development', 'Progressive Web Apps', 'App store optimization'],
-      position: { x: 85, y: 80 },
-      connections: [2, 4]
-    },
-    {
-      icon: Database,
-      title: 'Data Engineering',
-      description: 'Robust data pipelines and analytics platforms for data-driven decision making.',
-      features: ['ETL pipelines', 'Data warehousing', 'Real-time analytics', 'Data visualization'],
-      position: { x: 50, y: 85 },
-      connections: [3, 5]
-    },
-    {
-      icon: Shield,
-      title: 'Cybersecurity Solutions',
-      description: 'Comprehensive security measures to protect your digital assets and infrastructure.',
-      features: ['Security audits', 'Penetration testing', 'Compliance consulting', 'Incident response'],
-      position: { x: 15, y: 80 },
-      connections: [4, 0]
-    }
-  ];
+  }, [services.length]);
 
   return (
     <section id="services" className="py-20 relative overflow-hidden">
@@ -93,6 +191,24 @@ const ServicesSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
             Our <span className="text-neon animate-text-glow">Services</span> Network
           </h2>
+          
+          {/* Sector Selection */}
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            {sectors.map((sector) => (
+              <button
+                key={sector.id}
+                onClick={() => setActiveSector(sector.id)}
+                className={`flex items-center px-6 py-3 rounded-full transition-all duration-300 ${
+                  activeSector === sector.id
+                    ? 'bg-neon/20 border-2 border-neon text-neon shadow-lg shadow-neon/30'
+                    : 'bg-white/10 border border-white/20 text-white hover:bg-white/20 hover:border-white/40'
+                }`}
+              >
+                <sector.icon className="w-5 h-5 mr-2" />
+                <span className="font-medium">{sector.name}</span>
+              </button>
+            ))}
+          </div>
           
           <div className="max-w-6xl mx-auto mb-16">
             <p className="text-sm md:text-base text-gray-300 leading-relaxed">
