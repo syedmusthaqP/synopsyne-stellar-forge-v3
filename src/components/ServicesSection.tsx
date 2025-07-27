@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Code, Cloud, Smartphone, Brain, Database, Shield, Building, Users, GraduationCap, Settings, Zap } from 'lucide-react';
-import NeuralDevelopmentProcess from '@/components/ui/neural-development-process';
 
 const ServicesSection = () => {
   const [activeService, setActiveService] = useState(-1);
   const [neuralPulse, setNeuralPulse] = useState(0);
   const [activeSector, setActiveSector] = useState('Software Development');
   const [expandedPhases, setExpandedPhases] = useState<Record<string, boolean>>({});
+  const [selectedPhase, setSelectedPhase] = useState<any>(null);
 
   const sectors = [
     { id: 'Software Development', name: 'Software Development', icon: Code, color: '#00d4ff' },
@@ -22,6 +22,9 @@ const ServicesSection = () => {
         title: "Requirements Analysis",
         phase: "Phase 01",
         description: "Deep dive into your business needs, user stories, and technical requirements through neural analysis.",
+        detailedContent: "Our neural analysis engine processes your requirements through multiple cognitive layers: stakeholder interviews, user journey mapping, technical feasibility assessment, and risk analysis. We use AI-powered requirement gathering tools to ensure nothing is missed.",
+        deliverables: ["Requirements Document", "User Stories", "Technical Specifications", "Risk Assessment"],
+        duration: "2-3 weeks",
         icon: Brain,
         status: "completed",
         energy: 100,
@@ -31,6 +34,9 @@ const ServicesSection = () => {
         title: "System Architecture",
         phase: "Phase 02", 
         description: "Design scalable, maintainable architecture using modern patterns and neural network principles.",
+        detailedContent: "We architect your system using cutting-edge patterns like microservices, event-driven architecture, and neural network-inspired data flows. Our architects ensure scalability, security, and maintainability from day one.",
+        deliverables: ["System Architecture Diagram", "API Design", "Database Schema", "Security Framework"],
+        duration: "1-2 weeks",
         icon: Settings,
         status: "completed",
         energy: 90,
@@ -40,6 +46,9 @@ const ServicesSection = () => {
         title: "Development & Testing",
         phase: "Phase 03",
         description: "Agile development with continuous integration, testing, and neural feedback loops.",
+        detailedContent: "Our development process combines agile methodologies with AI-assisted coding, automated testing, and continuous integration. Neural feedback loops ensure code quality and performance optimization throughout development.",
+        deliverables: ["Working Software", "Test Suite", "CI/CD Pipeline", "Documentation"],
+        duration: "4-8 weeks",
         icon: Code,
         status: "in-progress",
         energy: 75,
@@ -49,6 +58,9 @@ const ServicesSection = () => {
         title: "Deployment & Optimization",
         phase: "Phase 04",
         description: "Seamless deployment with performance optimization and neural monitoring systems.",
+        detailedContent: "We deploy your application using blue-green deployment strategies, implement neural monitoring systems for real-time performance tracking, and set up automated scaling based on intelligent predictions.",
+        deliverables: ["Production Deployment", "Monitoring Dashboard", "Performance Reports", "Scaling Policies"],
+        duration: "1-2 weeks",
         icon: Cloud,
         status: "pending",
         energy: 60,
@@ -60,6 +72,9 @@ const ServicesSection = () => {
         title: "Process Assessment",
         phase: "Phase 01",
         description: "Comprehensive analysis of existing business processes and identification of optimization opportunities.",
+        detailedContent: "Our business analysts conduct deep-dive assessments of your current processes, identifying bottlenecks, inefficiencies, and automation opportunities using neural process mining techniques.",
+        deliverables: ["Process Map", "Gap Analysis", "Optimization Report", "ROI Projections"],
+        duration: "2-3 weeks",
         icon: Brain,
         status: "completed",
         energy: 100,
@@ -69,6 +84,9 @@ const ServicesSection = () => {
         title: "Service Design",
         phase: "Phase 02",
         description: "Custom service design aligned with your business objectives and quality standards.",
+        detailedContent: "We design custom BPO services tailored to your specific industry needs, incorporating best practices, quality frameworks, and neural-assisted process optimization for maximum efficiency.",
+        deliverables: ["Service Design Blueprint", "Quality Standards", "SLA Framework", "Training Materials"],
+        duration: "1-2 weeks",
         icon: Users,
         status: "completed",
         energy: 85,
@@ -78,6 +96,9 @@ const ServicesSection = () => {
         title: "Team Integration",
         phase: "Phase 03",
         description: "Seamless integration of our expert teams with your existing workflows and systems.",
+        detailedContent: "Our experts integrate seamlessly with your existing teams and systems, providing comprehensive training, establishing communication protocols, and implementing neural feedback mechanisms.",
+        deliverables: ["Team Onboarding", "Integration Plan", "Communication Protocols", "Performance Metrics"],
+        duration: "2-4 weeks",
         icon: Building,
         status: "in-progress",
         energy: 70,
@@ -87,6 +108,9 @@ const ServicesSection = () => {
         title: "Quality Assurance",
         phase: "Phase 04",
         description: "Continuous monitoring and improvement with performance metrics and neural feedback.",
+        detailedContent: "We implement comprehensive quality assurance frameworks with real-time monitoring, neural analytics for performance prediction, and continuous improvement processes.",
+        deliverables: ["QA Framework", "Performance Dashboard", "Improvement Reports", "Compliance Documentation"],
+        duration: "Ongoing",
         icon: Shield,
         status: "pending",
         energy: 55,
@@ -98,6 +122,9 @@ const ServicesSection = () => {
         title: "Skills Assessment",
         phase: "Phase 01",
         description: "Comprehensive evaluation of current skill levels and identification of learning pathways.",
+        detailedContent: "Our AI-powered assessment platform evaluates technical and soft skills, identifies learning gaps, and creates personalized development roadmaps using neural learning analytics.",
+        deliverables: ["Skills Assessment Report", "Learning Gap Analysis", "Personalized Roadmap", "Baseline Metrics"],
+        duration: "1 week",
         icon: Brain,
         status: "completed",
         energy: 100,
@@ -107,6 +134,9 @@ const ServicesSection = () => {
         title: "Learning Path Design",
         phase: "Phase 02",
         description: "Personalized curriculum design based on individual goals and industry requirements.",
+        detailedContent: "We create adaptive learning paths using neural network algorithms that adjust based on learning pace, style, and career objectives. Each path includes hands-on projects and real-world scenarios.",
+        deliverables: ["Custom Curriculum", "Learning Materials", "Project Assignments", "Progress Tracking System"],
+        duration: "1-2 weeks",
         icon: GraduationCap,
         status: "completed",
         energy: 90,
@@ -116,6 +146,9 @@ const ServicesSection = () => {
         title: "Interactive Training",
         phase: "Phase 03",
         description: "Hands-on learning with real-world projects and neural-enhanced learning techniques.",
+        detailedContent: "Our interactive training combines virtual labs, mentorship, peer collaboration, and AI-assisted learning to maximize knowledge retention and practical skill development.",
+        deliverables: ["Completed Projects", "Skill Certifications", "Portfolio Development", "Peer Reviews"],
+        duration: "4-12 weeks",
         icon: Users,
         status: "in-progress",
         energy: 80,
@@ -125,6 +158,9 @@ const ServicesSection = () => {
         title: "Certification & Career Support",
         phase: "Phase 04",
         description: "Industry certifications and ongoing career guidance with neural network matching.",
+        detailedContent: "We provide industry-recognized certifications, career counseling, job placement assistance, and ongoing professional development through our neural career matching platform.",
+        deliverables: ["Industry Certifications", "Career Plan", "Job Placement Support", "Alumni Network Access"],
+        duration: "Ongoing",
         icon: Zap,
         status: "pending",
         energy: 65,
@@ -136,6 +172,9 @@ const ServicesSection = () => {
         title: "Technology Audit",
         phase: "Phase 01",
         description: "Comprehensive assessment of current technology stack and infrastructure capabilities.",
+        detailedContent: "Our technology audit uses advanced scanning tools and neural analysis to evaluate your current tech stack, identify vulnerabilities, assess scalability, and benchmark against industry standards.",
+        deliverables: ["Technology Assessment Report", "Infrastructure Analysis", "Security Audit", "Modernization Roadmap"],
+        duration: "2-3 weeks",
         icon: Brain,
         status: "completed",
         energy: 100,
@@ -145,6 +184,9 @@ const ServicesSection = () => {
         title: "Strategic Planning",
         phase: "Phase 02",
         description: "Development of technology roadmap aligned with business objectives and growth plans.",
+        detailedContent: "We create comprehensive technology strategies that align with your business goals, incorporating emerging technologies, neural optimization principles, and sustainable growth frameworks.",
+        deliverables: ["Technology Roadmap", "Strategic Plan", "Budget Projections", "Implementation Timeline"],
+        duration: "2-4 weeks",
         icon: Settings,
         status: "completed",
         energy: 95,
@@ -154,6 +196,9 @@ const ServicesSection = () => {
         title: "Implementation Guidance",
         phase: "Phase 03",
         description: "Expert guidance during technology implementation with neural optimization strategies.",
+        detailedContent: "Our consultants provide hands-on guidance during implementation, using neural optimization to minimize risks, ensure smooth transitions, and maximize adoption rates.",
+        deliverables: ["Implementation Plan", "Change Management", "Training Programs", "Success Metrics"],
+        duration: "4-8 weeks",
         icon: Code,
         status: "in-progress",
         energy: 85,
@@ -163,18 +208,14 @@ const ServicesSection = () => {
         title: "Continuous Optimization",
         phase: "Phase 04",
         description: "Ongoing monitoring and optimization with AI-driven insights and recommendations.",
+        detailedContent: "We provide continuous optimization through AI-driven monitoring, predictive analytics, and neural feedback systems that identify improvement opportunities and automate optimizations.",
+        deliverables: ["Optimization Reports", "Performance Dashboards", "Predictive Analytics", "Automated Systems"],
+        duration: "Ongoing",
         icon: Zap,
         status: "pending",
         energy: 70,
       }
     ]
-  };
-
-  const togglePhases = (sectorId: string) => {
-    setExpandedPhases(prev => ({
-      ...prev,
-      [sectorId]: !prev[sectorId]
-    }));
   };
 
   const servicesBySector = {
@@ -318,6 +359,21 @@ const ServicesSection = () => {
 
   const services = servicesBySector[activeSector] || [];
 
+  const togglePhases = (sectorId: string) => {
+    setExpandedPhases(prev => ({
+      ...prev,
+      [sectorId]: !prev[sectorId]
+    }));
+  };
+
+  const handlePhaseClick = (phase: any) => {
+    setSelectedPhase(phase);
+  };
+
+  const closePhaseModal = () => {
+    setSelectedPhase(null);
+  };
+
   React.useEffect(() => {
     const pulseInterval = setInterval(() => {
       setNeuralPulse(prev => (prev + 1) % services.length);
@@ -389,6 +445,34 @@ const ServicesSection = () => {
               </span>
             </button>
           </div>
+
+          {/* Connecting Lines to Phases */}
+          {expandedPhases[activeSector] && (
+            <div className="relative mb-8">
+              <svg className="absolute inset-0 w-full h-20 pointer-events-none">
+                <defs>
+                  <linearGradient id="phaseConnection" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="rgba(0, 212, 255, 0.8)" />
+                    <stop offset="50%" stopColor="rgba(147, 51, 234, 0.8)" />
+                    <stop offset="100%" stopColor="rgba(168, 85, 247, 0.8)" />
+                  </linearGradient>
+                </defs>
+                <line
+                  x1="50%" y1="0%"
+                  x2="50%" y2="100%"
+                  stroke="url(#phaseConnection)"
+                  strokeWidth="4"
+                  className="animate-pulse"
+                />
+                <circle
+                  cx="50%" cy="50%"
+                  r="8"
+                  fill="rgb(147, 51, 234)"
+                  className="animate-ping"
+                />
+              </svg>
+            </div>
+          )}
           
           {/* Neural Development Phases */}
           {expandedPhases[activeSector] && (
@@ -401,7 +485,8 @@ const ServicesSection = () => {
                   {developmentPhases[activeSector]?.map((phase, index) => (
                     <div
                       key={phase.id}
-                      className="bg-black/40 backdrop-blur-sm rounded-2xl border border-purple-400/20 p-6 hover:border-purple-400/50 transition-all duration-300 group"
+                      onClick={() => handlePhaseClick(phase)}
+                      className="bg-black/40 backdrop-blur-sm rounded-2xl border border-purple-400/20 p-6 hover:border-purple-400/50 transition-all duration-300 group cursor-pointer hover:scale-105 hover:shadow-lg hover:shadow-purple-400/20"
                     >
                       <div className="flex items-center mb-4">
                         <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center mr-3">
@@ -434,6 +519,106 @@ const ServicesSection = () => {
                       </div>
                     </div>
                   ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Phase Detail Modal */}
+          {selectedPhase && (
+            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+              <div className="bg-black/90 backdrop-blur-lg rounded-3xl border border-purple-400/30 p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                <div className="flex justify-between items-start mb-6">
+                  <div>
+                    <div className="text-sm text-purple-400 font-medium mb-2">{selectedPhase.phase}</div>
+                    <h3 className="text-3xl font-bold text-white mb-2">{selectedPhase.title}</h3>
+                    <div className="flex items-center gap-4">
+                      <div className={`flex items-center text-sm ${
+                        selectedPhase.status === 'completed' ? 'text-green-400' :
+                        selectedPhase.status === 'in-progress' ? 'text-yellow-400' :
+                        'text-gray-400'
+                      }`}>
+                        <div className={`w-2 h-2 rounded-full mr-2 ${
+                          selectedPhase.status === 'completed' ? 'bg-green-400' :
+                          selectedPhase.status === 'in-progress' ? 'bg-yellow-400 animate-pulse' :
+                          'bg-gray-400'
+                        }`}></div>
+                        {selectedPhase.status.replace('-', ' ').charAt(0).toUpperCase() + selectedPhase.status.replace('-', ' ').slice(1)}
+                      </div>
+                      <div className="flex items-center text-sm text-purple-300">
+                        <Zap className="w-3 h-3 mr-1" />
+                        {selectedPhase.energy}% Neural Energy
+                      </div>
+                      <div className="text-sm text-gray-300">
+                        Duration: {selectedPhase.duration}
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={closePhaseModal}
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  <div>
+                    <h4 className="text-xl font-semibold text-purple-300 mb-4">Overview</h4>
+                    <p className="text-gray-300 leading-relaxed mb-6">
+                      {selectedPhase.detailedContent}
+                    </p>
+                    
+                    <h4 className="text-xl font-semibold text-purple-300 mb-4">Key Deliverables</h4>
+                    <ul className="space-y-2">
+                      {selectedPhase.deliverables?.map((deliverable: string, index: number) => (
+                        <li key={index} className="flex items-center text-gray-300">
+                          <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mr-3"></div>
+                          {deliverable}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <div className="bg-purple-500/10 rounded-2xl p-6 border border-purple-400/20">
+                      <h4 className="text-xl font-semibold text-purple-300 mb-4">Neural Insights</h4>
+                      <div className="space-y-4">
+                        <div className="flex justify-between items-center">
+                          <span className="text-gray-300">Complexity Level</span>
+                          <div className="flex items-center">
+                            {[...Array(5)].map((_, i) => (
+                              <div
+                                key={i}
+                                className={`w-2 h-2 rounded-full mr-1 ${
+                                  i < Math.floor(selectedPhase.energy / 20) ? 'bg-purple-400' : 'bg-gray-600'
+                                }`}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <div className="flex justify-between items-center">
+                          <span className="text-gray-300">Neural Efficiency</span>
+                          <span className="text-purple-300 font-semibold">{selectedPhase.energy}%</span>
+                        </div>
+                        
+                        <div className="flex justify-between items-center">
+                          <span className="text-gray-300">Timeline</span>
+                          <span className="text-gray-300">{selectedPhase.duration}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={closePhaseModal}
+                      className="w-full mt-6 py-3 bg-purple-500/20 border border-purple-400 text-purple-300 rounded-xl hover:bg-purple-500/30 transition-all duration-300"
+                    >
+                      Start Neural Sync
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
