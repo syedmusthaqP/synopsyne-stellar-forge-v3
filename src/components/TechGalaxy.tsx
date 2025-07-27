@@ -769,9 +769,14 @@ const TechGalaxy = () => {
                         boxShadow: `0 0 20px ${tech.color}40`
                       }}
                     >
-                       <span className="text-white text-[10px] font-bold text-center leading-none px-1 break-words max-w-full overflow-hidden">
-                         {tech.name.length > 8 ? tech.name.split(/[\s\/]/).join('\n') : tech.name}
-                       </span>
+                      <div className="text-white text-[10px] font-bold text-center leading-tight flex flex-col items-center justify-center h-full px-1">
+                        {tech.name.length > 8 ? 
+                          tech.name.split(/[\s\/]/).map((part, index) => (
+                            <span key={index} className="block">{part}</span>
+                          )) : 
+                          <span>{tech.name}</span>
+                        }
+                      </div>
                     </div>
 
                     {/* Expertise level indicator */}
