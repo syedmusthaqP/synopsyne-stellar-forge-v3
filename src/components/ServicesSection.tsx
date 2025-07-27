@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Code, Cloud, Smartphone, Brain, Database, Shield, Building, Users, GraduationCap, Settings } from 'lucide-react';
+import { Code, Cloud, Smartphone, Brain, Database, Shield, Building, Users, GraduationCap, Settings, Zap } from 'lucide-react';
 import NeuralDevelopmentProcess from '@/components/ui/neural-development-process';
 
 const ServicesSection = () => {
   const [activeService, setActiveService] = useState(-1);
   const [neuralPulse, setNeuralPulse] = useState(0);
   const [activeSector, setActiveSector] = useState('Software Development');
+  const [expandedPhases, setExpandedPhases] = useState<Record<string, boolean>>({});
 
   const sectors = [
     { id: 'Software Development', name: 'Software Development', icon: Code, color: '#00d4ff' },
@@ -13,6 +14,168 @@ const ServicesSection = () => {
     { id: 'Skill Development', name: 'Skill Development', icon: GraduationCap, color: '#ec4899' },
     { id: 'Technology Consulting', name: 'Technology Consulting', icon: Settings, color: '#06b6d4' }
   ];
+
+  const developmentPhases = {
+    'Software Development': [
+      {
+        id: 1,
+        title: "Requirements Analysis",
+        phase: "Phase 01",
+        description: "Deep dive into your business needs, user stories, and technical requirements through neural analysis.",
+        icon: Brain,
+        status: "completed",
+        energy: 100,
+      },
+      {
+        id: 2,
+        title: "System Architecture",
+        phase: "Phase 02", 
+        description: "Design scalable, maintainable architecture using modern patterns and neural network principles.",
+        icon: Settings,
+        status: "completed",
+        energy: 90,
+      },
+      {
+        id: 3,
+        title: "Development & Testing",
+        phase: "Phase 03",
+        description: "Agile development with continuous integration, testing, and neural feedback loops.",
+        icon: Code,
+        status: "in-progress",
+        energy: 75,
+      },
+      {
+        id: 4,
+        title: "Deployment & Optimization",
+        phase: "Phase 04",
+        description: "Seamless deployment with performance optimization and neural monitoring systems.",
+        icon: Cloud,
+        status: "pending",
+        energy: 60,
+      }
+    ],
+    'BPO': [
+      {
+        id: 1,
+        title: "Process Assessment",
+        phase: "Phase 01",
+        description: "Comprehensive analysis of existing business processes and identification of optimization opportunities.",
+        icon: Brain,
+        status: "completed",
+        energy: 100,
+      },
+      {
+        id: 2,
+        title: "Service Design",
+        phase: "Phase 02",
+        description: "Custom service design aligned with your business objectives and quality standards.",
+        icon: Users,
+        status: "completed",
+        energy: 85,
+      },
+      {
+        id: 3,
+        title: "Team Integration",
+        phase: "Phase 03",
+        description: "Seamless integration of our expert teams with your existing workflows and systems.",
+        icon: Building,
+        status: "in-progress",
+        energy: 70,
+      },
+      {
+        id: 4,
+        title: "Quality Assurance",
+        phase: "Phase 04",
+        description: "Continuous monitoring and improvement with performance metrics and neural feedback.",
+        icon: Shield,
+        status: "pending",
+        energy: 55,
+      }
+    ],
+    'Skill Development': [
+      {
+        id: 1,
+        title: "Skills Assessment",
+        phase: "Phase 01",
+        description: "Comprehensive evaluation of current skill levels and identification of learning pathways.",
+        icon: Brain,
+        status: "completed",
+        energy: 100,
+      },
+      {
+        id: 2,
+        title: "Learning Path Design",
+        phase: "Phase 02",
+        description: "Personalized curriculum design based on individual goals and industry requirements.",
+        icon: GraduationCap,
+        status: "completed",
+        energy: 90,
+      },
+      {
+        id: 3,
+        title: "Interactive Training",
+        phase: "Phase 03",
+        description: "Hands-on learning with real-world projects and neural-enhanced learning techniques.",
+        icon: Users,
+        status: "in-progress",
+        energy: 80,
+      },
+      {
+        id: 4,
+        title: "Certification & Career Support",
+        phase: "Phase 04",
+        description: "Industry certifications and ongoing career guidance with neural network matching.",
+        icon: Zap,
+        status: "pending",
+        energy: 65,
+      }
+    ],
+    'Technology Consulting': [
+      {
+        id: 1,
+        title: "Technology Audit",
+        phase: "Phase 01",
+        description: "Comprehensive assessment of current technology stack and infrastructure capabilities.",
+        icon: Brain,
+        status: "completed",
+        energy: 100,
+      },
+      {
+        id: 2,
+        title: "Strategic Planning",
+        phase: "Phase 02",
+        description: "Development of technology roadmap aligned with business objectives and growth plans.",
+        icon: Settings,
+        status: "completed",
+        energy: 95,
+      },
+      {
+        id: 3,
+        title: "Implementation Guidance",
+        phase: "Phase 03",
+        description: "Expert guidance during technology implementation with neural optimization strategies.",
+        icon: Code,
+        status: "in-progress",
+        energy: 85,
+      },
+      {
+        id: 4,
+        title: "Continuous Optimization",
+        phase: "Phase 04",
+        description: "Ongoing monitoring and optimization with AI-driven insights and recommendations.",
+        icon: Zap,
+        status: "pending",
+        energy: 70,
+      }
+    ]
+  };
+
+  const togglePhases = (sectorId: string) => {
+    setExpandedPhases(prev => ({
+      ...prev,
+      [sectorId]: !prev[sectorId]
+    }));
+  };
 
   const servicesBySector = {
     'Software Development': [
@@ -209,6 +372,72 @@ const ServicesSection = () => {
               </button>
             ))}
           </div>
+
+          {/* Neural Development Phases Button */}
+          <div className="flex justify-center mb-12">
+            <button
+              onClick={() => togglePhases(activeSector)}
+              className={`flex items-center px-8 py-4 rounded-full transition-all duration-300 ${
+                expandedPhases[activeSector]
+                  ? 'bg-purple-500/20 border-2 border-purple-400 text-purple-300 shadow-lg shadow-purple-400/30'
+                  : 'bg-white/10 border border-white/20 text-white hover:bg-purple-500/10 hover:border-purple-400/50'
+              }`}
+            >
+              <Brain className="w-6 h-6 mr-3" />
+              <span className="font-medium text-lg">
+                {expandedPhases[activeSector] ? 'Hide Neural Development Phases' : 'Show Neural Development Phases'}
+              </span>
+            </button>
+          </div>
+          
+          {/* Neural Development Phases */}
+          {expandedPhases[activeSector] && (
+            <div className="mb-16 animate-fade-in">
+              <div className="bg-black/20 backdrop-blur-sm rounded-3xl border border-purple-400/30 p-8">
+                <h3 className="text-2xl font-bold text-purple-300 mb-8 text-center">
+                  Neural Development Phases - {sectors.find(s => s.id === activeSector)?.name}
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {developmentPhases[activeSector]?.map((phase, index) => (
+                    <div
+                      key={phase.id}
+                      className="bg-black/40 backdrop-blur-sm rounded-2xl border border-purple-400/20 p-6 hover:border-purple-400/50 transition-all duration-300 group"
+                    >
+                      <div className="flex items-center mb-4">
+                        <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center mr-3">
+                          <phase.icon className="w-5 h-5 text-purple-300" />
+                        </div>
+                        <div>
+                          <div className="text-sm text-purple-400 font-medium">{phase.phase}</div>
+                          <div className="text-white font-semibold">{phase.title}</div>
+                        </div>
+                      </div>
+                      
+                      <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+                        {phase.description}
+                      </p>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <div className={`w-2 h-2 rounded-full mr-2 ${
+                            phase.status === 'completed' ? 'bg-green-400' :
+                            phase.status === 'in-progress' ? 'bg-yellow-400 animate-pulse' :
+                            'bg-gray-400'
+                          }`}></div>
+                          <span className="text-xs text-gray-400 capitalize">{phase.status.replace('-', ' ')}</span>
+                        </div>
+                        
+                        <div className="flex items-center">
+                          <Zap className="w-3 h-3 text-purple-400 mr-1" />
+                          <span className="text-xs text-purple-300">{phase.energy}%</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
           
           <div className="max-w-6xl mx-auto mb-16">
             <p className="text-sm md:text-base text-gray-300 leading-relaxed">
@@ -361,10 +590,6 @@ const ServicesSection = () => {
               </div>
             ))}
           </div>
-        </div>
-
-        <div className="mt-20">
-          <NeuralDevelopmentProcess />
         </div>
       </div>
     </section>
