@@ -7,6 +7,7 @@ const ServicesSection = () => {
   const [activeSector, setActiveSector] = useState('Software Development');
   const [expandedPhases, setExpandedPhases] = useState<Record<string, boolean>>({});
   const [selectedPhase, setSelectedPhase] = useState<any>(null);
+  const [serviceConnectedToPhases, setServiceConnectedToPhases] = useState(-1);
 
   const sectors = [
     { id: 'Software Development', name: 'Software Development', icon: Code, color: '#00d4ff' },
@@ -374,6 +375,31 @@ const ServicesSection = () => {
     setSelectedPhase(null);
   };
 
+  const handleServiceClick = (serviceIndex: number) => {
+    setServiceConnectedToPhases(serviceIndex);
+    setExpandedPhases(prev => ({
+      ...prev,
+      [activeSector]: true
+    }));
+  };
+
+  const handleNeuralSync = (serviceIndex: number) => {
+    // Trigger neural sync animation and show connection
+    setServiceConnectedToPhases(serviceIndex);
+    setExpandedPhases(prev => ({
+      ...prev,
+      [activeSector]: true
+    }));
+    
+    // Scroll to phases section smoothly
+    setTimeout(() => {
+      const phasesElement = document.getElementById('neural-phases');
+      if (phasesElement) {
+        phasesElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 300);
+  };
+
   React.useEffect(() => {
     const pulseInterval = setInterval(() => {
       setNeuralPulse(prev => (prev + 1) % services.length);
@@ -449,14 +475,20 @@ const ServicesSection = () => {
           {/* Connecting Lines to Phases */}
           {expandedPhases[activeSector] && (
             <div className="relative mb-8">
-              <svg className="absolute inset-0 w-full h-20 pointer-events-none">
+              <svg className="absolute inset-0 w-full h-32 pointer-events-none">
                 <defs>
                   <linearGradient id="phaseConnection" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stopColor="rgba(0, 212, 255, 0.8)" />
                     <stop offset="50%" stopColor="rgba(147, 51, 234, 0.8)" />
                     <stop offset="100%" stopColor="rgba(168, 85, 247, 0.8)" />
                   </linearGradient>
+                  <linearGradient id="serviceConnection" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="rgba(0, 212, 255, 1)" />
+                    <stop offset="100%" stopColor="rgba(147, 51, 234, 1)" />
+                  </linearGradient>
                 </defs>
+                
+                {/* Main connection line */}
                 <line
                   x1="50%" y1="0%"
                   x2="50%" y2="100%"
@@ -464,19 +496,54 @@ const ServicesSection = () => {
                   strokeWidth="4"
                   className="animate-pulse"
                 />
+                
+                {/* Service-specific connection node */}
+                {serviceConnectedToPhases >= 0 && (
+                  <>
+                    <line
+                      x1={`${20 + (serviceConnectedToPhases * 15)}%`} y1="20%"
+                      x2="50%" y2="80%"
+                      stroke="url(#serviceConnection)"
+                      strokeWidth="3"
+                      className="animate-pulse"
+                      strokeDasharray="5,5"
+                    />
+                    <circle
+                      cx={`${20 + (serviceConnectedToPhases * 15)}%`} cy="20%"
+                      r="6"
+                      fill="rgb(0, 212, 255)"
+                      className="animate-ping"
+                    />
+                    <text
+                      x={`${20 + (serviceConnectedToPhases * 15)}%`} y="10%"
+                      textAnchor="middle"
+                      className="fill-cyan-400 text-xs font-medium"
+                    >
+                      Service #{serviceConnectedToPhases + 1}
+                    </text>
+                  </>
+                )}
+                
                 <circle
-                  cx="50%" cy="50%"
-                  r="8"
+                  cx="50%" cy="80%"
+                  r="10"
                   fill="rgb(147, 51, 234)"
                   className="animate-ping"
                 />
+                <text
+                  x="50%" y="95%"
+                  textAnchor="middle"
+                  className="fill-purple-400 text-sm font-medium"
+                >
+                  Neural Development Phases
+                </text>
               </svg>
             </div>
           )}
           
           {/* Neural Development Phases */}
           {expandedPhases[activeSector] && (
-            <div className="mb-16 animate-fade-in">
+            <div id="neural-phases" className="mb-16 animate-fade-in mt-12">
               <div className="bg-black/20 backdrop-blur-sm rounded-3xl border border-purple-400/30 p-8">
                 <h3 className="text-2xl font-bold text-purple-300 mb-8 text-center">
                   Neural Development Phases - {sectors.find(s => s.id === activeSector)?.name}
@@ -526,8 +593,8 @@ const ServicesSection = () => {
 
           {/* Phase Detail Modal */}
           {selectedPhase && (
-            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-              <div className="bg-black/90 backdrop-blur-lg rounded-3xl border border-purple-400/30 p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" style={{ paddingTop: '80px' }}>
+              <div className="bg-black/90 backdrop-blur-lg rounded-3xl border border-purple-400/30 p-8 max-w-4xl w-full max-h-[calc(90vh-80px)] overflow-y-auto">
                 <div className="flex justify-between items-start mb-6">
                   <div>
                     <div className="text-sm text-purple-400 font-medium mb-2">{selectedPhase.phase}</div>
@@ -704,6 +771,7 @@ const ServicesSection = () => {
                 }}
                 onMouseEnter={() => setActiveService(index)}
                 onMouseLeave={() => setActiveService(-1)}
+                onClick={() => handleServiceClick(index)}
               >
                 <div className={`absolute inset-0 w-[350px] h-[350px] bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-3xl transition-all duration-500 -translate-x-1/2 -translate-y-1/2 ${
                   activeService === index ? 'scale-110 opacity-100' : 'scale-100 opacity-30'
@@ -756,9 +824,15 @@ const ServicesSection = () => {
                   </div>
 
                   <div>
-                    <button className={`w-full py-2 text-cyan-400 border border-cyan-400/30 rounded-lg transition-all text-sm ${
-                      activeService === index ? 'bg-cyan-400/20 border-cyan-400' : 'hover:bg-cyan-400/10 group-hover:border-cyan-400'
-                    }`}>
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleNeuralSync(index);
+                      }}
+                      className={`w-full py-2 text-cyan-400 border border-cyan-400/30 rounded-lg transition-all text-sm ${
+                        activeService === index ? 'bg-cyan-400/20 border-cyan-400' : 'hover:bg-cyan-400/10 group-hover:border-cyan-400'
+                      }`}
+                    >
                       Neural Sync
                     </button>
 
