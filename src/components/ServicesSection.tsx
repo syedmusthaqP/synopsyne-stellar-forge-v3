@@ -7,7 +7,7 @@ const ServicesSection = () => {
   const [activeSector, setActiveSector] = useState('Software Development');
   const [expandedPhases, setExpandedPhases] = useState<Record<string, boolean>>({});
   const [selectedPhase, setSelectedPhase] = useState<any>(null);
-  const [serviceConnectedToPhases, setServiceConnectedToPhases] = useState(-1);
+  const [hoveredService, setHoveredService] = useState(-1);
 
   const sectors = [
     { id: 'Software Development', name: 'Software Development', icon: Code, color: '#00d4ff' },
@@ -219,6 +219,34 @@ const ServicesSection = () => {
     ]
   };
 
+  // Define meaningful connections between services and phases
+  const serviceToPhaseMapping = {
+    'Software Development': {
+      0: [1, 2, 3], // Custom Software Development → Requirements, Architecture, Development
+      1: [2, 4], // Cloud Architecture → Architecture, Deployment
+      2: [1, 3], // AI & ML → Requirements, Development
+      3: [3, 4], // Mobile Development → Development, Deployment
+      4: [1, 2], // Data Engineering → Requirements, Architecture
+      5: [2, 4], // Cybersecurity → Architecture, Deployment
+    },
+    'BPO': {
+      0: [1, 2], // Customer Support → Process Assessment, Service Design
+      1: [1, 3], // Data Processing → Process Assessment, Team Integration
+      2: [2, 3, 4], // Back Office → Service Design, Team Integration, Quality Assurance
+    },
+    'Skill Development': {
+      0: [1, 2, 3], // Technical Training → Skills Assessment, Learning Path, Interactive Training
+      1: [2, 4], // Professional Development → Learning Path, Certification
+      2: [1, 4], // Certification Programs → Skills Assessment, Certification
+      3: [1, 2, 3], // Corporate Training → All phases
+    },
+    'Technology Consulting': {
+      0: [1, 2, 3], // Digital Transformation → All phases except last
+      1: [1, 3], // IT Security → Technology Audit, Implementation
+      2: [2, 4], // Technology Strategy → Strategic Planning, Optimization
+    }
+  };
+
   const servicesBySector = {
     'Software Development': [
       {
@@ -376,7 +404,7 @@ const ServicesSection = () => {
   };
 
   const handleServiceClick = (serviceIndex: number) => {
-    setServiceConnectedToPhases(serviceIndex);
+    setActiveService(serviceIndex);
     setExpandedPhases(prev => ({
       ...prev,
       [activeSector]: true
@@ -384,8 +412,7 @@ const ServicesSection = () => {
   };
 
   const handleNeuralSync = (serviceIndex: number) => {
-    // Trigger neural sync animation and show connection
-    setServiceConnectedToPhases(serviceIndex);
+    setActiveService(serviceIndex);
     setExpandedPhases(prev => ({
       ...prev,
       [activeSector]: true
@@ -402,14 +429,12 @@ const ServicesSection = () => {
     `;
     document.body.appendChild(notification);
     
-    // Remove notification after 3 seconds
     setTimeout(() => {
       if (notification.parentNode) {
         notification.parentNode.removeChild(notification);
       }
     }, 3000);
     
-    // Scroll to phases section smoothly
     setTimeout(() => {
       const phasesElement = document.getElementById('neural-phases');
       if (phasesElement) {
@@ -425,6 +450,11 @@ const ServicesSection = () => {
 
     return () => clearInterval(pulseInterval);
   }, [services.length]);
+
+  // Get connected phases for a service
+  const getConnectedPhases = (serviceIndex: number) => {
+    return serviceToPhaseMapping[activeSector]?.[serviceIndex] || [];
+  };
 
   return (
     <section id="services" className="py-20 relative overflow-hidden">
@@ -490,121 +520,166 @@ const ServicesSection = () => {
             </button>
           </div>
 
-          {/* Connecting Lines to Phases */}
+          {/* Meaningful Neural Connections */}
           {expandedPhases[activeSector] && (
             <div className="relative mb-8">
+              <div className="text-center mb-6">
+                <p className="text-sm text-gray-400 mb-2">
+                  {activeService >= 0 
+                    ? `Service "${services[activeService]?.title}" connects to specific development phases`
+                    : 'Click on a service to see its neural pathway connections'
+                  }
+                </p>
+              </div>
+              
               <svg className="absolute inset-0 w-full h-40 pointer-events-none">
                 <defs>
-                  <linearGradient id="phaseConnection" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="rgba(0, 212, 255, 0.8)" />
-                    <stop offset="50%" stopColor="rgba(147, 51, 234, 0.8)" />
-                    <stop offset="100%" stopColor="rgba(168, 85, 247, 0.8)" />
-                  </linearGradient>
-                  <linearGradient id="serviceConnection" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <linearGradient id="activeConnection" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stopColor="rgba(0, 212, 255, 1)" />
                     <stop offset="100%" stopColor="rgba(147, 51, 234, 1)" />
                   </linearGradient>
+                  <linearGradient id="inactiveConnection" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="rgba(0, 212, 255, 0.3)" />
+                    <stop offset="100%" stopColor="rgba(147, 51, 234, 0.3)" />
+                  </linearGradient>
                 </defs>
                 
-                {/* Main connection line */}
-                <line
-                  x1="50%" y1="0%"
-                  x2="50%" y2="100%"
-                  stroke="url(#phaseConnection)"
-                  strokeWidth="4"
-                  className="animate-pulse"
-                />
+                {/* Service nodes */}
+                {services.map((service, idx) => {
+                  const connectedPhases = getConnectedPhases(idx);
+                  const isActive = activeService === idx;
+                  
+                  return (
+                    <g key={`service-${idx}`}>
+                      {/* Service node */}
+                      <circle
+                        cx={`${20 + (idx * 12)}%`} 
+                        cy="20%"
+                        r={isActive ? "10" : "6"}
+                        fill={isActive ? "rgb(0, 212, 255)" : "rgba(0, 212, 255, 0.6)"}
+                        className={isActive ? "animate-pulse" : ""}
+                      />
+                      
+                      {/* Service label */}
+                      <text
+                        x={`${20 + (idx * 12)}%`} 
+                        y="10%"
+                        textAnchor="middle"
+                        className={`text-xs font-medium ${isActive ? 'fill-cyan-300' : 'fill-cyan-500'}`}
+                      >
+                        {service.title.split(' ')[0]}
+                      </text>
+                      
+                      {/* Connections to specific phases */}
+                      {connectedPhases.map((phaseIndex) => (
+                        <line
+                          key={`conn-${idx}-${phaseIndex}`}
+                          x1={`${20 + (idx * 12)}%`} 
+                          y1="20%"
+                          x2={`${25 + (phaseIndex * 12.5)}%`} 
+                          y2="80%"
+                          stroke={isActive ? "url(#activeConnection)" : "url(#inactiveConnection)"}
+                          strokeWidth={isActive ? "3" : "1"}
+                          strokeDasharray={isActive ? "none" : "4,2"}
+                          className={isActive ? "animate-pulse" : ""}
+                        />
+                      ))}
+                    </g>
+                  );
+                })}
                 
-                {/* Multiple service connections to show neural network */}
-                {services.map((service, idx) => (
-                  <g key={`connection-${idx}`}>
-                    <line
-                      x1={`${15 + (idx * 14)}%`} y1="10%"
-                      x2="50%" y2="90%"
-                      stroke="url(#serviceConnection)"
-                      strokeWidth={serviceConnectedToPhases === idx ? "4" : "2"}
-                      className={serviceConnectedToPhases === idx ? "animate-pulse" : ""}
-                      strokeDasharray="8,4"
-                      opacity={serviceConnectedToPhases === idx ? "1" : "0.6"}
-                    />
-                    <circle
-                      cx={`${15 + (idx * 14)}%`} cy="10%"
-                      r={serviceConnectedToPhases === idx ? "8" : "4"}
-                      fill={serviceConnectedToPhases === idx ? "rgb(0, 212, 255)" : "rgba(0, 212, 255, 0.7)"}
-                      className={serviceConnectedToPhases === idx ? "animate-ping" : ""}
-                    />
-                    <text
-                      x={`${15 + (idx * 14)}%`} y="5%"
-                      textAnchor="middle"
-                      className={`text-xs font-medium ${serviceConnectedToPhases === idx ? 'fill-cyan-300' : 'fill-cyan-500'}`}
-                    >
-                      S{idx + 1}
-                    </text>
-                  </g>
-                ))}
-                
-                <circle
-                  cx="50%" cy="90%"
-                  r="12"
-                  fill="rgb(147, 51, 234)"
-                  className="animate-ping"
-                />
-                <text
-                  x="50%" y="100%"
-                  textAnchor="middle"
-                  className="fill-purple-400 text-sm font-medium"
-                >
-                  Neural Development Hub
-                </text>
+                {/* Phase nodes */}
+                {developmentPhases[activeSector]?.map((phase, idx) => {
+                  const isConnected = activeService >= 0 && getConnectedPhases(activeService).includes(idx + 1);
+                  
+                  return (
+                    <g key={`phase-${idx}`}>
+                      <circle
+                        cx={`${25 + (idx * 12.5)}%`} 
+                        cy="80%"
+                        r={isConnected ? "10" : "6"}
+                        fill={isConnected ? "rgb(147, 51, 234)" : "rgba(147, 51, 234, 0.6)"}
+                        className={isConnected ? "animate-pulse" : ""}
+                      />
+                      <text
+                        x={`${25 + (idx * 12.5)}%`} 
+                        y="95%"
+                        textAnchor="middle"
+                        className={`text-xs font-medium ${isConnected ? 'fill-purple-300' : 'fill-purple-500'}`}
+                      >
+                        {phase.phase}
+                      </text>
+                    </g>
+                  );
+                })}
               </svg>
             </div>
           )}
           
           {/* Neural Development Phases */}
           {expandedPhases[activeSector] && (
-            <div id="neural-phases" className="mb-16 animate-fade-in mt-16">
+            <div id="neural-phases" className="mb-16 animate-fade-in mt-20">
               <div className="bg-black/20 backdrop-blur-sm rounded-3xl border border-purple-400/30 p-8">
                 <h3 className="text-2xl font-bold text-purple-300 mb-8 text-center">
                   Neural Development Phases - {sectors.find(s => s.id === activeSector)?.name}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {developmentPhases[activeSector]?.map((phase, index) => (
-                    <div
-                      key={phase.id}
-                      onClick={() => handlePhaseClick(phase)}
-                      className="bg-black/40 backdrop-blur-sm rounded-2xl border border-purple-400/20 p-6 hover:border-purple-400/50 transition-all duration-300 group cursor-pointer hover:scale-105 hover:shadow-lg hover:shadow-purple-400/20"
-                    >
-                      <div className="flex items-center mb-4">
-                        <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center mr-3">
-                          <phase.icon className="w-5 h-5 text-purple-300" />
-                        </div>
-                        <div>
-                          <div className="text-sm text-purple-400 font-medium">{phase.phase}</div>
-                          <div className="text-white font-semibold">{phase.title}</div>
-                        </div>
-                      </div>
-                      
-                      <p className="text-gray-300 text-sm mb-4 leading-relaxed">
-                        {phase.description}
-                      </p>
-                      
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                          <div className={`w-2 h-2 rounded-full mr-2 ${
-                            phase.status === 'completed' ? 'bg-green-400' :
-                            phase.status === 'in-progress' ? 'bg-yellow-400 animate-pulse' :
-                            'bg-gray-400'
-                          }`}></div>
-                          <span className="text-xs text-gray-400 capitalize">{phase.status.replace('-', ' ')}</span>
+                  {developmentPhases[activeSector]?.map((phase, index) => {
+                    const isConnected = activeService >= 0 && getConnectedPhases(activeService).includes(index + 1);
+                    
+                    return (
+                      <div
+                        key={phase.id}
+                        onClick={() => handlePhaseClick(phase)}
+                        className={`bg-black/40 backdrop-blur-sm rounded-2xl border p-6 transition-all duration-300 group cursor-pointer hover:scale-105 hover:shadow-lg ${
+                          isConnected 
+                            ? 'border-purple-400 shadow-lg shadow-purple-400/30' 
+                            : 'border-purple-400/20 hover:border-purple-400/50 hover:shadow-purple-400/20'
+                        }`}
+                      >
+                        <div className="flex items-center mb-4">
+                          <div className={`w-10 h-10 rounded-lg flex items-center justify-center mr-3 ${
+                            isConnected ? 'bg-purple-500/40' : 'bg-purple-500/20'
+                          }`}>
+                            <phase.icon className="w-5 h-5 text-purple-300" />
+                          </div>
+                          <div>
+                            <div className="text-sm text-purple-400 font-medium">{phase.phase}</div>
+                            <div className="text-white font-semibold">{phase.title}</div>
+                          </div>
                         </div>
                         
-                        <div className="flex items-center">
-                          <Zap className="w-3 h-3 text-purple-400 mr-1" />
-                          <span className="text-xs text-purple-300">{phase.energy}%</span>
+                        <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+                          {phase.description}
+                        </p>
+                        
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <div className={`w-2 h-2 rounded-full mr-2 ${
+                              phase.status === 'completed' ? 'bg-green-400' :
+                              phase.status === 'in-progress' ? 'bg-yellow-400 animate-pulse' :
+                              'bg-gray-400'
+                            }`}></div>
+                            <span className="text-xs text-gray-400 capitalize">{phase.status.replace('-', ' ')}</span>
+                          </div>
+                          
+                          <div className="flex items-center">
+                            <Zap className="w-3 h-3 text-purple-400 mr-1" />
+                            <span className="text-xs text-purple-300">{phase.energy}%</span>
+                          </div>
                         </div>
+                        
+                        {isConnected && (
+                          <div className="mt-3 pt-3 border-t border-purple-400/30">
+                            <div className="text-xs text-purple-300 flex items-center">
+                              <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 animate-pulse"></div>
+                              Connected to {services[activeService]?.title}
+                            </div>
+                          </div>
+                        )}
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -612,8 +687,8 @@ const ServicesSection = () => {
 
           {/* Phase Detail Modal */}
           {selectedPhase && (
-            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" style={{ paddingTop: '120px' }}>
-              <div className="bg-black/90 backdrop-blur-lg rounded-3xl border border-purple-400/30 p-8 max-w-4xl w-full max-h-[calc(90vh-120px)] overflow-y-auto">
+            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" style={{ paddingTop: '140px' }}>
+              <div className="bg-black/90 backdrop-blur-lg rounded-3xl border border-purple-400/30 p-8 max-w-4xl w-full max-h-[calc(90vh-140px)] overflow-y-auto">
                 <div className="flex justify-between items-start mb-6">
                   <div>
                     <div className="text-sm text-purple-400 font-medium mb-2">{selectedPhase.phase}</div>
@@ -719,6 +794,7 @@ const ServicesSection = () => {
           </div>
         </div>
 
+        {/* Services Network */}
         <div className="relative max-w-8xl mx-auto mb-32 mt-32">
           <div className="relative h-[1200px] w-full flex items-center justify-center">
             <svg className="absolute inset-0 w-full h-full pointer-events-none">
@@ -788,8 +864,8 @@ const ServicesSection = () => {
                   zIndex: activeService === index ? 50 : 10,
                   width: '300px'
                 }}
-                onMouseEnter={() => setActiveService(index)}
-                onMouseLeave={() => setActiveService(-1)}
+                onMouseEnter={() => setHoveredService(index)}
+                onMouseLeave={() => setHoveredService(-1)}
                 onClick={() => handleServiceClick(index)}
               >
                 <div className={`absolute inset-0 w-[350px] h-[350px] bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-3xl transition-all duration-500 -translate-x-1/2 -translate-y-1/2 ${
@@ -859,7 +935,7 @@ const ServicesSection = () => {
                       <div className="mt-3 pt-3 border-t border-cyan-500/30 animate-fade-in">
                         <div className="flex items-center text-xs text-cyan-400">
                           <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full mr-2 animate-pulse"></div>
-                          Neural pathways activated - analyzing connections...
+                          Connected to {getConnectedPhases(index).length} development phases
                         </div>
                       </div>
                     )}
