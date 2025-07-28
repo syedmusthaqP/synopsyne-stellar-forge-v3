@@ -391,6 +391,24 @@ const ServicesSection = () => {
       [activeSector]: true
     }));
     
+    // Show neural sync notification
+    const notification = document.createElement('div');
+    notification.className = 'fixed top-24 right-6 bg-cyan-500/20 border border-cyan-400 text-cyan-300 px-6 py-3 rounded-lg backdrop-blur-sm z-50 animate-fade-in';
+    notification.innerHTML = `
+      <div class="flex items-center">
+        <div class="w-2 h-2 bg-cyan-400 rounded-full mr-2 animate-ping"></div>
+        Neural Sync initiated for ${services[serviceIndex]?.title}
+      </div>
+    `;
+    document.body.appendChild(notification);
+    
+    // Remove notification after 3 seconds
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.parentNode.removeChild(notification);
+      }
+    }, 3000);
+    
     // Scroll to phases section smoothly
     setTimeout(() => {
       const phasesElement = document.getElementById('neural-phases');
@@ -475,7 +493,7 @@ const ServicesSection = () => {
           {/* Connecting Lines to Phases */}
           {expandedPhases[activeSector] && (
             <div className="relative mb-8">
-              <svg className="absolute inset-0 w-full h-32 pointer-events-none">
+              <svg className="absolute inset-0 w-full h-40 pointer-events-none">
                 <defs>
                   <linearGradient id="phaseConnection" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stopColor="rgba(0, 212, 255, 0.8)" />
@@ -497,45 +515,46 @@ const ServicesSection = () => {
                   className="animate-pulse"
                 />
                 
-                {/* Service-specific connection node */}
-                {serviceConnectedToPhases >= 0 && (
-                  <>
+                {/* Multiple service connections to show neural network */}
+                {services.map((service, idx) => (
+                  <g key={`connection-${idx}`}>
                     <line
-                      x1={`${20 + (serviceConnectedToPhases * 15)}%`} y1="20%"
-                      x2="50%" y2="80%"
+                      x1={`${15 + (idx * 14)}%`} y1="10%"
+                      x2="50%" y2="90%"
                       stroke="url(#serviceConnection)"
-                      strokeWidth="3"
-                      className="animate-pulse"
-                      strokeDasharray="5,5"
+                      strokeWidth={serviceConnectedToPhases === idx ? "4" : "2"}
+                      className={serviceConnectedToPhases === idx ? "animate-pulse" : ""}
+                      strokeDasharray="8,4"
+                      opacity={serviceConnectedToPhases === idx ? "1" : "0.6"}
                     />
                     <circle
-                      cx={`${20 + (serviceConnectedToPhases * 15)}%`} cy="20%"
-                      r="6"
-                      fill="rgb(0, 212, 255)"
-                      className="animate-ping"
+                      cx={`${15 + (idx * 14)}%`} cy="10%"
+                      r={serviceConnectedToPhases === idx ? "8" : "4"}
+                      fill={serviceConnectedToPhases === idx ? "rgb(0, 212, 255)" : "rgba(0, 212, 255, 0.7)"}
+                      className={serviceConnectedToPhases === idx ? "animate-ping" : ""}
                     />
                     <text
-                      x={`${20 + (serviceConnectedToPhases * 15)}%`} y="10%"
+                      x={`${15 + (idx * 14)}%`} y="5%"
                       textAnchor="middle"
-                      className="fill-cyan-400 text-xs font-medium"
+                      className={`text-xs font-medium ${serviceConnectedToPhases === idx ? 'fill-cyan-300' : 'fill-cyan-500'}`}
                     >
-                      Service #{serviceConnectedToPhases + 1}
+                      S{idx + 1}
                     </text>
-                  </>
-                )}
+                  </g>
+                ))}
                 
                 <circle
-                  cx="50%" cy="80%"
-                  r="10"
+                  cx="50%" cy="90%"
+                  r="12"
                   fill="rgb(147, 51, 234)"
                   className="animate-ping"
                 />
                 <text
-                  x="50%" y="95%"
+                  x="50%" y="100%"
                   textAnchor="middle"
                   className="fill-purple-400 text-sm font-medium"
                 >
-                  Neural Development Phases
+                  Neural Development Hub
                 </text>
               </svg>
             </div>
@@ -543,7 +562,7 @@ const ServicesSection = () => {
           
           {/* Neural Development Phases */}
           {expandedPhases[activeSector] && (
-            <div id="neural-phases" className="mb-16 animate-fade-in mt-12">
+            <div id="neural-phases" className="mb-16 animate-fade-in mt-16">
               <div className="bg-black/20 backdrop-blur-sm rounded-3xl border border-purple-400/30 p-8">
                 <h3 className="text-2xl font-bold text-purple-300 mb-8 text-center">
                   Neural Development Phases - {sectors.find(s => s.id === activeSector)?.name}
@@ -593,8 +612,8 @@ const ServicesSection = () => {
 
           {/* Phase Detail Modal */}
           {selectedPhase && (
-            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" style={{ paddingTop: '80px' }}>
-              <div className="bg-black/90 backdrop-blur-lg rounded-3xl border border-purple-400/30 p-8 max-w-4xl w-full max-h-[calc(90vh-80px)] overflow-y-auto">
+            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" style={{ paddingTop: '120px' }}>
+              <div className="bg-black/90 backdrop-blur-lg rounded-3xl border border-purple-400/30 p-8 max-w-4xl w-full max-h-[calc(90vh-120px)] overflow-y-auto">
                 <div className="flex justify-between items-start mb-6">
                   <div>
                     <div className="text-sm text-purple-400 font-medium mb-2">{selectedPhase.phase}</div>
