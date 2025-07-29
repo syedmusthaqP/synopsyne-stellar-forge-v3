@@ -220,30 +220,31 @@ const ServicesSection = () => {
   };
 
   // Define meaningful connections between services and phases
+  // Each service connects to ALL phases in logical sequence for comprehensive development
   const serviceToPhaseMapping = {
     'Software Development': {
-      0: [1, 2, 3], // Custom Software Development → Requirements, Architecture, Development
-      1: [2, 4], // Cloud Architecture → Architecture, Deployment
-      2: [1, 3], // AI & ML → Requirements, Development
-      3: [3, 4], // Mobile Development → Development, Deployment
-      4: [1, 2], // Data Engineering → Requirements, Architecture
-      5: [2, 4], // Cybersecurity → Architecture, Deployment
+      0: [1, 2, 3, 4], // Custom Software Development → Full cycle
+      1: [1, 2, 3, 4], // Cloud Architecture → Full cycle
+      2: [1, 2, 3, 4], // AI & ML → Full cycle
+      3: [1, 2, 3, 4], // Mobile Development → Full cycle
+      4: [1, 2, 3, 4], // Data Engineering → Full cycle
+      5: [1, 2, 3, 4], // Cybersecurity → Full cycle
     },
     'BPO': {
-      0: [1, 2], // Customer Support → Process Assessment, Service Design
-      1: [1, 3], // Data Processing → Process Assessment, Team Integration
-      2: [2, 3, 4], // Back Office → Service Design, Team Integration, Quality Assurance
+      0: [1, 2, 3, 4], // Customer Support → Full process cycle
+      1: [1, 2, 3, 4], // Data Processing → Full process cycle
+      2: [1, 2, 3, 4], // Back Office → Full process cycle
     },
     'Skill Development': {
-      0: [1, 2, 3], // Technical Training → Skills Assessment, Learning Path, Interactive Training
-      1: [2, 4], // Professional Development → Learning Path, Certification
-      2: [1, 4], // Certification Programs → Skills Assessment, Certification
-      3: [1, 2, 3], // Corporate Training → All phases
+      0: [1, 2, 3, 4], // Technical Training → Complete learning journey
+      1: [1, 2, 3, 4], // Professional Development → Complete learning journey
+      2: [1, 2, 3, 4], // Certification Programs → Complete learning journey
+      3: [1, 2, 3, 4], // Corporate Training → Complete learning journey
     },
     'Technology Consulting': {
-      0: [1, 2, 3], // Digital Transformation → All phases except last
-      1: [1, 3], // IT Security → Technology Audit, Implementation
-      2: [2, 4], // Technology Strategy → Strategic Planning, Optimization
+      0: [1, 2, 3, 4], // Digital Transformation → Complete transformation
+      1: [1, 2, 3, 4], // IT Security → Complete security implementation
+      2: [1, 2, 3, 4], // Technology Strategy → Complete strategic implementation
     }
   };
 
@@ -532,7 +533,7 @@ const ServicesSection = () => {
                 </p>
               </div>
               
-              <svg className="absolute inset-0 w-full h-40 pointer-events-none">
+              <svg className="absolute inset-0 w-full h-64 pointer-events-none">
                 <defs>
                   <linearGradient id="activeConnection" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stopColor="rgba(0, 212, 255, 1)" />
@@ -542,67 +543,116 @@ const ServicesSection = () => {
                     <stop offset="0%" stopColor="rgba(0, 212, 255, 0.3)" />
                     <stop offset="100%" stopColor="rgba(147, 51, 234, 0.3)" />
                   </linearGradient>
+                  <linearGradient id="hideButtonConnection" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="rgba(147, 51, 234, 1)" />
+                    <stop offset="100%" stopColor="rgba(168, 85, 247, 1)" />
+                  </linearGradient>
                 </defs>
                 
-                {/* Service nodes */}
+                {/* Hide Button Node */}
+                <g>
+                  <circle
+                    cx="50%" 
+                    cy="15%"
+                    r={activeService >= 0 ? "12" : "8"}
+                    fill={activeService >= 0 ? "rgb(147, 51, 234)" : "rgba(147, 51, 234, 0.6)"}
+                    className={activeService >= 0 ? "animate-pulse" : ""}
+                    style={{ filter: 'drop-shadow(0 0 8px rgba(147, 51, 234, 0.6))' }}
+                  />
+                  <text
+                    x="50%" 
+                    y="8%"
+                    textAnchor="middle"
+                    className="text-xs font-medium fill-purple-300"
+                  >
+                    Neural Hub
+                  </text>
+                </g>
+                
+                {/* Service nodes arranged in a cleaner layout */}
                 {services.map((service, idx) => {
                   const connectedPhases = getConnectedPhases(idx);
                   const isActive = activeService === idx;
+                  const angle = (idx * 60) - 30; // Better spacing
+                  const radius = 25;
+                  const x = 50 + radius * Math.cos((angle * Math.PI) / 180);
+                  const y = 35 + radius * Math.sin((angle * Math.PI) / 180) * 0.6;
                   
                   return (
                     <g key={`service-${idx}`}>
+                      {/* Connection to Hide Button (Neural Hub) */}
+                      {isActive && (
+                        <path
+                          d={`M ${x}% ${y}% Q 50% 20% 50% 15%`}
+                          stroke="url(#hideButtonConnection)"
+                          strokeWidth="3"
+                          fill="none"
+                          strokeDasharray="6,3"
+                          className="animate-pulse"
+                          style={{ filter: 'drop-shadow(0 0 6px rgba(147, 51, 234, 0.8))' }}
+                        />
+                      )}
+                      
                       {/* Service node */}
                       <circle
-                        cx={`${20 + (idx * 12)}%`} 
-                        cy="20%"
+                        cx={`${x}%`} 
+                        cy={`${y}%`}
                         r={isActive ? "10" : "6"}
                         fill={isActive ? "rgb(0, 212, 255)" : "rgba(0, 212, 255, 0.6)"}
                         className={isActive ? "animate-pulse" : ""}
+                        style={{ filter: 'drop-shadow(0 0 6px rgba(0, 212, 255, 0.6))' }}
                       />
                       
                       {/* Service label */}
                       <text
-                        x={`${20 + (idx * 12)}%`} 
-                        y="10%"
+                        x={`${x}%`} 
+                        y={`${y - 6}%`}
                         textAnchor="middle"
                         className={`text-xs font-medium ${isActive ? 'fill-cyan-300' : 'fill-cyan-500'}`}
                       >
                         {service.title.split(' ')[0]}
                       </text>
                       
-                      {/* Connections to specific phases */}
-                      {connectedPhases.map((phaseIndex) => (
-                        <line
-                          key={`conn-${idx}-${phaseIndex}`}
-                          x1={`${20 + (idx * 12)}%`} 
-                          y1="20%"
-                          x2={`${25 + (phaseIndex * 12.5)}%`} 
-                          y2="80%"
-                          stroke={isActive ? "url(#activeConnection)" : "url(#inactiveConnection)"}
-                          strokeWidth={isActive ? "3" : "1"}
-                          strokeDasharray={isActive ? "none" : "4,2"}
-                          className={isActive ? "animate-pulse" : ""}
-                        />
-                      ))}
+                      {/* Smooth curved connections to phases */}
+                      {isActive && connectedPhases.map((phaseIndex) => {
+                        const phaseX = 25 + ((phaseIndex - 1) * 12.5);
+                        const phaseY = 85;
+                        const controlY = y + ((phaseY - y) * 0.5);
+                        
+                        return (
+                          <path
+                            key={`conn-${idx}-${phaseIndex}`}
+                            d={`M ${x}% ${y}% Q ${x}% ${controlY}% ${phaseX}% ${phaseY}%`}
+                            stroke="url(#activeConnection)"
+                            strokeWidth="2.5"
+                            fill="none"
+                            strokeDasharray="8,4"
+                            className="animate-pulse"
+                            style={{ filter: 'drop-shadow(0 0 4px rgba(0, 212, 255, 0.6))' }}
+                          />
+                        );
+                      })}
                     </g>
                   );
                 })}
                 
-                {/* Phase nodes */}
+                {/* Phase nodes with better alignment */}
                 {developmentPhases[activeSector]?.map((phase, idx) => {
                   const isConnected = activeService >= 0 && getConnectedPhases(activeService).includes(idx + 1);
+                  const x = 25 + (idx * 12.5);
                   
                   return (
                     <g key={`phase-${idx}`}>
                       <circle
-                        cx={`${25 + (idx * 12.5)}%`} 
-                        cy="80%"
+                        cx={`${x}%`} 
+                        cy="85%"
                         r={isConnected ? "10" : "6"}
                         fill={isConnected ? "rgb(147, 51, 234)" : "rgba(147, 51, 234, 0.6)"}
                         className={isConnected ? "animate-pulse" : ""}
+                        style={{ filter: 'drop-shadow(0 0 6px rgba(147, 51, 234, 0.6))' }}
                       />
                       <text
-                        x={`${25 + (idx * 12.5)}%`} 
+                        x={`${x}%`} 
                         y="95%"
                         textAnchor="middle"
                         className={`text-xs font-medium ${isConnected ? 'fill-purple-300' : 'fill-purple-500'}`}
@@ -687,8 +737,8 @@ const ServicesSection = () => {
 
           {/* Phase Detail Modal */}
           {selectedPhase && (
-            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" style={{ paddingTop: '140px' }}>
-              <div className="bg-black/90 backdrop-blur-lg rounded-3xl border border-purple-400/30 p-8 max-w-4xl w-full max-h-[calc(90vh-140px)] overflow-y-auto">
+            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" style={{ paddingTop: '160px' }}>
+              <div className="bg-black/90 backdrop-blur-lg rounded-3xl border border-purple-400/30 p-8 max-w-4xl w-full max-h-[calc(85vh-160px)] overflow-y-auto">
                 <div className="flex justify-between items-start mb-6">
                   <div>
                     <div className="text-sm text-purple-400 font-medium mb-2">{selectedPhase.phase}</div>
@@ -774,7 +824,14 @@ const ServicesSection = () => {
                     </div>
 
                     <button
-                      onClick={closePhaseModal}
+                      onClick={() => {
+                        const neuralSyncElement = document.getElementById('neural-phases');
+                        if (neuralSyncElement) {
+                          neuralSyncElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                          // Close modal after scrolling
+                          setTimeout(() => closePhaseModal(), 500);
+                        }
+                      }}
                       className="w-full mt-6 py-3 bg-purple-500/20 border border-purple-400 text-purple-300 rounded-xl hover:bg-purple-500/30 transition-all duration-300"
                     >
                       Start Neural Sync
