@@ -425,7 +425,11 @@ const ServicesSection = () => {
     };
     computePositions();
     window.addEventListener('resize', computePositions);
-    return () => window.removeEventListener('resize', computePositions);
+    window.addEventListener('scroll', computePositions);
+    return () => {
+      window.removeEventListener('resize', computePositions);
+      window.removeEventListener('scroll', computePositions);
+    };
   }, [activeService, expandedPhases, activeSector, services.length]);
 
   const togglePhases = (sectorId: string) => {
@@ -445,26 +449,18 @@ const ServicesSection = () => {
 
   const handleServiceClick = (serviceIndex: number) => {
     setActiveService(serviceIndex);
-    setExpandedPhases(prev => ({
-      ...prev,
-      [activeSector]: true
-    }));
   };
 
   const handleNeuralSync = (serviceIndex: number) => {
     setActiveService(serviceIndex);
-    setExpandedPhases(prev => ({
-      ...prev,
-      [activeSector]: true
-    }));
     
-    // Show neural sync notification
+    // Show guidance to click the phases button
     const notification = document.createElement('div');
     notification.className = 'fixed top-24 right-6 bg-cyan-500/20 border border-cyan-400 text-cyan-300 px-6 py-3 rounded-lg backdrop-blur-sm z-50 animate-fade-in';
     notification.innerHTML = `
       <div class="flex items-center">
         <div class="w-2 h-2 bg-cyan-400 rounded-full mr-2 animate-ping"></div>
-        Neural Sync initiated for ${services[serviceIndex]?.title}
+        Neural Sync ready. Click "Show Neural Development Phases" to view mappings.
       </div>
     `;
     document.body.appendChild(notification);
@@ -476,9 +472,11 @@ const ServicesSection = () => {
     }, 3000);
     
     setTimeout(() => {
-      const phasesElement = document.getElementById('neural-phases');
-      if (phasesElement) {
-        phasesElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const btn = phaseToggleBtnRef.current;
+      if (btn) {
+        btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        btn.classList.add('ring-2','ring-purple-400');
+        setTimeout(() => btn.classList.remove('ring-2','ring-purple-400'), 1200);
       }
     }, 300);
   };
@@ -514,7 +512,7 @@ const ServicesSection = () => {
         </svg>
       </div>
       {/* Section-wide overlay for service->toggle connection */}
-      {activeService >= 0 && buttonPos && servicePos && (
+      {activeSector === 'Software Development' && activeService >= 0 && buttonPos && servicePos && (
         <svg className="absolute inset-0 w-full h-full pointer-events-none z-30">
           <defs>
             <linearGradient id="codeLineGradientSection" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -550,7 +548,7 @@ const ServicesSection = () => {
             {sectors.map((sector) => (
               <button
                 key={sector.id}
-                onClick={() => setActiveSector(sector.id)}
+                onClick={() => { setActiveSector(sector.id); setActiveService(-1); setSelectedPhase(null); }}
                 className={`flex items-center px-6 py-3 rounded-full transition-all duration-300 ${
                   activeSector === sector.id
                     ? 'bg-neon/20 border-2 border-neon text-neon shadow-lg shadow-neon/30'
