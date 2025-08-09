@@ -13,10 +13,15 @@ const ServicesSection = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const phaseToggleBtnRef = useRef<HTMLButtonElement | null>(null);
   const serviceCardRefs = useRef<Record<number, HTMLDivElement | null>>({});
+  const sectorBtnRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+
+  // Hover tracking for sectors
+  const [hoveredSector, setHoveredSector] = useState<string | null>(null);
 
   // Calculated pixel positions within the section for overlay connections
   const [buttonPos, setButtonPos] = useState<{ x: number; y: number } | null>(null);
   const [servicePos, setServicePos] = useState<{ x: number; y: number } | null>(null);
+  const [sectorPos, setSectorPos] = useState<{ x: number; y: number } | null>(null);
   const sectors = [
     { id: 'Software Development', name: 'Software Development', icon: Code, color: '#00d4ff' },
     { id: 'BPO', name: 'BPO Services', icon: Building, color: '#9333ea' },
@@ -402,6 +407,8 @@ const ServicesSection = () => {
       const sectionEl = sectionRef.current;
       const btnEl = phaseToggleBtnRef.current;
       const svcEl = serviceCardRefs.current[activeService] || null;
+      const sectorEl = hoveredSector ? sectorBtnRefs.current[hoveredSector] : null;
+
       if (sectionEl && btnEl) {
         const sectionRect = sectionEl.getBoundingClientRect();
         const btnRect = btnEl.getBoundingClientRect();
@@ -409,18 +416,30 @@ const ServicesSection = () => {
           x: btnRect.left + btnRect.width / 2 - sectionRect.left,
           y: btnRect.top + btnRect.height / 2 - sectionRect.top,
         });
+
+        if (svcEl) {
+          const svcRect = svcEl.getBoundingClientRect();
+          setServicePos({
+            x: svcRect.left + svcRect.width / 2 - sectionRect.left,
+            y: svcRect.top + svcRect.height / 2 - sectionRect.top,
+          });
+        } else {
+          setServicePos(null);
+        }
+
+        if (sectorEl) {
+          const secRect = sectorEl.getBoundingClientRect();
+          setSectorPos({
+            x: secRect.left + secRect.width / 2 - sectionRect.left,
+            y: secRect.top + secRect.height / 2 - sectionRect.top,
+          });
+        } else {
+          setSectorPos(null);
+        }
       } else {
         setButtonPos(null);
-      }
-      if (sectionEl && svcEl) {
-        const sectionRect = sectionEl.getBoundingClientRect();
-        const svcRect = svcEl.getBoundingClientRect();
-        setServicePos({
-          x: svcRect.left + svcRect.width / 2 - sectionRect.left,
-          y: svcRect.top + svcRect.height / 2 - sectionRect.top,
-        });
-      } else {
         setServicePos(null);
+        setSectorPos(null);
       }
     };
     computePositions();
@@ -430,7 +449,7 @@ const ServicesSection = () => {
       window.removeEventListener('resize', computePositions);
       window.removeEventListener('scroll', computePositions);
     };
-  }, [activeService, expandedPhases, activeSector, services.length]);
+  }, [activeService, expandedPhases, activeSector, services.length, hoveredSector]);
 
   const togglePhases = (sectorId: string) => {
     setExpandedPhases(prev => ({
@@ -511,6 +530,27 @@ const ServicesSection = () => {
           <rect width="100%" height="100%" fill="url(#neuralPattern)" />
         </svg>
       </div>
+      {/* Hover: sector chip -> toggle button */}
+      {hoveredSector && buttonPos && sectorPos && (
+        <svg className="absolute inset-0 w-full h-full pointer-events-none z-30">
+          <defs>
+            <linearGradient id="sectorLineGradientSection" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="rgba(0, 212, 255, 0.9)" />
+              <stop offset="100%" stopColor="rgba(168, 85, 247, 0.9)" />
+            </linearGradient>
+          </defs>
+          <path
+            d={`M ${sectorPos.x} ${sectorPos.y} Q ${sectorPos.x} ${(sectorPos.y + buttonPos.y) / 2} ${buttonPos.x} ${buttonPos.y}`}
+            stroke="url(#sectorLineGradientSection)"
+            strokeWidth="3"
+            fill="none"
+            strokeDasharray="8 5"
+            style={{ filter: 'drop-shadow(0 0 6px rgba(0, 212, 255, 0.6))' }}
+          />
+          <circle cx={buttonPos.x} cy={buttonPos.y} r="5" fill="rgba(168, 85, 247, 0.9)" />
+        </svg>
+      )}
+
       {/* Section-wide overlay for service->toggle connection */}
       {activeSector === 'Software Development' && activeService >= 0 && buttonPos && servicePos && (
         <svg className="absolute inset-0 w-full h-full pointer-events-none z-30">
@@ -548,6 +588,9 @@ const ServicesSection = () => {
             {sectors.map((sector) => (
               <button
                 key={sector.id}
+                ref={(el) => (sectorBtnRefs.current[sector.id] = el)}
+                onMouseEnter={() => setHoveredSector(sector.id)}
+                onMouseLeave={() => setHoveredSector(null)}
                 onClick={() => { setActiveSector(sector.id); setActiveService(-1); setSelectedPhase(null); }}
                 className={`flex items-center px-6 py-3 rounded-full transition-all duration-300 ${
                   activeSector === sector.id
