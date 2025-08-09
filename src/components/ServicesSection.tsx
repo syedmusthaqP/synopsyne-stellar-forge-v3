@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Code, Cloud, Smartphone, Brain, Database, Shield, Building, Users, GraduationCap, Settings, Zap } from 'lucide-react';
 
 const ServicesSection = () => {
@@ -9,6 +9,14 @@ const ServicesSection = () => {
   const [selectedPhase, setSelectedPhase] = useState<any>(null);
   const [hoveredService, setHoveredService] = useState(-1);
 
+  // Refs for section, toggle button, and service cards (for accurate connection lines)
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const phaseToggleBtnRef = useRef<HTMLButtonElement | null>(null);
+  const serviceCardRefs = useRef<Record<number, HTMLDivElement | null>>({});
+
+  // Calculated pixel positions within the section for overlay connections
+  const [buttonPos, setButtonPos] = useState<{ x: number; y: number } | null>(null);
+  const [servicePos, setServicePos] = useState<{ x: number; y: number } | null>(null);
   const sectors = [
     { id: 'Software Development', name: 'Software Development', icon: Code, color: '#00d4ff' },
     { id: 'BPO', name: 'BPO Services', icon: Building, color: '#9333ea' },
@@ -389,6 +397,37 @@ const ServicesSection = () => {
 
   const services = servicesBySector[activeSector] || [];
 
+  useEffect(() => {
+    const computePositions = () => {
+      const sectionEl = sectionRef.current;
+      const btnEl = phaseToggleBtnRef.current;
+      const svcEl = serviceCardRefs.current[activeService] || null;
+      if (sectionEl && btnEl) {
+        const sectionRect = sectionEl.getBoundingClientRect();
+        const btnRect = btnEl.getBoundingClientRect();
+        setButtonPos({
+          x: btnRect.left + btnRect.width / 2 - sectionRect.left,
+          y: btnRect.top + btnRect.height / 2 - sectionRect.top,
+        });
+      } else {
+        setButtonPos(null);
+      }
+      if (sectionEl && svcEl) {
+        const sectionRect = sectionEl.getBoundingClientRect();
+        const svcRect = svcEl.getBoundingClientRect();
+        setServicePos({
+          x: svcRect.left + svcRect.width / 2 - sectionRect.left,
+          y: svcRect.top + svcRect.height / 2 - sectionRect.top,
+        });
+      } else {
+        setServicePos(null);
+      }
+    };
+    computePositions();
+    window.addEventListener('resize', computePositions);
+    return () => window.removeEventListener('resize', computePositions);
+  }, [activeService, expandedPhases, activeSector, services.length]);
+
   const togglePhases = (sectorId: string) => {
     setExpandedPhases(prev => ({
       ...prev,
@@ -458,7 +497,7 @@ const ServicesSection = () => {
   };
 
   return (
-    <section id="services" className="py-20 relative overflow-hidden">
+    <section id="services" ref={sectionRef} className="py-20 relative overflow-hidden">
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/10 to-pink-500/10 animate-neural-pulse"></div>
         <svg className="absolute inset-0 w-full h-full">
@@ -474,6 +513,26 @@ const ServicesSection = () => {
           <rect width="100%" height="100%" fill="url(#neuralPattern)" />
         </svg>
       </div>
+      {/* Section-wide overlay for service->toggle connection */}
+      {activeService >= 0 && buttonPos && servicePos && (
+        <svg className="absolute inset-0 w-full h-full pointer-events-none z-30">
+          <defs>
+            <linearGradient id="codeLineGradientSection" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="rgba(0, 212, 255, 1)" />
+              <stop offset="100%" stopColor="rgba(168, 85, 247, 1)" />
+            </linearGradient>
+          </defs>
+          <path
+            d={`M ${servicePos.x} ${servicePos.y} Q ${servicePos.x} ${(servicePos.y + buttonPos.y) / 2} ${buttonPos.x} ${buttonPos.y}`}
+            stroke="url(#codeLineGradientSection)"
+            strokeWidth="3.5"
+            fill="none"
+            strokeDasharray="10 6"
+            style={{ filter: 'drop-shadow(0 0 8px rgba(0, 212, 255, 0.6))' }}
+          />
+          <circle cx={buttonPos.x} cy={buttonPos.y} r="6" fill="rgba(168, 85, 247, 0.9)" />
+        </svg>
+      )}
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
@@ -507,12 +566,13 @@ const ServicesSection = () => {
           {/* Neural Development Phases Button */}
           <div className="flex justify-center mb-12">
             <button
+              ref={phaseToggleBtnRef}
               onClick={() => togglePhases(activeSector)}
               className={`flex items-center px-8 py-4 rounded-full transition-all duration-300 ${
                 expandedPhases[activeSector]
                   ? 'bg-purple-500/20 border-2 border-purple-400 text-purple-300 shadow-lg shadow-purple-400/30'
                   : 'bg-white/10 border border-white/20 text-white hover:bg-purple-500/10 hover:border-purple-400/50'
-              }`}
+              } ${activeService >= 0 ? 'ring-2 ring-purple-400 shadow-purple-400/40 animate-pulse' : ''}`}
             >
               <Brain className="w-6 h-6 mr-3" />
               <span className="font-medium text-lg">
@@ -913,6 +973,7 @@ const ServicesSection = () => {
             {services.map((service, index) => (
               <div
                 key={index}
+                ref={(el) => (serviceCardRefs.current[index] = el)}
                 className="absolute cursor-pointer transition-all duration-500 group"
                 style={{ 
                   left: `${service.position.x}%`, 
