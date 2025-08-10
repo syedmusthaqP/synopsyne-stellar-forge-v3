@@ -21,6 +21,7 @@ const ServicesSection = () => {
   // Calculated pixel positions within the section for overlay connections
   const [buttonPos, setButtonPos] = useState<{ x: number; y: number } | null>(null);
   const [servicePos, setServicePos] = useState<{ x: number; y: number } | null>(null);
+  const [hoveredServicePos, setHoveredServicePos] = useState<{ x: number; y: number } | null>(null);
   const [sectorPos, setSectorPos] = useState<{ x: number; y: number } | null>(null);
   const sectors = [
     { id: 'Software Development', name: 'Software Development', icon: Code, color: '#00d4ff' },
@@ -407,6 +408,7 @@ const ServicesSection = () => {
       const sectionEl = sectionRef.current;
       const btnEl = phaseToggleBtnRef.current;
       const svcEl = serviceCardRefs.current[activeService] || null;
+      const hoveredEl = hoveredService >= 0 ? serviceCardRefs.current[hoveredService] : null;
       const sectorEl = hoveredSector ? sectorBtnRefs.current[hoveredSector] : null;
 
       if (sectionEl && btnEl) {
@@ -427,6 +429,16 @@ const ServicesSection = () => {
           setServicePos(null);
         }
 
+        if (hoveredEl) {
+          const hRect = hoveredEl.getBoundingClientRect();
+          setHoveredServicePos({
+            x: hRect.left + hRect.width / 2 - sectionRect.left,
+            y: hRect.top + hRect.height / 2 - sectionRect.top,
+          });
+        } else {
+          setHoveredServicePos(null);
+        }
+
         if (sectorEl) {
           const secRect = sectorEl.getBoundingClientRect();
           setSectorPos({
@@ -439,6 +451,7 @@ const ServicesSection = () => {
       } else {
         setButtonPos(null);
         setServicePos(null);
+        setHoveredServicePos(null);
         setSectorPos(null);
       }
     };
@@ -449,7 +462,7 @@ const ServicesSection = () => {
       window.removeEventListener('resize', computePositions);
       window.removeEventListener('scroll', computePositions);
     };
-  }, [activeService, expandedPhases, activeSector, services.length, hoveredSector]);
+  }, [activeService, hoveredService, expandedPhases, activeSector, services.length, hoveredSector]);
 
   const togglePhases = (sectorId: string) => {
     setExpandedPhases(prev => ({
@@ -551,6 +564,20 @@ const ServicesSection = () => {
         </svg>
       )}
 
+      {/* Hover-only overlay for service->toggle connection (dotted) */}
+      {hoveredService >= 0 && buttonPos && hoveredServicePos && (
+        <svg className="absolute inset-0 w-full h-full pointer-events-none z-30">
+          <path
+            d={`M ${hoveredServicePos.x} ${hoveredServicePos.y} Q ${hoveredServicePos.x} ${(hoveredServicePos.y + buttonPos.y) / 2} ${buttonPos.x} ${buttonPos.y}`}
+            stroke="rgba(0, 212, 255, 0.8)"
+            strokeWidth="2.5"
+            fill="none"
+            strokeDasharray="6 5"
+            style={{ filter: 'drop-shadow(0 0 6px rgba(0, 212, 255, 0.4))' }}
+          />
+        </svg>
+      )}
+
       {/* Section-wide overlay for service->toggle connection */}
       {activeSector === 'Software Development' && activeService >= 0 && buttonPos && servicePos && (
         <svg className="absolute inset-0 w-full h-full pointer-events-none z-30">
@@ -619,6 +646,11 @@ const ServicesSection = () => {
               <span className="font-medium text-lg">
                 {expandedPhases[activeSector] ? 'Hide Neural Development Phases' : 'Show Neural Development Phases'}
               </span>
+              {hoveredService >= 0 && services[hoveredService] && (
+                <span className="ml-3 inline-flex items-center rounded-full border border-cyan-400/50 bg-cyan-400/10 px-2.5 py-0.5 text-xs text-cyan-300">
+                  {services[hoveredService].title}
+                </span>
+              )}
             </button>
           </div>
 
