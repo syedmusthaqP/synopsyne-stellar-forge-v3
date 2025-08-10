@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Code, Cloud, Smartphone, Brain, Database, Shield, Building, Users, GraduationCap, Settings, Zap, ArrowRight } from 'lucide-react';
+import { Code, Cloud, Smartphone, Brain, Database, Shield, Building, Users, GraduationCap, Settings, Zap } from 'lucide-react';
 
 const ServicesSection = () => {
   const [activeService, setActiveService] = useState(-1);
@@ -17,9 +17,6 @@ const ServicesSection = () => {
 
   // Hover tracking for sectors
   const [hoveredSector, setHoveredSector] = useState<string | null>(null);
-
-  // UI guidance style selector
-  const [guidanceStyle, setGuidanceStyle] = useState<'halo' | 'breadcrumb' | 'callout' | 'dotted' | 'badge'>('halo');
 
   // Calculated pixel positions within the section for overlay connections
   const [buttonPos, setButtonPos] = useState<{ x: number; y: number } | null>(null);
@@ -409,7 +406,7 @@ const ServicesSection = () => {
     const computePositions = () => {
       const sectionEl = sectionRef.current;
       const btnEl = phaseToggleBtnRef.current;
-      const svcEl = serviceCardRefs.current[hoveredService >= 0 ? hoveredService : activeService] || null;
+      const svcEl = serviceCardRefs.current[activeService] || null;
       const sectorEl = hoveredSector ? sectorBtnRefs.current[hoveredSector] : null;
 
       if (sectionEl && btnEl) {
@@ -452,7 +449,7 @@ const ServicesSection = () => {
       window.removeEventListener('resize', computePositions);
       window.removeEventListener('scroll', computePositions);
     };
-  }, [activeService, expandedPhases, activeSector, services.length, hoveredSector, hoveredService]);
+  }, [activeService, expandedPhases, activeSector, services.length, hoveredSector]);
 
   const togglePhases = (sectorId: string) => {
     setExpandedPhases(prev => ({
@@ -534,7 +531,7 @@ const ServicesSection = () => {
         </svg>
       </div>
       {/* Hover: sector chip -> toggle button */}
-      {guidanceStyle === 'dotted' && hoveredSector && buttonPos && sectorPos && (
+      {hoveredSector && buttonPos && sectorPos && (
         <svg className="absolute inset-0 w-full h-full pointer-events-none z-30">
           <defs>
             <linearGradient id="sectorLineGradientSection" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -555,7 +552,7 @@ const ServicesSection = () => {
       )}
 
       {/* Section-wide overlay for service->toggle connection */}
-      {guidanceStyle === 'dotted' && hoveredService >= 0 && buttonPos && servicePos && (
+      {activeSector === 'Software Development' && activeService >= 0 && buttonPos && servicePos && (
         <svg className="absolute inset-0 w-full h-full pointer-events-none z-30">
           <defs>
             <linearGradient id="codeLineGradientSection" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -575,19 +572,6 @@ const ServicesSection = () => {
         </svg>
       )}
 
-      {guidanceStyle === 'callout' && (hoveredService >= 0 || hoveredSector) && buttonPos && (
-        <div className="absolute z-40 pointer-events-none" style={{ left: `${buttonPos.x + 16}px`, top: `${buttonPos.y - 48}px` }}>
-          <div className="bg-black/80 border border-purple-400/40 text-purple-200 text-sm rounded-xl px-3 py-2 shadow-lg">
-            <span>Open Neural Development Phases</span>
-            {hoveredService >= 0 && (
-              <span className="opacity-80"> for "{services[hoveredService]?.title}"</span>
-            )}
-            {hoveredService < 0 && hoveredSector && (
-              <span className="opacity-80"> in {hoveredSector}</span>
-            )}
-          </div>
-        </div>
-      )}
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-flex items-center text-neon text-sm mb-8 animate-float">
@@ -599,25 +583,6 @@ const ServicesSection = () => {
             Our <span className="text-neon animate-text-glow">Services</span> Network
           </h2>
           
-          <div className="flex justify-center mb-8">
-            <div className="inline-flex bg-black/30 backdrop-blur-sm border border-white/20 rounded-full p-1">
-              {[
-                { key: 'halo', label: 'Halo' },
-                { key: 'breadcrumb', label: 'Breadcrumb' },
-                { key: 'callout', label: 'Callout' },
-                { key: 'dotted', label: 'Dotted Path' },
-                { key: 'badge', label: 'Badge' },
-              ].map(opt => (
-                <button
-                  key={opt.key}
-                  onClick={() => setGuidanceStyle(opt.key as any)}
-                  className={`px-3 py-1.5 text-sm rounded-full transition-colors ${guidanceStyle === opt.key ? 'bg-purple-500/30 text-purple-200' : 'text-gray-300 hover:text-white'}`}
-                >
-                  {opt.label}
-                </button>
-              ))}
-            </div>
-          </div>
           {/* Sector Selection */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             {sectors.map((sector) => (
@@ -644,44 +609,18 @@ const ServicesSection = () => {
             <button
               ref={phaseToggleBtnRef}
               onClick={() => togglePhases(activeSector)}
-              className={`relative flex items-center px-8 py-4 rounded-full transition-all duration-300 ${
+              className={`flex items-center px-8 py-4 rounded-full transition-all duration-300 ${
                 expandedPhases[activeSector]
                   ? 'bg-purple-500/20 border-2 border-purple-400 text-purple-300 shadow-lg shadow-purple-400/30'
                   : 'bg-white/10 border border-white/20 text-white hover:bg-purple-500/10 hover:border-purple-400/50'
-              } ${guidanceStyle === 'halo' && (hoveredService >= 0 || hoveredSector) ? 'ring-2 ring-purple-400 shadow-purple-400/40 animate-pulse' : ''}`}
+              } ${activeService >= 0 ? 'ring-2 ring-purple-400 shadow-purple-400/40 animate-pulse' : ''}`}
             >
               <Brain className="w-6 h-6 mr-3" />
               <span className="font-medium text-lg">
                 {expandedPhases[activeSector] ? 'Hide Neural Development Phases' : 'Show Neural Development Phases'}
               </span>
-              {guidanceStyle === 'halo' && (hoveredService >= 0 || hoveredSector) && (
-                <ArrowRight className="w-5 h-5 ml-2 text-purple-300 animate-fade-in" />
-              )}
-              {guidanceStyle === 'badge' && (hoveredService >= 0 || hoveredSector) && (
-                <span className="ml-3 text-xs px-2 py-0.5 rounded-full bg-purple-500/20 border border-purple-400 text-purple-300">
-                  {hoveredService >= 0 ? services[hoveredService]?.title : hoveredSector}
-                </span>
-              )}
             </button>
           </div>
-
-          {guidanceStyle === 'breadcrumb' && (hoveredService >= 0 || hoveredSector) && (
-            <div className="flex justify-center mb-8 animate-fade-in">
-              <div className="bg-black/40 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 text-sm text-gray-200">
-                <span className="text-gray-400">Services</span>
-                <span className="mx-2 text-gray-500">/</span>
-                <span>{hoveredSector || activeSector}</span>
-                {hoveredService >= 0 && (
-                  <>
-                    <span className="mx-2 text-gray-500">/</span>
-                    <span className="text-neon">{services[hoveredService]?.title}</span>
-                  </>
-                )}
-                <span className="mx-2 text-gray-500">/</span>
-                <span className="text-purple-300">Open Phases</span>
-              </div>
-            </div>
-          )}
 
           {/* Meaningful Neural Connections */}
           {expandedPhases[activeSector] && (
