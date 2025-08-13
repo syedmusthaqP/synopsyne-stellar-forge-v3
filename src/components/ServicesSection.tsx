@@ -10,6 +10,7 @@ const ServicesSection = () => {
   const [hoveredService, setHoveredService] = useState(-1);
   const [showPhaseScreen, setShowPhaseScreen] = useState(false);
   const [clickedService, setClickedService] = useState<any>(null);
+  const [hoveredServiceTab, setHoveredServiceTab] = useState<{show: boolean, x: number, y: number}>({show: false, x: 0, y: 0});
 
   // Refs for section, toggle button, and service cards (for accurate connection lines)
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -1066,8 +1067,19 @@ const ServicesSection = () => {
                   zIndex: activeService === index ? 50 : 10,
                   width: '300px'
                 }}
-                onMouseEnter={() => setHoveredService(index)}
-                onMouseLeave={() => setHoveredService(-1)}
+                onMouseEnter={(e) => {
+                  setHoveredService(index);
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  setHoveredServiceTab({
+                    show: true,
+                    x: rect.right + 20,
+                    y: rect.top + rect.height / 2
+                  });
+                }}
+                onMouseLeave={() => {
+                  setHoveredService(-1);
+                  setHoveredServiceTab({show: false, x: 0, y: 0});
+                }}
                 onClick={() => handleServiceClick(index)}
               >
                 <div className={`absolute inset-0 w-[350px] h-[350px] bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-3xl transition-all duration-500 -translate-x-1/2 -translate-y-1/2 ${
@@ -1148,6 +1160,63 @@ const ServicesSection = () => {
           </div>
         </div>
       </div>
+
+      {/* Hover Tab for Neural Development Phases */}
+      {hoveredServiceTab.show && (
+        <div 
+          className="fixed z-[90] pointer-events-none"
+          style={{
+            left: `${hoveredServiceTab.x}px`,
+            top: `${hoveredServiceTab.y}px`,
+            transform: 'translateY(-50%)'
+          }}
+        >
+          <div className="relative">
+            {/* Dotted line connecting to tab */}
+            <div 
+              className="absolute right-full top-1/2 w-16 h-0 border-t-2 border-dotted border-cyan-400/60"
+              style={{
+                transform: 'translateY(-50%)',
+                animation: 'slideFromDots 0.5s ease-out'
+              }}
+            />
+            
+            {/* Neural Development Phases Tab */}
+            <div 
+              className="bg-gradient-to-r from-cyan-500/90 to-purple-500/90 backdrop-blur-lg border border-cyan-400/30 rounded-lg px-4 py-3 min-w-[250px] shadow-lg shadow-cyan-400/20"
+              style={{
+                animation: 'slideInFromRight 0.5s ease-out'
+              }}
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-3 h-3 rounded-full bg-cyan-400 animate-pulse" />
+                <div>
+                  <h4 className="text-white font-semibold text-sm">Neural Development Phases</h4>
+                  <p className="text-white/70 text-xs">Click to explore development process</p>
+                </div>
+              </div>
+              
+              {/* Progress indicator */}
+              <div className="mt-2 flex gap-1">
+                {[1,2,3,4].map((phase) => (
+                  <div 
+                    key={phase} 
+                    className="h-1 flex-1 bg-white/20 rounded-full overflow-hidden"
+                  >
+                    <div 
+                      className="h-full bg-cyan-400 rounded-full"
+                      style={{
+                        width: phase <= 2 ? '100%' : phase === 3 ? '60%' : '0%',
+                        animation: `fillPhase 0.8s ease-out ${phase * 0.1}s both`
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Fullscreen Phase Development Screen */}
       {showPhaseScreen && clickedService && (
