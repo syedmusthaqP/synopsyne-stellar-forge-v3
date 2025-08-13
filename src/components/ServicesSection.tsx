@@ -8,6 +8,8 @@ const ServicesSection = () => {
   const [expandedPhases, setExpandedPhases] = useState<Record<string, boolean>>({});
   const [selectedPhase, setSelectedPhase] = useState<any>(null);
   const [hoveredService, setHoveredService] = useState(-1);
+  const [showPhaseScreen, setShowPhaseScreen] = useState(false);
+  const [clickedService, setClickedService] = useState<any>(null);
 
   // Refs for section, toggle button, and service cards (for accurate connection lines)
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -479,7 +481,16 @@ const ServicesSection = () => {
     setSelectedPhase(null);
   };
 
+  const closePhaseScreen = () => {
+    setShowPhaseScreen(false);
+    setClickedService(null);
+    setActiveService(-1);
+  };
+
   const handleServiceClick = (serviceIndex: number) => {
+    const service = services[serviceIndex];
+    setClickedService(service);
+    setShowPhaseScreen(true);
     setActiveService(serviceIndex);
   };
 
@@ -1137,6 +1148,111 @@ const ServicesSection = () => {
           </div>
         </div>
       </div>
+
+      {/* Fullscreen Phase Development Screen */}
+      {showPhaseScreen && clickedService && (
+        <div className="fixed inset-0 z-50 bg-gray-900/95 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="w-full max-w-7xl h-full bg-gray-900/90 rounded-3xl border border-cyan-500/30 overflow-hidden relative">
+            {/* Close button */}
+            <button
+              onClick={closePhaseScreen}
+              className="absolute top-6 right-6 z-10 w-12 h-12 rounded-full bg-red-500/20 border border-red-400/30 text-red-400 hover:bg-red-500/30 transition-colors flex items-center justify-center text-xl font-bold"
+            >
+              ×
+            </button>
+
+            {/* Header */}
+            <div className="p-8 border-b border-cyan-500/20">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-16 h-16 rounded-full bg-cyan-500/20 border border-cyan-400/30 flex items-center justify-center">
+                  <clickedService.icon className="w-8 h-8 text-cyan-400" />
+                </div>
+                <div>
+                  <h2 className="text-3xl font-bold text-white mb-2">{clickedService.title}</h2>
+                  <p className="text-gray-300 text-lg">{clickedService.description}</p>
+                </div>
+              </div>
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-cyan-400 mb-2">Neural Development Phases</h3>
+                <p className="text-gray-400">Comprehensive development journey for {clickedService.title}</p>
+              </div>
+            </div>
+
+            {/* Development Phases Grid */}
+            <div className="p-8 h-full overflow-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {developmentPhases[activeSector].map((phase) => (
+                  <div
+                    key={phase.id}
+                    className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-cyan-500/20 rounded-2xl p-6 hover:border-cyan-400/40 transition-all duration-300 cursor-pointer transform hover:scale-105"
+                    onClick={() => setSelectedPhase(phase)}
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-xs font-medium text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-full">
+                        {phase.phase}
+                      </span>
+                      <div className={`w-3 h-3 rounded-full ${
+                        phase.status === 'completed' ? 'bg-green-400' :
+                        phase.status === 'in-progress' ? 'bg-yellow-400' : 'bg-gray-400'
+                      }`} />
+                    </div>
+                    
+                    <div className="w-12 h-12 rounded-xl bg-cyan-500/20 border border-cyan-400/30 flex items-center justify-center mb-4">
+                      <phase.icon className="w-6 h-6 text-cyan-400" />
+                    </div>
+                    
+                    <h4 className="text-lg font-semibold text-white mb-2">{phase.title}</h4>
+                    <p className="text-gray-400 text-sm mb-4">{phase.description}</p>
+                    
+                    <div className="mb-4">
+                      <div className="flex justify-between text-xs text-gray-400 mb-1">
+                        <span>Energy Level</span>
+                        <span>{phase.energy}%</span>
+                      </div>
+                      <div className="w-full bg-gray-700 rounded-full h-2">
+                        <div 
+                          className="bg-gradient-to-r from-cyan-500 to-blue-500 h-2 rounded-full transition-all duration-1000"
+                          style={{ width: `${phase.energy}%` }}
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="text-xs text-gray-500">
+                      Duration: {phase.duration}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Neural Connection Lines Background */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                <svg className="w-full h-full">
+                  {/* Animated neural connections between phases */}
+                  {developmentPhases[activeSector].map((phase, index) => {
+                    if (index < developmentPhases[activeSector].length - 1) {
+                      return (
+                        <g key={`connection-${index}`}>
+                          <path
+                            d={`M ${200 + (index % 4) * 300} ${300 + Math.floor(index / 4) * 200} 
+                               Q ${250 + (index % 4) * 300} ${350 + Math.floor(index / 4) * 200} 
+                               ${200 + ((index + 1) % 4) * 300} ${300 + Math.floor((index + 1) / 4) * 200}`}
+                            stroke="rgba(6, 182, 212, 0.3)"
+                            strokeWidth="2"
+                            fill="none"
+                            strokeDasharray="5,5"
+                            className="animate-pulse"
+                          />
+                        </g>
+                      );
+                    }
+                    return null;
+                  })}
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
