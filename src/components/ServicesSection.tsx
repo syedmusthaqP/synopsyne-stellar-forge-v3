@@ -1070,11 +1070,32 @@ const ServicesSection = () => {
                 onMouseEnter={(e) => {
                   setHoveredService(index);
                   const rect = e.currentTarget.getBoundingClientRect();
-                  setHoveredServiceTab({
-                    show: true,
-                    x: rect.right + 20,
-                    y: rect.top + rect.height / 2
-                  });
+                  const sectionRect = sectionRef.current?.getBoundingClientRect();
+                  
+                  if (sectionRect) {
+                    // Calculate position relative to viewport, ensuring it doesn't overlap
+                    let tabX = rect.right + 30;
+                    let tabY = rect.top + rect.height / 2;
+                    
+                    // Adjust if tab would go off screen
+                    if (tabX + 280 > window.innerWidth) {
+                      tabX = rect.left - 310; // Show on left side instead
+                    }
+                    
+                    // Ensure tab stays within viewport vertically
+                    if (tabY + 100 > window.innerHeight) {
+                      tabY = window.innerHeight - 120;
+                    }
+                    if (tabY < 20) {
+                      tabY = 20;
+                    }
+                    
+                    setHoveredServiceTab({
+                      show: true,
+                      x: tabX,
+                      y: tabY
+                    });
+                  }
                 }}
                 onMouseLeave={() => {
                   setHoveredService(-1);
@@ -1174,44 +1195,79 @@ const ServicesSection = () => {
           <div className="relative">
             {/* Dotted line connecting to tab */}
             <div 
-              className="absolute right-full top-1/2 w-16 h-0 border-t-2 border-dotted border-cyan-400/60"
+              className={`absolute top-1/2 h-0 border-t-2 border-dotted border-cyan-400/60 ${
+                hoveredServiceTab.x > window.innerWidth / 2 ? 'right-full w-8' : 'left-full w-8'
+              }`}
               style={{
                 transform: 'translateY(-50%)',
-                animation: 'slideFromDots 0.5s ease-out'
+                animation: 'slideFromDots 0.3s ease-out'
               }}
             />
             
             {/* Neural Development Phases Tab */}
             <div 
-              className="bg-gradient-to-r from-cyan-500/90 to-purple-500/90 backdrop-blur-lg border border-cyan-400/30 rounded-lg px-4 py-3 min-w-[250px] shadow-lg shadow-cyan-400/20"
+              className={`bg-gray-900/95 backdrop-blur-xl border border-cyan-400/40 rounded-xl px-5 py-4 min-w-[280px] shadow-2xl shadow-cyan-400/10 ${
+                hoveredServiceTab.x > window.innerWidth / 2 ? 'mr-2' : 'ml-2'
+              }`}
               style={{
-                animation: 'slideInFromRight 0.5s ease-out'
+                animation: 'slideInFromRight 0.4s ease-out',
+                background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%)',
+                borderImage: 'linear-gradient(135deg, #06b6d4, #a855f7) 1'
               }}
             >
-              <div className="flex items-center gap-3">
-                <div className="w-3 h-3 rounded-full bg-cyan-400 animate-pulse" />
+              <div className="flex items-center gap-3 mb-3">
+                <div className="relative">
+                  <div className="w-3 h-3 rounded-full bg-cyan-400 animate-pulse" />
+                  <div className="absolute inset-0 w-3 h-3 rounded-full bg-cyan-400/30 animate-ping" />
+                </div>
                 <div>
-                  <h4 className="text-white font-semibold text-sm">Neural Development Phases</h4>
-                  <p className="text-white/70 text-xs">Click to explore development process</p>
+                  <h4 className="text-white font-bold text-sm">Neural Development Phases</h4>
+                  <p className="text-cyan-200/80 text-xs">Click service to explore process</p>
                 </div>
               </div>
               
-              {/* Progress indicator */}
-              <div className="mt-2 flex gap-1">
-                {[1,2,3,4].map((phase) => (
-                  <div 
-                    key={phase} 
-                    className="h-1 flex-1 bg-white/20 rounded-full overflow-hidden"
-                  >
+              {/* Enhanced Progress indicator */}
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs text-cyan-300/70">
+                  <span>Analysis</span>
+                  <span>Architecture</span>
+                  <span>Development</span>
+                  <span>Deployment</span>
+                </div>
+                <div className="flex gap-1">
+                  {[1,2,3,4].map((phase) => (
                     <div 
-                      className="h-full bg-cyan-400 rounded-full"
-                      style={{
-                        width: phase <= 2 ? '100%' : phase === 3 ? '60%' : '0%',
-                        animation: `fillPhase 0.8s ease-out ${phase * 0.1}s both`
-                      }}
-                    />
+                      key={phase} 
+                      className="h-2 flex-1 bg-white/10 rounded-full overflow-hidden border border-cyan-400/20"
+                    >
+                      <div 
+                        className="h-full bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full"
+                        style={{
+                          width: phase <= 2 ? '100%' : phase === 3 ? '60%' : '0%',
+                          animation: `fillPhase 0.8s ease-out ${phase * 0.15}s both`
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Neural activity indicator */}
+              <div className="mt-3 pt-3 border-t border-cyan-400/20">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-cyan-300/70">Neural Activity</span>
+                  <div className="flex items-center gap-1">
+                    {[1,2,3].map((dot) => (
+                      <div 
+                        key={dot}
+                        className="w-1 h-1 bg-cyan-400 rounded-full"
+                        style={{
+                          animation: `pulse 1.5s ease-in-out ${dot * 0.2}s infinite`
+                        }}
+                      />
+                    ))}
                   </div>
-                ))}
+                </div>
               </div>
             </div>
           </div>
