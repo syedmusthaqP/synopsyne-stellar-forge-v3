@@ -1073,41 +1073,31 @@ const ServicesSection = () => {
                   const sectionRect = sectionRef.current?.getBoundingClientRect();
                   
                   if (sectionRect) {
-                    // Calculate safe position with bigger margin to avoid overlaps
-                    let tabX = rect.right + 50; // Increased margin
-                    let tabY = rect.top + rect.height / 2;
+                    // Use fixed positioning in safe zones to avoid any overlapping
+                    const viewportWidth = window.innerWidth;
+                    const viewportHeight = window.innerHeight;
                     
-                    // Check if tab would overlap with viewport or need to show on left
-                    if (tabX + 320 > window.innerWidth) {
-                      tabX = rect.left - 370; // Show on left side with more margin
+                    // Create safe zones - either far right or far left of viewport
+                    let tabX, tabY;
+                    
+                    // Always position in safe zones that don't interfere with content
+                    if (viewportWidth > 1400) {
+                      // Large screens: use right edge safe zone
+                      tabX = viewportWidth - 350;
+                    } else if (viewportWidth > 1200) {
+                      // Medium screens: use right edge with more margin
+                      tabX = viewportWidth - 320;
+                    } else {
+                      // Smaller screens: use overlay approach in center-right
+                      tabX = viewportWidth - 300;
                     }
                     
-                    // Ensure tab stays well within viewport vertically with more margin
-                    if (tabY + 120 > window.innerHeight) {
-                      tabY = window.innerHeight - 140;
-                    }
-                    if (tabY < 40) {
-                      tabY = 40;
-                    }
-                    
-                    // Additional check: if service is in center area, position tab further away
-                    const centerX = sectionRect.left + sectionRect.width / 2;
-                    const centerY = sectionRect.top + sectionRect.height / 2;
-                    const isInCenter = Math.abs(rect.left + rect.width/2 - centerX) < 200 && 
-                                     Math.abs(rect.top + rect.height/2 - centerY) < 150;
-                    
-                    if (isInCenter) {
-                      // For center cards, position tab further away
-                      if (rect.left < centerX) {
-                        tabX = rect.left - 400; // Further left
-                      } else {
-                        tabX = rect.right + 80; // Further right
-                      }
-                    }
+                    // Vertical position based on hovered card but constrained to safe area
+                    tabY = Math.max(100, Math.min(rect.top + rect.height / 2, viewportHeight - 200));
                     
                     setHoveredServiceTab({
                       show: true,
-                      x: Math.max(20, Math.min(tabX, window.innerWidth - 320)),
+                      x: tabX,
                       y: tabY
                     });
                   }
