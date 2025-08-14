@@ -1069,12 +1069,20 @@ const ServicesSection = () => {
                 }}
                 onMouseEnter={(e) => {
                   setHoveredService(index);
-                  // Simple fixed positioning - no calculations needed, completely separate overlay
-                  setHoveredServiceTab({
-                    show: true,
-                    x: 0, // Will be positioned with fixed CSS, not absolute positioning
-                    y: 0  // Will be positioned with fixed CSS, not absolute positioning
-                  });
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const sectionRect = sectionRef.current?.getBoundingClientRect();
+                  
+                  if (sectionRect) {
+                    // Position above the hovered card
+                    const tabX = rect.left + rect.width / 2; // Center horizontally with card
+                    const tabY = rect.top - 20; // Position above the card with small gap
+                    
+                    setHoveredServiceTab({
+                      show: true,
+                      x: tabX,
+                      y: tabY
+                    });
+                  }
                 }}
                 onMouseLeave={() => {
                   setHoveredService(-1);
@@ -1161,52 +1169,57 @@ const ServicesSection = () => {
         </div>
       </div>
 
-      {/* Fixed Position Neural Development Phases Tab */}
+      {/* Neural Development Phases Tab - Above Cards */}
       {hoveredServiceTab.show && (
-        <div className="fixed top-32 right-6 z-[100] pointer-events-none">
+        <div 
+          className="fixed z-[100] pointer-events-none"
+          style={{
+            left: `${hoveredServiceTab.x}px`,
+            top: `${hoveredServiceTab.y}px`,
+            transform: 'translate(-50%, -100%)'
+          }}
+        >
           <div className="relative">
-            {/* Dotted line connecting to services area */}
+            {/* Dotted line connecting to card below */}
             <div 
-              className="absolute top-1/2 right-full w-20 h-0 border-t-2 border-dotted border-cyan-400/60"
+              className="absolute top-full left-1/2 w-0 h-5 border-l-2 border-dotted border-cyan-400/60"
               style={{
-                transform: 'translateY(-50%)',
+                transform: 'translateX(-50%)',
                 animation: 'slideFromDots 0.3s ease-out'
               }}
             />
             
-            {/* Neural Development Phases Tab */}
+            {/* Compact Neural Development Phases Tab */}
             <div 
-              className="bg-gray-900/95 backdrop-blur-xl border border-cyan-400/40 rounded-xl px-5 py-4 w-80 shadow-2xl shadow-cyan-400/10"
+              className="bg-gray-900/95 backdrop-blur-xl border border-cyan-400/40 rounded-lg px-3 py-2 w-48 shadow-2xl shadow-cyan-400/10"
               style={{
                 animation: 'slideInFromRight 0.4s ease-out',
                 background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%)',
                 borderImage: 'linear-gradient(135deg, #06b6d4, #a855f7) 1'
               }}
             >
-              <div className="flex items-center gap-3 mb-3">
+              <div className="flex items-center gap-2 mb-2">
                 <div className="relative">
-                  <div className="w-3 h-3 rounded-full bg-cyan-400 animate-pulse" />
-                  <div className="absolute inset-0 w-3 h-3 rounded-full bg-cyan-400/30 animate-ping" />
+                  <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                  <div className="absolute inset-0 w-2 h-2 rounded-full bg-cyan-400/30 animate-ping" />
                 </div>
                 <div>
-                  <h4 className="text-white font-bold text-sm">Neural Development Phases</h4>
-                  <p className="text-cyan-200/80 text-xs">Click service to explore process</p>
+                  <h4 className="text-white font-bold text-xs">Neural Development</h4>
+                  <p className="text-cyan-200/80 text-[10px]">Click to explore</p>
                 </div>
               </div>
               
-              {/* Enhanced Progress indicator */}
-              <div className="space-y-2">
-                <div className="flex justify-between text-xs text-cyan-300/70">
+              {/* Compact Progress indicator */}
+              <div className="space-y-1">
+                <div className="flex justify-between text-[8px] text-cyan-300/70">
                   <span>Analysis</span>
-                  <span>Architecture</span>
-                  <span>Development</span>
-                  <span>Deployment</span>
+                  <span>Deploy</span>
                 </div>
-                <div className="flex gap-1">
+                <div className="flex gap-0.5">
                   {[1,2,3,4].map((phase) => (
                     <div 
                       key={phase} 
-                      className="h-2 flex-1 bg-white/10 rounded-full overflow-hidden border border-cyan-400/20"
+                      className="h-1 flex-1 bg-white/10 rounded-full overflow-hidden border border-cyan-400/20"
                     >
                       <div 
                         className="h-full bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full"
@@ -1217,24 +1230,6 @@ const ServicesSection = () => {
                       />
                     </div>
                   ))}
-                </div>
-              </div>
-              
-              {/* Neural activity indicator */}
-              <div className="mt-3 pt-3 border-t border-cyan-400/20">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-cyan-300/70">Neural Activity</span>
-                  <div className="flex items-center gap-1">
-                    {[1,2,3].map((dot) => (
-                      <div 
-                        key={dot}
-                        className="w-1 h-1 bg-cyan-400 rounded-full"
-                        style={{
-                          animation: `pulse 1.5s ease-in-out ${dot * 0.2}s infinite`
-                        }}
-                      />
-                    ))}
-                  </div>
                 </div>
               </div>
             </div>
