@@ -1163,7 +1163,7 @@ const ServicesSection = () => {
 
       {/* Fixed Position Neural Development Phases Tab */}
       {hoveredServiceTab.show && (
-        <div className="fixed top-20 right-6 z-[100] pointer-events-none">
+        <div className="fixed top-32 right-6 z-[100] pointer-events-none">
           <div className="relative">
             {/* Dotted line connecting to services area */}
             <div 
