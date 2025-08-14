@@ -1069,38 +1069,12 @@ const ServicesSection = () => {
                 }}
                 onMouseEnter={(e) => {
                   setHoveredService(index);
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  const sectionRect = sectionRef.current?.getBoundingClientRect();
-                  
-                  if (sectionRect) {
-                    // Use fixed positioning in safe zones to avoid any overlapping
-                    const viewportWidth = window.innerWidth;
-                    const viewportHeight = window.innerHeight;
-                    
-                    // Create safe zones - either far right or far left of viewport
-                    let tabX, tabY;
-                    
-                    // Always position in safe zones that don't interfere with content
-                    if (viewportWidth > 1400) {
-                      // Large screens: use right edge safe zone
-                      tabX = viewportWidth - 350;
-                    } else if (viewportWidth > 1200) {
-                      // Medium screens: use right edge with more margin
-                      tabX = viewportWidth - 320;
-                    } else {
-                      // Smaller screens: use overlay approach in center-right
-                      tabX = viewportWidth - 300;
-                    }
-                    
-                    // Vertical position based on hovered card but constrained to safe area
-                    tabY = Math.max(100, Math.min(rect.top + rect.height / 2, viewportHeight - 200));
-                    
-                    setHoveredServiceTab({
-                      show: true,
-                      x: tabX,
-                      y: tabY
-                    });
-                  }
+                  // Simple fixed positioning - no calculations needed, completely separate overlay
+                  setHoveredServiceTab({
+                    show: true,
+                    x: 0, // Will be positioned with fixed CSS, not absolute positioning
+                    y: 0  // Will be positioned with fixed CSS, not absolute positioning
+                  });
                 }}
                 onMouseLeave={() => {
                   setHoveredService(-1);
@@ -1187,22 +1161,13 @@ const ServicesSection = () => {
         </div>
       </div>
 
-      {/* Hover Tab for Neural Development Phases */}
+      {/* Fixed Position Neural Development Phases Tab */}
       {hoveredServiceTab.show && (
-        <div 
-          className="fixed z-[90] pointer-events-none"
-          style={{
-            left: `${hoveredServiceTab.x}px`,
-            top: `${hoveredServiceTab.y}px`,
-            transform: 'translateY(-50%)'
-          }}
-        >
+        <div className="fixed top-20 right-6 z-[100] pointer-events-none">
           <div className="relative">
-            {/* Dotted line connecting to tab */}
+            {/* Dotted line connecting to services area */}
             <div 
-              className={`absolute top-1/2 h-0 border-t-2 border-dotted border-cyan-400/60 ${
-                hoveredServiceTab.x > window.innerWidth / 2 ? 'right-full w-8' : 'left-full w-8'
-              }`}
+              className="absolute top-1/2 right-full w-20 h-0 border-t-2 border-dotted border-cyan-400/60"
               style={{
                 transform: 'translateY(-50%)',
                 animation: 'slideFromDots 0.3s ease-out'
@@ -1211,9 +1176,7 @@ const ServicesSection = () => {
             
             {/* Neural Development Phases Tab */}
             <div 
-              className={`bg-gray-900/95 backdrop-blur-xl border border-cyan-400/40 rounded-xl px-5 py-4 min-w-[280px] shadow-2xl shadow-cyan-400/10 ${
-                hoveredServiceTab.x > window.innerWidth / 2 ? 'mr-2' : 'ml-2'
-              }`}
+              className="bg-gray-900/95 backdrop-blur-xl border border-cyan-400/40 rounded-xl px-5 py-4 w-80 shadow-2xl shadow-cyan-400/10"
               style={{
                 animation: 'slideInFromRight 0.4s ease-out',
                 background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%)',
