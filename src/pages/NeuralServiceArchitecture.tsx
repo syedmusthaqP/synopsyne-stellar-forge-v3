@@ -3,6 +3,7 @@ import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ServicesSection from '../components/ServicesSection';
+import NeuralDevelopmentProcess from '../components/ui/neural-development-process';
 
 const NeuralServiceArchitecture = () => {
   return (
@@ -26,6 +27,13 @@ const NeuralServiceArchitecture = () => {
           <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
             Advanced neural network architectures for modern service delivery
           </p>
+        </div>
+      </section>
+      
+      {/* Neural Development Process Section */}
+      <section className="py-20 relative">
+        <div className="container mx-auto px-6">
+          <NeuralDevelopmentProcess />
         </div>
       </section>
       
