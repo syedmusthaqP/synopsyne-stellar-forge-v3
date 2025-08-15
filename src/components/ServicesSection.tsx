@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Code, Cloud, Smartphone, Brain, Database, Shield, Building, Users, GraduationCap, Settings, Zap } from 'lucide-react';
-import NeuralDevelopmentProcess from './ui/neural-development-process';
 
 const ServicesSection = () => {
   const [activeService, setActiveService] = useState(-1);
@@ -1267,9 +1266,77 @@ const ServicesSection = () => {
               </div>
             </div>
 
-            {/* Neural Development Process */}
-            <div className="h-full overflow-hidden">
-              <NeuralDevelopmentProcess />
+            {/* Development Phases Grid */}
+            <div className="p-8 h-full overflow-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {developmentPhases[activeSector].map((phase) => (
+                  <div
+                    key={phase.id}
+                    className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-cyan-500/20 rounded-2xl p-6 hover:border-cyan-400/40 transition-all duration-300 cursor-pointer transform hover:scale-105"
+                    onClick={() => setSelectedPhase(phase)}
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-xs font-medium text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-full">
+                        {phase.phase}
+                      </span>
+                      <div className={`w-3 h-3 rounded-full ${
+                        phase.status === 'completed' ? 'bg-green-400' :
+                        phase.status === 'in-progress' ? 'bg-yellow-400' : 'bg-gray-400'
+                      }`} />
+                    </div>
+                    
+                    <div className="w-12 h-12 rounded-xl bg-cyan-500/20 border border-cyan-400/30 flex items-center justify-center mb-4">
+                      <phase.icon className="w-6 h-6 text-cyan-400" />
+                    </div>
+                    
+                    <h4 className="text-lg font-semibold text-white mb-2">{phase.title}</h4>
+                    <p className="text-gray-400 text-sm mb-4">{phase.description}</p>
+                    
+                    <div className="mb-4">
+                      <div className="flex justify-between text-xs text-gray-400 mb-1">
+                        <span>Energy Level</span>
+                        <span>{phase.energy}%</span>
+                      </div>
+                      <div className="w-full bg-gray-700 rounded-full h-2">
+                        <div 
+                          className="bg-gradient-to-r from-cyan-500 to-blue-500 h-2 rounded-full transition-all duration-1000"
+                          style={{ width: `${phase.energy}%` }}
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="text-xs text-gray-500">
+                      Duration: {phase.duration}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Neural Connection Lines Background */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                <svg className="w-full h-full">
+                  {/* Animated neural connections between phases */}
+                  {developmentPhases[activeSector].map((phase, index) => {
+                    if (index < developmentPhases[activeSector].length - 1) {
+                      return (
+                        <g key={`connection-${index}`}>
+                          <path
+                            d={`M ${200 + (index % 4) * 300} ${300 + Math.floor(index / 4) * 200} 
+                               Q ${250 + (index % 4) * 300} ${350 + Math.floor(index / 4) * 200} 
+                               ${200 + ((index + 1) % 4) * 300} ${300 + Math.floor((index + 1) / 4) * 200}`}
+                            stroke="rgba(6, 182, 212, 0.3)"
+                            strokeWidth="2"
+                            fill="none"
+                            strokeDasharray="5,5"
+                            className="animate-pulse"
+                          />
+                        </g>
+                      );
+                    }
+                    return null;
+                  })}
+                </svg>
+              </div>
             </div>
           </div>
         </div>
