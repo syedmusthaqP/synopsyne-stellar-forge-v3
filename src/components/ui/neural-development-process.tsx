@@ -218,6 +218,32 @@ const NeuralDevelopmentProcess = () => {
             <stop offset="100%" stopColor="rgb(236, 72, 153)" stopOpacity="0.8" />
           </linearGradient>
           
+          {/* Phase-specific gradients */}
+          <linearGradient id="phaseGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="rgb(34, 197, 94)" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="rgb(16, 185, 129)" stopOpacity="0.7" />
+          </linearGradient>
+          
+          <linearGradient id="phaseGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="rgb(34, 197, 94)" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="rgb(6, 182, 212)" stopOpacity="0.7" />
+          </linearGradient>
+          
+          <linearGradient id="phaseGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="rgb(6, 182, 212)" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="rgb(59, 130, 246)" stopOpacity="0.7" />
+          </linearGradient>
+          
+          <linearGradient id="phaseGradient4" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="rgb(147, 51, 234)" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="rgb(139, 92, 246)" stopOpacity="0.7" />
+          </linearGradient>
+          
+          <linearGradient id="phaseGradient5" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="rgb(251, 146, 60)" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="rgb(239, 68, 68)" stopOpacity="0.7" />
+          </linearGradient>
+          
           <filter id="glow">
             <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
             <feMerge> 
@@ -235,6 +261,17 @@ const NeuralDevelopmentProcess = () => {
             const isActive = activeNode === node.id || activeNode === connId;
             const isPulsing = pulseEffect[node.id] || pulseEffect[connId];
             
+            // Determine which phase gradient to use based on the main phase nodes
+            const getPhaseGradient = (nodeId: number) => {
+              if (nodeId >= 1 && nodeId <= 5) return `phaseGradient${nodeId}`;
+              // For supporting nodes, use their connected main phase gradient
+              const mainPhase = processNodes.find(n => n.id === nodeId)?.connections[0];
+              if (mainPhase && mainPhase >= 1 && mainPhase <= 5) return `phaseGradient${mainPhase}`;
+              return "connectionGradient";
+            };
+            
+            const gradientId = getPhaseGradient(node.id);
+            
             return (
               <line
                 key={`${node.id}-${connId}`}
@@ -242,7 +279,7 @@ const NeuralDevelopmentProcess = () => {
                 y1={`${node.position.y}%`}
                 x2={`${targetNode.position.x}%`}
                 y2={`${targetNode.position.y}%`}
-                stroke={isActive || isPulsing ? "url(#connectionGradient)" : "rgba(0, 212, 255, 0.3)"}
+                stroke={isActive || isPulsing ? `url(#${gradientId})` : "rgba(0, 212, 255, 0.3)"}
                 strokeWidth={isActive || isPulsing ? "3" : "2"}
                 filter={isActive || isPulsing ? "url(#glow)" : "none"}
                 className={`transition-all duration-500 ${
