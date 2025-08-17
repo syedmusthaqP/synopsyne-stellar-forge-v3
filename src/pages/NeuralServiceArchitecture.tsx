@@ -1,10 +1,14 @@
 
-import React from 'react';
+import React, { useState } from 'react';
+import { Brain } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ServicesSection from '../components/ServicesSection';
+import NeuralDevelopmentProcess from '../components/ui/neural-development-process';
 
 const NeuralServiceArchitecture = () => {
+  const [showNeuralProcess, setShowNeuralProcess] = useState(false);
+
   return (
     <div className="min-h-screen gradient-bg relative overflow-hidden">
       {/* Particle background effect */}
@@ -26,10 +30,29 @@ const NeuralServiceArchitecture = () => {
           <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
             Advanced neural network architectures for modern service delivery
           </p>
+          
+          {/* Neural Development Phase Toggle Button */}
+          <button
+            onClick={() => setShowNeuralProcess(!showNeuralProcess)}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 text-white rounded-full font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            <Brain className="w-5 h-5" />
+            {showNeuralProcess ? 'Hide Neural Process' : 'Show Neural Development Process'}
+          </button>
         </div>
       </section>
       
       <ServicesSection />
+      
+      {/* Neural Development Process Section */}
+      {showNeuralProcess && (
+        <section className="py-20 relative">
+          <div className="container mx-auto px-6">
+            <NeuralDevelopmentProcess />
+          </div>
+        </section>
+      )}
+      
       <Footer />
     </div>
   );
