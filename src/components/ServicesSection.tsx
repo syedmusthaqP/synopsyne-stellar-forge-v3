@@ -1,221 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Code, Cloud, Smartphone, Brain, Database, Shield, Building, Users, GraduationCap, Settings, Zap } from 'lucide-react';
 
 const ServicesSection = () => {
   const [activeService, setActiveService] = useState(-1);
+  const [neuralPulse, setNeuralPulse] = useState(0);
   const [activeSector, setActiveSector] = useState('Software Development');
   const [hoveredService, setHoveredService] = useState(-1);
-  const [clickedService, setClickedService] = useState<any>(null);
+  const [hoveredServiceTab, setHoveredServiceTab] = useState<{show: boolean, x: number, y: number}>({show: false, x: 0, y: 0});
 
+  // Refs for section, toggle button, and service cards (for accurate connection lines)
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const serviceCardRefs = useRef<Record<number, HTMLDivElement | null>>({});
+  const sectorBtnRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+
+  // Hover tracking for sectors
+  const [hoveredSector, setHoveredSector] = useState<string | null>(null);
+
+  // Calculated pixel positions within the section for overlay connections
+  const [buttonPos, setButtonPos] = useState<{ x: number; y: number } | null>(null);
+  const [servicePos, setServicePos] = useState<{ x: number; y: number } | null>(null);
+  const [hoveredServicePos, setHoveredServicePos] = useState<{ x: number; y: number } | null>(null);
+  const [sectorPos, setSectorPos] = useState<{ x: number; y: number } | null>(null);
+  
   const sectors = [
     { id: 'Software Development', name: 'Software Development', icon: Code, color: '#00d4ff' },
     { id: 'BPO', name: 'BPO Services', icon: Building, color: '#9333ea' },
     { id: 'Skill Development', name: 'Skill Development', icon: GraduationCap, color: '#ec4899' },
     { id: 'Technology Consulting', name: 'Technology Consulting', icon: Settings, color: '#06b6d4' }
   ];
-
-  const developmentPhases = {
-    'Software Development': [
-      {
-        id: 1,
-        title: "Requirements Analysis",
-        phase: "Phase 01",
-        description: "Deep dive into your business needs, user stories, and technical requirements through neural analysis.",
-        detailedContent: "Our neural analysis engine processes your requirements through multiple cognitive layers: stakeholder interviews, user journey mapping, technical feasibility assessment, and risk analysis. We use AI-powered requirement gathering tools to ensure nothing is missed.",
-        deliverables: ["Requirements Document", "User Stories", "Technical Specifications", "Risk Assessment"],
-        duration: "2-3 weeks",
-        icon: Brain,
-        status: "completed",
-        energy: 100,
-      },
-      {
-        id: 2,
-        title: "System Architecture",
-        phase: "Phase 02", 
-        description: "Design scalable, maintainable architecture using modern patterns and neural network principles.",
-        detailedContent: "We architect your system using cutting-edge patterns like microservices, event-driven architecture, and neural network-inspired data flows. Our architects ensure scalability, security, and maintainability from day one.",
-        deliverables: ["System Architecture Diagram", "API Design", "Database Schema", "Security Framework"],
-        duration: "1-2 weeks",
-        icon: Settings,
-        status: "completed",
-        energy: 90,
-      },
-      {
-        id: 3,
-        title: "Development & Testing",
-        phase: "Phase 03",
-        description: "Agile development with continuous integration, testing, and neural feedback loops.",
-        detailedContent: "Our development process combines agile methodologies with AI-assisted coding, automated testing, and continuous integration. Neural feedback loops ensure code quality and performance optimization throughout development.",
-        deliverables: ["Working Software", "Test Suite", "CI/CD Pipeline", "Documentation"],
-        duration: "4-8 weeks",
-        icon: Code,
-        status: "in-progress",
-        energy: 75,
-      },
-      {
-        id: 4,
-        title: "Deployment & Optimization",
-        phase: "Phase 04",
-        description: "Seamless deployment with performance optimization and neural monitoring systems.",
-        detailedContent: "We deploy your application using blue-green deployment strategies, implement neural monitoring systems for real-time performance tracking, and set up automated scaling based on intelligent predictions.",
-        deliverables: ["Production Deployment", "Monitoring Dashboard", "Performance Reports", "Scaling Policies"],
-        duration: "1-2 weeks",
-        icon: Cloud,
-        status: "pending",
-        energy: 60,
-      }
-    ],
-    'BPO': [
-      {
-        id: 1,
-        title: "Process Assessment",
-        phase: "Phase 01",
-        description: "Comprehensive analysis of existing business processes and identification of optimization opportunities.",
-        detailedContent: "Our business analysts conduct deep-dive assessments of your current processes, identifying bottlenecks, inefficiencies, and automation opportunities using neural process mining techniques.",
-        deliverables: ["Process Map", "Gap Analysis", "Optimization Report", "ROI Projections"],
-        duration: "2-3 weeks",
-        icon: Brain,
-        status: "completed",
-        energy: 100,
-      },
-      {
-        id: 2,
-        title: "Service Design",
-        phase: "Phase 02",
-        description: "Custom service design aligned with your business objectives and quality standards.",
-        detailedContent: "We design custom BPO services tailored to your specific industry needs, incorporating best practices, quality frameworks, and neural-assisted process optimization for maximum efficiency.",
-        deliverables: ["Service Design Blueprint", "Quality Standards", "SLA Framework", "Training Materials"],
-        duration: "1-2 weeks",
-        icon: Users,
-        status: "completed",
-        energy: 85,
-      },
-      {
-        id: 3,
-        title: "Team Integration",
-        phase: "Phase 03",
-        description: "Seamless integration of our expert teams with your existing workflows and systems.",
-        detailedContent: "Our experts integrate seamlessly with your existing teams and systems, providing comprehensive training, establishing communication protocols, and implementing neural feedback mechanisms.",
-        deliverables: ["Team Onboarding", "Integration Plan", "Communication Protocols", "Performance Metrics"],
-        duration: "2-4 weeks",
-        icon: Building,
-        status: "in-progress",
-        energy: 70,
-      },
-      {
-        id: 4,
-        title: "Quality Assurance",
-        phase: "Phase 04",
-        description: "Continuous monitoring and improvement with performance metrics and neural feedback.",
-        detailedContent: "We implement comprehensive quality assurance frameworks with real-time monitoring, neural analytics for performance prediction, and continuous improvement processes.",
-        deliverables: ["QA Framework", "Performance Dashboard", "Improvement Reports", "Compliance Documentation"],
-        duration: "Ongoing",
-        icon: Shield,
-        status: "pending",
-        energy: 55,
-      }
-    ],
-    'Skill Development': [
-      {
-        id: 1,
-        title: "Skills Assessment",
-        phase: "Phase 01",
-        description: "Comprehensive evaluation of current skill levels and identification of learning pathways.",
-        detailedContent: "Our AI-powered assessment platform evaluates technical and soft skills, identifies learning gaps, and creates personalized development roadmaps using neural learning analytics.",
-        deliverables: ["Skills Assessment Report", "Learning Gap Analysis", "Personalized Roadmap", "Baseline Metrics"],
-        duration: "1 week",
-        icon: Brain,
-        status: "completed",
-        energy: 100,
-      },
-      {
-        id: 2,
-        title: "Learning Path Design",
-        phase: "Phase 02",
-        description: "Personalized curriculum design based on individual goals and industry requirements.",
-        detailedContent: "We create adaptive learning paths using neural network algorithms that adjust based on learning pace, style, and career objectives. Each path includes hands-on projects and real-world scenarios.",
-        deliverables: ["Custom Curriculum", "Learning Materials", "Project Assignments", "Progress Tracking System"],
-        duration: "1-2 weeks",
-        icon: GraduationCap,
-        status: "completed",
-        energy: 90,
-      },
-      {
-        id: 3,
-        title: "Interactive Training",
-        phase: "Phase 03",
-        description: "Hands-on learning with real-world projects and neural-enhanced learning techniques.",
-        detailedContent: "Our interactive training combines virtual labs, mentorship, peer collaboration, and AI-assisted learning to maximize knowledge retention and practical skill development.",
-        deliverables: ["Completed Projects", "Skill Certifications", "Portfolio Development", "Peer Reviews"],
-        duration: "4-12 weeks",
-        icon: Users,
-        status: "in-progress",
-        energy: 80,
-      },
-      {
-        id: 4,
-        title: "Certification & Career Support",
-        phase: "Phase 04",
-        description: "Industry certifications and ongoing career guidance with neural network matching.",
-        detailedContent: "We provide industry-recognized certifications, career counseling, job placement assistance, and ongoing professional development through our neural career matching platform.",
-        deliverables: ["Industry Certifications", "Career Plan", "Job Placement Support", "Alumni Network Access"],
-        duration: "Ongoing",
-        icon: Zap,
-        status: "pending",
-        energy: 65,
-      }
-    ],
-    'Technology Consulting': [
-      {
-        id: 1,
-        title: "Technology Audit",
-        phase: "Phase 01",
-        description: "Comprehensive assessment of current technology stack and infrastructure capabilities.",
-        detailedContent: "Our technology audit uses advanced scanning tools and neural analysis to evaluate your current tech stack, identify vulnerabilities, assess scalability, and benchmark against industry standards.",
-        deliverables: ["Technology Assessment Report", "Infrastructure Analysis", "Security Audit", "Modernization Roadmap"],
-        duration: "2-3 weeks",
-        icon: Brain,
-        status: "completed",
-        energy: 100,
-      },
-      {
-        id: 2,
-        title: "Strategic Planning",
-        phase: "Phase 02",
-        description: "Development of technology roadmap aligned with business objectives and growth plans.",
-        detailedContent: "We create comprehensive technology strategies that align with your business goals, incorporating emerging technologies, neural optimization principles, and sustainable growth frameworks.",
-        deliverables: ["Technology Roadmap", "Strategic Plan", "Budget Projections", "Implementation Timeline"],
-        duration: "2-4 weeks",
-        icon: Settings,
-        status: "completed",
-        energy: 95,
-      },
-      {
-        id: 3,
-        title: "Implementation Guidance",
-        phase: "Phase 03",
-        description: "Expert guidance during technology implementation with neural optimization strategies.",
-        detailedContent: "Our consultants provide hands-on guidance during implementation, using neural optimization to minimize risks, ensure smooth transitions, and maximize adoption rates.",
-        deliverables: ["Implementation Plan", "Change Management", "Training Programs", "Success Metrics"],
-        duration: "4-8 weeks",
-        icon: Code,
-        status: "in-progress",
-        energy: 85,
-      },
-      {
-        id: 4,
-        title: "Continuous Optimization",
-        phase: "Phase 04",
-        description: "Ongoing monitoring and optimization with AI-driven insights and recommendations.",
-        detailedContent: "We provide continuous optimization through AI-driven monitoring, predictive analytics, and neural feedback systems that identify improvement opportunities and automate optimizations.",
-        deliverables: ["Optimization Reports", "Performance Dashboards", "Predictive Analytics", "Automated Systems"],
-        duration: "Ongoing",
-        icon: Zap,
-        status: "pending",
-        energy: 70,
-      }
-    ]
-  };
 
   const servicesBySector = {
     'Software Development': [
@@ -314,199 +126,308 @@ const ServicesSection = () => {
       {
         icon: Code,
         title: 'Certification Programs',
-        description: 'Industry-recognized certifications to validate your skills and advance your career.',
-        features: ['AWS certifications', 'Google Cloud certifications', 'Microsoft Azure certifications', 'Professional project management'],
+        description: 'Industry-recognized certifications to validate and advance your expertise.',
+        features: ['Technology certifications', 'Professional credentials', 'Skills validation', 'Career advancement'],
         position: { x: 20, y: 75 },
-        connections: [3, 0]
+        connections: [0, 3]
       },
       {
         icon: Users,
         title: 'Corporate Training Solutions',
-        description: 'Customized training programs designed for enterprise teams and organizations.',
-        features: ['Team workshops', 'Leadership development', 'Digital transformation training', 'Custom curriculum design'],
+        description: 'Customized training programs for organizations and teams.',
+        features: ['Team workshops', 'Leadership development', 'Skills assessment', 'Performance improvement'],
         position: { x: 80, y: 75 },
-        connections: [2, 1]
+        connections: [1, 2]
       }
     ],
     'Technology Consulting': [
       {
         icon: Brain,
         title: 'Digital Transformation',
-        description: 'End-to-end digital transformation strategies to modernize your business operations.',
-        features: ['Process automation', 'Legacy system migration', 'Cloud adoption strategy', 'Change management'],
-        position: { x: 30, y: 30 },
+        description: 'Strategic guidance for modernizing business processes and technology infrastructure.',
+        features: ['Process optimization', 'Technology assessment', 'Change management', 'Digital strategy'],
+        position: { x: 30, y: 25 },
         connections: [1, 2]
       },
       {
         icon: Shield,
         title: 'IT Security Consulting',
-        description: 'Comprehensive cybersecurity assessments and implementation of robust security frameworks.',
-        features: ['Security audits', 'Compliance consulting', 'Risk assessment', 'Incident response planning'],
-        position: { x: 70, y: 30 },
+        description: 'Comprehensive security strategy and implementation for enterprise environments.',
+        features: ['Security assessments', 'Compliance frameworks', 'Risk management', 'Incident response'],
+        position: { x: 70, y: 25 },
         connections: [0, 2]
       },
       {
         icon: Settings,
-        title: 'Technology Strategy',
-        description: 'Strategic technology planning aligned with your business objectives and growth plans.',
-        features: ['Technology roadmapping', 'Architecture design', 'Vendor selection', 'Cost optimization'],
-        position: { x: 50, y: 70 },
+        title: 'Technology Strategy & Planning',
+        description: 'Long-term technology planning aligned with business objectives and growth.',
+        features: ['Strategic roadmaps', 'Technology evaluation', 'Investment planning', 'Innovation strategy'],
+        position: { x: 50, y: 75 },
         connections: [0, 1]
       }
     ]
   };
 
-  const handleServiceClick = (service: any, sector: string) => {
-    setClickedService({ ...service, sector });
+  const services = servicesBySector[activeSector as keyof typeof servicesBySector] || [];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNeuralPulse(prev => (prev + 1) % services.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [services.length]);
+
+  useEffect(() => {
+    const computePositions = () => {
+      if (sectionRef.current) {
+        const sectionRect = sectionRef.current.getBoundingClientRect();
+        
+        if (hoveredSector && sectorBtnRefs.current[hoveredSector]) {
+          const sectorRect = sectorBtnRefs.current[hoveredSector]!.getBoundingClientRect();
+          setSectorPos({
+            x: sectorRect.left + sectorRect.width / 2 - sectionRect.left,
+            y: sectorRect.top + sectorRect.height / 2 - sectionRect.top
+          });
+        }
+        
+        if (hoveredService >= 0 && serviceCardRefs.current[hoveredService]) {
+          const serviceRect = serviceCardRefs.current[hoveredService]!.getBoundingClientRect();
+          setHoveredServicePos({
+            x: serviceRect.left + serviceRect.width / 2 - sectionRect.left,
+            y: serviceRect.top + serviceRect.height / 2 - sectionRect.top
+          });
+        }
+        
+        if (activeService >= 0 && serviceCardRefs.current[activeService]) {
+          const serviceRect = serviceCardRefs.current[activeService]!.getBoundingClientRect();
+          setServicePos({
+            x: serviceRect.left + serviceRect.width / 2 - sectionRect.left,
+            y: serviceRect.top + serviceRect.height / 2 - sectionRect.top
+          });
+        }
+      } else {
+        setButtonPos(null);
+        setServicePos(null);
+        setHoveredServicePos(null);
+        setSectorPos(null);
+      }
+    };
+    computePositions();
+    window.addEventListener('resize', computePositions);
+    window.addEventListener('scroll', computePositions);
+    return () => {
+      window.removeEventListener('resize', computePositions);
+      window.removeEventListener('scroll', computePositions);
+    };
+  }, [activeService, hoveredService, activeSector, services.length, hoveredSector]);
+
+  const handleServiceClick = (serviceIndex: number) => {
+    setActiveService(serviceIndex);
   };
 
-  const closeServiceModal = () => {
-    setClickedService(null);
+  const handleNeuralSync = (serviceIndex: number) => {
+    setActiveService(serviceIndex);
+    
+    // Show guidance to click the neural development process button
+    const notification = document.createElement('div');
+    notification.className = 'fixed top-24 right-6 bg-cyan-500/20 border border-cyan-400 text-cyan-300 px-6 py-3 rounded-lg backdrop-blur-sm z-50 animate-fade-in';
+    notification.innerHTML = `
+      <div class="flex items-center gap-2">
+        <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+        <span class="text-sm">Click "Show Neural Development Process" to explore phases</span>
+      </div>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.remove();
+    }, 4000);
   };
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'completed':
-        return 'from-green-500 to-emerald-600';
-      case 'in-progress':
-        return 'from-blue-500 to-cyan-600';
-      case 'pending':
-        return 'from-orange-500 to-red-600';
-      default:
-        return 'from-gray-500 to-slate-600';
-    }
-  };
-
-  const currentServices = servicesBySector[activeSector as keyof typeof servicesBySector] || [];
 
   return (
-    <section className="py-20 relative overflow-hidden min-h-screen">
+    <section ref={sectionRef} id="services" className="py-20 relative">
       <div className="container mx-auto px-6 relative z-10">
+        {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-            Our <span className="text-neon animate-text-glow">Services</span>
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+            Neural <span className="text-neon">Services</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
-            Comprehensive solutions across multiple domains, powered by cutting-edge technology and expert teams
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Advanced service delivery through intelligent automation and cognitive architectures
           </p>
         </div>
 
         {/* Sector Navigation */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {sectors.map((sector, index) => (
-            <button
-              key={sector.id}
-              onClick={() => setActiveSector(sector.id)}
-              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 flex items-center gap-2 ${
-                activeSector === sector.id
-                  ? 'bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-lg transform scale-105'
-                  : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
-              }`}
-            >
-              <sector.icon size={20} />
-              {sector.name}
-            </button>
-          ))}
+          {sectors.map((sector) => {
+            const IconComponent = sector.icon;
+            return (
+              <button
+                key={sector.id}
+                ref={(el) => { sectorBtnRefs.current[sector.id] = el; }}
+                onClick={() => setActiveSector(sector.id)}
+                onMouseEnter={() => setHoveredSector(sector.id)}
+                onMouseLeave={() => setHoveredSector(null)}
+                className={`group flex items-center gap-3 px-6 py-3 rounded-full transition-all duration-300 ${
+                  activeSector === sector.id 
+                    ? 'bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-lg' 
+                    : 'glassmorphism text-gray-300 hover:text-white'
+                }`}
+                style={{
+                  boxShadow: activeSector === sector.id ? `0 0 20px ${sector.color}40` : undefined
+                }}
+              >
+                <IconComponent className="w-5 h-5" />
+                <span className="font-medium">{sector.name}</span>
+                <div className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  activeSector === sector.id ? 'bg-white' : 'bg-gray-500 group-hover:bg-gray-300'
+                }`}></div>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Services Grid */}
+        {/* Services Grid with Neural Network Visualization */}
         <div className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {currentServices.map((service, index) => (
-              <div
-                key={index}
-                className={`glassmorphism p-6 rounded-xl transition-all duration-300 cursor-pointer group hover:shadow-xl ${
-                  hoveredService === index ? 'transform scale-105' : ''
+          {/* Neural connections SVG */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
+            <defs>
+              <linearGradient id="neuralGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="rgb(0, 212, 255)" stopOpacity="0.6" />
+                <stop offset="50%" stopColor="rgb(147, 51, 234)" stopOpacity="0.4" />
+                <stop offset="100%" stopColor="rgb(236, 72, 153)" stopOpacity="0.6" />
+              </linearGradient>
+              <filter id="neuralGlow">
+                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                <feMerge> 
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+
+            {/* Connection lines between services */}
+            {services.map((service, index) => 
+              service.connections.map(connIndex => {
+                if (connIndex >= services.length) return null;
+                const targetService = services[connIndex];
+                const isActive = activeService === index || activeService === connIndex;
+                const isHovered = hoveredService === index || hoveredService === connIndex;
+                
+                return (
+                  <line
+                    key={`${index}-${connIndex}`}
+                    x1={`${service.position.x}%`}
+                    y1={`${service.position.y}%`}
+                    x2={`${targetService.position.x}%`}
+                    y2={`${targetService.position.y}%`}
+                    stroke={isActive || isHovered ? "url(#neuralGradient)" : "rgba(0, 212, 255, 0.2)"}
+                    strokeWidth={isActive || isHovered ? "2" : "1"}
+                    filter={isActive || isHovered ? "url(#neuralGlow)" : "none"}
+                    className="transition-all duration-500"
+                  />
+                );
+              })
+            )}
+
+            {/* Neural pulse indicators */}
+            {services.map((service, index) => (
+              <circle
+                key={`pulse-${index}`}
+                cx={`${service.position.x}%`}
+                cy={`${service.position.y}%`}
+                r="3"
+                fill="rgb(0, 212, 255)"
+                className={`transition-all duration-300 ${
+                  neuralPulse === index ? 'animate-ping' : 'opacity-40'
                 }`}
-                onMouseEnter={() => setHoveredService(index)}
-                onMouseLeave={() => setHoveredService(-1)}
-                onClick={() => handleServiceClick(service, activeSector)}
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="p-3 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600">
-                    <service.icon className="w-6 h-6 text-white" />
+              />
+            ))}
+          </svg>
+
+          {/* Service Cards */}
+          <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" style={{ zIndex: 2 }}>
+            {services.map((service, index) => {
+              const IconComponent = service.icon;
+              return (
+                <div
+                  key={index}
+                  ref={(el) => { serviceCardRefs.current[index] = el; }}
+                  className={`group relative glassmorphism p-6 rounded-xl border border-cyan-500/20 transition-all duration-500 cursor-pointer ${
+                    activeService === index 
+                      ? 'scale-105 shadow-2xl border-cyan-500/50' 
+                      : 'hover:scale-102 hover:border-cyan-500/30'
+                  }`}
+                  style={{
+                    position: 'absolute',
+                    left: `${service.position.x}%`,
+                    top: `${service.position.y}%`,
+                    transform: 'translate(-50%, -50%)',
+                    width: '300px',
+                    minHeight: '250px'
+                  }}
+                  onClick={() => handleServiceClick(index)}
+                  onMouseEnter={() => setHoveredService(index)}
+                  onMouseLeave={() => setHoveredService(-1)}
+                >
+                  {/* Neural energy indicator */}
+                  <div className={`absolute top-4 right-4 w-3 h-3 rounded-full transition-all duration-300 ${
+                    activeService === index ? 'bg-cyan-400 animate-pulse' : 'bg-gray-500'
+                  }`}></div>
+
+                  {/* Service icon */}
+                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center mb-4 transition-all duration-300 ${
+                    activeService === index ? 'scale-110' : 'group-hover:scale-105'
+                  }`}>
+                    <IconComponent className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-white group-hover:text-neon transition-colors">
+
+                  {/* Service content */}
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
                     {service.title}
                   </h3>
-                </div>
-                <p className="text-gray-300 mb-4">{service.description}</p>
-                <div className="space-y-2">
-                  {service.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-neon"></div>
-                      <span className="text-sm text-gray-400">{feature}</span>
+                  <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+                    {service.description}
+                  </p>
+
+                  {/* Neural Sync Badge */}
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="px-3 py-1 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 border border-cyan-500/30 rounded-full">
+                      <span className="text-xs text-cyan-300 font-medium">Neural Sync</span>
                     </div>
-                  ))}
+                    <div className="flex items-center gap-1">
+                      <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
+                      <span className="text-xs text-green-400">Active</span>
+                    </div>
+                  </div>
+
+                  {/* Features list */}
+                  <ul className="space-y-2 mb-4">
+                    {service.features.slice(0, 3).map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center text-xs text-gray-400">
+                        <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full mr-2"></div>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Neural link button */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleNeuralSync(index);
+                    }}
+                    className="w-full mt-auto py-2 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 border border-cyan-500/30 rounded-lg text-cyan-300 text-sm font-medium hover:from-cyan-500/30 hover:to-purple-600/30 transition-all duration-300 flex items-center justify-center gap-2"
+                  >
+                    <Brain className="w-4 h-4" />
+                    Neural Link
+                  </button>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
-
-      {/* Service Detail Modal */}
-      {clickedService && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
-          <div className="bg-slate-900/95 backdrop-blur-sm border border-white/20 rounded-2xl p-8 max-w-4xl max-h-[90vh] overflow-y-auto m-4">
-            <div className="flex justify-between items-start mb-6">
-              <div className="flex items-center gap-4">
-                <div className="p-3 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600">
-                  <clickedService.icon className="w-8 h-8 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-white">{clickedService.title}</h3>
-                  <p className="text-neon">{clickedService.sector}</p>
-                </div>
-              </div>
-              <button
-                onClick={closeServiceModal}
-                className="text-gray-400 hover:text-white transition-colors text-2xl"
-              >
-                ×
-              </button>
-            </div>
-
-            <p className="text-gray-300 mb-8 text-lg">{clickedService.description}</p>
-
-            {/* Development Phases for clicked service */}
-            <div className="space-y-6">
-              <h4 className="text-xl font-bold text-white mb-4">Development Process</h4>
-              {developmentPhases[clickedService.sector as keyof typeof developmentPhases]?.map((phase, index) => (
-                <div key={phase.id} className="glassmorphism p-6 rounded-xl">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className={`p-3 rounded-lg bg-gradient-to-r ${getStatusColor(phase.status)}`}>
-                      <phase.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h5 className="text-lg font-bold text-white">{phase.title}</h5>
-                      <span className="text-sm text-neon">{phase.phase}</span>
-                    </div>
-                  </div>
-                  <p className="text-gray-300 mb-4">{phase.description}</p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <h6 className="text-white font-semibold mb-2">Deliverables:</h6>
-                      <ul className="space-y-1">
-                        {phase.deliverables.map((deliverable, idx) => (
-                          <li key={idx} className="text-gray-400 text-sm flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-neon"></div>
-                            {deliverable}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h6 className="text-white font-semibold mb-2">Duration:</h6>
-                      <p className="text-gray-400 text-sm">{phase.duration}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 };
