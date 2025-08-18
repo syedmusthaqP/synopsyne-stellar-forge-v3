@@ -27,7 +27,7 @@ const NeuralDevelopmentProcess = () => {
       description: "Understanding your vision and requirements through comprehensive analysis and stakeholder collaboration.",
       icon: Brain,
       position: { x: 20, y: 50 },
-      connections: [2, 6],
+      connections: [2],
       status: "completed",
       energy: 100,
     },
@@ -38,7 +38,7 @@ const NeuralDevelopmentProcess = () => {
       description: "Creating intuitive user experiences with cutting-edge design principles and neural interface concepts.",
       icon: FileText,
       position: { x: 35, y: 25 },
-      connections: [1, 3, 7],
+      connections: [1, 3],
       status: "completed",
       energy: 90,
     },
@@ -49,7 +49,7 @@ const NeuralDevelopmentProcess = () => {
       description: "Building with cutting-edge technologies using neural development methodologies and cognitive architecture.",
       icon: Code,
       position: { x: 65, y: 25 },
-      connections: [2, 4, 8],
+      connections: [2, 4],
       status: "in-progress",
       energy: 75,
     },
@@ -60,7 +60,7 @@ const NeuralDevelopmentProcess = () => {
       description: "Ensuring quality and performance through comprehensive testing protocols and neural validation systems.",
       icon: User,
       position: { x: 80, y: 50 },
-      connections: [3, 5, 9],
+      connections: [3, 5],
       status: "pending",
       energy: 60,
     },
@@ -71,72 +71,16 @@ const NeuralDevelopmentProcess = () => {
       description: "Launching your solution to the world with seamless deployment and continuous neural monitoring.",
       icon: Clock,
       position: { x: 50, y: 75 },
-      connections: [4, 10],
-      status: "pending",
-      energy: 40,
-    },
-    // Connecting nodes for each phase
-    {
-      id: 6,
-      title: "Requirement Analysis",
-      phase: "Discovery Support",
-      description: "Data gathering and stakeholder interviews to understand core requirements.",
-      icon: Brain,
-      position: { x: 10, y: 65 },
-      connections: [1],
-      status: "completed",
-      energy: 95,
-    },
-    {
-      id: 7,
-      title: "UI/UX Research",
-      phase: "Design Support",
-      description: "User experience research and interface design validation.",
-      icon: FileText,
-      position: { x: 25, y: 10 },
-      connections: [2],
-      status: "completed",
-      energy: 85,
-    },
-    {
-      id: 8,
-      title: "Code Architecture",
-      phase: "Development Support",
-      description: "System architecture planning and technical implementation strategy.",
-      icon: Code,
-      position: { x: 75, y: 10 },
-      connections: [3],
-      status: "in-progress",
-      energy: 70,
-    },
-    {
-      id: 9,
-      title: "Quality Assurance",
-      phase: "Testing Support",
-      description: "Automated testing and quality validation protocols.",
-      icon: User,
-      position: { x: 90, y: 65 },
       connections: [4],
       status: "pending",
-      energy: 55,
-    },
-    {
-      id: 10,
-      title: "Launch Strategy",
-      phase: "Deployment Support",
-      description: "Go-to-market strategy and deployment optimization.",
-      icon: Clock,
-      position: { x: 60, y: 90 },
-      connections: [5],
-      status: "pending",
-      energy: 35,
+      energy: 40,
     },
   ];
 
   useEffect(() => {
     const pulseInterval = setInterval(() => {
       setNeuralPulse(prev => (prev + 1) % processNodes.length);
-    }, 1500);
+    }, 2000);
 
     return () => clearInterval(pulseInterval);
   }, []);
@@ -218,32 +162,6 @@ const NeuralDevelopmentProcess = () => {
             <stop offset="100%" stopColor="rgb(236, 72, 153)" stopOpacity="0.8" />
           </linearGradient>
           
-          {/* Phase-specific gradients */}
-          <linearGradient id="phaseGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="rgb(34, 197, 94)" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="rgb(16, 185, 129)" stopOpacity="0.7" />
-          </linearGradient>
-          
-          <linearGradient id="phaseGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="rgb(34, 197, 94)" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="rgb(6, 182, 212)" stopOpacity="0.7" />
-          </linearGradient>
-          
-          <linearGradient id="phaseGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="rgb(6, 182, 212)" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="rgb(59, 130, 246)" stopOpacity="0.7" />
-          </linearGradient>
-          
-          <linearGradient id="phaseGradient4" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="rgb(147, 51, 234)" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="rgb(139, 92, 246)" stopOpacity="0.7" />
-          </linearGradient>
-          
-          <linearGradient id="phaseGradient5" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="rgb(251, 146, 60)" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="rgb(239, 68, 68)" stopOpacity="0.7" />
-          </linearGradient>
-          
           <filter id="glow">
             <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
             <feMerge> 
@@ -261,17 +179,6 @@ const NeuralDevelopmentProcess = () => {
             const isActive = activeNode === node.id || activeNode === connId;
             const isPulsing = pulseEffect[node.id] || pulseEffect[connId];
             
-            // Determine which phase gradient to use based on the main phase nodes
-            const getPhaseGradient = (nodeId: number) => {
-              if (nodeId >= 1 && nodeId <= 5) return `phaseGradient${nodeId}`;
-              // For supporting nodes, use their connected main phase gradient
-              const mainPhase = processNodes.find(n => n.id === nodeId)?.connections[0];
-              if (mainPhase && mainPhase >= 1 && mainPhase <= 5) return `phaseGradient${mainPhase}`;
-              return "connectionGradient";
-            };
-            
-            const gradientId = getPhaseGradient(node.id);
-            
             return (
               <line
                 key={`${node.id}-${connId}`}
@@ -279,7 +186,7 @@ const NeuralDevelopmentProcess = () => {
                 y1={`${node.position.y}%`}
                 x2={`${targetNode.position.x}%`}
                 y2={`${targetNode.position.y}%`}
-                stroke={isActive || isPulsing ? `url(#${gradientId})` : "rgba(0, 212, 255, 0.3)"}
+                stroke={isActive || isPulsing ? "url(#connectionGradient)" : "rgba(0, 212, 255, 0.3)"}
                 strokeWidth={isActive || isPulsing ? "3" : "2"}
                 filter={isActive || isPulsing ? "url(#glow)" : "none"}
                 className={`transition-all duration-500 ${
