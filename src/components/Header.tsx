@@ -114,6 +114,14 @@ const Header = () => {
               Testimonials
             </Link>
             
+            <Link 
+              to="/founder" 
+              className="text-white hover:text-neon transition-colors"
+              onClick={handleLinkClick}
+            >
+              Founder Profile
+            </Link>
+            
             {/* Get In Touch Button */}
             <Link 
               to="/contact" 
@@ -175,6 +183,14 @@ const Header = () => {
                   onClick={handleLinkClick}
                 >
                   Testimonials
+                </Link>
+                
+                <Link
+                  to="/founder"
+                  className="block text-white hover:text-neon transition-colors text-base font-medium py-2 px-2 rounded-lg hover:bg-cyan-500/10"
+                  onClick={handleLinkClick}
+                >
+                  Founder Profile
                 </Link>
               </div>
               
