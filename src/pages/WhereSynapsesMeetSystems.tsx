@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import ContactSection from '../components/ContactSection';
+import { ContactSection } from '../components/ContactSection';
 import { Brain, Zap, Link, TrendingUp, Gem, Handshake, Target, Rocket, Lightbulb, Globe, Eye, Layers, Users, Compass, Sparkles, Network, Shield, Crown, Atom, MessageCircle } from 'lucide-react';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
