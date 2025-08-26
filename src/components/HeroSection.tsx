@@ -28,7 +28,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative pt-20">
+    <section className="min-h-screen flex items-center justify-center relative pt-24">
       {/* Professional AI/Software Background */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Professional Grid Pattern */}
@@ -126,59 +126,105 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-transparent to-black/60"></div>
       </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10">
-        {/* Animated badge */}
-        <div className="inline-flex items-center glassmorphism px-6 py-2 rounded-full mb-8 animate-float">
-          <Brain className="w-4 h-4 text-neon mr-2" />
-          <span className="text-white text-sm">Neural Innovation Since 2020</span>
-        </div>
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left Content */}
+          <div className="text-center lg:text-left">
+            {/* Animated badge */}
+            <div className="inline-flex items-center glassmorphism px-6 py-2 rounded-full mb-8 animate-float">
+              <Brain className="w-4 h-4 text-neon mr-2" />
+              <span className="text-white text-sm">Neural Innovation Since 2020</span>
+            </div>
 
-        {/* Main headline */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-          We Engineer{' '}
-          <span className="text-neon animate-text-glow">Software</span>
-          <br />
-          That Transforms{' '}
-          <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-            Industries
-          </span>
-        </h1>
+            {/* Main headline */}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+              We Engineer{' '}
+              <span className="text-neon animate-text-glow">Software</span>
+              <br />
+              That Transforms{' '}
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                Industries
+              </span>
+            </h1>
 
-        {/* Subheadline */}
-        <div className="relative mb-12 max-w-3xl mx-auto">
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 rounded-lg blur-xl"></div>
-          <div className="relative glassmorphism p-4 sm:p-6 rounded-lg">
-            <p className="text-base sm:text-lg md:text-xl text-gray-300">
-              Custom solutions, cutting-edge technology, measurable results.
-              We build the future, one neural connection at a time.
-            </p>
+            {/* Subheadline */}
+            <div className="relative mb-12 max-w-3xl">
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 rounded-lg blur-xl"></div>
+              <div className="relative glassmorphism p-4 sm:p-6 rounded-lg">
+                <p className="text-base sm:text-lg md:text-xl text-gray-300">
+                  Custom solutions, cutting-edge technology, measurable results.
+                  We build the future, one neural connection at a time.
+                </p>
+              </div>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start items-center">
+              {/* Primary CTA */}
+              <button 
+                onClick={handleNeuralTransformation}
+                className="w-full sm:w-auto group relative overflow-hidden neon-border px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-white hover:bg-cyan-500/10 transition-all transform hover:scale-105"
+              >
+                <span className="relative z-10 flex items-center justify-center text-base sm:text-lg font-semibold">
+                  Start Your Neural Transformation
+                  <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </button>
+
+              {/* Secondary CTA */}
+              <button 
+                onClick={handleExploreSolutions}
+                className="w-full sm:w-auto group glassmorphism px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-white hover:bg-white/10 transition-all transform hover:scale-105"
+              >
+                <span className="flex items-center justify-center text-base sm:text-lg font-semibold">
+                  <Rocket className="mr-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform" />
+                  Explore Neural Solutions
+                </span>
+              </button>
+            </div>
           </div>
-        </div>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4">
-          {/* Primary CTA */}
-          <button 
-            onClick={handleNeuralTransformation}
-            className="w-full sm:w-auto group relative overflow-hidden neon-border px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-white hover:bg-cyan-500/10 transition-all transform hover:scale-105"
-          >
-            <span className="relative z-10 flex items-center justify-center text-base sm:text-lg font-semibold">
-              Start Your Neural Transformation
-              <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
-            </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </button>
-
-          {/* Secondary CTA */}
-          <button 
-            onClick={handleExploreSolutions}
-            className="w-full sm:w-auto group glassmorphism px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-white hover:bg-white/10 transition-all transform hover:scale-105"
-          >
-            <span className="flex items-center justify-center text-base sm:text-lg font-semibold">
-              <Rocket className="mr-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform" />
-              Explore Neural Solutions
-            </span>
-          </button>
+          {/* Right Content - Founder Photo */}
+          <div className="flex justify-center lg:justify-end">
+            <div className="relative">
+              {/* Glowing container */}
+              <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-xl blur-xl"></div>
+              
+              {/* Photo container with enhanced effects */}
+              <div className="relative glassmorphism p-6 rounded-xl border border-cyan-400/30">
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-xl"></div>
+                
+                {/* Profile photo */}
+                <div className="relative w-80 h-96 overflow-hidden rounded-lg">
+                  <img 
+                    src="/lovable-uploads/ba92d56a-fa78-4d89-983a-57acc0023c22.png" 
+                    alt="Syed Musthaq - Founder" 
+                    className="w-full h-full object-cover object-center"
+                  />
+                  
+                  {/* Overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+                  
+                  {/* Floating particles around photo */}
+                  <div className="absolute -top-2 -left-2 w-4 h-4 bg-cyan-400 rounded-full animate-ping opacity-60"></div>
+                  <div className="absolute -top-2 -right-2 w-3 h-3 bg-blue-400 rounded-full animate-ping opacity-60" style={{animationDelay: '1s'}}></div>
+                  <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-purple-400 rounded-full animate-ping opacity-60" style={{animationDelay: '2s'}}></div>
+                  <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-cyan-400 rounded-full animate-ping opacity-60" style={{animationDelay: '0.5s'}}></div>
+                </div>
+                
+                {/* Tech badge overlay */}
+                <div className="absolute bottom-8 left-8 right-8">
+                  <div className="glassmorphism px-4 py-2 rounded-lg border border-cyan-400/30">
+                    <p className="text-cyan-300 text-sm font-medium text-center">AI Innovation Leader</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Additional glowing effects */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-cyan-500/5 to-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>
+            </div>
+          </div>
         </div>
       </div>
 

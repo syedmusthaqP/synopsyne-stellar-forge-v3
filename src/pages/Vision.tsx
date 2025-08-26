@@ -78,7 +78,7 @@ export default function VisionPage() {
       
       <Header />
       
-      <div className="container mx-auto container-padding py-12 relative z-10">
+      <div className="container mx-auto container-padding pt-32 pb-12 relative z-10">
         {/* Header Section */}
         <motion.div 
           className="text-center mb-16"
