@@ -111,7 +111,7 @@ export function FounderProfile() {
   };
   
   return (
-    <section id="about" className="min-h-screen relative overflow-hidden pt-12 pb-12 bg-gradient-to-b from-[#052037] to-[#0a1929]">
+    <section id="about" className="min-h-screen relative overflow-hidden pt-24 pb-12 bg-gradient-to-b from-[#052037] to-[#0a1929]">
       {/* Background light effects */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0iZ3JhZDEiIGN4PSIyMCUiIGN5PSIyMCUiIHI9IjUwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0icmdiYSgwLCAxOTUsIDI1NSwgMC4xKSIgLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9InJnYmEoMCwgMTk1LCAyNTUsIDApIiAvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMwNzE1MjUiIC8+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkMSkiIC8+PC9zdmc+')]"></div>
       
@@ -451,14 +451,13 @@ export function FounderProfile() {
                     ))}
                   </div>
                   
-                  {/* Placeholder for profile image */}
-                  <div className="w-full h-96 bg-gradient-to-br from-[#00c3ff]/20 to-[#c961de]/20 flex items-center justify-center relative z-10">
-                    <div className="text-white text-center">
-                      <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#00c3ff] to-[#c961de] flex items-center justify-center">
-                        <span className="text-2xl font-bold">SM</span>
-                      </div>
-                      <p className="text-sm opacity-70">Profile Image Placeholder</p>
-                    </div>
+                  {/* Profile image with your photo */}
+                  <div className="w-full h-96 relative z-10">
+                    <img 
+                      src="/lovable-uploads/ba92d56a-fa78-4d89-983a-57acc0023c22.png" 
+                      alt="Syed Musthaq - Founder" 
+                      className="w-full h-full object-cover object-center rounded-lg"
+                    />
                   </div>
                   
                   {/* Enhanced animated overlay gradient */}
