@@ -17,7 +17,6 @@ import Testimonials from "./pages/Testimonials";
 import Login from "./pages/Login";
 import CMS from "./pages/CMS";
 import Founder from "./pages/Founder";
-import Vision from "./pages/Vision";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -42,7 +41,6 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/cms" element={<CMS />} />
           <Route path="/founder" element={<Founder />} />
-          <Route path="/vision" element={<Vision />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

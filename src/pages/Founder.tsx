@@ -3,7 +3,6 @@ import Header from '../components/Header';
 import { FounderProfile } from '../components/FounderProfile';
 import { InnovationSection } from '../components/InnovationSection';
 import { TimelineSection } from '../components/TimelineSection';
-import { ContactSection } from '../components/ContactSection';
 import Footer from '../components/Footer';
 
 const Founder = () => {
@@ -21,7 +20,6 @@ const Founder = () => {
       <FounderProfile />
       <InnovationSection />
       <TimelineSection />
-      <ContactSection />
       <Footer />
     </div>
   );

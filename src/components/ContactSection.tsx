@@ -1,423 +1,594 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { GradientText } from '@/components/ui/gradient-text';
-import { Mail, MapPin, Phone, Send, Linkedin, Github, Twitter, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
-export function ContactSection() {
-  const [formState, setFormState] = useState({
+import React, { useState } from 'react';
+import { Brain, Mail, Phone, MapPin, Send, Calendar, Clock, Users, Zap, Target, BarChart3, Settings, MessageSquare, Database, Shield, Cpu, Cloud, Code, Bot } from 'lucide-react';
+
+const ContactSection = () => {
+  const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
-    message: ''
+    company: '',
+    message: '',
+    projectType: '',
+    customProjectType: '',
+    timeline: '',
+    budget: '',
+    budgetCurrency: 'USD',
+    features: []
   });
-  
-  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormState(prev => ({ ...prev, [name]: value }));
+
+  const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+  const [showModal, setShowModal] = useState(false);
+
+  const productivityFeatures = [
+    { id: 'ai-automation', name: 'AI Process Automation', icon: Zap, description: 'Automate repetitive tasks with intelligent workflows' },
+    { id: 'real-time-analytics', name: 'Real-time Analytics Dashboard', icon: BarChart3, description: 'Monitor performance and KPIs in real-time' },
+    { id: 'team-collaboration', name: 'Advanced Team Collaboration', icon: Users, description: 'Seamless communication and project management tools' },
+    { id: 'smart-scheduling', name: 'AI-Powered Scheduling', icon: Calendar, description: 'Intelligent meeting and resource scheduling' },
+    { id: 'performance-tracking', name: 'Performance Optimization', icon: Target, description: 'Track and optimize team productivity metrics' },
+    { id: 'workflow-integration', name: 'Workflow Integration Hub', icon: Settings, description: 'Connect all your tools in one unified platform' },
+    { id: 'intelligent-reporting', name: 'Intelligent Reporting', icon: MessageSquare, description: 'Auto-generated insights and progress reports' },
+    { id: 'time-management', name: 'Smart Time Management', icon: Clock, description: 'AI-driven time tracking and optimization suggestions' },
+    { id: 'data-visualization', name: 'Advanced Data Visualization', icon: Database, description: 'Interactive charts and comprehensive data insights' },
+    { id: 'security-compliance', name: 'Security & Compliance Suite', icon: Shield, description: 'Enterprise-grade security with compliance automation' },
+    { id: 'machine-learning', name: 'Custom ML Models', icon: Cpu, description: 'Tailored machine learning solutions for your business' },
+    { id: 'cloud-integration', name: 'Multi-Cloud Integration', icon: Cloud, description: 'Seamless integration across AWS, Azure, and GCP' },
+    { id: 'api-development', name: 'Custom API Development', icon: Code, description: 'RESTful and GraphQL APIs for seamless integrations' },
+    { id: 'chatbot-ai', name: 'AI-Powered Chatbots', icon: Bot, description: 'Intelligent customer service and internal support bots' },
+    { id: 'predictive-analytics', name: 'Predictive Analytics Engine', icon: BarChart3, description: 'Forecast trends and make data-driven decisions' },
+    { id: 'voice-recognition', name: 'Voice Recognition System', icon: MessageSquare, description: 'Advanced voice commands and speech-to-text capabilities' },
+    { id: 'blockchain-integration', name: 'Blockchain Solutions', icon: Shield, description: 'Secure and transparent blockchain implementations' },
+    { id: 'iot-connectivity', name: 'IoT Device Management', icon: Cpu, description: 'Connect and manage Internet of Things devices' },
+    { id: 'augmented-reality', name: 'AR/VR Integration', icon: Code, description: 'Immersive augmented and virtual reality experiences' },
+    { id: 'automated-testing', name: 'Automated Testing Suite', icon: Settings, description: 'Comprehensive automated testing and quality assurance' }
+  ];
+
+  const handleFeatureToggle = (featureId: string) => {
+    setSelectedFeatures(prev => 
+      prev.includes(featureId) 
+        ? prev.filter(id => id !== featureId)
+        : [...prev, featureId]
+    );
   };
-  
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setFormStatus('submitting');
+    setIsSubmitting(true);
     
     // Simulate form submission
     setTimeout(() => {
-      setFormStatus('success');
-      setFormState({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
+      const selectedFeatureNames = selectedFeatures
+        .map(id => productivityFeatures.find(f => f.id === id)?.name)
+        .filter(Boolean);
+      
+      console.log('Neural Connection Request Submitted:', {
+        ...formData,
+        features: selectedFeatureNames,
+        timestamp: new Date().toISOString()
       });
       
-      // Reset form status after 3 seconds
-      setTimeout(() => {
-        setFormStatus('idle');
-      }, 3000);
-    }, 1500);
+      // Store contact data for admin dashboard
+      const contactData = {
+        ...formData,
+        features: selectedFeatureNames,
+        timestamp: new Date().toISOString(),
+        id: Date.now()
+      };
+      
+      // Store in localStorage for demo purposes
+      const existingContacts = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
+      existingContacts.push(contactData);
+      localStorage.setItem('contactSubmissions', JSON.stringify(existingContacts));
+      
+      setSubmitMessage(`🧠 Neural Connection Established Successfully! 
+
+Thank you ${formData.name || 'valued client'}, your digital transformation request has been processed by our AI systems.
+
+📋 PROJECT SUMMARY:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Client: ${formData.name || 'To be provided'}
+• Company: ${formData.company || 'Individual/Startup'}
+• Project Type: ${formData.projectType === 'other' ? formData.customProjectType : formData.projectType || 'Custom Solution'}
+• Timeline: ${formData.timeline || 'To be discussed'}
+• Budget Range: ${formData.budget || 'To be determined'} ${formData.budgetCurrency}
+• Selected Features: ${selectedFeatureNames.length > 0 ? selectedFeatureNames.join(', ') : 'Basic consultation package'}
+
+🚀 NEXT STEPS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Initial consultation call within 4 hours
+2. Technical requirements analysis
+3. Custom solution architecture design
+4. Project timeline and milestone planning
+5. Development team assignment
+
+💡 INNOVATION PREVIEW:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Based on your selections, we'll incorporate cutting-edge AI technologies including machine learning algorithms, cloud-native architecture, and advanced automation systems to deliver a solution that exceeds your expectations.
+
+Our neural network has analyzed your requirements and prepared a comprehensive solution overview. Expect a detailed proposal with cost analysis, technical specifications, and implementation roadmap.
+
+🔗 Connection Status: ACTIVE | Priority: HIGH | Response Time: < 4 Hours`);
+      
+      // Clear form data after submission
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        message: '',
+        projectType: '',
+        customProjectType: '',
+        timeline: '',
+        budget: '',
+        budgetCurrency: 'USD',
+        features: []
+      });
+      setSelectedFeatures([]);
+      setShowModal(true);
+      
+      setIsSubmitting(false);
+    }, 2000);
   };
-  
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
   };
-  
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
-  
-  const contactInfo = [
-    {
-      icon: <Mail className="h-5 w-5" />,
-      title: "Email",
-      value: "syedmusthaqk786@gmail.com",
-      link: "mailto:syedmusthaqk786@gmail.com",
-      color: "from-[#00c3ff] to-[#0080ff]"
-    },
-    {
-      icon: <MapPin className="h-5 w-5" />,
-      title: "Location",
-      value: "Andhra Pradesh, India",
-      link: "#",
-      color: "from-[#c961de] to-[#9932cc]"
-    },
-    {
-      icon: <Phone className="h-5 w-5" />,
-      title: "Phone",
-      value: "+91 7013425496",
-      link: "tel:+917013425496",
-      color: "from-[#00cc99] to-[#009973]"
-    }
-  ];
-  
-  const socialLinks = [
-    {
-      icon: <Linkedin className="h-5 w-5" />,
-      name: "LinkedIn",
-      link: "#",
-      color: "#0077B5"
-    },
-    {
-      icon: <Github className="h-5 w-5" />,
-      name: "GitHub",
-      link: "#",
-      color: "#333"
-    },
-    {
-      icon: <Twitter className="h-5 w-5" />,
-      name: "Twitter",
-      link: "#",
-      color: "#1DA1F2"
-    }
-  ];
 
   return (
-    <section id="contact" className="py-20 relative overflow-hidden bg-gradient-to-b from-[#0a1929] to-[#071525]">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 z-0 opacity-30">
-        <div className="absolute top-1/3 left-1/3 w-1/3 h-1/3 rounded-full" style={{ 
-          background: 'radial-gradient(circle, rgba(0,195,255,0.05) 0%, rgba(0,195,255,0) 70%)'
-        }}></div>
-        <div className="absolute bottom-1/3 right-1/3 w-1/3 h-1/3 rounded-full" style={{ 
-          background: 'radial-gradient(circle, rgba(201,97,222,0.05) 0%, rgba(201,97,222,0) 70%)'
-        }}></div>
-        
-        {/* Animated dots background */}
-        <div className="absolute inset-0">
-          {Array.from({ length: 15 }).map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                width: `${Math.random() * 3 + 1}px`,
-                height: `${Math.random() * 3 + 1}px`,
-                background: i % 2 === 0 ? '#00c3ff' : '#c961de',
-                opacity: 0.3
-              }}
-              animate={{
-                y: [0, Math.random() * 30 - 15],
-                x: [0, Math.random() * 30 - 15],
-                opacity: [0.2, 0.5, 0.2]
-              }}
-              transition={{
-                duration: 3 + Math.random() * 2,
-                repeat: Infinity,
-                repeatType: "reverse"
-              }}
-            />
-          ))}
-        </div>
-      </div>
-      
-      <div className="container mx-auto container-padding relative z-10">
-        {/* Section Header */}
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="inline-block mb-4"
-          >
-            <div className="bg-[rgba(7,25,45,0.7)] backdrop-blur-md px-6 py-2 rounded-full border border-[rgba(30,73,118,0.6)]">
-              <Mail className="h-5 w-5 text-[#00c3ff] inline-block mr-2" />
-              <span className="text-[#00c3ff] font-medium">Get in Touch</span>
-            </div>
-          </motion.div>
+    <>
+      <style>
+        {`
+          .custom-scrollbar::-webkit-scrollbar {
+            display: none;
+          }
+          .custom-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
           
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <GradientText>Let's Connect</GradientText>
-          </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Reach out to discuss collaboration opportunities, strategic partnerships, or innovative projects
-          </p>
-        </motion.div>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Contact Information */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            <motion.div variants={itemVariants}>
-              <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
-              <p className="text-gray-400 mb-8">
-                Feel free to reach out through any of the channels below. I'm always open to discussing new projects, 
-                innovative ideas, or opportunities to collaborate.
-              </p>
-            </motion.div>
-            
-            {/* Contact Cards */}
-            <div className="space-y-4">
-              {contactInfo.map((info, index) => (
-                <motion.a
-                  key={index}
-                  href={info.link}
-                  variants={itemVariants}
-                  whileHover={{ 
-                    scale: 1.03, 
-                    boxShadow: "0 0 20px rgba(0, 195, 255, 0.3)",
-                    y: -2
-                  }}
-                  className="bg-[rgba(7,25,45,0.7)] backdrop-blur-lg p-5 rounded-lg border border-[#1e4976]/60 flex items-center relative overflow-hidden block"
-                >
-                  {/* Background gradient */}
-                  <div className={`absolute top-0 right-0 w-full h-full opacity-5 bg-gradient-to-br ${info.color}`}></div>
-                  
-                  {/* Icon Container */}
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${info.color} flex items-center justify-center mr-4 relative z-10`}>
-                    {info.icon}
-                  </div>
-                  
-                  {/* Info Text */}
-                  <div className="relative z-10">
-                    <h4 className="text-white font-medium">{info.title}</h4>
-                    <p className="text-[#00c3ff]">{info.value}</p>
-                  </div>
-                  
-                  {/* Arrow indicator */}
-                  <div className="ml-auto relative z-10">
-                    <ArrowRight className="h-5 w-5 text-gray-500" />
-                  </div>
-                </motion.a>
-              ))}
-            </div>
-            
-            {/* Social Media Links */}
-            <motion.div variants={itemVariants} className="mt-10">
-              <h4 className="text-white font-semibold mb-4">Connect on Social Media</h4>
-              <div className="flex space-x-3">
-                {socialLinks.map((social, index) => (
-                  <motion.a
-                    key={index}
-                    href={social.link}
-                    whileHover={{ 
-                      scale: 1.1,
-                      boxShadow: `0 0 15px ${social.color}50` 
-                    }}
-                    className="w-10 h-10 rounded-full bg-[rgba(7,25,45,0.7)] backdrop-blur-sm border border-[#1e4976]/60 flex items-center justify-center text-white transition-colors"
-                    style={{ color: social.color }}
-                  >
-                    {social.icon}
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
-            
-            {/* Additional Info */}
-            <motion.div variants={itemVariants} className="mt-12 p-6 bg-[rgba(7,25,45,0.7)] backdrop-blur-lg rounded-lg border border-[#1e4976]/60 relative overflow-hidden">
-              <div className="absolute -top-10 -right-10 w-40 h-40 opacity-10" style={{
-                background: 'radial-gradient(circle, rgba(0, 195, 255, 0.8) 0%, transparent 70%)'
-              }}></div>
-              
-              <h4 className="text-white font-bold mb-2 relative z-10">Looking for Strategic Partnership?</h4>
-              <p className="text-gray-400 mb-4 relative z-10">
-                For business inquiries, collaborations, or speaking engagements, please reach out through the contact form or connect directly via email.
-              </p>
-              <div className="relative z-10">
-                <a href="mailto:syedmusthaqk786@gmail.com" className="text-[#00c3ff] font-medium hover:underline inline-flex items-center">
-                  <Mail className="h-4 w-4 mr-2" />
-                  syedmusthaqk786@gmail.com
-                </a>
-              </div>
-            </motion.div>
-          </motion.div>
+          /* Fix autocomplete styling */
+          input:-webkit-autofill,
+          input:-webkit-autofill:hover,
+          input:-webkit-autofill:focus,
+          input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px rgba(0, 0, 0, 0.4) inset !important;
+            -webkit-text-fill-color: white !important;
+            background: rgba(0, 0, 0, 0.4) !important;
+            backdrop-filter: blur(10px) !important;
+            transition: background-color 5000s;
+          }
           
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <div className="bg-[rgba(7,25,45,0.7)] backdrop-blur-lg p-8 rounded-lg border border-[#1e4976]/60 relative overflow-hidden">
-              {/* Decorative elements */}
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00c3ff] to-[#c961de]"></div>
-              <div className="absolute -top-20 -right-20 w-40 h-40 opacity-5" style={{
-                background: 'radial-gradient(circle, rgba(201, 97, 222, 0.8) 0%, transparent 70%)'
-              }}></div>
+          /* Enhanced scrolling for features */
+          .features-grid {
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+          }
+          .features-grid::-webkit-scrollbar {
+            display: none;
+          }
+        `}
+      </style>
+    
+      <section className="min-h-screen flex items-center justify-center relative pt-20">
+        <div className="container mx-auto px-6 relative z-10">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center glassmorphism px-6 py-2 rounded-full mb-8 animate-float">
+              <Brain className="w-4 h-4 text-neon mr-2" />
+              <span className="text-white text-sm">Neural Connection Request</span>
+            </div>
+
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+              Get In <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-pulse">Touch</span>
+            </h1>
+
+            <div className="relative mb-12 max-w-3xl mx-auto">
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 rounded-lg blur-xl"></div>
+              <div className="relative glassmorphism p-6 rounded-lg">
+                <p className="text-lg md:text-xl text-gray-300">
+                  Ready to transform your business with cutting-edge AI and software solutions? 
+                  Let's discuss how we can boost your productivity and efficiency.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Contact Form */}
+            <div className="relative glassmorphism p-8 rounded-2xl border border-cyan-400/30">
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-t-2xl"></div>
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Start Your Digital Transformation</h2>
               
-              <h3 className="text-2xl font-bold text-white mb-6">Send a Message</h3>
               
-              <form onSubmit={handleSubmit} className="space-y-5">
-                {/* Name Field */}
-                <div>
-                  <label className="block text-gray-300 mb-2 text-sm">Your Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formState.name}
-                    onChange={handleChange}
-                    className="w-full bg-[rgba(7,35,55,0.6)] text-white border border-[#1e4976]/80 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#00c3ff]/50 transition-all"
-                    placeholder="John Doe"
-                    required
-                  />
-                </div>
-                
-                {/* Email Field */}
-                <div>
-                  <label className="block text-gray-300 mb-2 text-sm">Email Address</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formState.email}
-                    onChange={handleChange}
-                    className="w-full bg-[rgba(7,35,55,0.6)] text-white border border-[#1e4976]/80 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#00c3ff]/50 transition-all"
-                    placeholder="john@example.com"
-                    required
-                  />
-                </div>
-                
-                {/* Subject Field */}
-                <div>
-                  <label className="block text-gray-300 mb-2 text-sm">Subject</label>
-                  <input
-                    type="text"
-                    name="subject"
-                    value={formState.subject}
-                    onChange={handleChange}
-                    className="w-full bg-[rgba(7,35,55,0.6)] text-white border border-[#1e4976]/80 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#00c3ff]/50 transition-all"
-                    placeholder="How can I help you?"
-                    required
-                  />
-                </div>
-                
-                {/* Message Field */}
-                <div>
-                  <label className="block text-gray-300 mb-2 text-sm">Your Message</label>
-                  <textarea
-                    name="message"
-                    value={formState.message}
-                    onChange={handleChange}
-                    rows={5}
-                    className="w-full bg-[rgba(7,35,55,0.6)] text-white border border-[#1e4976]/80 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#00c3ff]/50 transition-all resize-none"
-                    placeholder="Write your message here..."
-                    required
-                  ></textarea>
-                </div>
-                
-                {/* Submit Button */}
-                <motion.div whileHover={{ scale: 1.02 }}>
-                  <Button
-                    type="submit"
-                    className="w-full py-4 mt-4 bg-gradient-to-r from-[#00c3ff] to-[#c961de] rounded-lg text-white font-medium relative overflow-hidden"
-                    disabled={formStatus === 'submitting'}
-                  >
-                    <span className="relative z-10 flex items-center justify-center">
-                      {formStatus === 'submitting' ? (
-                        <>
-                          <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                          Sending...
-                        </>
-                      ) : formStatus === 'success' ? (
-                        'Message Sent!'
-                      ) : (
-                        <>
-                          <Send className="h-5 w-5 mr-2" />
-                          Send Message
-                        </>
-                      )}
-                    </span>
-                    
-                    {/* Animated light streak */}
-                    <motion.div 
-                      className="absolute top-0 -right-20 w-20 h-full transform rotate-20 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                      animate={{ 
-                        right: ["120%", "-20%"],
-                        transition: { duration: 1.5, repeat: Infinity, repeatDelay: 3 }
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Name *</label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                      placeholder="Your full name"
+                      required
+                      style={{
+                        background: 'rgba(0, 0, 0, 0.4)',
+                        backdropFilter: 'blur(10px)',
                       }}
                     />
-                  </Button>
-                </motion.div>
-                
-                {/* Success Message */}
-                {formStatus === 'success' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-green-400 text-sm mt-3 flex items-center"
-                  >
-                    <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    Your message has been sent successfully. I'll get back to you soon!
-                  </motion.div>
-                )}
+                  </div>
+                  <div>
+                    <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Email *</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                      placeholder="your.email@company.com"
+                      required
+                      style={{
+                        background: 'rgba(0, 0, 0, 0.4)',
+                        backdropFilter: 'blur(10px)',
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Company</label>
+                    <input
+                      type="text"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                      placeholder="Your company name"
+                      style={{
+                        background: 'rgba(0, 0, 0, 0.4)',
+                        backdropFilter: 'blur(10px)',
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Project Type</label>
+                    <div className="relative">
+                      <select
+                        name="projectType"
+                        value={formData.projectType}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
+                        style={{
+                          background: 'rgba(0, 0, 0, 0.4)',
+                          backdropFilter: 'blur(10px)',
+                        }}
+                      >
+                        <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Select project type</option>
+                        <option value="web-app" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Web Application</option>
+                        <option value="mobile-app" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Mobile Application</option>
+                        <option value="ai-integration" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>AI Integration</option>
+                        <option value="cloud-solution" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Cloud Solution</option>
+                        <option value="consulting" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Consulting</option>
+                        <option value="other" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Other</option>
+                      </select>
+                      <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                        <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                      </div>
+                    </div>
+                    {formData.projectType === 'other' && (
+                      <input
+                        type="text"
+                        name="customProjectType"
+                        value={formData.customProjectType}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all mt-2"
+                        placeholder="Please specify your project type"
+                        style={{
+                          background: 'rgba(0, 0, 0, 0.4)',
+                          backdropFilter: 'blur(10px)',
+                        }}
+                      />
+                    )}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Timeline</label>
+                    <div className="relative">
+                      <select
+                        name="timeline"
+                        value={formData.timeline}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
+                        style={{
+                          background: 'rgba(0, 0, 0, 0.4)',
+                          backdropFilter: 'blur(10px)',
+                        }}
+                      >
+                        <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Select innovation timeline</option>
+                        <option value="lightning-sprint" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>⚡ Lightning Sprint (2-4 weeks)</option>
+                        <option value="neural-acceleration" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>🧠 Neural Acceleration (1-3 months)</option>
+                        <option value="quantum-development" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>⚛️ Quantum Development (3-6 months)</option>
+                        <option value="digital-evolution" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>🚀 Digital Evolution (6-12 months)</option>
+                        <option value="infinite-partnership" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>♾️ Infinite Partnership (Ongoing)</option>
+                      </select>
+                      <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                        <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Budget Range</label>
+                    <div className="flex gap-2">
+                      <div className="relative flex-1">
+                        <select
+                          name="budgetCurrency"
+                          value={formData.budgetCurrency}
+                          onChange={handleInputChange}
+                          className="w-full px-3 py-3 border border-cyan-400/50 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
+                          style={{
+                            background: 'rgba(0, 0, 0, 0.4)',
+                            backdropFilter: 'blur(10px)',
+                          }}
+                        >
+                          <option value="USD" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>USD $</option>
+                          <option value="INR" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>INR ₹</option>
+                        </select>
+                        <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                          <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="relative flex-[2]">
+                        <select
+                          name="budget"
+                          value={formData.budget}
+                          onChange={handleInputChange}
+                          className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
+                          style={{
+                            background: 'rgba(0, 0, 0, 0.4)',
+                            backdropFilter: 'blur(10px)',
+                          }}
+                        >
+                          <option value="" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>Select range</option>
+                          {formData.budgetCurrency === 'USD' ? (
+                            <>
+                              <option value="10k-25k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$10k - $25k</option>
+                              <option value="25k-50k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$25k - $50k</option>
+                              <option value="50k-100k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$50k - $100k</option>
+                              <option value="100k-250k" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$100k - $250k</option>
+                              <option value="250k+" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>$250k+</option>
+                            </>
+                          ) : (
+                            <>
+                              <option value="8L-20L" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>₹8L - ₹20L</option>
+                              <option value="20L-40L" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>₹20L - ₹40L</option>
+                              <option value="40L-80L" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>₹40L - ₹80L</option>
+                              <option value="80L-2Cr" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>₹80L - ₹2Cr</option>
+                              <option value="2Cr+" style={{ background: 'rgba(0, 0, 0, 0.9)', color: 'white' }}>₹2Cr+</option>
+                            </>
+                          )}
+                        </select>
+                        <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                          <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Productivity Features Selection */}
+                <div>
+                  <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-4">
+                    Productivity Features You're Interested In:
+                  </label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-80 features-grid pr-2">
+                    {productivityFeatures.map((feature) => (
+                      <div
+                        key={feature.id}
+                        onClick={() => handleFeatureToggle(feature.id)}
+                        className={`p-4 rounded-lg cursor-pointer transition-all border-2 ${
+                          selectedFeatures.includes(feature.id)
+                            ? 'border-cyan-400/50 bg-cyan-500/10'
+                            : 'border-gray-600 hover:border-cyan-400/50 bg-gray-800/30'
+                        }`}
+                      >
+                        <div className="flex items-start space-x-3">
+                          <feature.icon 
+                            className={`w-5 h-5 mt-0.5 ${
+                              selectedFeatures.includes(feature.id) ? 'text-neon' : 'text-gray-400'
+                            }`} 
+                          />
+                          <div>
+                            <h4 className={`font-medium ${
+                              selectedFeatures.includes(feature.id) ? 'text-neon' : 'text-white'
+                            }`}>
+                              {feature.name}
+                            </h4>
+                            <p className="text-xs text-gray-400 mt-1">{feature.description}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-sm font-medium mb-2">Project Details *</label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows={5}
+                    className="w-full px-4 py-3 border border-cyan-400/50 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all resize-none"
+                    placeholder="Tell us about your project, goals, and any specific requirements..."
+                    required
+                    style={{
+                      background: 'rgba(0, 0, 0, 0.4)',
+                      backdropFilter: 'blur(10px)',
+                    }}
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full neon-border px-8 py-4 rounded-lg text-white font-semibold hover:bg-cyan-500/10 transition-all transform hover:scale-105 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-cyan-400 mr-2"></div>
+                      Processing Neural Connection...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5 mr-2" />
+                      Send Neural Connection Request
+                    </>
+                  )}
+                </button>
               </form>
             </div>
-          </motion.div>
-        </div>
-        
-        {/* Footer Note */}
-        <motion.div
-          className="mt-20 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="max-w-3xl mx-auto">
-            <div className="flex justify-center mb-4">
-              <div className="w-12 h-1 bg-gradient-to-r from-[#00c3ff] to-[#c961de] rounded-full"></div>
+
+            {/* Contact Info & Quick Stats */}
+            <div className="space-y-8">
+              {/* Contact Information */}
+              <div className="relative glassmorphism p-8 rounded-2xl border border-cyan-400/30">
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-t-2xl"></div>
+                <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Connect Directly</h3>
+                
+                   <div className="space-y-6">
+                     <div className="flex items-center space-x-4">
+                       <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 border border-cyan-400/30 flex items-center justify-center">
+                         <Mail className="w-5 h-5 text-cyan-400" />
+                       </div>
+                       <div>
+                         <h4 className="text-white font-semibold text-lg mb-1">Email Us</h4>
+                         <p className="text-cyan-400 font-medium text-base">syedmusthaqk786@gmail.com</p>
+                         <p className="text-gray-400 text-sm">We respond within 24 hours</p>
+                       </div>
+                     </div>
+
+                     <div className="flex items-center space-x-4">
+                       <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 border border-cyan-400/30 flex items-center justify-center">
+                         <Phone className="w-5 h-5 text-cyan-400" />
+                       </div>
+                       <div>
+                         <h4 className="text-white font-semibold text-lg mb-1">Call Us</h4>
+                         <p className="text-cyan-400 font-medium text-base">+91 7013425496</p>
+                         <p className="text-gray-400 text-sm">Mon-Fri 9AM-6PM IST</p>
+                       </div>
+                     </div>
+
+                     <div className="flex items-center space-x-4">
+                       <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 border border-cyan-400/30 flex items-center justify-center">
+                         <MapPin className="w-5 h-5 text-cyan-400" />
+                       </div>
+                       <div>
+                         <h4 className="text-white font-semibold text-lg mb-1">Visit Us</h4>
+                         <p className="text-cyan-400 font-medium text-base">Andhra Pradesh, India</p>
+                       </div>
+                     </div>
+                   </div>
+              </div>
+
+              {/* Response Time & Stats */}
+              <div className="relative glassmorphism p-8 rounded-2xl border border-cyan-400/30">
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-t-2xl"></div>
+                <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Our Commitment</h3>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-cyan-500/10 to-blue-500/10">
+                    <span className="text-white font-medium">Response Time</span>
+                    <span className="text-cyan-400 font-bold">&lt; 4 hours</span>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-purple-500/10 to-pink-500/10">
+                    <span className="text-white font-medium">Project Success Rate</span>
+                    <span className="text-purple-400 font-bold">98.5%</span>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-blue-500/10 to-cyan-500/10">
+                    <span className="text-white font-medium">Average Productivity Boost</span>
+                    <span className="text-blue-400 font-bold">245%</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quick Benefits */}
+              <div className="relative glassmorphism p-8 rounded-2xl border border-cyan-400/30">
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-t-2xl"></div>
+                <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-6">Why Choose Us?</h3>
+                
+                <div className="space-y-3">
+                  {[
+                    'Free initial consultation & project scope',
+                    'Dedicated project manager assigned',
+                    'Weekly progress reports & demos',
+                    'Post-launch support & optimization',
+                    'Scalable solutions that grow with you'
+                  ].map((benefit, index) => (
+                    <div key={index} className="flex items-center space-x-3">
+                      <div className="w-2 h-2 rounded-full bg-cyan-400"></div>
+                      <span className="text-gray-300">{benefit}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-            <p className="text-gray-400">
-              Thank you for visiting my portfolio. I look forward to connecting with you and exploring potential collaborations.
-            </p>
           </div>
-          
-          {/* Copyright */}
-          <div className="mt-8 text-gray-500 text-sm">
-            © {new Date().getFullYear()} Syed Musthaq
+        </div>
+
+        {/* Result Modal */}
+        {showModal && (
+          <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className="relative bg-slate-900/90 backdrop-blur-xl border border-cyan-400/30 rounded-2xl p-6 max-w-4xl w-full max-h-[80vh] overflow-y-auto custom-scrollbar">
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-t-2xl"></div>
+              
+              <div className="mb-6">
+                <pre className="text-green-400 text-sm leading-relaxed whitespace-pre-wrap font-mono">
+                  {submitMessage}
+                </pre>
+              </div>
+              
+              {/* Confirm close section */}
+              <div className="flex flex-col items-center space-y-4 pt-4 border-t border-gray-700">
+                <p className="text-gray-300 text-sm">Are you sure you want to close this window?</p>
+                <div className="flex space-x-4">
+                  <button
+                    onClick={() => setShowModal(false)}
+                    className="px-6 py-2 neon-border rounded-lg text-white font-semibold hover:bg-cyan-500/10 transition-all"
+                  >
+                    Yes, Close
+                  </button>
+                  <button
+                    onClick={() => {/* Keep modal open */}}
+                    className="px-6 py-2 border border-gray-500 rounded-lg text-gray-300 font-semibold hover:bg-gray-500/10 transition-all"
+                  >
+                    Keep Open
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-        </motion.div>
-      </div>
-    </section>
+        )}
+      </section>
+    </>
   );
-}
+};
+
+export default ContactSection;
