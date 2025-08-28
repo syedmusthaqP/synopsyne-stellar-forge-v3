@@ -4,6 +4,319 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FileText, Code, TrendingUp, Download, MessageCircle, Star, Zap } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import Typed from 'typed.js';
+import { SkillTree } from '@/components/ui/skill-tree';
+import { GradientText } from '@/components/ui/gradient-text';
+import { HolographicSkills } from '@/components/ui/holographic-progress';
+
+// Skills section with interactive skill tree visualization
+function SkillsSection() {
+  const [activeView, setActiveView] = useState<'tree' | 'list'>('tree');
+  
+  return (
+    <section id="skills" className="py-20 bg-[#0a1929] relative overflow-hidden">
+      {/* Animated Background Gradient with Tech Circuit Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#051527] to-[#0e2439] z-0">
+        {/* Circuit Pattern Overlay */}
+        <div className="absolute inset-0 z-0 opacity-10">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="circuit-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                <circle cx="50" cy="50" r="1" fill="#00c3ff" />
+                <circle cx="0" cy="0" r="1" fill="#c961de" />
+                <circle cx="0" cy="100" r="1" fill="#00c3ff" />
+                <circle cx="100" cy="0" r="1" fill="#c961de" />
+                <circle cx="100" cy="100" r="1" fill="#00c3ff" />
+                <path d="M0,50 L100,50" stroke="#1e4976" strokeWidth="0.5" />
+                <path d="M50,0 L50,100" stroke="#1e4976" strokeWidth="0.5" />
+                <path d="M25,0 L25,100" stroke="#1e4976" strokeWidth="0.3" strokeDasharray="4 4" />
+                <path d="M75,0 L75,100" stroke="#1e4976" strokeWidth="0.3" strokeDasharray="4 4" />
+                <path d="M0,25 L100,25" stroke="#1e4976" strokeWidth="0.3" strokeDasharray="4 4" />
+                <path d="M0,75 L100,75" stroke="#1e4976" strokeWidth="0.3" strokeDasharray="4 4" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#circuit-pattern)" />
+            
+            {/* Animated floating nodes and connections */}
+            <g className="animated-circuits">
+              <motion.circle 
+                cx="20%" 
+                cy="30%" 
+                r="3" 
+                fill="#00c3ff" 
+                initial={{ opacity: 0.2 }}
+                animate={{ 
+                  opacity: [0.2, 0.6, 0.2],
+                  scale: [1, 1.3, 1] 
+                }}
+                transition={{ 
+                  duration: 4, 
+                  repeat: Infinity,
+                  repeatType: "reverse" 
+                }}
+              />
+              <motion.circle 
+                cx="80%" 
+                cy="70%" 
+                r="3" 
+                fill="#c961de" 
+                initial={{ opacity: 0.2 }}
+                animate={{ 
+                  opacity: [0.2, 0.6, 0.2],
+                  scale: [1, 1.3, 1] 
+                }}
+                transition={{ 
+                  duration: 3, 
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  delay: 1
+                }}
+              />
+              <motion.circle 
+                cx="65%" 
+                cy="25%" 
+                r="2" 
+                fill="#00c3ff" 
+                initial={{ opacity: 0.2 }}
+                animate={{ 
+                  opacity: [0.2, 0.6, 0.2],
+                  scale: [1, 1.3, 1] 
+                }}
+                transition={{ 
+                  duration: 5, 
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  delay: 2 
+                }}
+              />
+              
+              {/* Animated pulse between nodes */}
+              <motion.path 
+                d="M20%,30% L65%,25%" 
+                stroke="#00c3ff" 
+                strokeWidth="1"
+                strokeLinecap="round"
+                fill="none"
+                initial={{ pathLength: 0, opacity: 0.2 }}
+                animate={{ 
+                  pathLength: [0, 1, 0],
+                  opacity: [0.2, 0.5, 0.2]
+                }}
+                transition={{ 
+                  duration: 4, 
+                  repeat: Infinity,
+                  repeatType: "loop"
+                }}
+              />
+              <motion.path 
+                d="M65%,25% L80%,70%" 
+                stroke="#c961de" 
+                strokeWidth="1"
+                strokeLinecap="round"
+                fill="none"
+                initial={{ pathLength: 0, opacity: 0.2 }}
+                animate={{ 
+                  pathLength: [0, 1, 0],
+                  opacity: [0.2, 0.5, 0.2]
+                }}
+                transition={{ 
+                  duration: 5, 
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  delay: 2
+                }}
+              />
+            </g>
+          </svg>
+        </div>
+      </div>
+      
+      <div className="container mx-auto px-6 relative z-10">
+        <motion.div 
+          className="text-center mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center justify-center">
+            <span className="text-[#00c3ff] mr-2">•</span>
+            <GradientText>Technical Expertise</GradientText>
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            An interactive visualization of my skills and how they interconnect across technical
+            and business domains.
+          </p>
+          
+          {/* View Toggle */}
+          <div className="flex items-center justify-center mt-6 mb-4 space-x-4">
+            <button
+              className={`px-4 py-2 rounded-md transition-all duration-300 ${
+                activeView === 'tree'
+                  ? 'bg-gradient-to-r from-[#00c3ff] to-[#c961de] text-white'
+                  : 'bg-[rgba(14,36,57,0.6)] text-gray-300 hover:bg-[rgba(14,36,57,0.8)]'
+              }`}
+              onClick={() => setActiveView('tree')}
+            >
+              Interactive Skill Map
+            </button>
+            <button
+              className={`px-4 py-2 rounded-md transition-all duration-300 ${
+                activeView === 'list'
+                  ? 'bg-gradient-to-r from-[#00c3ff] to-[#c961de] text-white'
+                  : 'bg-[rgba(14,36,57,0.6)] text-gray-300 hover:bg-[rgba(14,36,57,0.8)]'
+              }`}
+              onClick={() => setActiveView('list')}
+            >
+              Skill Ratings
+            </button>
+          </div>
+        </motion.div>
+        
+        {/* Interactive Skill Tree */}
+        {activeView === 'tree' && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <SkillTree className="mb-10" />
+            
+            <p className="text-center text-gray-400 mt-4 text-sm">
+              <span className="text-[#00c3ff]">Interact</span> with the skill nodes to see connections and details.
+              <br/>
+              The size and color of each node represents skill category and proficiency level.
+            </p>
+          </motion.div>
+        )}
+        
+        {/* Traditional Skill List */}
+        {activeView === 'list' && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Technical Skills */}
+              <motion.div 
+                className="bg-[rgba(14,36,57,0.6)] backdrop-blur-[5px] rounded-xl p-8 border border-[#1c3654]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <h3 className="text-xl font-semibold mb-6 text-white flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-[#00c3ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                  </svg>
+                  Technical Skills
+                </h3>
+                
+                <HolographicSkills 
+                  skills={[
+                    { name: "AI Implementation", level: 95, primaryColor: "#00c3ff", secondaryColor: "#c961de" },
+                    { name: "Process Automation", level: 90, primaryColor: "#00c3ff", secondaryColor: "#c961de" },
+                    { name: "System Architecture", level: 85, primaryColor: "#00c3ff", secondaryColor: "#c961de" },
+                    { name: "Data Analysis", level: 80, primaryColor: "#00c3ff", secondaryColor: "#c961de" },
+                    { name: "Electric Vehicles", level: 85, primaryColor: "#00c3ff", secondaryColor: "#c961de" },
+                    { name: "Aerodynamics", level: 80, primaryColor: "#00c3ff", secondaryColor: "#c961de" }
+                  ]}
+                />
+              </motion.div>
+              
+              {/* Business Skills */}
+              <motion.div 
+                className="bg-[rgba(14,36,57,0.6)] backdrop-blur-[5px] rounded-xl p-8 border border-[#1c3654]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                <h3 className="text-xl font-semibold mb-6 text-white flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-[#c961de]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  Business Skills
+                </h3>
+                
+                <HolographicSkills 
+                  skills={[
+                    { name: "Strategic Planning", level: 95, primaryColor: "#c961de", secondaryColor: "#00c3ff" },
+                    { name: "Team Leadership", level: 90, primaryColor: "#c961de", secondaryColor: "#00c3ff" },
+                    { name: "Business Development", level: 85, primaryColor: "#c961de", secondaryColor: "#00c3ff" },
+                    { name: "Client Relations", level: 90, primaryColor: "#c961de", secondaryColor: "#00c3ff" },
+                    { name: "Industrial Relations", level: 85, primaryColor: "#c961de", secondaryColor: "#00c3ff" },
+                    { name: "Human Resource", level: 80, primaryColor: "#c961de", secondaryColor: "#00c3ff" }
+                  ]}
+                />
+              </motion.div>
+            </div>
+            
+            {/* Expertise Areas */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+              <motion.div 
+                className="bg-[rgba(14,36,57,0.6)] backdrop-blur-[5px] rounded-xl p-6 border border-[#1c3654]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              >
+                <div className="h-14 w-14 bg-[#00c3ff]/20 rounded-full flex items-center justify-center mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#00c3ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-white">AI Solutions</h3>
+                <p className="text-gray-400">
+                  Deploying custom AI solutions to streamline operations, automate repetitive tasks, and enhance decision-making capabilities.
+                </p>
+              </motion.div>
+              
+              <motion.div 
+                className="bg-[rgba(14,36,57,0.6)] backdrop-blur-[5px] rounded-xl p-6 border border-[#1c3654]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              >
+                <div className="h-14 w-14 bg-[#c961de]/20 rounded-full flex items-center justify-center mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#c961de]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-white">Process Optimization</h3>
+                <p className="text-gray-400">
+                  Analyzing and refining business processes to eliminate bottlenecks, reduce costs, and improve overall operational efficiency.
+                </p>
+              </motion.div>
+              
+              <motion.div 
+                className="bg-[rgba(14,36,57,0.6)] backdrop-blur-[5px] rounded-xl p-6 border border-[#1c3654]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              >
+                <div className="h-14 w-14 bg-teal-500/20 rounded-full flex items-center justify-center mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-white">Strategic Consulting</h3>
+                <p className="text-gray-400">
+                  Providing expert guidance on business strategy, digital transformation, and technology implementation to drive growth.
+                </p>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </div>
+    </section>
+  );
+}
 
 export function FounderProfile() {
   const typedRef = useRef<HTMLSpanElement>(null);
@@ -739,6 +1052,9 @@ export function FounderProfile() {
           delay: 1
         }}
       />
+      
+      {/* Skills Section */}
+      <SkillsSection />
     </section>
   );
 }
