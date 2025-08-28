@@ -424,16 +424,16 @@ export function FounderProfile() {
   };
   
   return (
-    <section id="about" className="min-h-screen relative overflow-hidden pt-12 pb-12 bg-gradient-to-b from-[#052037] to-[#0a1929]">
+    <section id="about" className="min-h-screen relative overflow-hidden pt-24 pb-12 bg-gradient-to-b from-[#052037] to-[#0a1929]">
       {/* Background light effects */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0iZ3JhZDEiIGN4PSIyMCUiIGN5PSIyMCUiIHI9IjUwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0icmdiYSgwLCAxOTUsIDI1NSwgMC4xKSIgLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9InJnYmEoMCwgMTk1LCAyNTUsIDApIiAvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMwNzE1MjUiIC8+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkMSkiIC8+PC9zdmc+')]"></div>
       
       <div className="container mx-auto px-6 h-full relative z-10">
-        {/* Main Content */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-10 h-full">
-          {/* Left Content */}
+        {/* Main Content - Two Column Layout */}
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 min-h-[calc(100vh-120px)]">
+          {/* Left Content - Text Content */}
           <motion.div 
-            className="lg:w-7/12"
+            className="lg:w-1/2 w-full"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -712,142 +712,95 @@ export function FounderProfile() {
           
           {/* Right Content - Profile Image with enhanced effects */}
           <motion.div 
-            className="lg:w-5/12 flex justify-center relative"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            className="lg:w-1/2 w-full flex justify-center lg:justify-end relative"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            {/* Enhanced Profile Image with light effects */}
-            <motion.div 
-              className="relative max-w-md"
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.3 }}
-            >
-              {/* Light glow behind image */}
+            {/* Main Profile Image Container with Glassmorphic Frame */}
+            <div className="relative w-full max-w-md">
+              {/* Enhanced Glassmorphic container with multiple glowing layers */}
               <motion.div 
-                className="absolute -inset-4 bg-gradient-to-tr from-[#00c3ff]/30 to-[#c961de]/30 rounded-full blur-xl"
-                animate={{ 
-                  opacity: [0.4, 0.7, 0.4],
-                  scale: [0.98, 1.02, 0.98],
-                  transition: { duration: 3, repeat: Infinity }
+                className="relative p-1 rounded-3xl overflow-hidden"
+                animate={{
+                  boxShadow: [
+                    "0 0 30px rgba(0, 195, 255, 0.3), 0 0 60px rgba(201, 97, 222, 0.2)",
+                    "0 0 50px rgba(0, 195, 255, 0.5), 0 0 80px rgba(201, 97, 222, 0.3)",
+                    "0 0 30px rgba(0, 195, 255, 0.3), 0 0 60px rgba(201, 97, 222, 0.2)"
+                  ]
                 }}
-              />
-              
-              {/* Image border with light effect */}
-              <div className="p-[2px] rounded-lg relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#00c3ff] to-[#c961de] opacity-70 rounded-lg"></div>
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+              >
+                {/* Animated gradient border */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-[#00c3ff] via-[#4f8efc] to-[#c961de] animate-pulse"></div>
                 
-                {/* Image Container with improved effects */}
-                <div className="relative z-10 overflow-hidden rounded-lg">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-[#00c3ff]/30 to-[#c961de]/30 z-20 mix-blend-overlay"></div>
+                {/* Inner glassmorphic frame */}
+                <div className="relative bg-[rgba(7,25,45,0.4)] backdrop-blur-xl rounded-3xl p-6 border border-[rgba(255,255,255,0.1)]">
+                  {/* Profile Image */}
+                  <motion.div 
+                    className="relative rounded-2xl overflow-hidden"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <img 
+                      src="/lovable-uploads/db0763a5-1a5f-4853-9906-f6aac69f19e2.png" 
+                      alt="Syed Musthaq - Professional Portrait"
+                      className="w-full h-auto object-cover rounded-2xl shadow-2xl"
+                    />
+                    
+                    {/* Professional overlay with enhanced styling */}
+                    <motion.div 
+                      className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[rgba(0,0,0,0.8)] via-[rgba(0,0,0,0.4)] to-transparent p-6 rounded-b-2xl"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.8 }}
+                    >
+                      <div className="text-white">
+                        <motion.p 
+                          className="text-sm font-medium text-[#8acdff] mb-1"
+                          animate={{ opacity: [0.7, 1, 0.7] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
+                          Vision-driven
+                        </motion.p>
+                        <p className="text-lg font-bold bg-gradient-to-r from-[#00c3ff] to-[#c961de] bg-clip-text text-transparent">
+                          Entrepreneur
+                        </p>
+                      </div>
+                    </motion.div>
+                  </motion.div>
                   
-                  {/* Floating light particles over image */}
-                  <div className="absolute inset-0 z-30 overflow-hidden">
-                    {Array.from({ length: 8 }).map((_, i) => (
+                  {/* Floating particles around the image */}
+                  <div className="absolute inset-0 pointer-events-none">
+                    {[...Array(6)].map((_, i) => (
                       <motion.div
                         key={i}
-                        className="absolute w-1 h-1 rounded-full bg-white"
+                        className="absolute w-2 h-2 rounded-full"
                         style={{
-                          left: `${Math.random() * 100}%`,
-                          top: `${Math.random() * 100}%`,
+                          background: i % 2 === 0 ? '#00c3ff' : '#c961de',
+                          left: `${10 + i * 15}%`,
+                          top: `${20 + i * 10}%`
                         }}
                         animate={{
-                          opacity: [0, 0.8, 0],
-                          scale: [0, 1, 0],
+                          y: [-10, 10, -10],
+                          opacity: [0.3, 0.8, 0.3],
+                          scale: [0.8, 1.2, 0.8]
                         }}
                         transition={{
-                          duration: 2 + Math.random() * 2,
+                          duration: 3 + i * 0.5,
                           repeat: Infinity,
-                          delay: Math.random() * 5,
+                          delay: i * 0.3
                         }}
                       />
                     ))}
                   </div>
-                  
-                  {/* Placeholder for profile image */}
-                  <div className="w-full h-96 bg-gradient-to-br from-[#00c3ff]/20 to-[#c961de]/20 flex items-center justify-center relative z-10">
-                    <div className="text-white text-center">
-                      <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#00c3ff] to-[#c961de] flex items-center justify-center">
-                        <span className="text-2xl font-bold">SM</span>
-                      </div>
-                      <p className="text-sm opacity-70">Profile Image Placeholder</p>
-                    </div>
-                  </div>
-                  
-                  {/* Enhanced animated overlay gradient */}
-                  <motion.div 
-                    className="absolute inset-0 bg-gradient-to-tr from-[#00c3ff]/30 to-transparent z-30"
-                    animate={{ 
-                      opacity: [0.2, 0.4, 0.2],
-                      transition: { duration: 3, repeat: Infinity }
-                    }}
-                  />
-                  
-                  {/* Light streak effect */}
-                  <motion.div 
-                    className="absolute top-0 w-[200%] h-[200%] rotate-45 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                    initial={{ left: "-200%" }}
-                    animate={{ 
-                      left: ["100%", "-200%"],
-                      transition: { duration: 5, repeat: Infinity, repeatDelay: 2 }
-                    }}
-                  />
-                </div>
-              </div>
-              
-              {/* Enhanced highlight box */}
-              <motion.div 
-                className="absolute bottom-8 right-4 bg-[rgba(7,25,45,0.8)] backdrop-blur-xl p-4 rounded z-40 border border-[rgba(0,195,255,0.3)]"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-                whileHover={{ 
-                  boxShadow: "0 0 25px rgba(0, 195, 255, 0.5)",
-                  scale: 1.05
-                }}
-              >
-                <div className="rounded text-white font-semibold relative">
-                  <div className="absolute top-0 right-0">
-                    <motion.div
-                      animate={{
-                        rotate: [0, 360],
-                        transition: { duration: 20, repeat: Infinity, ease: "linear" }
-                      }}
-                    >
-                      <Star className="h-4 w-4 text-[#00c3ff]/50" />
-                    </motion.div>
-                  </div>
-                  <p className="text-sm">Vision-driven</p>
-                  <p className="text-sm text-[#00c3ff]">Entrepreneur</p>
                 </div>
               </motion.div>
-              
-              {/* Additional floating badges */}
-              <motion.div 
-                className="absolute -top-2 -left-2 bg-[rgba(7,25,45,0.8)] backdrop-blur-xl p-2 rounded-full z-40 border border-[rgba(0,195,255,0.3)]"
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.8, duration: 0.5 }}
-                whileHover={{ 
-                  boxShadow: "0 0 15px rgba(0, 195, 255, 0.5)",
-                  scale: 1.1
-                }}
-              >
-                <div className="w-8 h-8 flex items-center justify-center">
-                  <motion.div 
-                    animate={{ 
-                      rotate: 360,
-                      transition: { duration: 10, repeat: Infinity, ease: "linear" }
-                    }}
-                  >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                      <circle cx="12" cy="12" r="10" stroke="#00c3ff" strokeWidth="1" strokeDasharray="2 2" />
-                      <circle cx="12" cy="12" r="5" fill="#00c3ff" fillOpacity="0.5" />
-                    </svg>
-                  </motion.div>
-                </div>
-              </motion.div>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>

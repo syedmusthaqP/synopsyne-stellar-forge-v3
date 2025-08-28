@@ -12,13 +12,17 @@ interface SkillNode {
 }
 
 const skillNodes: SkillNode[] = [
-  { id: 'ai', name: 'AI Implementation', level: 95, category: 'technical', x: 20, y: 30, connections: ['automation', 'data'] },
-  { id: 'automation', name: 'Process Automation', level: 90, category: 'technical', x: 40, y: 20, connections: ['ai', 'strategy'] },
-  { id: 'architecture', name: 'System Architecture', level: 85, category: 'technical', x: 60, y: 40, connections: ['data'] },
-  { id: 'data', name: 'Data Analysis', level: 80, category: 'technical', x: 80, y: 30, connections: ['ai', 'architecture'] },
-  { id: 'strategy', name: 'Strategic Planning', level: 95, category: 'business', x: 25, y: 70, connections: ['automation', 'leadership'] },
-  { id: 'leadership', name: 'Team Leadership', level: 90, category: 'leadership', x: 75, y: 70, connections: ['strategy', 'business'] },
-  { id: 'business', name: 'Business Development', level: 85, category: 'business', x: 50, y: 60, connections: ['leadership'] },
+  { id: 'ai', name: 'AI Implementation', level: 95, category: 'technical', x: 15, y: 25, connections: ['automation', 'data'] },
+  { id: 'automation', name: 'Process Automation', level: 90, category: 'technical', x: 40, y: 15, connections: ['ai', 'strategy'] },
+  { id: 'architecture', name: 'System Architecture', level: 85, category: 'technical', x: 70, y: 20, connections: ['data', 'business'] },
+  { id: 'data', name: 'Data Analysis', level: 80, category: 'technical', x: 85, y: 35, connections: ['ai', 'architecture'] },
+  { id: 'ev', name: 'Electric Vehicles', level: 85, category: 'technical', x: 65, y: 50, connections: ['aerodynamics'] },
+  { id: 'aerodynamics', name: 'Aerodynamics', level: 80, category: 'technical', x: 45, y: 65, connections: ['ev'] },
+  { id: 'strategy', name: 'Strategic Planning', level: 95, category: 'business', x: 20, y: 75, connections: ['automation', 'leadership'] },
+  { id: 'leadership', name: 'Team Leadership', level: 90, category: 'leadership', x: 75, y: 75, connections: ['strategy', 'business'] },
+  { id: 'business', name: 'Business Development', level: 85, category: 'business', x: 50, y: 85, connections: ['leadership', 'architecture'] },
+  { id: 'hr', name: 'Human Resource', level: 80, category: 'leadership', x: 25, y: 50, connections: ['strategy', 'industrial'] },
+  { id: 'industrial', name: 'Industrial Relations', level: 85, category: 'business', x: 10, y: 60, connections: ['hr'] },
 ];
 
 interface SkillTreeProps {
@@ -43,8 +47,8 @@ export function SkillTree({ className = "" }: SkillTreeProps) {
   };
 
   return (
-    <div className={`relative w-full h-96 bg-[rgba(14,36,57,0.3)] rounded-xl border border-[#1c3654] ${className}`}>
-      <svg width="100%" height="100%" className="absolute inset-0">
+    <div className={`relative w-full h-[500px] bg-[rgba(14,36,57,0.3)] rounded-xl border border-[#1c3654] overflow-hidden ${className}`}>
+      <svg width="100%" height="100%" className="absolute inset-0" viewBox="0 0 100 100" preserveAspectRatio="none">
         {/* Connections */}
         {skillNodes.map(node => 
           node.connections.map(connectionId => {
