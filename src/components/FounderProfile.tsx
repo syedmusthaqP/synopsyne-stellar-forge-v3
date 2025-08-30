@@ -719,38 +719,45 @@ export function FounderProfile() {
           >
             {/* Main Profile Image Container with Glassmorphic Frame */}
             <div className="relative w-full max-w-md">
-              {/* Enhanced Glassmorphic container with multiple glowing layers */}
-              <motion.div 
-                className="relative p-1 rounded-3xl overflow-hidden"
-                animate={{
-                  boxShadow: [
-                    "0 0 30px rgba(0, 195, 255, 0.3), 0 0 60px rgba(201, 97, 222, 0.2)",
-                    "0 0 50px rgba(0, 195, 255, 0.5), 0 0 80px rgba(201, 97, 222, 0.3)",
-                    "0 0 30px rgba(0, 195, 255, 0.3), 0 0 60px rgba(201, 97, 222, 0.2)"
-                  ]
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  repeatType: "reverse"
-                }}
-              >
-                {/* Animated gradient border */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-[#00c3ff] via-[#4f8efc] to-[#c961de] animate-pulse"></div>
-                
-                {/* Inner glassmorphic frame */}
-                <div className="relative bg-[rgba(7,25,45,0.4)] backdrop-blur-xl rounded-3xl p-6 border border-[rgba(255,255,255,0.1)]">
-                  {/* Profile Image */}
-                  <motion.div 
-                    className="relative rounded-2xl overflow-hidden"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <img 
-                      src="/lovable-uploads/db0763a5-1a5f-4853-9906-f6aac69f19e2.png" 
-                      alt="Syed Musthaq - Professional Portrait"
-                      className="w-full h-auto object-cover rounded-2xl shadow-2xl"
-                    />
+                {/* Ultra-Enhanced Glassmorphic container with thick attractive frame */}
+                <motion.div 
+                  className="relative p-2 rounded-3xl overflow-hidden"
+                  animate={{
+                    boxShadow: [
+                      "0 0 40px rgba(0, 195, 255, 0.5), 0 0 80px rgba(201, 97, 222, 0.3), inset 0 0 30px rgba(255, 255, 255, 0.1)",
+                      "0 0 60px rgba(0, 195, 255, 0.7), 0 0 120px rgba(201, 97, 222, 0.5), inset 0 0 50px rgba(255, 255, 255, 0.2)",
+                      "0 0 40px rgba(0, 195, 255, 0.5), 0 0 80px rgba(201, 97, 222, 0.3), inset 0 0 30px rgba(255, 255, 255, 0.1)"
+                    ]
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    repeatType: "reverse"
+                  }}
+                >
+                  {/* Multi-layer gradient border for thickness */}
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-[#00c3ff] via-[#4f8efc] to-[#c961de] p-1">
+                    <div className="absolute inset-1 rounded-3xl bg-gradient-to-br from-[#c961de] via-[#8a4bff] to-[#00c3ff] opacity-80"></div>
+                  </div>
+                  
+                  {/* Outer glow ring */}
+                  <div className="absolute -inset-2 rounded-3xl bg-gradient-to-r from-[#00c3ff]/30 via-transparent to-[#c961de]/30 blur-lg animate-spin-slow"></div>
+                  
+                  {/* Inner glassmorphic frame with enhanced backdrop */}
+                  <div className="relative bg-gradient-to-br from-[rgba(7,25,45,0.6)] to-[rgba(15,35,55,0.8)] backdrop-blur-2xl rounded-3xl p-8 border-2 border-[rgba(255,255,255,0.2)] shadow-inner">
+                    {/* Profile Image with optimized loading */}
+                    <motion.div 
+                      className="relative rounded-2xl overflow-hidden shadow-2xl"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <img 
+                        src="/images/founder-profile.png"
+                        alt="Syed Musthaq - Professional Portrait"
+                        className="w-full h-auto object-cover rounded-2xl shadow-2xl"
+                        loading="eager"
+                        fetchPriority="high"
+                      />
                     
                     {/* Professional overlay with enhanced styling */}
                     <motion.div 
