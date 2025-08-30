@@ -12,17 +12,30 @@ interface SkillNode {
 }
 
 const skillNodes: SkillNode[] = [
-  { id: 'ai', name: 'AI Implementation', level: 95, category: 'technical', x: 15, y: 25, connections: ['automation', 'data'] },
-  { id: 'automation', name: 'Process Automation', level: 90, category: 'technical', x: 40, y: 15, connections: ['ai', 'strategy'] },
-  { id: 'architecture', name: 'System Architecture', level: 85, category: 'technical', x: 70, y: 20, connections: ['data', 'business'] },
-  { id: 'data', name: 'Data Analysis', level: 80, category: 'technical', x: 85, y: 35, connections: ['ai', 'architecture'] },
-  { id: 'ev', name: 'Electric Vehicles', level: 85, category: 'technical', x: 65, y: 50, connections: ['aerodynamics'] },
-  { id: 'aerodynamics', name: 'Aerodynamics', level: 80, category: 'technical', x: 45, y: 65, connections: ['ev'] },
-  { id: 'strategy', name: 'Strategic Planning', level: 95, category: 'business', x: 20, y: 75, connections: ['automation', 'leadership'] },
-  { id: 'leadership', name: 'Team Leadership', level: 90, category: 'leadership', x: 75, y: 75, connections: ['strategy', 'business'] },
-  { id: 'business', name: 'Business Development', level: 85, category: 'business', x: 50, y: 85, connections: ['leadership', 'architecture'] },
-  { id: 'hr', name: 'Human Resource', level: 80, category: 'leadership', x: 25, y: 50, connections: ['strategy', 'industrial'] },
-  { id: 'industrial', name: 'Industrial Relations', level: 85, category: 'business', x: 10, y: 60, connections: ['hr'] },
+  // Central core skills
+  { id: 'ai', name: 'AI Implementation', level: 95, category: 'technical', x: 50, y: 20, connections: ['automation', 'data', 'strategy'] },
+  { id: 'strategy', name: 'Strategic Planning', level: 95, category: 'business', x: 50, y: 50, connections: ['ai', 'leadership', 'business', 'automation'] },
+  
+  // Technical cluster (top-right)
+  { id: 'automation', name: 'Process Automation', level: 90, category: 'technical', x: 75, y: 15, connections: ['ai', 'architecture', 'strategy'] },
+  { id: 'architecture', name: 'System Architecture', level: 85, category: 'technical', x: 85, y: 35, connections: ['automation', 'data'] },
+  { id: 'data', name: 'Data Analysis', level: 80, category: 'technical', x: 75, y: 55, connections: ['ai', 'architecture'] },
+  
+  // Business cluster (bottom)
+  { id: 'business', name: 'Business Development', level: 85, category: 'business', x: 35, y: 75, connections: ['strategy', 'leadership', 'hr'] },
+  { id: 'leadership', name: 'Team Leadership', level: 90, category: 'leadership', x: 65, y: 75, connections: ['strategy', 'business', 'hr'] },
+  
+  // Specialized skills (left side)
+  { id: 'hr', name: 'Human Resource', level: 80, category: 'leadership', x: 20, y: 45, connections: ['strategy', 'business', 'leadership', 'industrial'] },
+  { id: 'industrial', name: 'Industrial Relations', level: 85, category: 'business', x: 15, y: 65, connections: ['hr', 'business'] },
+  
+  // Engineering cluster (right side)
+  { id: 'ev', name: 'Electric Vehicles', level: 85, category: 'technical', x: 85, y: 65, connections: ['aerodynamics', 'data'] },
+  { id: 'aerodynamics', name: 'Aerodynamics', level: 80, category: 'technical', x: 90, y: 85, connections: ['ev'] },
+  
+  // Innovation skills
+  { id: 'innovation', name: 'Innovation Management', level: 88, category: 'leadership', x: 30, y: 25, connections: ['ai', 'strategy', 'hr'] },
+  { id: 'consulting', name: 'Strategic Consulting', level: 92, category: 'business', x: 70, y: 35, connections: ['strategy', 'architecture', 'leadership'] },
 ];
 
 interface SkillTreeProps {
@@ -47,8 +60,8 @@ export function SkillTree({ className = "" }: SkillTreeProps) {
   };
 
   return (
-    <div className={`relative w-full h-[500px] bg-[rgba(14,36,57,0.3)] rounded-xl border border-[#1c3654] overflow-hidden ${className}`}>
-      <svg width="100%" height="100%" className="absolute inset-0" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <div className={`relative w-full h-[600px] bg-gradient-to-br from-[rgba(14,36,57,0.4)] to-[rgba(7,25,45,0.6)] rounded-xl border border-[#1c3654] overflow-hidden ${className}`}>
+      <svg width="100%" height="100%" className="absolute inset-0" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
         {/* Connections */}
         {skillNodes.map(node => 
           node.connections.map(connectionId => {

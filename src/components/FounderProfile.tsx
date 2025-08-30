@@ -717,47 +717,90 @@ export function FounderProfile() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            {/* Main Profile Image Container with Glassmorphic Frame */}
+            {/* Main Profile Image Container with Ultra-Attractive Frame */}
             <div className="relative w-full max-w-md">
-                {/* Ultra-Enhanced Glassmorphic container with thick attractive frame */}
-                <motion.div 
-                  className="relative p-2 rounded-3xl overflow-hidden"
-                  animate={{
-                    boxShadow: [
-                      "0 0 40px rgba(0, 195, 255, 0.5), 0 0 80px rgba(201, 97, 222, 0.3), inset 0 0 30px rgba(255, 255, 255, 0.1)",
-                      "0 0 60px rgba(0, 195, 255, 0.7), 0 0 120px rgba(201, 97, 222, 0.5), inset 0 0 50px rgba(255, 255, 255, 0.2)",
-                      "0 0 40px rgba(0, 195, 255, 0.5), 0 0 80px rgba(201, 97, 222, 0.3), inset 0 0 30px rgba(255, 255, 255, 0.1)"
-                    ]
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                  }}
-                >
-                  {/* Multi-layer gradient border for thickness */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-[#00c3ff] via-[#4f8efc] to-[#c961de] p-1">
-                    <div className="absolute inset-1 rounded-3xl bg-gradient-to-br from-[#c961de] via-[#8a4bff] to-[#00c3ff] opacity-80"></div>
+              {/* Animated Holographic Frame System */}
+              <motion.div 
+                className="relative p-3 rounded-3xl overflow-hidden"
+                animate={{
+                  boxShadow: [
+                    "0 0 60px rgba(0, 195, 255, 0.6), 0 0 120px rgba(201, 97, 222, 0.4), inset 0 0 40px rgba(255, 255, 255, 0.1)",
+                    "0 0 80px rgba(0, 195, 255, 0.8), 0 0 160px rgba(201, 97, 222, 0.6), inset 0 0 60px rgba(255, 255, 255, 0.2)",
+                    "0 0 60px rgba(0, 195, 255, 0.6), 0 0 120px rgba(201, 97, 222, 0.4), inset 0 0 40px rgba(255, 255, 255, 0.1)"
+                  ]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+              >
+                {/* Multiple Animated Border Layers */}
+                <div className="absolute inset-0 rounded-3xl">
+                  {/* Outer spinning ring */}
+                  <motion.div 
+                    className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-[#00c3ff] via-[#4f8efc] to-[#c961de] opacity-30 blur-sm"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                  />
+                  
+                  {/* Main gradient frame */}
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#00c3ff] via-[#4f8efc] via-[#8a4bff] to-[#c961de] p-1">
+                    <div className="absolute inset-1 rounded-3xl bg-gradient-to-tl from-[#c961de] via-[#8a4bff] to-[#00c3ff] opacity-80"></div>
                   </div>
                   
-                  {/* Outer glow ring */}
-                  <div className="absolute -inset-2 rounded-3xl bg-gradient-to-r from-[#00c3ff]/30 via-transparent to-[#c961de]/30 blur-lg animate-spin-slow"></div>
-                  
-                  {/* Inner glassmorphic frame with enhanced backdrop */}
-                  <div className="relative bg-gradient-to-br from-[rgba(7,25,45,0.6)] to-[rgba(15,35,55,0.8)] backdrop-blur-2xl rounded-3xl p-8 border-2 border-[rgba(255,255,255,0.2)] shadow-inner">
-                    {/* Profile Image with optimized loading */}
-                    <motion.div 
-                      className="relative rounded-2xl overflow-hidden shadow-2xl"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <img 
-                        src="/images/founder-profile.png"
-                        alt="Syed Musthaq - Professional Portrait"
-                        className="w-full h-auto object-cover rounded-2xl shadow-2xl"
-                        loading="eager"
-                        fetchPriority="high"
+                  {/* Inner pulsing ring */}
+                  <motion.div 
+                    className="absolute inset-2 rounded-3xl border-2 border-white/30"
+                    animate={{ 
+                      opacity: [0.3, 0.8, 0.3],
+                      scale: [0.98, 1.02, 0.98]
+                    }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+                </div>
+                
+                {/* Premium Glassmorphic Container */}
+                <div className="relative bg-gradient-to-br from-[rgba(7,25,45,0.8)] via-[rgba(15,35,55,0.9)] to-[rgba(10,30,50,0.8)] backdrop-blur-3xl rounded-3xl p-8 border-2 border-[rgba(255,255,255,0.3)] shadow-2xl">
+                  {/* Floating Orbs Inside Frame */}
+                  <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
+                    {[...Array(8)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className="absolute w-3 h-3 rounded-full opacity-40"
+                        style={{
+                          background: i % 3 === 0 ? '#00c3ff' : i % 3 === 1 ? '#c961de' : '#4f8efc',
+                          left: `${15 + (i * 10)}%`,
+                          top: `${10 + (i * 8)}%`
+                        }}
+                        animate={{
+                          y: [-15, 15, -15],
+                          x: [-10, 10, -10],
+                          opacity: [0.2, 0.6, 0.2],
+                          scale: [0.8, 1.3, 0.8]
+                        }}
+                        transition={{
+                          duration: 4 + i * 0.5,
+                          repeat: Infinity,
+                          delay: i * 0.2
+                        }}
                       />
+                    ))}
+                  </div>
+                  
+                  {/* Profile Image with Enhanced Styling */}
+                  <motion.div 
+                    className="relative rounded-2xl overflow-hidden shadow-2xl"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <img 
+                      src="/images/founder-profile.png"
+                      alt="Syed Musthaq - Professional Portrait"
+                      className="w-full h-auto object-cover rounded-2xl shadow-2xl"
+                      loading="eager"
+                      fetchPriority="high"
+                    />
                     
                     {/* Professional overlay with enhanced styling */}
                     <motion.div 
