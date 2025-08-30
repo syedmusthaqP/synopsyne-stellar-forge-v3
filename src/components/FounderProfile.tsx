@@ -784,7 +784,7 @@ export function FounderProfile() {
                           repeat: Infinity,
                           delay: i * 0.2
                         }}
-                      />
+                    />
                     ))}
                   </div>
                   
@@ -799,7 +799,6 @@ export function FounderProfile() {
                       alt="Syed Musthaq - Professional Portrait"
                       className="w-full h-auto object-cover rounded-2xl shadow-2xl"
                       loading="eager"
-                      fetchPriority="high"
                     />
                     
                     {/* Professional overlay with enhanced styling */}
