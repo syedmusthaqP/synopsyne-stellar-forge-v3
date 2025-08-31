@@ -788,37 +788,18 @@ export function FounderProfile() {
                     ))}
                   </div>
                   
-                  {/* Profile Image with Unique Attractive Frame */}
+                  {/* Profile Image with Enhanced Styling */}
                   <motion.div 
-                    className="relative"
+                    className="relative rounded-2xl overflow-hidden shadow-2xl"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   >
-                    {/* Futuristic Tech Frame */}
-                    <div className="relative p-1 rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 shadow-2xl">
-                      <div className="relative p-1 rounded-xl bg-gradient-to-br from-slate-900 to-slate-800">
-                        {/* Corner Tech Elements */}
-                        <div className="absolute -top-2 -left-2 w-6 h-6 border-l-2 border-t-2 border-cyan-400 rounded-tl-lg"></div>
-                        <div className="absolute -top-2 -right-2 w-6 h-6 border-r-2 border-t-2 border-purple-400 rounded-tr-lg"></div>
-                        <div className="absolute -bottom-2 -left-2 w-6 h-6 border-l-2 border-b-2 border-purple-400 rounded-bl-lg"></div>
-                        <div className="absolute -bottom-2 -right-2 w-6 h-6 border-r-2 border-b-2 border-cyan-400 rounded-br-lg"></div>
-                        
-                        {/* Tech Pattern Overlay */}
-                        <div className="absolute inset-0 rounded-xl overflow-hidden">
-                          <div className="absolute top-2 left-2 w-1 h-1 bg-cyan-400 rounded-full animate-pulse"></div>
-                          <div className="absolute top-2 right-2 w-1 h-1 bg-purple-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
-                          <div className="absolute bottom-2 left-2 w-1 h-1 bg-purple-400 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
-                          <div className="absolute bottom-2 right-2 w-1 h-1 bg-cyan-400 rounded-full animate-pulse" style={{animationDelay: '1.5s'}}></div>
-                        </div>
-                        
-                        <img 
-                          src="/lovable-uploads/15c1e9f1-f155-4ea1-8406-92f9bca79297.png"
-                          alt="Syed Musthaq - Professional Portrait"
-                          className="w-full h-auto object-cover rounded-lg shadow-2xl relative z-10"
-                          loading="eager"
-                        />
-                      </div>
-                    </div>
+                    <img 
+                      src="/images/founder-profile.png"
+                      alt="Syed Musthaq - Professional Portrait"
+                      className="w-full h-auto object-cover rounded-2xl shadow-2xl"
+                      loading="eager"
+                    />
                     
                     {/* Professional overlay with enhanced styling */}
                     <motion.div 
