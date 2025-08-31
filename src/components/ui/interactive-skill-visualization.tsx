@@ -40,7 +40,7 @@ export const InteractiveSkillVisualization: React.FC<InteractiveSkillVisualizati
   const selectedSkillData = skillsData.find(skill => skill.id === selectedSkill);
 
   return (
-    <div className={`relative w-full max-w-md mx-auto h-96 bg-gradient-to-br from-slate-900/80 via-blue-900/80 to-purple-900/80 rounded-2xl border border-cyan-400/30 backdrop-blur-sm overflow-hidden ${className}`}>
+    <div className={`relative w-full max-w-lg mx-auto h-[500px] bg-gradient-to-br from-slate-900/90 via-blue-900/90 to-purple-900/90 rounded-3xl border border-cyan-400/40 backdrop-blur-md overflow-hidden shadow-2xl ${className}`}>
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl"></div>
@@ -53,61 +53,126 @@ export const InteractiveSkillVisualization: React.FC<InteractiveSkillVisualizati
         <p className="text-gray-400 text-sm">Click circles to see percentages</p>
       </div>
 
-      {/* Central Gauge */}
+      {/* Central Speedometer Gauge */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-        <div className="relative w-32 h-32">
-          {/* Outer Ring */}
-          <div className="absolute inset-0 rounded-full border-4 border-gray-600/50"></div>
+        <div className="relative w-48 h-48">
+          {/* Outer decorative ring */}
+          <div className="absolute inset-0 rounded-full border-4 border-gradient-to-r from-cyan-400 via-purple-500 to-cyan-400 shadow-2xl">
+            <div className="absolute inset-2 rounded-full border-2 border-gray-600/30"></div>
+          </div>
           
-          {/* Progress Ring */}
+          {/* Speed marks */}
+          {[...Array(11)].map((_, i) => {
+            const angle = (i * 18) - 90; // 0 to 180 degrees
+            const isMainMark = i % 2 === 0;
+            return (
+              <div
+                key={i}
+                className="absolute top-1/2 left-1/2 origin-bottom"
+                style={{
+                  width: isMainMark ? '3px' : '2px',
+                  height: isMainMark ? '20px' : '15px',
+                  marginLeft: isMainMark ? '-1.5px' : '-1px',
+                  marginTop: '-85px',
+                  transform: `rotate(${angle}deg)`,
+                }}
+              >
+                <div className={`w-full h-full ${isMainMark ? 'bg-white' : 'bg-gray-400'} rounded-full`}></div>
+              </div>
+            );
+          })}
+          
+          {/* Percentage numbers */}
+          {[0, 25, 50, 75, 100].map((num, i) => {
+            const angle = (i * 45) - 90;
+            const x = 85 * Math.cos((angle * Math.PI) / 180);
+            const y = 85 * Math.sin((angle * Math.PI) / 180);
+            return (
+              <div
+                key={num}
+                className="absolute text-white text-sm font-bold"
+                style={{
+                  left: '50%',
+                  top: '50%',
+                  transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
+                }}
+              >
+                {num}
+              </div>
+            );
+          })}
+          
+          {/* Progress Arc */}
           <AnimatePresence>
             {selectedSkillData && (
               <motion.div
-                className="absolute inset-0 rounded-full border-4 border-transparent"
-                style={{
-                  background: `conic-gradient(from 0deg, transparent 0deg, transparent ${(selectedSkillData.percentage * 3.6) - 90}deg, rgba(0, 195, 255, 0.8) ${(selectedSkillData.percentage * 3.6) - 90}deg, rgba(0, 195, 255, 0.8) ${(selectedSkillData.percentage * 3.6) + 90}deg, transparent ${(selectedSkillData.percentage * 3.6) + 90}deg)`,
-                  borderRadius: '50%'
-                }}
+                className="absolute inset-0 rounded-full"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-              />
-            )}
-          </AnimatePresence>
-
-          {/* Animated Arrow */}
-          <AnimatePresence>
-            {selectedSkillData && (
-              <motion.div
-                className="absolute top-1/2 left-1/2 origin-bottom"
-                style={{
-                  width: '2px',
-                  height: '50px',
-                  marginLeft: '-1px',
-                  marginTop: '-50px'
-                }}
-                initial={{ rotate: -90, opacity: 0 }}
-                animate={{ 
-                  rotate: getArrowRotation(selectedSkillData.percentage),
-                  opacity: 1 
-                }}
-                exit={{ opacity: 0 }}
-                transition={{ 
-                  duration: 1.5,
-                  type: "spring",
-                  stiffness: 100,
-                  damping: 15
-                }}
               >
-                <div className="w-full h-full bg-gradient-to-t from-cyan-400 to-purple-400 rounded-full"></div>
-                {/* Arrow Head */}
-                <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-2 border-r-2 border-b-4 border-l-transparent border-r-transparent border-b-cyan-400"></div>
+                <svg className="w-full h-full transform -rotate-90">
+                  <motion.circle
+                    cx="96"
+                    cy="96"
+                    r="80"
+                    fill="none"
+                    stroke="url(#progressGradient)"
+                    strokeWidth="6"
+                    strokeLinecap="round"
+                    strokeDasharray={`${(selectedSkillData.percentage / 100) * 251.33} 251.33`}
+                    initial={{ strokeDasharray: "0 251.33" }}
+                    animate={{ strokeDasharray: `${(selectedSkillData.percentage / 100) * 251.33} 251.33` }}
+                    transition={{ duration: 2, ease: "easeOut" }}
+                  />
+                  <defs>
+                    <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#00c3ff" />
+                      <stop offset="50%" stopColor="#c961de" />
+                      <stop offset="100%" stopColor="#00c3ff" />
+                    </linearGradient>
+                  </defs>
+                </svg>
               </motion.div>
             )}
           </AnimatePresence>
 
+          {/* Animated Arrow/Needle */}
+          <AnimatePresence>
+            {selectedSkillData && (
+              <motion.div
+                className="absolute top-1/2 left-1/2 origin-bottom z-20"
+                style={{
+                  width: '4px',
+                  height: '70px',
+                  marginLeft: '-2px',
+                  marginTop: '-70px',
+                }}
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ 
+                  rotate: ((selectedSkillData.percentage / 100) * 180) - 90,
+                  opacity: 1 
+                }}
+                exit={{ opacity: 0 }}
+                transition={{ 
+                  duration: 2,
+                  type: "spring",
+                  stiffness: 80,
+                  damping: 20
+                }}
+              >
+                <div className="w-full h-full bg-gradient-to-t from-red-500 via-orange-400 to-yellow-300 rounded-full shadow-lg"></div>
+                {/* Needle tip */}
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-3 border-r-3 border-b-6 border-l-transparent border-r-transparent border-b-red-500"></div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Center hub */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-gradient-to-br from-gray-700 to-gray-900 rounded-full border-2 border-white/30 shadow-lg z-30"></div>
+
           {/* Center Display */}
-          <div className="absolute inset-4 rounded-full bg-black/40 backdrop-blur-sm flex flex-col items-center justify-center">
+          <div className="absolute inset-6 rounded-full bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center border border-cyan-400/30">
             <AnimatePresence mode="wait">
               {selectedSkillData ? (
                 <motion.div
@@ -116,13 +181,16 @@ export const InteractiveSkillVisualization: React.FC<InteractiveSkillVisualizati
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  <div className="text-2xl font-bold text-cyan-400 mb-1">
+                  <div className="text-3xl font-bold text-cyan-400 mb-2">
                     {selectedSkillData.percentage}%
                   </div>
-                  <div className="text-xs text-white text-center leading-tight">
+                  <div className="text-sm text-white text-center leading-tight px-2">
                     {selectedSkillData.name}
+                  </div>
+                  <div className="text-xs text-gray-400 mt-1 capitalize">
+                    {selectedSkillData.category}
                   </div>
                 </motion.div>
               ) : (
@@ -135,6 +203,9 @@ export const InteractiveSkillVisualization: React.FC<InteractiveSkillVisualizati
                   <div className="text-gray-400 text-sm text-center">
                     Click a skill
                   </div>
+                  <div className="text-xs text-gray-500 mt-1">
+                    to see gauge
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -146,7 +217,7 @@ export const InteractiveSkillVisualization: React.FC<InteractiveSkillVisualizati
       <div className="relative w-full h-full">
         {skillsData.map((skill, index) => {
           const angle = (index * 45) * (Math.PI / 180); // 45 degrees apart
-          const radius = 120;
+          const radius = 160;
           const x = 50 + (radius * Math.cos(angle)) / 4; // Percentage positioning
           const y = 50 + (radius * Math.sin(angle)) / 4;
           
@@ -183,17 +254,17 @@ export const InteractiveSkillVisualization: React.FC<InteractiveSkillVisualizati
               
               {/* Main Circle */}
               <motion.div
-                className={`relative w-12 h-12 rounded-full bg-gradient-to-r ${skill.color} p-0.5`}
+                className={`relative w-16 h-16 rounded-full bg-gradient-to-r ${skill.color} p-1 shadow-xl`}
                 animate={{
                   boxShadow: selectedSkill === skill.id 
-                    ? '0 0 20px rgba(0, 195, 255, 0.8)' 
+                    ? '0 0 30px rgba(0, 195, 255, 0.9), 0 0 60px rgba(0, 195, 255, 0.4)' 
                     : hoveredSkill === skill.id 
-                    ? '0 0 15px rgba(0, 195, 255, 0.5)'
-                    : '0 0 5px rgba(0, 195, 255, 0.2)'
+                    ? '0 0 20px rgba(0, 195, 255, 0.6)'
+                    : '0 0 8px rgba(0, 195, 255, 0.3)'
                 }}
               >
-                <div className="w-full h-full rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center">
-                  <div className="text-white font-bold text-xs">
+                <div className="w-full h-full rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center border border-white/10">
+                  <div className="text-white font-bold text-sm">
                     {skill.percentage}%
                   </div>
                 </div>
