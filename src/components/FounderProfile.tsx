@@ -788,18 +788,25 @@ export function FounderProfile() {
                     ))}
                   </div>
                   
-                  {/* Profile Image with Enhanced Styling */}
+                  {/* Profile Image with Attractive Frame - EXACTLY like screenshot */}
                   <motion.div 
-                    className="relative rounded-2xl overflow-hidden shadow-2xl"
+                    className="relative"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <img 
-                      src="/images/founder-profile.png"
-                      alt="Syed Musthaq - Professional Portrait"
-                      className="w-full h-auto object-cover rounded-2xl shadow-2xl"
-                      loading="eager"
-                    />
+                    {/* Multi-layer gradient frame like screenshot */}
+                    <div className="relative p-2 rounded-3xl bg-gradient-to-r from-cyan-400 via-purple-500 to-cyan-400 shadow-2xl">
+                      <div className="relative p-1 rounded-2xl bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400">
+                        <div className="relative p-1 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900">
+                          <img 
+                            src="/lovable-uploads/53267f21-b7c7-49db-8152-d6d0c187c068.png"
+                            alt="Syed Musthaq - Professional Portrait"
+                            className="w-full h-auto object-cover rounded-lg shadow-2xl"
+                            loading="eager"
+                          />
+                        </div>
+                      </div>
+                    </div>
                     
                     {/* Professional overlay with enhanced styling */}
                     <motion.div 
