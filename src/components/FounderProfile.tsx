@@ -795,7 +795,7 @@ export function FounderProfile() {
                     transition={{ duration: 0.3 }}
                   >
                     <img 
-                      src="/images/founder-profile.png"
+                      src="/lovable-uploads/bff3b4a9-c2a4-4c4c-bfcf-d76c402bda7f.png"
                       alt="Syed Musthaq - Professional Portrait"
                       className="w-full h-auto object-cover rounded-2xl shadow-2xl"
                       loading="eager"
