@@ -5,8 +5,8 @@ import { FileText, Code, TrendingUp, Download, MessageCircle, Star, Zap } from '
 import { useEffect, useRef, useState } from 'react';
 import Typed from 'typed.js';
 import { ModernSkillShowcase } from '@/components/ui/modern-skill-showcase';
+import { ProfessionalSkillRatings } from '@/components/ui/professional-skill-ratings';
 import { GradientText } from '@/components/ui/gradient-text';
-import { HolographicSkills } from '@/components/ui/holographic-progress';
 
 // Skills section with interactive skill tree visualization
 function SkillsSection() {
@@ -189,127 +189,22 @@ function SkillsSection() {
           </motion.div>
         )}
         
-        {/* Traditional Skill List */}
+        {/* Professional Skill Ratings */}
         {activeView === 'list' && (
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Technical Skills */}
-              <motion.div 
-                className="bg-[rgba(14,36,57,0.6)] backdrop-blur-[5px] rounded-xl p-8 border border-[#1c3654]"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-              >
-                <h3 className="text-xl font-semibold mb-6 text-white flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-[#00c3ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-                  </svg>
-                  Technical Skills
-                </h3>
-                
-                <HolographicSkills 
-                  skills={[
-                    { name: "AI Implementation", level: 95, primaryColor: "#00c3ff", secondaryColor: "#c961de" },
-                    { name: "Process Automation", level: 90, primaryColor: "#00c3ff", secondaryColor: "#c961de" },
-                    { name: "System Architecture", level: 85, primaryColor: "#00c3ff", secondaryColor: "#c961de" },
-                    { name: "Data Analysis", level: 80, primaryColor: "#00c3ff", secondaryColor: "#c961de" },
-                    { name: "Electric Vehicles", level: 85, primaryColor: "#00c3ff", secondaryColor: "#c961de" },
-                    { name: "Aerodynamics", level: 80, primaryColor: "#00c3ff", secondaryColor: "#c961de" }
-                  ]}
-                />
-              </motion.div>
-              
-              {/* Business Skills */}
-              <motion.div 
-                className="bg-[rgba(14,36,57,0.6)] backdrop-blur-[5px] rounded-xl p-8 border border-[#1c3654]"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <h3 className="text-xl font-semibold mb-6 text-white flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-[#c961de]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  Business Skills
-                </h3>
-                
-                <HolographicSkills 
-                  skills={[
-                    { name: "Strategic Planning", level: 95, primaryColor: "#c961de", secondaryColor: "#00c3ff" },
-                    { name: "Team Leadership", level: 90, primaryColor: "#c961de", secondaryColor: "#00c3ff" },
-                    { name: "Business Development", level: 85, primaryColor: "#c961de", secondaryColor: "#00c3ff" },
-                    { name: "Client Relations", level: 90, primaryColor: "#c961de", secondaryColor: "#00c3ff" },
-                    { name: "Industrial Relations", level: 85, primaryColor: "#c961de", secondaryColor: "#00c3ff" },
-                    { name: "Human Resource", level: 80, primaryColor: "#c961de", secondaryColor: "#00c3ff" }
-                  ]}
-                />
-              </motion.div>
-            </div>
+            <ProfessionalSkillRatings />
             
-            {/* Expertise Areas */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-              <motion.div 
-                className="bg-[rgba(14,36,57,0.6)] backdrop-blur-[5px] rounded-xl p-6 border border-[#1c3654]"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              >
-                <div className="h-14 w-14 bg-[#00c3ff]/20 rounded-full flex items-center justify-center mb-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#00c3ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2 text-white">AI Solutions</h3>
-                <p className="text-gray-400">
-                  Deploying custom AI solutions to streamline operations, automate repetitive tasks, and enhance decision-making capabilities.
-                </p>
-              </motion.div>
-              
-              <motion.div 
-                className="bg-[rgba(14,36,57,0.6)] backdrop-blur-[5px] rounded-xl p-6 border border-[#1c3654]"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              >
-                <div className="h-14 w-14 bg-[#c961de]/20 rounded-full flex items-center justify-center mb-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#c961de]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2 text-white">Process Optimization</h3>
-                <p className="text-gray-400">
-                  Analyzing and refining business processes to eliminate bottlenecks, reduce costs, and improve overall operational efficiency.
-                </p>
-              </motion.div>
-              
-              <motion.div 
-                className="bg-[rgba(14,36,57,0.6)] backdrop-blur-[5px] rounded-xl p-6 border border-[#1c3654]"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              >
-                <div className="h-14 w-14 bg-teal-500/20 rounded-full flex items-center justify-center mb-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2 text-white">Strategic Consulting</h3>
-                <p className="text-gray-400">
-                  Providing expert guidance on business strategy, digital transformation, and technology implementation to drive growth.
-                </p>
-              </motion.div>
+            <div className="text-center mt-8 p-6 rounded-xl bg-gradient-to-r from-[rgba(0,195,255,0.1)] to-[rgba(201,97,222,0.1)] border border-[rgba(0,195,255,0.2)]">
+              <p className="text-gray-300 text-sm mb-2">
+                <span className="text-[#00c3ff] font-semibold">Click on skill cards</span> to view detailed certifications and achievements
+              </p>
+              <p className="text-gray-400 text-xs">
+                Proficiency levels are based on real-world project experience and industry certifications
+              </p>
             </div>
           </motion.div>
         )}
