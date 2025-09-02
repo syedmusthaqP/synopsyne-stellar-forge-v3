@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FileText, Code, TrendingUp, Download, MessageCircle, Star, Zap } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import Typed from 'typed.js';
-import { SkillTree } from '@/components/ui/skill-tree';
+import { ModernSkillShowcase } from '@/components/ui/modern-skill-showcase';
 import { GradientText } from '@/components/ui/gradient-text';
 import { HolographicSkills } from '@/components/ui/holographic-progress';
 
@@ -157,7 +157,7 @@ function SkillsSection() {
               }`}
               onClick={() => setActiveView('tree')}
             >
-              Interactive Skill Map
+              Modern Skill Showcase
             </button>
             <button
               className={`px-4 py-2 rounded-md transition-all duration-300 ${
@@ -172,19 +172,19 @@ function SkillsSection() {
           </div>
         </motion.div>
         
-        {/* Interactive Skill Tree */}
+        {/* Modern Skill Showcase */}
         {activeView === 'tree' && (
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <SkillTree className="mb-10" />
+            <ModernSkillShowcase className="mb-10" />
             
-            <p className="text-center text-gray-400 mt-4 text-sm">
-              <span className="text-[#00c3ff]">Interact</span> with the skill nodes to see connections and details.
+            <p className="text-center text-gray-400 mt-8 text-sm">
+              <span className="text-[#00c3ff]">Click</span> on category filters to explore specific skill areas.
               <br/>
-              The size and color of each node represents skill category and proficiency level.
+              Each card represents a core competency with real-world achievements and proficiency levels.
             </p>
           </motion.div>
         )}
