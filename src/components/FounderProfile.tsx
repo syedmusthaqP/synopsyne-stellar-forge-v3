@@ -612,76 +612,131 @@ export function FounderProfile() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            {/* Main Profile Image Container with Ultra-Attractive Frame */}
-            <div className="relative w-full max-w-md">
-              {/* Animated Holographic Frame System */}
-              <motion.div 
-                className="relative p-3 rounded-3xl overflow-hidden"
-                animate={{
-                  boxShadow: [
-                    "0 0 60px rgba(0, 195, 255, 0.6), 0 0 120px rgba(201, 97, 222, 0.4), inset 0 0 40px rgba(255, 255, 255, 0.1)",
-                    "0 0 80px rgba(0, 195, 255, 0.8), 0 0 160px rgba(201, 97, 222, 0.6), inset 0 0 60px rgba(255, 255, 255, 0.2)",
-                    "0 0 60px rgba(0, 195, 255, 0.6), 0 0 120px rgba(201, 97, 222, 0.4), inset 0 0 40px rgba(255, 255, 255, 0.1)"
-                  ]
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  repeatType: "reverse"
-                }}
-              >
-                {/* Multiple Animated Border Layers */}
-                <div className="absolute inset-0 rounded-3xl">
-                  {/* Outer spinning ring */}
-                  <motion.div 
-                    className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-[#00c3ff] via-[#4f8efc] to-[#c961de] opacity-30 blur-sm"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                  />
-                  
-                  {/* Main gradient frame */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#00c3ff] via-[#4f8efc] via-[#8a4bff] to-[#c961de] p-1">
-                    <div className="absolute inset-1 rounded-3xl bg-gradient-to-tl from-[#c961de] via-[#8a4bff] to-[#00c3ff] opacity-80"></div>
-                  </div>
-                  
-                  {/* Inner pulsing ring */}
-                  <motion.div 
-                    className="absolute inset-2 rounded-3xl border-2 border-white/30"
-                    animate={{ 
-                      opacity: [0.3, 0.8, 0.3],
-                      scale: [0.98, 1.02, 0.98]
-                    }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                </div>
-                
-                {/* Premium Glassmorphic Container */}
-                <div className="relative bg-gradient-to-br from-[rgba(7,25,45,0.8)] via-[rgba(15,35,55,0.9)] to-[rgba(10,30,50,0.8)] backdrop-blur-3xl rounded-3xl p-8 border-2 border-[rgba(255,255,255,0.3)] shadow-2xl">
-                  {/* Floating Orbs Inside Frame */}
-                  <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
-                    {[...Array(8)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className="absolute w-3 h-3 rounded-full opacity-40"
-                        style={{
-                          background: i % 3 === 0 ? '#00c3ff' : i % 3 === 1 ? '#c961de' : '#4f8efc',
-                          left: `${15 + (i * 10)}%`,
-                          top: `${10 + (i * 8)}%`
-                        }}
-                        animate={{
-                          y: [-15, 15, -15],
-                          x: [-10, 10, -10],
-                          opacity: [0.2, 0.6, 0.2],
-                          scale: [0.8, 1.3, 0.8]
-                        }}
-                        transition={{
-                          duration: 4 + i * 0.5,
-                          repeat: Infinity,
-                          delay: i * 0.2
-                        }}
+              {/* Main Profile Image Container with Ultra-Attractive Frame */}
+              <div className="relative w-full max-w-md">
+                {/* Quantum Energy Frame System */}
+                <motion.div 
+                  className="relative p-2 rounded-[2rem] overflow-visible"
+                  animate={{
+                    boxShadow: [
+                      "0 0 100px rgba(0, 195, 255, 0.8), 0 0 200px rgba(201, 97, 222, 0.6), inset 0 0 60px rgba(255, 255, 255, 0.15)",
+                      "0 0 140px rgba(0, 195, 255, 1), 0 0 280px rgba(201, 97, 222, 0.8), inset 0 0 80px rgba(255, 255, 255, 0.25)",
+                      "0 0 100px rgba(0, 195, 255, 0.8), 0 0 200px rgba(201, 97, 222, 0.6), inset 0 0 60px rgba(255, 255, 255, 0.15)"
+                    ]
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    repeatType: "reverse"
+                  }}
+                >
+                  {/* Quantum Energy Rings */}
+                  <div className="absolute inset-0 rounded-[2rem]">
+                    {/* Outer quantum field */}
+                    <motion.div 
+                      className="absolute -inset-8 rounded-[2rem] bg-gradient-conic from-[#00c3ff] via-[#4f8efc] via-[#8a4bff] via-[#c961de] via-[#ff6b9d] to-[#00c3ff] opacity-40 blur-lg"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
                     />
-                    ))}
+                    
+                    {/* Middle energy ring */}
+                    <motion.div 
+                      className="absolute -inset-6 rounded-[2rem] bg-gradient-conic from-[#c961de] via-[#8a4bff] via-[#4f8efc] to-[#00c3ff] opacity-60 blur-md"
+                      animate={{ rotate: -360 }}
+                      transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                    />
+                    
+                    {/* Inner plasma ring */}
+                    <motion.div 
+                      className="absolute -inset-3 rounded-[2rem] bg-gradient-to-r from-[#00c3ff] via-[#ffffff] to-[#c961de] opacity-30"
+                      animate={{ 
+                        rotate: 360,
+                        scale: [1, 1.05, 1] 
+                      }}
+                      transition={{ 
+                        rotate: { duration: 6, repeat: Infinity, ease: "linear" },
+                        scale: { duration: 3, repeat: Infinity }
+                      }}
+                    />
+                    
+                    {/* Ultra-premium metallic frame */}
+                    <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-[#00c3ff] via-[#4f8efc] via-[#8a4bff] via-[#c961de] to-[#ff6b9d] p-[3px]">
+                      <div className="absolute inset-[3px] rounded-[2rem] bg-gradient-to-tl from-[#c961de] via-[#8a4bff] via-[#4f8efc] to-[#00c3ff] opacity-90"></div>
+                    </div>
+                    
+                    {/* Crystal-like inner border */}
+                    <motion.div 
+                      className="absolute inset-3 rounded-[2rem] border-[2px] border-white/50 backdrop-blur-sm"
+                      animate={{ 
+                        opacity: [0.3, 0.9, 0.3],
+                        borderColor: ["rgba(255,255,255,0.3)", "rgba(255,255,255,0.9)", "rgba(255,255,255,0.3)"]
+                      }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
                   </div>
+                  
+                  {/* Quantum Glassmorphic Container */}
+                  <div className="relative bg-gradient-to-br from-[rgba(7,25,45,0.95)] via-[rgba(15,35,55,0.98)] to-[rgba(10,30,50,0.95)] backdrop-blur-3xl rounded-[2rem] p-10 border-[3px] border-[rgba(255,255,255,0.4)] shadow-[0_0_60px_rgba(0,195,255,0.3),inset_0_0_60px_rgba(255,255,255,0.1)]">
+                    
+                    {/* Quantum Particles Inside Frame */}
+                    <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[2rem]">
+                      {/* Floating energy particles */}
+                      {[...Array(12)].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          className="absolute rounded-full opacity-60"
+                          style={{
+                            width: i % 4 === 0 ? '6px' : i % 4 === 1 ? '4px' : i % 4 === 2 ? '8px' : '3px',
+                            height: i % 4 === 0 ? '6px' : i % 4 === 1 ? '4px' : i % 4 === 2 ? '8px' : '3px',
+                            background: i % 4 === 0 ? 'linear-gradient(45deg, #00c3ff, #ffffff)' : 
+                                       i % 4 === 1 ? 'linear-gradient(45deg, #c961de, #ffffff)' : 
+                                       i % 4 === 2 ? 'linear-gradient(45deg, #4f8efc, #ffffff)' :
+                                       'linear-gradient(45deg, #8a4bff, #ffffff)',
+                            left: `${10 + (i * 7)}%`,
+                            top: `${8 + (i * 6)}%`,
+                            boxShadow: '0 0 20px currentColor'
+                          }}
+                          animate={{
+                            y: [-20, 20, -20],
+                            x: [-15, 15, -15],
+                            opacity: [0.3, 0.8, 0.3],
+                            scale: [0.5, 1.5, 0.5],
+                            rotate: [0, 360]
+                          }}
+                          transition={{
+                            duration: 5 + i * 0.3,
+                            repeat: Infinity,
+                            delay: i * 0.15
+                          }}
+                        />
+                      ))}
+                      
+                      {/* Energy streaks */}
+                      {[...Array(6)].map((_, i) => (
+                        <motion.div
+                          key={`streak-${i}`}
+                          className="absolute w-1 h-16 opacity-40"
+                          style={{
+                            background: i % 3 === 0 ? 'linear-gradient(to bottom, transparent, #00c3ff, transparent)' :
+                                       i % 3 === 1 ? 'linear-gradient(to bottom, transparent, #c961de, transparent)' :
+                                       'linear-gradient(to bottom, transparent, #4f8efc, transparent)',
+                            left: `${20 + (i * 12)}%`,
+                            top: `${5 + (i * 8)}%`,
+                            filter: 'blur(1px)'
+                          }}
+                          animate={{
+                            scaleY: [0, 1, 0],
+                            opacity: [0, 0.6, 0],
+                            rotate: [0, 180]
+                          }}
+                          transition={{
+                            duration: 3 + i * 0.5,
+                            repeat: Infinity,
+                            delay: i * 0.4
+                          }}
+                        />
+                      ))}
+                    </div>
                   
                   {/* Profile Image with Enhanced Styling */}
                   <motion.div 
