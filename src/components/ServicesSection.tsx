@@ -1102,8 +1102,8 @@ const ServicesSection = () => {
         </div>
       </div>
 
-      {/* Neural Development Phases Tab - Above Cards */}
-      {hoveredServiceTab.show && (
+      {/* Neural Development Phases Tab - Hidden on hover for better UX */}
+      {false && hoveredServiceTab.show && (
         <div 
           className="fixed z-[100] pointer-events-none"
           style={{
