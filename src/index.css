@@ -398,21 +398,6 @@
   }
 }
 
-@keyframes slideInFromDotted {
-  0% {
-    transform: translateY(30px) translateX(-50%) scale(0.8);
-    opacity: 0;
-  }
-  50% {
-    transform: translateY(15px) translateX(-50%) scale(0.9);
-    opacity: 0.5;
-  }
-  100% {
-    transform: translateY(0) translateX(-50%) scale(1);
-    opacity: 1;
-  }
-}
-
 @keyframes fillPhase {
   0% {
     width: 0%;

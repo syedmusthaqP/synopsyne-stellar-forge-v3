@@ -1102,8 +1102,8 @@ const ServicesSection = () => {
         </div>
       </div>
 
-      {/* Neural Development Phases Tab - Slides on dotted line to service card */}
-      {hoveredServiceTab.show && (
+      {/* Neural Development Phases Tab - Hidden on hover for better UX */}
+      {false && hoveredServiceTab.show && (
         <div 
           className="fixed z-[100] pointer-events-none"
           style={{
@@ -1118,7 +1118,7 @@ const ServicesSection = () => {
               className="absolute top-full left-1/2 w-0 h-5 border-l-2 border-dotted border-cyan-400/60"
               style={{
                 transform: 'translateX(-50%)',
-                animation: 'slideFromDots 0.5s ease-out'
+                animation: 'slideFromDots 0.3s ease-out'
               }}
             />
             
@@ -1126,7 +1126,7 @@ const ServicesSection = () => {
             <div 
               className="bg-gray-900/95 backdrop-blur-xl border border-cyan-400/40 rounded-lg px-3 py-2 w-48 shadow-2xl shadow-cyan-400/10"
               style={{
-                animation: 'slideInFromDotted 0.6s ease-out',
+                animation: 'slideInFromRight 0.4s ease-out',
                 background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%)',
                 borderImage: 'linear-gradient(135deg, #06b6d4, #a855f7) 1'
               }}
