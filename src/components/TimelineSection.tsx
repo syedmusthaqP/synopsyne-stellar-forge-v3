@@ -185,12 +185,12 @@ export function TimelineSection() {
                       {/* Background gradient */}
                       <div className={`absolute top-0 right-0 w-full h-32 opacity-5 bg-gradient-to-br ${item.color}`}></div>
                       
-                      {/* Date badge - SUPER ENHANCED to be extremely visible */}
-                      <div className={`absolute -top-5 ${isEven ? 'left-4' : 'right-4'} px-5 py-3 rounded-lg bg-gradient-to-r ${item.color} text-white font-extrabold shadow-2xl flex items-center z-20 border-2 border-white/30`}
-                        style={{ fontSize: "1rem", letterSpacing: "0.5px" }}
+                      {/* Date badge - SUPER ENHANCED to be extremely visible with increased height */}
+                      <div className={`absolute -top-8 ${isEven ? 'left-4' : 'right-4'} px-6 py-4 rounded-lg bg-gradient-to-r ${item.color} text-white font-extrabold shadow-2xl flex items-center z-20 border-2 border-white/30 min-h-[3rem]`}
+                        style={{ fontSize: "1.1rem", letterSpacing: "0.5px" }}
                       >
-                        <Calendar className="h-5 w-5 mr-2" />
-                        <span className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">{item.year}</span>
+                        <Calendar className="h-6 w-6 mr-3" />
+                        <span className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] leading-none">{item.year}</span>
                         
                         {/* Multiple overlapping animations to make years extremely prominent */}
                         <motion.div 
