@@ -38,8 +38,34 @@ const TestimonialAdmin = () => {
   };
 
   const approveTestimonial = (testimonial: PendingTestimonial) => {
-    // In a real implementation, this would add to the live testimonials
-    console.log('Approved testimonial:', testimonial);
+    // Add to live testimonials (for Testimonials page)
+    const existingLiveTestimonials = JSON.parse(localStorage.getItem('liveTestimonials') || '{"ids": [], "details": {}}');
+    const newId = `live-${Date.now()}`;
+    
+    existingLiveTestimonials.ids.push(newId);
+    existingLiveTestimonials.details[newId] = {
+      id: newId,
+      description: testimonial.description,
+      profileImage: testimonial.profileImage,
+      name: testimonial.name,
+      designation: testimonial.designation,
+    };
+    
+    localStorage.setItem('liveTestimonials', JSON.stringify(existingLiveTestimonials));
+    
+    // Add to CMS testimonials list
+    const existingCMSTestimonials = JSON.parse(localStorage.getItem('cmsTestimonials') || '[]');
+    const cmsTestimonial = {
+      id: Date.now(),
+      name: testimonial.name,
+      designation: testimonial.designation,
+      description: testimonial.description,
+      profileImage: testimonial.profileImage,
+      approvedAt: new Date().toISOString()
+    };
+    
+    existingCMSTestimonials.push(cmsTestimonial);
+    localStorage.setItem('cmsTestimonials', JSON.stringify(existingCMSTestimonials));
     
     // Remove from pending
     deleteTestimonial(testimonial.id);

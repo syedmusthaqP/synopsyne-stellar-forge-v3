@@ -9,7 +9,8 @@ type TestimonialDetails = {
 };
 
 const Testimonials = () => {
-  const testimonialData = {
+  // Load live testimonials from localStorage, fallback to default data
+  const defaultTestimonialData = {
     ids: [
       "e60aa346-f6da-11ed-b67e-0242ac120002",
       "e60aa346-f6da-11ed-b67e-0242ac120003",
@@ -62,6 +63,13 @@ const Testimonials = () => {
         designation: "Director of Technology at FinanceForward",
       }
     },
+  };
+
+  // Merge with live testimonials from localStorage
+  const liveTestimonials = JSON.parse(localStorage.getItem('liveTestimonials') || '{"ids": [], "details": {}}');
+  const testimonialData = {
+    ids: [...defaultTestimonialData.ids, ...liveTestimonials.ids],
+    details: { ...defaultTestimonialData.details, ...liveTestimonials.details }
   };
 
   // Create testimonial cards for the retro carousel

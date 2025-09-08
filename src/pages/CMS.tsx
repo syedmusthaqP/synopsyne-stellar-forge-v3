@@ -8,7 +8,10 @@ const CMS = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeSection, setActiveSection] = useState('contacts');
   const [contacts, setContacts] = useState<any[]>([]);
-  const [testimonials, setTestimonials] = useState([
+  const [testimonials, setTestimonials] = useState(() => {
+    // Load testimonials from localStorage, fallback to default data
+    const storedTestimonials = localStorage.getItem('cmsTestimonials');
+    return storedTestimonials ? JSON.parse(storedTestimonials) : [
     {
       id: 1,
       quote: "Synopsyne Dynamics transformed our entire infrastructure. Their neural approach to software development isn't just innovative—it's revolutionary. Our system performance improved by 300%.",
@@ -50,8 +53,9 @@ const CMS = () => {
       name: "David Kumar",
       designation: "Director of Technology at FinanceForward",
       src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop&crop=face"
-    }
-  ]);
+     }
+    ];
+  });
 
   const [heroContent, setHeroContent] = useState({
     title: "Neural Software Development",
@@ -146,17 +150,23 @@ const CMS = () => {
       ...testimonialData,
       id: Date.now()
     };
-    setTestimonials(prev => [...prev, newTestimonial]);
+    const updatedTestimonials = [...testimonials, newTestimonial];
+    setTestimonials(updatedTestimonials);
+    localStorage.setItem('cmsTestimonials', JSON.stringify(updatedTestimonials));
     setIsAddingNew(false);
   };
 
   const updateTestimonial = (id: number, testimonialData: any) => {
-    setTestimonials(prev => prev.map(t => t.id === id ? { ...testimonialData, id } : t));
+    const updatedTestimonials = testimonials.map(t => t.id === id ? { ...testimonialData, id } : t);
+    setTestimonials(updatedTestimonials);
+    localStorage.setItem('cmsTestimonials', JSON.stringify(updatedTestimonials));
     setEditingTestimonial(null);
   };
 
   const deleteTestimonial = (id: number) => {
-    setTestimonials(prev => prev.filter(t => t.id !== id));
+    const updatedTestimonials = testimonials.filter(t => t.id !== id);
+    setTestimonials(updatedTestimonials);
+    localStorage.setItem('cmsTestimonials', JSON.stringify(updatedTestimonials));
   };
 
   // Service functions
