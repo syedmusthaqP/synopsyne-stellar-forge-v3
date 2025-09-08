@@ -14,6 +14,7 @@ import WhyChooseUs from "./pages/WhyChooseUs";
 import Contact from "./pages/Contact";
 import Services from "./pages/Services";
 import Testimonials from "./pages/Testimonials";
+import SubmitTestimonial from "./pages/SubmitTestimonial";
 import Login from "./pages/Login";
 import CMS from "./pages/CMS";
 import Founder from "./pages/Founder";
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/services" element={<Services />} />
           <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/submit-testimonial" element={<SubmitTestimonial />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cms" element={<CMS />} />
           <Route path="/founder" element={<Founder />} />
