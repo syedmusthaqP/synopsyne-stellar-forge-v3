@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Brain, LogOut, Plus, Edit2, Trash2, Upload, Image as ImageIcon, Home, Users, Settings, FileText } from 'lucide-react';
 import TestimonialAdmin from '../components/TestimonialAdmin';
+import WorkshopAnalytics from '../components/WorkshopAnalytics';
+import FeedbackAdmin from '../components/FeedbackAdmin';
 
 const CMS = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -373,6 +375,12 @@ const CMS = () => {
       case 'pending-testimonials':
         return <TestimonialAdmin />;
 
+      case 'workshop-analytics':
+        return <WorkshopAnalytics />;
+
+      case 'feedback-admin':
+        return <FeedbackAdmin />;
+
       case 'hero':
         return (
           <div className="space-y-6">
@@ -610,6 +618,8 @@ const CMS = () => {
                 { id: 'contacts', label: 'Contact Submissions', icon: Users },
                 { id: 'testimonials', label: 'Testimonials', icon: Users },
                 { id: 'pending-testimonials', label: 'Pending Testimonials', icon: FileText },
+                { id: 'workshop-analytics', label: 'Workshop Analytics', icon: Settings },
+                { id: 'feedback-admin', label: 'Feedback Management', icon: FileText },
                 { id: 'hero', label: 'Hero Section', icon: Home },
                 { id: 'photos', label: 'Photos', icon: ImageIcon },
               ].map((item) => (
