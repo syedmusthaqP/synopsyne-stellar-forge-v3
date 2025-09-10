@@ -142,7 +142,10 @@ const WorkshopFeedback = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-dark via-dark/95 to-dark text-white overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden"
+         style={{
+           background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)'
+         }}>
       {/* Enhanced Decorative background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-10 left-10 w-96 h-96 bg-gradient-to-r from-neon/10 to-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -203,7 +206,7 @@ const WorkshopFeedback = () => {
                       value={formData.participantName}
                       onChange={(e) => handleInputChange('participantName', e.target.value)}
                       placeholder="Enter your full name"
-                      className="bg-dark/50 border-gray-600 text-white"
+                      className="bg-slate-800/50 border-gray-600 text-white focus:border-cyan-400"
                     />
                   </div>
                   <div>
@@ -215,7 +218,7 @@ const WorkshopFeedback = () => {
                       value={formData.email}
                       onChange={(e) => handleInputChange('email', e.target.value)}
                       placeholder="your@email.com"
-                      className="bg-dark/50 border-gray-600 text-white"
+                      className="bg-slate-800/50 border-gray-600 text-white focus:border-cyan-400"
                     />
                   </div>
                 </div>
@@ -229,7 +232,7 @@ const WorkshopFeedback = () => {
                       value={formData.workshopTitle}
                       onChange={(e) => handleInputChange('workshopTitle', e.target.value)}
                       placeholder="Enter workshop name"
-                      className="bg-dark/50 border-gray-600 text-white"
+                      className="bg-slate-800/50 border-gray-600 text-white focus:border-cyan-400"
                     />
                   </div>
                   <div>
@@ -240,7 +243,7 @@ const WorkshopFeedback = () => {
                       type="date"
                       value={formData.workshopDate}
                       onChange={(e) => handleInputChange('workshopDate', e.target.value)}
-                      className="bg-dark/50 border-gray-600 text-white"
+                      className="bg-slate-800/50 border-gray-600 text-white focus:border-cyan-400"
                     />
                   </div>
                 </div>
@@ -276,7 +279,7 @@ const WorkshopFeedback = () => {
                     onChange={(e) => handleInputChange('feedback', e.target.value)}
                     placeholder="Share your experience, what you learned, and how the workshop helped you..."
                     rows={4}
-                    className="bg-dark/50 border-gray-600 text-white resize-none"
+                    className="bg-slate-800/50 border-gray-600 text-white resize-none focus:border-cyan-400"
                   />
                 </div>
 
@@ -289,7 +292,7 @@ const WorkshopFeedback = () => {
                     onChange={(e) => handleInputChange('suggestions', e.target.value)}
                     placeholder="Any suggestions to make future workshops even better..."
                     rows={3}
-                    className="bg-dark/50 border-gray-600 text-white resize-none"
+                    className="bg-slate-800/50 border-gray-600 text-white resize-none focus:border-cyan-400"
                   />
                 </div>
 
