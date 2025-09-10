@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Upload, Send, Star, Calendar, Users, Building2 } from 'lucide-react';
+import { Upload, Send, Star, Calendar, Users, Building2, Sparkles, Award } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { useToast } from '../hooks/use-toast';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 
 interface FeedbackData {
   participantName: string;
@@ -144,34 +142,57 @@ const WorkshopFeedback = () => {
   };
 
   return (
-    <div className="min-h-screen bg-dark text-white">
-      <Header />
-      
-      {/* Decorative background */}
+    <div className="min-h-screen bg-gradient-to-br from-dark via-dark/95 to-dark text-white overflow-hidden">
+      {/* Enhanced Decorative background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-neon/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl animate-pulse delay-500"></div>
+        <div className="absolute top-10 left-10 w-96 h-96 bg-gradient-to-r from-neon/10 to-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-10 right-10 w-80 h-80 bg-gradient-to-l from-primary/10 to-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-gradient-to-br from-green-500/5 to-blue-500/5 rounded-full blur-3xl animate-pulse delay-500"></div>
+        <div className="absolute bottom-1/3 left-1/4 w-72 h-72 bg-gradient-to-tl from-yellow-500/5 to-red-500/5 rounded-full blur-3xl animate-pulse delay-700"></div>
+        
+        {/* Floating particles */}
+        <div className="absolute top-1/4 left-1/2 w-2 h-2 bg-neon rounded-full animate-bounce"></div>
+        <div className="absolute top-3/4 left-1/3 w-1 h-1 bg-cyan-400 rounded-full animate-ping"></div>
+        <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse"></div>
       </div>
 
-      <main className="relative z-10 pt-24 pb-16">
+      <main className="relative z-10 py-20">
         <div className="container mx-auto px-6">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center space-x-3 mb-4">
-              <Building2 className="w-8 h-8 text-neon" />
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-neon to-cyan-400 bg-clip-text text-transparent">
-                Workshop Feedback
-              </h1>
+          {/* Enhanced Header */}
+          <div className="text-center mb-16">
+            <div className="relative inline-block mb-6">
+              <div className="absolute inset-0 bg-gradient-to-r from-neon/20 to-cyan-400/20 rounded-full blur-2xl"></div>
+              <div className="relative flex items-center justify-center space-x-4 glassmorphism p-4 rounded-full neon-border">
+                <Building2 className="w-10 h-10 text-neon animate-pulse" />
+                <Sparkles className="w-8 h-8 text-cyan-400 animate-bounce" />
+                <Award className="w-10 h-10 text-purple-400 animate-pulse delay-150" />
+              </div>
             </div>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              Share your experience and help us improve future workshops, conferences, and events
-            </p>
+            <h1 className="text-6xl font-bold bg-gradient-to-r from-neon via-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4 animate-fade-in">
+              Workshop Feedback
+            </h1>
+            <div className="relative">
+              <p className="text-gray-300 text-xl max-w-3xl mx-auto leading-relaxed">
+                Share your transformative experience and help us elevate future workshops, conferences, and innovation events
+              </p>
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-neon to-cyan-400 rounded-full animate-pulse"></div>
+            </div>
           </div>
 
-          <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Feedback Form */}
-            <div className="glassmorphism p-8 rounded-xl neon-border">
+            <div className="lg:col-span-2 glassmorphism p-8 rounded-2xl neon-border relative overflow-hidden">
+              {/* Form background decoration */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-neon/10 to-transparent rounded-bl-full"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-cyan-500/10 to-transparent rounded-tr-full"></div>
+              
+              <div className="relative z-10">
+                <div className="flex items-center space-x-3 mb-8">
+                  <div className="p-3 bg-gradient-to-r from-neon/20 to-cyan-500/20 rounded-lg neon-glow">
+                    <Send className="w-6 h-6 text-neon" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-white">Your Feedback Matters</h2>
+                </div>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -304,28 +325,42 @@ const WorkshopFeedback = () => {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full glassmorphism neon-border py-3 text-lg font-semibold hover:bg-neon/10 transition-all"
+                  className="w-full relative overflow-hidden glassmorphism neon-border py-4 text-lg font-bold hover:bg-neon/10 transition-all group"
                 >
+                  <div className="absolute inset-0 bg-gradient-to-r from-neon/0 via-neon/20 to-neon/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                   {isSubmitting ? (
-                    <div className="flex items-center space-x-2">
-                      <div className="w-5 h-5 border-2 border-neon border-t-transparent rounded-full animate-spin"></div>
-                      <span>Submitting...</span>
+                    <div className="flex items-center justify-center space-x-3">
+                      <div className="w-6 h-6 border-2 border-neon border-t-transparent rounded-full animate-spin"></div>
+                      <span>Submitting Your Feedback...</span>
                     </div>
                   ) : (
-                    <div className="flex items-center space-x-2">
-                      <Send className="w-5 h-5" />
+                    <div className="flex items-center justify-center space-x-3">
+                      <Send className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                       <span>Submit Feedback</span>
+                      <Sparkles className="w-5 h-5 text-cyan-400 animate-pulse" />
                     </div>
                   )}
                 </Button>
               </form>
+              </div>
             </div>
 
-            {/* Live Preview */}
-            <div className="glassmorphism p-8 rounded-xl border border-gray-700">
+            {/* Enhanced Live Preview */}
+            <div className="glassmorphism p-8 rounded-2xl neon-border relative overflow-hidden">
+              {/* Preview background decoration */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-neon via-cyan-400 to-purple-400"></div>
+              <div className="absolute top-2 left-4 w-2 h-2 bg-neon rounded-full animate-pulse"></div>
+              <div className="absolute top-2 left-8 w-2 h-2 bg-cyan-400 rounded-full animate-pulse delay-150"></div>
+              <div className="absolute top-2 left-12 w-2 h-2 bg-purple-400 rounded-full animate-pulse delay-300"></div>
+              
               <h3 className="text-xl font-bold text-white mb-6 flex items-center space-x-2">
-                <Users className="w-5 h-5 text-neon" />
+                <div className="p-2 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-lg">
+                  <Users className="w-5 h-5 text-neon" />
+                </div>
                 <span>Live Preview</span>
+                <div className="px-2 py-1 bg-gradient-to-r from-green-500/20 to-green-600/20 rounded-full text-xs text-green-400">
+                  LIVE
+                </div>
               </h3>
               
               <div className="space-y-4">
@@ -391,8 +426,6 @@ const WorkshopFeedback = () => {
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 };
